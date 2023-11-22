@@ -11,7 +11,7 @@ function UserRoutes({ isLogged }) {
 }
 
 UserRoutes.propTypes = {
-  isLogged: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 export default UserRoutes;

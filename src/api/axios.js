@@ -8,11 +8,9 @@ const axiosInstance = axios.create({
   timeout: appConfig?.timeout ?? 2000,
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => ({
-    ...(config.headers || {}),
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
-  })
-);
+axiosInstance.interceptors.request.use((config) => ({
+  ...(config.headers || {}),
+  Authorization: `Bearer ${localStorage.getItem('token')}`,
+}));
 
 export default axiosInstance;
