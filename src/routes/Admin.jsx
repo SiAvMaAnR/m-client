@@ -4,14 +4,14 @@ import PermissionGuard from '../components/permission/PermissionGuard';
 
 function AdminRoutes({ isLogged }) {
   return (
-    <Route element={<PermissionGuard roles={['admin']} />}>
+    <Route element={<PermissionGuard permittedRoles={['admin']} />}>
       <Route path="home" element={<Navigate to="/chat" />} />
     </Route>
   );
 }
 
 AdminRoutes.propTypes = {
-  isLogged: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 export default AdminRoutes;

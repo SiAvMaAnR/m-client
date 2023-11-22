@@ -8,7 +8,7 @@ export const authSlice = createSlice({
       role: null,
       isLogged: false,
       token: null,
-    }
+    },
   },
   reducers: {
     setAuth: (state, action) => {
