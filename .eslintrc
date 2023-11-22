@@ -15,7 +15,8 @@
     ],
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "js": true
         },
         "ecmaVersion": "latest",
         "sourceType": "module"
@@ -23,11 +24,19 @@
     "plugins": [
         "react"
     ],
-    "rules": {},
-    "import/no-extraneous-dependencies": [
-        "error",
-        {
-            "devDependencies": true
-        }
-    ]
+    "rules": {
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true
+            }
+        ],
+        "no-param-reassign": [
+            "error",
+            {
+                "props": false
+            }
+        ],
+        "no-unused-vars": "warn"
+    }
 }

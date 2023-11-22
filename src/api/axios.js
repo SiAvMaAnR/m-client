@@ -1,32 +1,18 @@
 import axios from 'axios';
-import config from '../config/config';
+import configuration from '../../config/appConfig';
+
+const appConfig = configuration.app;
 
 const axiosInstance = axios.create({
-    baseURL: config?.app?.url ?? 5050,
-    timeout: config?.app?.timeout ?? 2000
+  baseURL: appConfig?.url ?? 5050,
+  timeout: appConfig?.timeout ?? 2000,
 });
 
-axiosInstance.interceptors.request.use((config) => {
-    const {
-        headers = {}
-    } = config
-
-    config.headers = {
-        ...headers,
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-    };
-
-    return config;
-}, (error) => {
-    console.error(error);
-    return Promise.reject(error);
-});
-
-axiosInstance.interceptors.response.use((response) => {
-    return response;
-}, (error) => {
-    console.error(error);
-    return Promise.reject(error);
-});
+axiosInstance.interceptors.request.use(
+  (config) => ({
+    ...(config.headers || {}),
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  })
+);
 
 export default axiosInstance;

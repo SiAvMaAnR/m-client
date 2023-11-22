@@ -12,6 +12,6 @@ export const rootSlice = createSlice({
   },
 });
 
-export const {} = rootSlice.actions;
+export const { setLanguage } = rootSlice.actions;
 
 export default rootSlice.reducer;
