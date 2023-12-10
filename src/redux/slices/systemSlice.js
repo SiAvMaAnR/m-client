@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const rootSlice = createSlice({
-  name: 'root',
+export const systemSlice = createSlice({
+  name: 'system',
   initialState: {
     language: 'en',
   },
@@ -12,6 +12,6 @@ export const rootSlice = createSlice({
   },
 });
 
-export const { setLanguage } = rootSlice.actions;
+export const { setLanguage } = systemSlice.actions;
 
-export default rootSlice.reducer;
+export default systemSlice.reducer;

@@ -1,17 +1,13 @@
-import { Route, Navigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 import PermissionGuard from '../components/permission/PermissionGuard';
+import Users from '../pages/Admin/Users/Users';
 
-function UserRoutes({ isLogged }) {
+function UserRoutes() {
   return (
-    <Route element={<PermissionGuard roles={['user']} />}>
-      <Route path="*" element={<Navigate to="/chat" />} />
+    <Route element={<PermissionGuard permittedRoles={['user']} />}>
+      <Route path="*" element={<Users />} />
     </Route>
   );
 }
-
-UserRoutes.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
-};
 
 export default UserRoutes;

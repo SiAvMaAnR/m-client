@@ -1,4 +1,4 @@
 import authReducer from './slices/authSlice';
-import rootReducer from './slices/rootSlice';
+import systemReducer from './slices/systemSlice';
 
-export { authReducer, rootReducer };
+export { authReducer, systemReducer };

@@ -6,7 +6,11 @@ function PermissionGuard({ permittedRoles }) {
   const navigate = useNavigate();
   const userRole = useRole();
 
+  console.log('userRole', userRole);
+
   const isAccess = permittedRoles.includes(userRole);
+
+  console.log('isAccess', isAccess);
 
   return isAccess ? <Outlet /> : navigate('/login');
 }
