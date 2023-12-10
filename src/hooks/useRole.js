@@ -1,5 +1,8 @@
 import { useSelector } from 'react-redux';
 
-const useRole = () => useSelector((state) => state.auth.role);
+const useRole = () => {
+  const role = useSelector((state) => state.auth.role);
+  return role;
+};
 
 export default useRole;
