@@ -1,13 +1,12 @@
-import { Route } from 'react-router-dom';
-import PermissionGuard from '../components/permission/PermissionGuard';
-import { Login } from '../pages/exports';
+import { Navigate, Route } from 'react-router-dom';
+import { Login, Registration } from '../pages/exports';
 
-function PublicRoutes() {
-  return (
-    <Route>
-      <Route path="/login" element={<Login />} />
-    </Route>
-  );
-}
+const publicRoutes = (
+  <Route>
+    <Route path="*" element={<Navigate to="/login" />} />
+    <Route path="login" element={<Login />} />
+    <Route path="registration" element={<Registration />} />
+  </Route>
+);
 
-export default PublicRoutes;
+export default publicRoutes;

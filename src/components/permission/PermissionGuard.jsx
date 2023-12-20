@@ -1,18 +1,16 @@
-import { useNavigate, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Outlet } from 'react-router-dom';
+import Error from '../../pages/Public/Error/Error';
 import useRole from '../../hooks/useRole';
 
 function PermissionGuard({ permittedRoles }) {
-  const navigate = useNavigate();
   const userRole = useRole();
 
-  console.log('userRole', userRole);
-
   const isAccess = permittedRoles.includes(userRole);
+  // console.log('permittedRoles', permittedRoles);
+  // console.log('userRole', userRole);
 
-  console.log('isAccess', isAccess);
-
-  return isAccess ? <Outlet /> : navigate('/login');
+  return isAccess ? <Outlet /> : <Error />;
 }
 
 PermissionGuard.propTypes = {

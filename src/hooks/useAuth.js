@@ -1,44 +1,32 @@
-import { useCallback, useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import TokenHelper from '../utils/helpers/tokenHelper';
-import { setId, setRole, setToken, clearToken } from '../redux/slices/authSlice';
+import { setInfo, clearInfo } from '../redux/slices/authSlice';
 
 const useAuth = () => {
-  const token = useSelector((state) => state.auth.token);
-
   const dispatch = useDispatch();
-  const tokenHelper = useMemo(() => new TokenHelper(token), [token]);
-  const tokenPayload = useMemo(() => tokenHelper.getPayload(), [tokenHelper]);
-  const leftTime = tokenPayload ? tokenPayload.exp - Date.now() : 0;
 
   const logIn = useCallback(
-    (newToken) => {
-      localStorage.setItem('token', newToken);
-      dispatch(setToken(newToken));
+    (token) => {
+      localStorage.setItem('token', token);
+
+      const tokenHelper = new TokenHelper(token);
+      const tokenPayload = tokenHelper.getPayload();
+
+      const { id, role, exp } = tokenPayload;
+      const isLogged = true;
+
+      dispatch(setInfo({ id, role, isLogged, exp, token }));
     },
     [dispatch],
   );
 
   const logOut = useCallback(() => {
     localStorage.removeItem('token');
-    dispatch(clearToken());
+    dispatch(clearInfo());
   }, [dispatch]);
 
-  useEffect(() => {
-    const verifyTokenTimeout = setTimeout(() => {
-      logOut();
-    }, leftTime);
-
-    return () => clearTimeout(verifyTokenTimeout);
-  }, [leftTime, logOut]);
-
-  useEffect(() => {
-    const { id, role } = tokenPayload || {};
-    dispatch(setId(id));
-    dispatch(setRole(role?.toLowerCase()));
-  }, [dispatch, tokenPayload]);
-
-  return { logIn, logOut, token };
+  return { logIn, logOut };
 };
 
 export default useAuth;
