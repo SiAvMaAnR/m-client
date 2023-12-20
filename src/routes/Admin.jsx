@@ -1,12 +1,12 @@
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate, Route } from 'react-router-dom';
 import PermissionGuard from '../components/permission/PermissionGuard';
+import { Users } from '../pages/exports';
 
-function AdminRoutes() {
-  return (
-    <Route element={<PermissionGuard permittedRoles={['admin']} />}>
-      <Route path="users" element={<Navigate to="/users" />} />
-    </Route>
-  );
-}
+const adminRoutes = (
+  <Route element={<PermissionGuard permittedRoles={['admin']} />}>
+    <Route path="*" element={<Navigate to="/users" />} />
+    <Route path="users" element={<Users />} />
+  </Route>
+);
 
-export default AdminRoutes;
+export default adminRoutes;

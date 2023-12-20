@@ -1,31 +1,27 @@
-import { Routes, BrowserRouter } from 'react-router-dom';
-import AdminRoutes from './routes/Admin';
-import UserRoutes from './routes/User';
-import PublicRoutes from './routes/Public';
-import CustomRoutes from './routes/Custom';
-import useAuth from './hooks/useAuth';
+import { useSelector } from 'react-redux';
+import { Routes } from 'react-router-dom';
+import routes from './routes/_exports';
 import './App.scss';
 
 function App() {
-  // const { isLogged } = useAuth();
-  // console.log('isLogged', isLogged);
-  const isLogged = false;
+  const { info: authInfo } = useSelector((state) => state.auth);
+  const { isLogged } = authInfo;
+
+  console.log('authInfo', authInfo);
 
   return (
     <div className="app">
-      <BrowserRouter>
-        <Routes>
-          {PublicRoutes()}
-
-          {isLogged && (
-            <>
-              {AdminRoutes()}
-              {UserRoutes()}
-              {CustomRoutes()}
-            </>
-          )}
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        {isLogged ? (
+          <>
+            {routes.admin}
+            {routes.user}
+            {routes.custom}
+          </>
+        ) : (
+          routes.public
+        )}
+      </Routes>
     </div>
   );
 }
