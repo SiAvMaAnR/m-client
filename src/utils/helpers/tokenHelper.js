@@ -2,11 +2,11 @@ const jwtPayloadKey = {
   id: 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier',
   role: 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role',
   exp: 'exp',
-};
+}
 
 class TokenHelper {
   constructor(token) {
-    this.jwtPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;
+    this.jwtPayload = token ? JSON.parse(atob(token.split('.')[1])) : null
   }
 
   getPayload() {
@@ -16,8 +16,8 @@ class TokenHelper {
           role: this.jwtPayload[jwtPayloadKey.role],
           exp: this.jwtPayload[jwtPayloadKey.exp] * 1000,
         }
-      : null;
+      : null
   }
 }
 
-export default TokenHelper;
+export default TokenHelper

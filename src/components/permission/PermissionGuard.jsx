@@ -1,20 +1,16 @@
-import PropTypes from 'prop-types';
-import { Outlet } from 'react-router-dom';
-import Error from '../../pages/Public/Error/Error';
-import useRole from '../../hooks/useRole';
+import PropTypes from 'prop-types'
+import { Outlet } from 'react-router-dom'
+import Error from '../../pages/common/Error/Error'
+import useRole from '../../hooks/useRole'
 
 function PermissionGuard({ permittedRoles }) {
-  const userRole = useRole();
-
-  const isAccess = permittedRoles.includes(userRole);
-  // console.log('permittedRoles', permittedRoles);
-  // console.log('userRole', userRole);
-
-  return isAccess ? <Outlet /> : <Error />;
+  const userRole = useRole()
+  const isAccess = permittedRoles.includes(userRole)
+  return isAccess ? <Outlet /> : <Error />
 }
 
 PermissionGuard.propTypes = {
   permittedRoles: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+}
 
-export default PermissionGuard;
+export default PermissionGuard

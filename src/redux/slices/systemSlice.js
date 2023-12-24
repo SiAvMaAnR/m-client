@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 export const systemSlice = createSlice({
   name: 'system',
@@ -7,11 +7,11 @@ export const systemSlice = createSlice({
   },
   reducers: {
     setLanguage: (state, action) => {
-      state.language = action.payload;
+      state.language = action.payload
     },
   },
-});
+})
 
-export const { setLanguage } = systemSlice.actions;
+export const { setLanguage } = systemSlice.actions
 
-export default systemSlice.reducer;
+export default systemSlice.reducer

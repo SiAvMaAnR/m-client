@@ -1,28 +1,31 @@
-import { useEffect, useState } from 'react';
-import useAuth from '../../../hooks/useAuth';
-import api from '../../../api/api';
-import './Login.scss';
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import useAuth from '../../../hooks/useAuth'
+import api from '../../../api/api'
+import './Login.scss'
 
 function Login() {
-  const { logIn } = useAuth();
-  const [loginData, setLoginData] = useState({ email: 'admin@admin.com', password: 'Sosnova61S' });
-  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate()
+  const { logIn } = useAuth()
+  const [loginData, setLoginData] = useState({ email: 'admin@admin.com', password: 'Sosnova61S' })
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const { email, password } = loginData;
+  const { email, password } = loginData
 
   useEffect(() => {
-    setErrorMessage('');
-  }, [loginData]);
+    setErrorMessage('')
+  }, [loginData])
 
   const loginHandler = () => {
     api.account
       .login(email, password)
       .then((result) => logIn(result?.token))
+      .then(() => navigate('/home'))
       .catch((error) => {
-        const { clientMessage } = error.response.data;
-        setErrorMessage(clientMessage);
-      });
-  };
+        const { clientMessage } = error.response.data
+        setErrorMessage(clientMessage)
+      })
+  }
 
   return (
     <div>
@@ -45,7 +48,7 @@ function Login() {
         Login
       </button>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login

@@ -1,8 +1,7 @@
-import accountApi from "./requests/accountApi";
+import accountApi from './requests/accountApi'
 
 const api = {
-    account: accountApi
+  account: accountApi,
 }
 
-
-export default api;
+export default api
