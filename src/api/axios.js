@@ -3,7 +3,7 @@ import configuration from '../config/configuration'
 
 const appConfig = configuration.app
 
-const token = localStorage.getItem('token')
+const accessToken = localStorage.getItem('accessToken')
 
 const axiosInstance = axios.create({
   baseURL: appConfig.url,
@@ -15,7 +15,7 @@ axiosInstance.interceptors.request.use((config) => {
 
   config.headers = {
     ...headers,
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${accessToken}`,
   }
 
   return config
