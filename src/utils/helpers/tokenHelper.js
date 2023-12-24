@@ -5,8 +5,8 @@ const jwtPayloadKey = {
 }
 
 class TokenHelper {
-  constructor(token) {
-    this.jwtPayload = token ? JSON.parse(atob(token.split('.')[1])) : null
+  constructor(accessToken) {
+    this.jwtPayload = accessToken ? JSON.parse(atob(accessToken.split('.')[1])) : null
   }
 
   getPayload() {
@@ -14,7 +14,7 @@ class TokenHelper {
       ? {
           id: this.jwtPayload[jwtPayloadKey.id],
           role: this.jwtPayload[jwtPayloadKey.role],
-          exp: this.jwtPayload[jwtPayloadKey.exp] * 1000,
+          exp: this.jwtPayload[jwtPayloadKey.exp],
         }
       : null
   }

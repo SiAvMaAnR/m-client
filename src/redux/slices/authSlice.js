@@ -7,11 +7,13 @@ export const authSlice = createSlice({
       id: null,
       role: null,
       isLogged: false,
-      exp: null,
+      accessTokenExp: null,
+      refreshTokenExp: null,
     },
   },
   reducers: {
     setInfo: (state, action) => {
+      console.log(action.payload);
       state.info = action.payload
     },
     clearInfo: (state) => {
@@ -19,7 +21,8 @@ export const authSlice = createSlice({
         id: null,
         role: null,
         isLogged: false,
-        exp: null,
+        accessTokenExp: null,
+        refreshTokenExp: null,
       }
     },
   },

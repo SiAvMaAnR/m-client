@@ -19,10 +19,10 @@ function Login() {
   const loginHandler = () => {
     api.account
       .login(email, password)
-      .then((result) => logIn(result?.token))
+      .then((result) => logIn(result))
       .then(() => navigate('/home'))
       .catch((error) => {
-        const { clientMessage } = error.response.data
+        const clientMessage = error.response?.data?.clientMessage ?? 'Unknown error'
         setErrorMessage(clientMessage)
       })
   }
