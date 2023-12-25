@@ -12,8 +12,13 @@ export const authSlice = createSlice({
     },
   },
   reducers: {
+    updateInfo: (state, action) => {
+      state.info = {
+        ...state.info,
+        ...action.payload,
+      }
+    },
     setInfo: (state, action) => {
-      console.log(action.payload);
       state.info = action.payload
     },
     clearInfo: (state) => {
@@ -28,6 +33,6 @@ export const authSlice = createSlice({
   },
 })
 
-export const { setInfo, clearInfo } = authSlice.actions
+export const { setInfo, clearInfo, updateInfo } = authSlice.actions
 
 export default authSlice.reducer
