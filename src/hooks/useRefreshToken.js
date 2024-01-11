@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { page } from '../utils/constants/system'
 import useAuth from './useAuth'
 import api from '../api/api'
 
@@ -20,8 +21,10 @@ const useRefreshToken = () => {
           updateAccessToken(result)
         })
       } else {
-        logOut()
-        navigate('/login')
+        api.account.revokeToken(refreshToken).then(() => {
+          logOut()
+          navigate(page.login)
+        })
       }
     }, leftTime)
 

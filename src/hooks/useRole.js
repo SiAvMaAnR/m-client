@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux'
-import { roles } from '../utils/constants/auth'
+import { role } from '../utils/constants/system'
 
 const useRole = () => {
-  const role = useSelector((state) => state.auth.info.role)
-  return role?.toLowerCase() || roles.public
+  const currentRole = useSelector((state) => state.auth.info.role)
+  return currentRole?.toLowerCase() || role.public
 }
 
 export default useRole

@@ -1,0 +1,50 @@
+.form-input-wrapper {
+    position: relative;
+
+    .c-form-input {
+        border-radius: 13px;
+        border: 1px solid var(--border-color);
+        display: flex;
+        padding: 3px 40px 3px 30px;
+        align-items: center;
+        background: var(--background-color);
+        outline: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+
+        &::placeholder {
+            color: var(--placeholder-color);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        &:focus {}
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:focus {
+            box-shadow: 0 0 0 30px #fff inset !important;
+            -webkit-text-fill-color: #000000;
+        }
+    }
+
+    .toggle-wrapper {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        cursor: pointer;
+        height: 30px;
+        width: 30px;
+
+        .toggle-visibility {
+            height: 100%;
+            width: 100%;
+
+            path {
+                stroke: var(--placeholder-color);
+            }
+        }
+    }
+}

@@ -1,6 +1,8 @@
 .app {
   height: 100%;
   width: 100%;
+  min-width: 1280px;
+  min-height: 720px;
 
   .app-router {
     height: 100%;
