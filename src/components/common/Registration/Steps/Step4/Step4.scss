@@ -1,0 +1,28 @@
+.c-registration-step {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+
+    .birthday-title {
+        flex: 0 0 15%;
+    }
+
+    .birthday-desc {
+        flex: 0 0 45%;
+        padding: 0 20px;
+    }
+
+    .inputs {
+        flex: 0 0 40%;
+        display: grid;
+        place-items: center;
+
+        .birthday-input {
+            input {
+                height: 42px;
+                width: 80px;
+            }
+        }
+    }
+}
