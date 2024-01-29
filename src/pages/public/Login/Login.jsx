@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react'
 import useAuth from '../../../hooks/useAuth'
 import api from '../../../api/api'
 import { page } from '../../../utils/constants/system'
-import FormInput from '../../../components/common/Input/FormInput/FormInput'
-import { Brand, FormButton, Logo, NavLink } from '../../../components/_exports'
+import { Brand, FormButton, Logo, NavLink, FormInput } from '../../../components/_exports'
 import './Login.scss'
 
 function Login() {
@@ -29,7 +28,7 @@ function Login() {
     try {
       setIsLoading(true)
 
-      const { data, response } = await api.account.login(email, password)
+      const { data, response } = await api.account.login({ email, password })
 
       if (response?.data?.errors) {
         throw new Error('Validation error')
@@ -52,6 +51,12 @@ function Login() {
     event.preventDefault()
   }
 
+  const submitKeyDownHandler = (event) => {
+    if (event.key === 'Enter') {
+      loginHandler()
+    }
+  }
+
   return (
     <div className="p-login">
       <div className="login-header">
@@ -66,7 +71,7 @@ function Login() {
       </div>
 
       <div className="login-content">
-        <div className="login-container">
+        <div className="login-panel" onKeyDown={submitKeyDownHandler} role="presentation">
           <div className="logo-wrapper">
             <Logo className="logo" />
           </div>

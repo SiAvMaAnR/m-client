@@ -1,0 +1,59 @@
+.c-date-input {
+    position: relative;
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    gap: 8px;
+
+    .date-input-wrapper {
+        &.invalid {
+            .date-input {
+                border: solid 2px var(--invalid-error-color);
+            }
+        }
+
+        .date-input {
+            border-radius: 13px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 3px 10px 3px 10px;
+            background: var(--background-color);
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-align: center;
+
+            &::placeholder {
+                text-align: center;
+                color: var(--placeholder-color);
+                font-family: 'Montserrat', sans-serif;
+                font-size: 13px;
+                font-weight: 400;
+            }
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:focus {
+                box-shadow: 0 0 0 30px #fff inset !important;
+                -webkit-text-fill-color: var(--text-fill-color);
+            }
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+        }
+    }
+
+    .valid-wrapper {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -30px;
+        cursor: pointer;
+        height: 18px;
+        width: 18px;
+        color: var(--invalid-error-color);
+    }
+}

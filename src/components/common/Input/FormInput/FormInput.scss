@@ -1,7 +1,13 @@
-.form-input-wrapper {
+.c-form-input {
     position: relative;
 
-    .c-form-input {
+    &.invalid {
+        .form-input {
+            border: solid 2px var(--invalid-error-color);
+        }
+    }
+
+    .form-input {
         border-radius: 13px;
         border: 1px solid var(--border-color);
         display: flex;
@@ -20,12 +26,10 @@
             font-weight: 400;
         }
 
-        &:focus {}
-
         &:-webkit-autofill,
         &:-webkit-autofill:focus {
             box-shadow: 0 0 0 30px #fff inset !important;
-            -webkit-text-fill-color: #000000;
+            -webkit-text-fill-color: var(--text-fill-color);
         }
     }
 
@@ -35,16 +39,40 @@
         transform: translateY(-50%);
         right: 10px;
         cursor: pointer;
-        height: 30px;
-        width: 30px;
+        height: 32px;
+        width: 32px;
 
         .toggle-visibility {
             height: 100%;
             width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+
+            &:hover {
+                background: var(--toggle-background-color);
+                transition: all 0.5s ease;
+
+                path {
+                    stroke: var(--toggle-stroke-color);
+                }
+            }
 
             path {
                 stroke: var(--placeholder-color);
+                transition: all 0.5s ease;
             }
         }
+    }
+
+    .valid-wrapper {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -30px;
+        cursor: pointer;
+        height: 18px;
+        width: 18px;
+        color: var(--invalid-error-color);
     }
 }

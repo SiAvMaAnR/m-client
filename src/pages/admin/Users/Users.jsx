@@ -10,7 +10,7 @@ function Users() {
   const refreshToken = localStorage.getItem('refreshToken')
 
   const logoutHandler = () => {
-    api.account.revokeToken(refreshToken).then(() => {
+    api.account.revokeToken({ refreshToken }).then(() => {
       logOut()
       navigate(page.login)
     })

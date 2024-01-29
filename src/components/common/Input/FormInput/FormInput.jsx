@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import ShowIcon from './ShowIcon/ShowIcon'
 import HideIcon from './HideIcon/HideIcon'
+import ToolTip1 from '../../ToolTip/ToolTip1/ToolTip1'
+import ValidIcon from './ValidIcon/ValidIcon'
 import './FormInput.scss'
 
 function FormInput({
@@ -12,10 +14,29 @@ function FormInput({
   value,
   className,
   required,
+  isPassword,
+  validator,
+  onValid,
   pattern
 }) {
-  const isPassword = type === 'password'
   const [isVisiblePassword, setIsVisiblePassword] = useState(false)
+  const [isValid, setIsValid] = useState(true)
+  const [errorMessage, setErrorMessage] = useState('')
+  const validClass = isValid ? 'valid' : 'invalid'
+
+  useEffect(() => {
+    if (validator && value) {
+      const { valid, error } = validator(value)
+      setIsValid(valid)
+      setErrorMessage(error)
+    } else {
+      setIsValid(true)
+    }
+  }, [value, setIsValid, validator])
+
+  useEffect(() => {
+    onValid(!!value && isValid)
+  }, [isValid, onValid, value])
 
   const toggleClickHandler = () => {
     setIsVisiblePassword(!isVisiblePassword)
@@ -35,7 +56,7 @@ function FormInput({
 
   return (
     <div
-      className="form-input-wrapper"
+      className={`c-form-input ${validClass}`}
       onKeyDown={toggleKeyDownHandler}
       onKeyUp={toggleKeyUpHandler}
       role="presentation"
@@ -45,13 +66,21 @@ function FormInput({
           {isVisiblePassword ? (
             <HideIcon className="toggle-visibility" />
           ) : (
-            <ShowIcon className="toggle-visibility" onClick={() => setIsVisiblePassword(true)} />
+            <ShowIcon className="toggle-visibility" />
           )}
         </div>
       )}
 
+      {!isValid && (
+        <div className="valid-wrapper">
+          <ToolTip1 text={errorMessage}>
+            <ValidIcon />
+          </ToolTip1>
+        </div>
+      )}
+
       <input
-        className={`c-form-input ${className}`}
+        className={`form-input ${className}`}
         type={isVisiblePassword ? 'text' : type}
         autoComplete={autoComplete}
         placeholder={placeholder}
@@ -72,7 +101,10 @@ FormInput.defaultProps = {
   className: '',
   autoComplete: null,
   required: false,
-  pattern: null
+  pattern: null,
+  isPassword: false,
+  validator: null,
+  onValid: () => {}
 }
 
 FormInput.propTypes = {
@@ -83,7 +115,10 @@ FormInput.propTypes = {
   className: PropTypes.string,
   autoComplete: PropTypes.string,
   required: PropTypes.bool,
-  pattern: PropTypes.string
+  pattern: PropTypes.string,
+  isPassword: PropTypes.bool,
+  validator: PropTypes.func,
+  onValid: PropTypes.func
 }
 
 export default FormInput

@@ -1,6 +1,8 @@
 @use 'colors' as *;
 
 .app {
+  --font-color-primary-0: #{$c-purple-0};
+  
   .c-brand {
     --font-color-1: #{$c-purple-0};
   }
@@ -14,19 +16,25 @@
 .app[data-theme="dark"] {
   --background-color: #{$c-dark-neutral-0};
   --shadow-color: #{$c-dark-secondary-1};
-  --placeholder-color: #{$c-light-secondary-0};
+  --placeholder-color: #{$c-dark-secondary-0};
+  --border-color: #{$c-dark-secondary-4};
 
   .c-nav-link {
     --font-color: #{$c-white-0};
   }
 
   .c-brand {
-    --font-color-0: #{$c-white-0};
+    --font-color: #{$c-white-0};
   }
 
-  .c-form-input {
+  .c-form-input,
+  .c-date-input {
     --background-color: #{$c-white-0};
-    --border-color: #{$c-light-secondary-0};
+    --border-color: #{$c-dark-secondary-0};
+    --text-fill-color: #{$c-black-0};
+    --toggle-background-color: #{$c-dark-secondary-2};
+    --toggle-stroke-color: #{$c-dark-secondary-3};
+    --invalid-error-color: #{$c-dark-primary-2};
   }
 }
 
@@ -34,17 +42,23 @@
   --background-color: #{$c-light-neutral-0};
   --shadow-color: #{$c-light-secondary-1};
   --placeholder-color: #{$c-light-secondary-0};
+  --border-color: #{$c-light-secondary-4};
 
   .c-nav-link {
     --font-color: #{$c-black-0};
   }
 
   .c-brand {
-    --font-color-0: #{$c-black-0};
+    --font-color: #{$c-black-0};
   }
 
-  .c-form-input {
+  .c-form-input,
+  .c-date-input {
     --background-color: #{$c-white-0};
     --border-color: #{$c-light-secondary-0};
+    --text-fill-color: #{$c-black-0};
+    --toggle-background-color: #{$c-light-secondary-2};
+    --toggle-stroke-color: #{$c-light-secondary-3};
+    --invalid-error-color: #{$c-light-primary-2};
   }
 }
