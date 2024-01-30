@@ -7,7 +7,7 @@ const accessToken = localStorage.getItem('accessToken')
 
 const axiosInstance = axios.create({
   baseURL: appConfig.url,
-  timeout: appConfig.timeout,
+  timeout: appConfig.timeout
 })
 
 axiosInstance.interceptors.request.use((config) => {
@@ -15,7 +15,7 @@ axiosInstance.interceptors.request.use((config) => {
 
   config.headers = {
     ...headers,
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${accessToken}`
   }
 
   return config
@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use((config) => {
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  (error) => error,
+  (error) => error
 )
 
 export default axiosInstance

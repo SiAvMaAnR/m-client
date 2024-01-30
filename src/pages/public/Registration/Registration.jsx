@@ -1,22 +1,14 @@
 import { useEffect, useState } from 'react'
 import api from '../../../api/api'
 import { page } from '../../../utils/constants/system'
-import {
-  Brand,
-  FormButton,
-  FormDesc,
-  FormTitle,
-  Logo,
-  NavLink,
-  StatusIcon
-} from '../../../components/_exports'
+import { Brand, FormButton, FormDesc, FormTitle, Logo, NavLink } from '../../../components/_exports'
 import { Step1, Step2, Step3, Step4 } from '../../../components/common/Registration/Steps/_exports'
 import './Registration.scss'
 
 function Registration() {
   const [registrationData, setRegistrationData] = useState({
     login: 'SiAvMaAnR',
-    email: 'admin@admin.com',
+    email: 'samarkin20022002@gmail.com',
     password: 'Sosnova61S',
     confirmationPassword: 'Sosnova61S'
   })
@@ -66,7 +58,7 @@ function Registration() {
   const registrationHandler = async () => {
     try {
       setIsLoading(true)
-
+      console.log('birthday', birthday)
       const { data, response } = await api.user.registration({
         login,
         email,
@@ -82,7 +74,7 @@ function Registration() {
         throw new Error(response.data.clientMessage)
       }
 
-      if (!data.isSuccess) {
+      if (!data?.isSuccess) {
         throw new Error('Something went wrong')
       }
 
@@ -155,7 +147,7 @@ function Registration() {
                 {result.isSuccess ? 'Success' : 'Failed'}
               </FormTitle>
 
-              <FormDesc className="error">{result.message}</FormDesc>
+              <FormDesc className="reason">{result.message}</FormDesc>
             </div>
           ) : (
             <div className="content form-content">

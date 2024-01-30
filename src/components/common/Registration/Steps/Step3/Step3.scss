@@ -1,28 +1,28 @@
 .c-registration-step {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
 
-    .password-title {
-        flex: 0 0 15%;
+  .password-title {
+    flex: 0 0 15%;
+  }
+
+  .password-desc {
+    flex: 0 0 45%;
+    padding: 0 20px;
+  }
+
+  .inputs {
+    flex: 0 0 40%;
+    display: grid;
+    place-items: center;
+    gap: 6px;
+
+    .password-input,
+    .confirmation-password-input {
+      height: 42px;
+      width: 255px;
     }
-
-    .password-desc {
-        flex: 0 0 45%;
-        padding: 0 20px;
-    }
-
-    .inputs {
-        flex: 0 0 40%;
-        display: grid;
-        place-items: center;
-        gap: 6px;
-
-        .password-input,
-        .confirmation-password-input {
-            height: 42px;
-            width: 255px;
-        }
-    }
+  }
 }

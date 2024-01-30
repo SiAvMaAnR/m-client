@@ -7,7 +7,7 @@ const useAuth = () => {
   const dispatch = useDispatch()
 
   const updateAccessToken = useCallback(
-    ({accessToken}) => {
+    ({ accessToken }) => {
       localStorage.setItem('accessToken', accessToken)
 
       const tokenHelper = new TokenHelper(accessToken)
@@ -20,15 +20,16 @@ const useAuth = () => {
           id,
           role,
           isLogged,
-          accessTokenExp: accessTokenExp * 1000,
-        }),
+          accessTokenExp: accessTokenExp * 1000
+        })
       )
     },
-    [dispatch],
+    [dispatch]
   )
 
   const logIn = useCallback(
     ({ accessToken, refreshToken, refreshTokenExp }) => {
+      console.log(accessToken, refreshToken, refreshTokenExp);
       localStorage.setItem('accessToken', accessToken)
       localStorage.setItem('refreshToken', refreshToken)
 
@@ -43,11 +44,11 @@ const useAuth = () => {
           role,
           isLogged,
           accessTokenExp: accessTokenExp * 1000,
-          refreshTokenExp: new Date(refreshTokenExp).getTime(),
-        }),
+          refreshTokenExp: new Date(refreshTokenExp).getTime()
+        })
       )
     },
-    [dispatch],
+    [dispatch]
   )
 
   const logOut = useCallback(() => {

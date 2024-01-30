@@ -16,7 +16,7 @@ function cPasswordValidator(password, cPassword) {
     errors.push('* The length of the entered password must be more than 8 characters')
   }
 
-  if(!isMatchPasswords){
+  if (!isMatchPasswords) {
     errors.push('* Password mismatch')
   }
 

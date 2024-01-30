@@ -18,7 +18,7 @@ function FormButton({ onClick, className, isActive, isLoading, children }) {
 FormButton.defaultProps = {
   onClick: () => {},
   isLoading: false,
-  isActive: false,
+  isActive: true,
   children: '',
   className: ''
 }

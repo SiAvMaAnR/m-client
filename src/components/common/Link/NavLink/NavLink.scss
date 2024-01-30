@@ -1,12 +1,12 @@
 .c-nav-link {
-    color: var(--font-color);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    text-decoration: none;
-    text-underline-offset: 2px;
+  color: var(--font-color);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: none;
+  text-underline-offset: 2px;
 
-    &:hover {
-        text-decoration: underline;
-    }
+  &:hover {
+    text-decoration: underline;
+  }
 }

@@ -37,7 +37,7 @@ function DateInput({ setValue, className, onValid }) {
 
   useEffect(() => {
     if (isValid) {
-      setValue(new Date(date.year, date.month - 1, date.day))
+      setValue(`${date.year}-${date.month?.padStart(2, '0')}-${date.day?.padStart(2, '0')}`)
     }
   }, [date, setValue, isValid])
 

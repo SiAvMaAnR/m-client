@@ -10,7 +10,7 @@ function PermissionGuard({ permittedRoles }) {
 }
 
 PermissionGuard.propTypes = {
-  permittedRoles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  permittedRoles: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
 export default PermissionGuard
