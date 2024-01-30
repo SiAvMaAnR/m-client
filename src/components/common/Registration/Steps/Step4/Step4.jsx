@@ -1,9 +1,22 @@
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { DateInput, FormDesc, FormTitle } from '../../../../_exports'
 import './Step4.scss'
 
 function Step4({ className, setRegistrationData, registrationData, setIsValid }) {
+  const [value, setValue] = useState(null)
+
   const { birthday } = registrationData
+
+  useEffect(() => {
+    if (value !== birthday) {
+      console.log(value)
+      setRegistrationData({
+        ...registrationData,
+        birthday: value
+      })
+    }
+  }, [value, setRegistrationData, registrationData, birthday])
 
   return (
     <div className={`c-registration-step ${className}`}>
@@ -16,12 +29,7 @@ function Step4({ className, setRegistrationData, registrationData, setIsValid })
       <div className="inputs">
         <DateInput
           className="birthday-input"
-          onChange={(e) =>
-            setRegistrationData({
-              ...registrationData,
-              birthday: e.target.value
-            })
-          }
+          setValue={setValue}
           onValid={setIsValid}
           value={birthday}
         />
@@ -44,7 +52,7 @@ Step4.propTypes = {
     login: PropTypes.string,
     password: PropTypes.string,
     confirmationPassword: PropTypes.string,
-    birthday: PropTypes.instanceOf(Date)
+    birthday: PropTypes.string
   }),
   className: PropTypes.string,
   setIsValid: PropTypes.func

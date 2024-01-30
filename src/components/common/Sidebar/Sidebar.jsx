@@ -10,7 +10,7 @@ function Sidebar() {
   }
 
   const style = {
-    expand: expand ? 'expand' : '',
+    expand: expand ? 'expand' : ''
   }
 
   return (

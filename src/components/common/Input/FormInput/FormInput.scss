@@ -1,78 +1,78 @@
 .c-form-input {
-    position: relative;
+  position: relative;
 
-    &.invalid {
-        .form-input {
-            border: solid 2px var(--invalid-error-color);
-        }
-    }
-
+  &.invalid {
     .form-input {
-        border-radius: 13px;
-        border: 1px solid var(--border-color);
-        display: flex;
-        padding: 3px 40px 3px 30px;
-        align-items: center;
-        background: var(--background-color);
-        outline: none;
-        font-family: 'Roboto', sans-serif;
-        font-size: 14px;
-        font-weight: 400;
+      border: solid 2px var(--invalid-error-color);
+    }
+  }
 
-        &::placeholder {
-            color: var(--placeholder-color);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            font-weight: 400;
-        }
+  .form-input {
+    border-radius: 13px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    padding: 3px 40px 3px 30px;
+    align-items: center;
+    background: var(--background-color);
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
 
-        &:-webkit-autofill,
-        &:-webkit-autofill:focus {
-            box-shadow: 0 0 0 30px #fff inset !important;
-            -webkit-text-fill-color: var(--text-fill-color);
-        }
+    &::placeholder {
+      color: var(--placeholder-color);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
     }
 
-    .toggle-wrapper {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 10px;
-        cursor: pointer;
-        height: 32px;
-        width: 32px;
+    &:-webkit-autofill,
+    &:-webkit-autofill:focus {
+      box-shadow: 0 0 0 30px #fff inset !important;
+      -webkit-text-fill-color: var(--text-fill-color);
+    }
+  }
 
-        .toggle-visibility {
-            height: 100%;
-            width: 100%;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.5s ease;
+  .toggle-wrapper {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
 
-            &:hover {
-                background: var(--toggle-background-color);
-                transition: all 0.5s ease;
+    .toggle-visibility {
+      height: 100%;
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.5s ease;
 
-                path {
-                    stroke: var(--toggle-stroke-color);
-                }
-            }
+      &:hover {
+        background: var(--toggle-background-color);
+        transition: all 0.5s ease;
 
-            path {
-                stroke: var(--placeholder-color);
-                transition: all 0.5s ease;
-            }
+        path {
+          stroke: var(--toggle-stroke-color);
         }
-    }
+      }
 
-    .valid-wrapper {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: -30px;
-        cursor: pointer;
-        height: 18px;
-        width: 18px;
-        color: var(--invalid-error-color);
+      path {
+        stroke: var(--placeholder-color);
+        transition: all 0.5s ease;
+      }
     }
+  }
+
+  .valid-wrapper {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -30px;
+    cursor: pointer;
+    height: 18px;
+    width: 18px;
+    color: var(--invalid-error-color);
+  }
 }

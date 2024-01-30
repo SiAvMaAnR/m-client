@@ -2,7 +2,7 @@
 
 .app {
   --font-color-primary-0: #{$c-purple-0};
-  
+
   .c-brand {
     --font-color-1: #{$c-purple-0};
   }
@@ -13,7 +13,7 @@
   }
 }
 
-.app[data-theme="dark"] {
+.app[data-theme='dark'] {
   --background-color: #{$c-dark-neutral-0};
   --shadow-color: #{$c-dark-secondary-1};
   --placeholder-color: #{$c-dark-secondary-0};
@@ -38,7 +38,7 @@
   }
 }
 
-.app[data-theme="light"] {
+.app[data-theme='light'] {
   --background-color: #{$c-light-neutral-0};
   --shadow-color: #{$c-light-secondary-1};
   --placeholder-color: #{$c-light-secondary-0};

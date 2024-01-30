@@ -1,6 +1,7 @@
 // public
 import Login from './public/Login/Login'
 import Registration from './public/Registration/Registration'
+import ConfirmedRegistration from './public/ConfirmedRegistration/ConfirmedRegistration'
 
 // admin
 import Users from './admin/Users/Users'
@@ -13,4 +14,4 @@ import Chat from './common/Chat/Chat'
 import Home from './common/Home/Home'
 import Error from './common/Error/Error'
 
-export { Login, Registration, Users, Profile, Chat, Home, Error }
+export { Login, Registration, Users, Profile, Chat, Home, Error, ConfirmedRegistration }

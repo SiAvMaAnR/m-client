@@ -74,7 +74,7 @@ Step3.propTypes = {
     login: PropTypes.string,
     password: PropTypes.string,
     confirmationPassword: PropTypes.string,
-    birthday: PropTypes.instanceOf(Date)
+    birthday: PropTypes.string
   }),
   className: PropTypes.string,
   setIsValid: PropTypes.func

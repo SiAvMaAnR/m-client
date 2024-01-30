@@ -12,7 +12,7 @@ function SidebarLayout({ page }) {
 }
 
 SidebarLayout.propTypes = {
-  page: PropTypes.element.isRequired,
+  page: PropTypes.element.isRequired
 }
 
 export default SidebarLayout

@@ -1,105 +1,105 @@
 .p-login {
-    position: relative;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  background: var(--background-color);
+  cursor: default;
+  user-select: none;
+
+  .login-header {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 150px;
+    height: 150px;
+    width: 100%;
+  }
+
+  .login-content {
     height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    background: var(--background-color);
-    cursor: default;
-    user-select: none;
+    justify-content: center;
+    align-items: center;
 
-    .login-header {
-        position: absolute;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 150px;
-        height: 150px;
-        width: 100%;
-    }
+    .login-panel {
+      height: 490px;
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+      align-items: stretch;
+      border-radius: 25px;
+      box-shadow: 0px 0 10px 6px var(--shadow-color);
+      padding: 48px 15px 20px;
 
-    .login-content {
-        height: 100%;
-        width: 100%;
+      .logo-wrapper {
+        flex: 0 0 80px;
         display: flex;
         justify-content: center;
         align-items: center;
+      }
 
-        .login-panel {
-            height: 490px;
-            width: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: stretch;
-            align-items: stretch;
-            border-radius: 25px;
-            box-shadow: 0px 0 10px 6px var(--shadow-color);
-            padding: 48px 15px 20px;
+      .title {
+        padding-top: 10px;
+        flex: 0 0 46px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 26px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-            .logo-wrapper {
-                flex: 0 0 80px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+      .client-message {
+        flex: 0 0 46px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        font-size: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-            .title {
-                padding-top: 10px;
-                flex: 0 0 46px;
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 600;
-                font-size: 26px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+      .form {
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: stretch;
 
-            .client-message {
-                flex: 0 0 46px;
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 300;
-                font-size: 15px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+        .inputs-wrapper {
+          flex: 1 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+          padding: 18px 20px 10px;
 
-            .form {
-                flex: 1 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: stretch;
-                align-items: stretch;
-
-                .inputs-wrapper {
-                    flex: 1 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-evenly;
-                    align-items: center;
-                    padding: 18px 20px 10px;
-
-                    .email-input,
-                    .password-input {
-                        height: 42px;
-                        width: 255px;
-                    }
-                }
-
-                .button-wrapper {
-                    flex: 0 0 110px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    .submit-button {
-                        height: 48px;
-                        width: 160px;
-                    }
-                }
-            }
+          .email-input,
+          .password-input {
+            height: 42px;
+            width: 255px;
+          }
         }
+
+        .button-wrapper {
+          flex: 0 0 110px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .submit-button {
+            height: 48px;
+            width: 160px;
+          }
+        }
+      }
     }
+  }
 }

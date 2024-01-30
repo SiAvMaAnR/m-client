@@ -6,8 +6,8 @@ function Brand({ className, children }) {
 
   return (
     <div className={`c-brand ${className}`}>
-      <span className='first'>{word1}</span>
-      <span className='second'>{word2}</span>
+      <span className="first">{word1}</span>
+      <span className="second">{word2}</span>
     </div>
   )
 }

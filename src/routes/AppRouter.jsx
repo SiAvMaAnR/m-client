@@ -1,6 +1,14 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { role, page } from '../utils/constants/system'
-import { Chat, Home, Login, Profile, Registration, Users } from '../pages/_exports'
+import {
+  Chat,
+  ConfirmedRegistration,
+  Home,
+  Login,
+  Profile,
+  Registration,
+  Users
+} from '../pages/_exports'
 import { PermissionGuard, SidebarLayout } from '../components/_exports'
 
 function AppRouter() {
@@ -11,6 +19,7 @@ function AppRouter() {
           <Route path="*" element={<Navigate to={page.login} />} />
           <Route path="login" element={<Login />} />
           <Route path="registration" element={<Registration />} />
+          <Route path="confirmed-registration" element={<ConfirmedRegistration />} />
         </Route>
 
         <Route element={<PermissionGuard permittedRoles={[role.admin]} />}>

@@ -6,12 +6,12 @@ import { authReducer, systemReducer } from './_exports'
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['system', 'auth'],
+  whitelist: ['system', 'auth']
 }
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  system: systemReducer,
+  system: systemReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -20,8 +20,8 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+      serializableCheck: false
+    })
 })
 
 const persistor = persistStore(store)

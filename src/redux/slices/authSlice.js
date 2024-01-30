@@ -8,14 +8,14 @@ export const authSlice = createSlice({
       role: null,
       isLogged: false,
       accessTokenExp: null,
-      refreshTokenExp: null,
-    },
+      refreshTokenExp: null
+    }
   },
   reducers: {
     updateInfo: (state, action) => {
       state.info = {
         ...state.info,
-        ...action.payload,
+        ...action.payload
       }
     },
     setInfo: (state, action) => {
@@ -27,10 +27,10 @@ export const authSlice = createSlice({
         role: null,
         isLogged: false,
         accessTokenExp: null,
-        refreshTokenExp: null,
+        refreshTokenExp: null
       }
-    },
-  },
+    }
+  }
 })
 
 export const { setInfo, clearInfo, updateInfo } = authSlice.actions
