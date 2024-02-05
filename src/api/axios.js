@@ -3,14 +3,15 @@ import configuration from '../config/configuration'
 
 const appConfig = configuration.app
 
-const accessToken = localStorage.getItem('accessToken')
-
 const axiosInstance = axios.create({
   baseURL: appConfig.url,
   timeout: appConfig.timeout
 })
 
+const getAccessToken = () => localStorage.getItem('accessToken')
+
 axiosInstance.interceptors.request.use((config) => {
+  const accessToken = getAccessToken()
   const { headers = {} } = config
 
   config.headers = {

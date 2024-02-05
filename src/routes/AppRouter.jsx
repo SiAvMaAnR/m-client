@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { role, page } from '../utils/constants/system'
 import {
@@ -12,11 +13,15 @@ import {
 import { PermissionGuard, SidebarLayout } from '../components/_exports'
 
 function AppRouter() {
+  const isLogged = useSelector((state) => state.auth.info.isLogged)
+  const defaultPage = isLogged ? page.home : page.login
+
   return (
     <div className="app-router">
       <Routes>
+        <Route path="*" element={<Navigate to={defaultPage} />} />
+
         <Route element={<PermissionGuard permittedRoles={[role.public]} />}>
-          <Route path="*" element={<Navigate to={page.login} />} />
           <Route path="login" element={<Login />} />
           <Route path="registration" element={<Registration />} />
           <Route path="confirmed-registration" element={<ConfirmedRegistration />} />

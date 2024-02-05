@@ -1,0 +1,19 @@
+.c-dropdown {
+    position: relative;
+
+
+    .dropdown {
+        position: absolute;
+        bottom: 10px;
+        left: 40px;
+        width: 250px;
+        box-shadow: 0px 0 10px 6px var(--shadow-color);
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 300;
+        white-space: pre-wrap;
+        z-index: 99;
+    }
+}

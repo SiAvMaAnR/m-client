@@ -13,6 +13,11 @@ const userApi = {
     const body = { confirmation }
     const response = await axiosInstance.post(`${path}/confirmation`, body)
     return response
+  },
+
+  profile: async () => {
+    const response = await axiosInstance.get(`${path}/profile`)
+    return response
   }
 }
 

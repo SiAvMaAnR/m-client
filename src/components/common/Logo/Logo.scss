@@ -1,3 +1,8 @@
 .c-logo {
-  cursor: pointer;
+  display: grid;
+  place-items: center;
+
+  svg {
+    cursor: pointer;
+  }
 }

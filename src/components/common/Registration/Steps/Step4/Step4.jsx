@@ -10,7 +10,6 @@ function Step4({ className, setRegistrationData, registrationData, setIsValid })
 
   useEffect(() => {
     if (value !== birthday) {
-      console.log(value)
       setRegistrationData({
         ...registrationData,
         birthday: value

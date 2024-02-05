@@ -13,14 +13,15 @@ const useAuth = () => {
       const tokenHelper = new TokenHelper(accessToken)
       const tokenPayload = tokenHelper.getPayload()
 
-      const { id, role, exp: accessTokenExp } = tokenPayload
+      const { id, role, exp: accessTokenExp } = tokenPayload || {}
       const isLogged = true
+
       dispatch(
         updateInfo({
           id,
           role,
           isLogged,
-          accessTokenExp: accessTokenExp * 1000
+          accessTokenExp: (accessTokenExp || 0) * 1000
         })
       )
     },
@@ -29,21 +30,21 @@ const useAuth = () => {
 
   const logIn = useCallback(
     ({ accessToken, refreshToken, refreshTokenExp }) => {
-      console.log(accessToken, refreshToken, refreshTokenExp);
       localStorage.setItem('accessToken', accessToken)
       localStorage.setItem('refreshToken', refreshToken)
 
       const tokenHelper = new TokenHelper(accessToken)
       const tokenPayload = tokenHelper.getPayload()
 
-      const { id, role, exp: accessTokenExp } = tokenPayload
+      const { id, role, exp: accessTokenExp } = tokenPayload || {}
       const isLogged = true
+
       dispatch(
         setInfo({
           id,
           role,
           isLogged,
-          accessTokenExp: accessTokenExp * 1000,
+          accessTokenExp: (accessTokenExp || 0) * 1000,
           refreshTokenExp: new Date(refreshTokenExp).getTime()
         })
       )

@@ -58,7 +58,6 @@ function Registration() {
   const registrationHandler = async () => {
     try {
       setIsLoading(true)
-      console.log('birthday', birthday)
       const { data, response } = await api.user.registration({
         login,
         email,

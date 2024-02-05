@@ -23,7 +23,8 @@ const useRefreshToken = () => {
 
       if (refreshTokenExp > Date.now()) {
         api.account.refreshToken({ refreshToken }).then((result) => {
-          updateAccessToken(result)
+          const accessToken = result?.data?.accessToken
+          updateAccessToken({ accessToken })
         })
       } else {
         api.account.revokeToken({ refreshToken }).then(() => {
