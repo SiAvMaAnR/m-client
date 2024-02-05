@@ -31,6 +31,17 @@ const accountApi = {
     const body = { resetToken, password }
     const response = await axiosInstance.post(`${path}/reset-password`, body)
     return response
+  },
+
+  image: async () => {
+    const response = await axiosInstance.get(`${path}/image`)
+    return response
+  },
+
+  uploadImage: async ({ file }) => {
+    const body = { file }
+    const response = await axiosInstance.post(`${path}/upload-image`, body)
+    return response
   }
 }
 
