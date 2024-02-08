@@ -25,7 +25,7 @@
         height: 100%;
         max-width: 0;
         overflow-x: hidden;
-        transition: all 0.4s linear;
+        transition: all 0.3s linear;
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
         display: flex;
@@ -59,11 +59,13 @@
             width: 40px;
             cursor: pointer;
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: all 0.3s linear;
+            max-width: 0;
+
 
             &:hover {
                 background: var(--menu-icon-background-color);
-                transition: all 0.3s ease;
+                transition: all 0.3s linear;
             }
 
             svg {
@@ -75,17 +77,20 @@
 
     &.expand {
 
-        .sidebar-profile-image {}
-
         .sidebar-profile-info {
             max-width: 125px;
-            transition: all 0.4s linear;
+            transition: all 0.3s linear;
         }
 
         .sidebar-profile-menu {
             max-width: 50px;
             transition: all 0.3s linear;
-            overflow-x: visible; // need fix
+            overflow-x: visible;
+
+            .menu-icon {
+                max-width: 40px;
+                transition: all 0.3s linear;
+            }
         }
     }
 }

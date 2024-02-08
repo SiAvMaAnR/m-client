@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 import api from '../../../../api/api'
-import { role } from '../../../../utils/constants/system'
+import { page, role } from '../../../../utils/constants/system'
 import useRole from '../../../../hooks/useRole'
+import useAuth from '../../../../hooks/useAuth'
 import defaultProfileImg from '../../../../utils/constants/defaultProfileImg'
 import MenuIcon from './MenuIcon/MenuIcon'
-import './SidebarProfile.scss'
 import DropDown from '../../DropDown/DropDown'
+import LogoutIcon from './MenuIcons/LogoutIcon/LogoutIcon'
+import SettingsIcon from './MenuIcons/SettingsIcon/SettingsIcon'
+import './SidebarProfile.scss'
 
 function SidebarProfile({ className, isExpand }) {
   const [image, setImage] = useState(null)
@@ -14,6 +18,8 @@ function SidebarProfile({ className, isExpand }) {
   const [login, setLogin] = useState('')
   const expandClass = isExpand ? 'expand' : ''
   const userRole = useRole()
+  const { logOut } = useAuth()
+  const navigate = useNavigate()
 
   useEffect(() => {
     api.account.image().then((result) => {
@@ -32,24 +38,17 @@ function SidebarProfile({ className, isExpand }) {
 
   const menuItems = [
     {
-      icon: <div>TEST</div>,
-      title: 'Test',
+      icon: <SettingsIcon />,
+      title: 'Settings',
       onClick: () => {}
     },
     {
-      icon: <div>TEST</div>,
-      title: 'Test1',
-      onClick: () => {}
-    },
-    {
-      icon: <div>TEST</div>,
-      title: 'Test2',
-      onClick: () => {}
-    },
-    {
-      icon: <div>TEST</div>,
-      title: 'Test3',
-      onClick: () => {}
+      icon: <LogoutIcon />,
+      title: 'LogOut',
+      onClick: () => {
+        logOut()
+        navigate(page.login)
+      }
     }
   ]
 

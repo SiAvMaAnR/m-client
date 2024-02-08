@@ -19,7 +19,7 @@
     .brand {
         max-width: 0;
         overflow-x: hidden;
-        transition: all 0.5s linear;
+        transition: all 0.3s linear;
         text-align: right;
     }
 
@@ -30,7 +30,7 @@
 
         .brand {
             max-width: 200px;
-            transition: all 0.5s linear;
+            transition: all 0.3s linear;
             flex: 1 1;
             padding-right: 30px;
         }
