@@ -1,15 +1,14 @@
 .c-dropdown {
     position: relative;
 
-
     .dropdown {
         position: absolute;
-        bottom: 10px;
-        left: 40px;
-        width: 250px;
+        bottom: 0px;
+        left: 50px;
+        width: 120px;
         box-shadow: 0px 0 10px 6px var(--shadow-color);
         border-radius: 8px;
-        padding: 8px 12px;
+        padding: 2px 4px;
         font-family: 'Montserrat', sans-serif;
         font-size: 12px;
         font-weight: 300;

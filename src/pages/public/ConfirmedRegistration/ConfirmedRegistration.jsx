@@ -64,8 +64,8 @@ function ConfirmedRegistration() {
   }, [confirmAsync])
 
   return (
-    <div className="p-confirmed-registration">
-      <div className="confirmed-registration-header">
+    <div className="p-confirm-registration">
+      <div className="confirm-registration-header">
         <div className="brand-wrapper">
           <Brand className="brand">Safe|Book</Brand>
         </div>
@@ -76,8 +76,8 @@ function ConfirmedRegistration() {
         </div>
       </div>
 
-      <div className="confirmed-registration-content">
-        <div className="confirmed-registration-panel">
+      <div className="confirm-registration-content">
+        <div className="confirm-registration-panel">
           <div className="logo-wrapper">
             <Logo className="logo" />
           </div>

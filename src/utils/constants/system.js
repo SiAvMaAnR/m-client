@@ -17,7 +17,11 @@ const theme = {
 const page = {
   login: '/login',
   registration: '/registration',
-  home: '/home'
+  home: '/home',
+  chat: '/chat',
+  settings: '/settings',
+  profile: '/profile',
+  users: '/users'
 }
 
 export { language, theme, role, page }

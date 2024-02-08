@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import './DropDown.scss'
 import { useEffect, useRef, useState } from 'react'
+import DDItem from './DDItem/DDItem'
+import './DropDown.scss'
 
 function DropDown({ className, children, items }) {
-  const refSetTimeout = useRef()
   const [showDropDown, setShowDropDown] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -22,8 +22,7 @@ function DropDown({ className, children, items }) {
   }, [])
 
   const onClickHandler = () => {
-    clearTimeout(refSetTimeout.current)
-    setShowDropDown(!showDropDown)
+    setShowDropDown(true)
   }
 
   return (
@@ -32,9 +31,8 @@ function DropDown({ className, children, items }) {
       {showDropDown && (
         <div className="dropdown" ref={dropdownRef}>
           {items?.map((item) => {
-            const { title } = item
-
-            return <div key={title}>{title}</div>
+            const { title, icon, onClick } = item
+            return <DDItem key={title} onClick={onClick} icon={icon} title={title} />
           })}
         </div>
       )}

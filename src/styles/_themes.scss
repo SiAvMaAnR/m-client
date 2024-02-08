@@ -39,9 +39,11 @@
 
   .c-sidebar {
     --background-color: #{$c-white-0};
+    --background-item-color: #{$c-white-0};
     --border-color: #{$c-dark-secondary-5};
     --search-icon-background-color: #{$c-dark-neutral-2};
     --menu-icon-background-color: #{$c-dark-neutral-2};
+    --default-background-color: #{$c-dark-neutral-2};
   }
 }
 
@@ -71,8 +73,10 @@
 
   .c-sidebar {
     --background-color: #{$c-white-0};
+    --background-item-color: #{$c-white-0};
     --border-color: #{$c-light-secondary-5};
     --search-icon-background-color: #{$c-light-neutral-2};
     --menu-icon-background-color: #{$c-light-neutral-2};
+    --default-background-color: #{$c-light-neutral-2};
   }
 }

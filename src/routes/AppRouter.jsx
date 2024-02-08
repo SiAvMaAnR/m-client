@@ -24,7 +24,7 @@ function AppRouter() {
         <Route element={<PermissionGuard permittedRoles={[role.public]} />}>
           <Route path="login" element={<Login />} />
           <Route path="registration" element={<Registration />} />
-          <Route path="confirmed-registration" element={<ConfirmedRegistration />} />
+          <Route path="confirm-registration" element={<ConfirmedRegistration />} />
         </Route>
 
         <Route element={<PermissionGuard permittedRoles={[role.admin]} />}>

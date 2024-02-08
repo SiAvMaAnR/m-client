@@ -1,32 +1,33 @@
 .c-sidebar-search {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 46px;
-    margin: 7px;
+    height: 40px;
+    margin: 8px;
     border-radius: 14px;
     border: solid 1px var(--border-color);
+    background: var(--default-background-color);
     cursor: pointer;
 
     .search-icon-container {
-        flex: 0 0 44px;
         height: 100%;
         width: 100%;
+        flex: 0 0 100%;
+        max-width: 44px;
 
         .search-icon {
             height: 100%;
             width: 100%;
-            border-radius: 14px;
-            transition: all 0.5s ease;
+            border-radius: 12px;
 
             svg {
-                height: 22px;
-                width: 22px;
+                height: 18px;
+                width: 18px;
             }
 
             &:hover {
-                background: var(--search-icon-background-color);
-                transition: all 0.5s ease;
+                transition: all 0.3s linear;
             }
         }
     }
@@ -36,25 +37,33 @@
         place-items: center;
         max-width: 0;
         overflow-x: hidden;
-        transition: all 0.3s linear;
+        transition: all 0.5s linear;
 
         input {
             outline: none;
-            font-size: 16px;
+            font-size: 15px;
             font-family: 'Montserrat', sans-serif;
             border: none;
             width: 95%;
             padding: 6px 10px;
             border-radius: 8px;
+            background: var(--default-background-color);
+
+            &::placeholder {
+                font-size: 15px;
+            }
         }
     }
 
     &.expand {
         justify-content: stretch;
 
+        .search-icon-container {
+            flex: 0 0 44px;
+        }
+
         .search-input-container {
             max-width: 200px;
-            transition: all 0.3s linear;
             flex: 1 1;
         }
     }

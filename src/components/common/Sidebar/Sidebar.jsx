@@ -6,10 +6,12 @@ import SidebarSearch from './SidebarSearch/SidebarSearch'
 import SidebarTheme from './SidebarTheme/SidebarTheme'
 import SidebarProfile from './SidebarProfile/SidebarProfile'
 import SidebarExpander from './SidebarExpander/SidebarExpander'
+import { page } from '../../../utils/constants/system'
 import './Sidebar.scss'
 
 function Sidebar() {
   const [expand, setExpand] = useState(false)
+  // counters to slice
 
   const expandHandler = () => {
     setExpand(!expand)
@@ -43,14 +45,31 @@ function Sidebar() {
       </div>
 
       <div className="sidebar-items-container">
-        <SidebarItem />
-        <SidebarItem />
-        <SidebarItem />
-        <SidebarItem />
+        <SidebarItem
+          className="sidebar-item"
+          link={page.home}
+          title="Home"
+          isExpand={expand}
+          noticeCounter={1}
+        />
+        <SidebarItem
+          className="sidebar-item"
+          link={page.chat}
+          title="Messenger"
+          isExpand={expand}
+          noticeCounter={1}
+        />
+        <SidebarItem
+          className="sidebar-item"
+          link={page.users}
+          title="Users"
+          isExpand={expand}
+          noticeCounter={1}
+        />
       </div>
 
       <div className="sidebar-theme-container">
-        <SidebarTheme />
+        <SidebarTheme className="sidebar-theme" isExpand={expand} />
       </div>
 
       <div className="sidebar-profile-container">

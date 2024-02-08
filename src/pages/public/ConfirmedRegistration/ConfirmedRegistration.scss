@@ -1,4 +1,4 @@
-.p-confirmed-registration {
+.p-confirm-registration {
     position: relative;
     height: 100%;
     width: 100%;
@@ -10,7 +10,7 @@
     user-select: none;
     cursor: default;
 
-    .confirmed-registration-header {
+    .confirm-registration-header {
         position: absolute;
         display: flex;
         justify-content: space-between;
@@ -20,7 +20,7 @@
         width: 100%;
     }
 
-    .confirmed-registration-content {
+    .confirm-registration-content {
         height: 100%;
         width: 100%;
         display: flex;
@@ -28,7 +28,7 @@
         align-items: center;
         gap: 10px;
 
-        .confirmed-registration-panel {
+        .confirm-registration-panel {
             height: 490px;
             width: 500px;
             display: flex;

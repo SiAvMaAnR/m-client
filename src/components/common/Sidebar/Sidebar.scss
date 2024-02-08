@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   user-select: none;
 
   &:hover {
@@ -43,7 +43,6 @@
 
   .sidebar-header-container {
     flex: 0 0 70px;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +50,6 @@
 
   .sidebar-search-container {
     flex: 0 0 140px;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,12 +60,11 @@
   }
 
   .sidebar-theme-container {
-    flex: 0 0 60px;
+    flex: 0 0 80px;
   }
 
   .sidebar-profile-container {
     flex: 0 0 65px;
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
