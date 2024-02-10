@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { FormDesc, FormInput, FormTitle } from '../../../../_exports'
-import { passwordValidator, cPasswordValidator } from '../../../../../utils/validators/_exports'
+import { FormDesc, FormInput, FormTitle } from '../../../_exports'
+import { passwordValidator, cPasswordValidator } from '../../../../utils/validators/_exports'
 import './Step3.scss'
 
 function Step3({ className, setRegistrationData, registrationData, setIsValid }) {

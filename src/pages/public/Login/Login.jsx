@@ -38,7 +38,7 @@ function Login() {
         throw new Error(response.data.clientMessage)
       }
 
-      if (!data?.accessToken) {
+      if (!data) {
         throw new Error("Something went wrong")
       }
 
