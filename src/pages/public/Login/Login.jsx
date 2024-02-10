@@ -38,6 +38,10 @@ function Login() {
         throw new Error(response.data.clientMessage)
       }
 
+      if (!data?.accessToken) {
+        throw new Error("Something went wrong")
+      }
+
       logIn(data)
       navigate(page.home)
     } catch (error) {

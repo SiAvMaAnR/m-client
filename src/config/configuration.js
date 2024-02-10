@@ -1,6 +1,8 @@
-export default {
+const config = {
   app: {
-    url: 'http://localhost:8080',
-    timeout: 10000
+    url: process.env.REACT_APP_URL,
+    timeout: process.env.REACT_APP_TIMEOUT
   }
 }
+
+export default config
