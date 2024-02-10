@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { page } from '../../../utils/constants/system'
+import { page, role } from '../../../utils/constants/system'
 import useKeyDown from '../../../hooks/useKeyDown'
 import SidebarItem from './SidebarItem/SidebarItem'
 import SidebarHeader from './SidebarHeader/SidebarHeader'
@@ -11,6 +11,7 @@ import HomeIcon from './SidebarIcons/HomeIcon/HomeIcon'
 import MessengerIcon from './SidebarIcons/MessengerIcon/MessengerIcon'
 import UsersIcon from './SidebarIcons/UsersIcon/UsersIcon'
 import './Sidebar.scss'
+import ComponentPermissionGuard from '../../permission/ComponentPermissionGuard'
 
 function Sidebar() {
   const [expand, setExpand] = useState(false)
@@ -68,15 +69,17 @@ function Sidebar() {
           <MessengerIcon />
         </SidebarItem>
 
-        <SidebarItem
-          className="sidebar-item"
-          link={page.users}
-          title="Users"
-          isExpand={expand}
-          noticeCounter={1}
-        >
-          <UsersIcon />
-        </SidebarItem>
+        <ComponentPermissionGuard permittedRoles={[role.admin]}>
+          <SidebarItem
+            className="sidebar-item"
+            link={page.users}
+            title="Users"
+            isExpand={expand}
+            noticeCounter={1}
+          >
+            <UsersIcon />
+          </SidebarItem>
+        </ComponentPermissionGuard>
       </div>
 
       <div className="sidebar-theme-container">

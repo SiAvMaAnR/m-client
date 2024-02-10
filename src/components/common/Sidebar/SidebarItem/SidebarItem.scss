@@ -2,24 +2,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
-    width: 50px;
+    height: 44px;
+    width: 44px;
     text-decoration: none;
     border-radius: 12px;
     transition: all 0.3s linear;
     border: solid 1px transparent;
-    
+
 
     .sidebar-item-icon {
-        flex: 0 0 50px;
+        flex: 0 0 44px;
         display: grid;
         place-items: center;
         height: 100%;
         transition: all 0.3s linear;
 
         svg {
-            height: 26px;
-            width: 26px;
+            height: 23px;
+            width: 23px;
         }
     }
 
@@ -27,7 +27,7 @@
         flex: 1 1;
         color: var(--default-item-color);
         font-family: 'Montserrat', sans-serif;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 400;
         max-width: 0;
         transition: all 0.3s linear;
@@ -40,11 +40,20 @@
         place-items: center;
         height: 100%;
         color: var(--default-item-color);
-        font-family: 'Montserrat', sans-serif;
-        font-size: 15px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 10px;
         max-width: 0;
-        transition: all 0.3s linear;
+        transition: all 0.1s linear;
         overflow: hidden;
+
+        .notice-counter-wrapper {
+            display: grid;
+            place-items: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: solid 1px var(--border-color);
+        }
     }
 
 
@@ -63,7 +72,7 @@
         }
 
         .sidebar-item-notice-counter {
-            max-width: 60px;
+            max-width: 50px;
         }
     }
 }

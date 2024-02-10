@@ -1,5 +1,6 @@
 import SidebarLayout from './common/SidebarLayout/SidebarLayout'
-import PermissionGuard from './permission/PermissionGuard'
+import RoutePermissionGuard from './permission/RoutePermissionGuard'
+import ComponentPermissionGuard from './permission/ComponentPermissionGuard'
 import FormInput from './common/Input/FormInput/FormInput'
 import DateInput from './common/Input/DateInput/DateInput'
 import Sidebar from './common/Sidebar/Sidebar'
@@ -15,7 +16,8 @@ import StatusIcon from './common/StatusIcon/StatusIcon'
 
 export {
   SidebarLayout,
-  PermissionGuard,
+  RoutePermissionGuard,
+  ComponentPermissionGuard,
   FormInput,
   Sidebar,
   SidebarItem,
