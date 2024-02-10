@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { page } from '../../../utils/constants/system'
 import useKeyDown from '../../../hooks/useKeyDown'
 import SidebarItem from './SidebarItem/SidebarItem'
 import SidebarHeader from './SidebarHeader/SidebarHeader'
@@ -6,7 +7,9 @@ import SidebarSearch from './SidebarSearch/SidebarSearch'
 import SidebarTheme from './SidebarTheme/SidebarTheme'
 import SidebarProfile from './SidebarProfile/SidebarProfile'
 import SidebarExpander from './SidebarExpander/SidebarExpander'
-import { page } from '../../../utils/constants/system'
+import HomeIcon from './SidebarIcons/HomeIcon/HomeIcon'
+import MessengerIcon from './SidebarIcons/MessengerIcon/MessengerIcon'
+import UsersIcon from './SidebarIcons/UsersIcon/UsersIcon'
 import './Sidebar.scss'
 
 function Sidebar() {
@@ -51,21 +54,29 @@ function Sidebar() {
           title="Home"
           isExpand={expand}
           noticeCounter={1}
-        />
+        >
+          <HomeIcon />
+        </SidebarItem>
+
         <SidebarItem
           className="sidebar-item"
           link={page.chat}
           title="Messenger"
           isExpand={expand}
           noticeCounter={1}
-        />
+        >
+          <MessengerIcon />
+        </SidebarItem>
+
         <SidebarItem
           className="sidebar-item"
           link={page.users}
           title="Users"
           isExpand={expand}
           noticeCounter={1}
-        />
+        >
+          <UsersIcon />
+        </SidebarItem>
       </div>
 
       <div className="sidebar-theme-container">

@@ -9,7 +9,7 @@ function SidebarItem({ isExpand, className, title, children, link, noticeCounter
     <Link className={`c-sidebar-item ${className} ${expandClass}`} to={link}>
       <div className="sidebar-item-icon">{children}</div>
       <div className="sidebar-item-title">{title}</div>
-      <div className="sidebar-item-noticeCounter">{noticeCounter}</div>
+      <div className="sidebar-item-notice-counter">{noticeCounter}</div>
     </Link>
   )
 }
