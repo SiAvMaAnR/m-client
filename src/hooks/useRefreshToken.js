@@ -27,7 +27,7 @@ const useRefreshToken = () => {
           updateAccessToken({ accessToken })
         })
       } else {
-        api.account.revokeToken({ refreshToken }).then(() => {
+        api.account.revokeToken({ refreshToken }).finally(() => {
           logOut()
           navigate(page.login)
         })
