@@ -24,4 +24,9 @@ const page = {
   users: '/users'
 }
 
-export { language, theme, role, page }
+const hub = {
+  chat: 'chat',
+  state: 'state'
+}
+
+export { language, theme, role, page, hub }

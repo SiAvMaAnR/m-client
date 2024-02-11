@@ -1,7 +1,10 @@
 const config = {
   app: {
-    url: process.env.REACT_APP_URL,
-    timeout: process.env.REACT_APP_TIMEOUT
+    port: process.env.PORT
+  },
+  server: {
+    url: process.env.REACT_APP_SERVER_URL,
+    timeout: process.env.REACT_APP_SERVER_TIMEOUT
   }
 }
 

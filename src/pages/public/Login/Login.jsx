@@ -18,17 +18,17 @@ function Login() {
   const { email, password } = loginData
 
   useEffect(() => {
-    const isValid = true
+    const isActive = loginData.email && loginData.password
 
     setMessage(defaultClientMessage)
-    setIsActiveBtn(isValid)
+    setIsActiveBtn(!!isActive)
   }, [loginData])
 
   const loginHandler = async () => {
     try {
       setIsLoading(true)
 
-      const { data, response } = await api.account.login({ email, password })
+      const { data, response } = await api.auth.login({ email, password })
 
       if (response?.data?.errors) {
         throw new Error('Validation error')
@@ -39,7 +39,7 @@ function Login() {
       }
 
       if (!data) {
-        throw new Error("Something went wrong")
+        throw new Error('Something went wrong')
       }
 
       logIn(data)
