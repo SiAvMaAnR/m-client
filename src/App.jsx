@@ -3,7 +3,7 @@ import AppRouter from './routes/AppRouter'
 import useRefreshToken from './hooks/useRefreshToken'
 import './App.scss'
 import useSignalRHub from './hooks/useSignalRHub'
-import { hub } from './utils/constants/system'
+import { hub } from './constants/system'
 
 function App() {
   const theme = useSelector((state) => state.system.theme)

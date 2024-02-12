@@ -1,5 +1,5 @@
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr'
-import { hub } from '../utils/constants/system'
+import { hub } from '../constants/system'
 import config from '../config/configuration'
 import { getAccessToken } from '../utils/helpers/tokenHelper'
 

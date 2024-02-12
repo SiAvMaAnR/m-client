@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import api from '../../../api/api'
-import { page } from '../../../utils/constants/system'
+import { page } from '../../../constants/system'
 import { Brand, FormButton, FormDesc, FormTitle, Logo, NavLink } from '../../../components/_exports'
 import { Step1, Step2, Step3, Step4 } from '../../../components/registrationPage/Steps/_exports'
 import './Registration.scss'

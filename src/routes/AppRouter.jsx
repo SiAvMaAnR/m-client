@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { role, page } from '../utils/constants/system'
+import { role, page } from '../constants/system'
 import {
   Chat,
   ConfirmedRegistration,

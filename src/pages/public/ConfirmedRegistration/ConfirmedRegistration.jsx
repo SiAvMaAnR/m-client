@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Brand, FormButton, Logo, NavLink } from '../../../components/_exports'
 import './ConfirmedRegistration.scss'
-import { page } from '../../../utils/constants/system'
+import { page } from '../../../constants/system'
 import api from '../../../api/api'
 import useAuth from '../../../hooks/useAuth'
 

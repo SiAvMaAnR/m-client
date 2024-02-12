@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { language, theme } from '../../utils/constants/system'
+import { language, theme } from '../../constants/system'
 
 export const systemSlice = createSlice({
   name: 'system',

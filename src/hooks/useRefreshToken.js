@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import { page } from '../utils/constants/system'
+import { page } from '../constants/system'
 import useAuth from './useAuth'
 import api from '../api/api'
 import { getAuthTokens } from '../utils/helpers/tokenHelper'

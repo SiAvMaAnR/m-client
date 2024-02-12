@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { page, role } from '../../../utils/constants/system'
+import { page, role } from '../../../constants/system'
 import useKeyDown from '../../../hooks/useKeyDown'
 import SidebarItem from './SidebarItem/SidebarItem'
 import SidebarHeader from './SidebarHeader/SidebarHeader'
