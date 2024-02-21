@@ -1,0 +1,19 @@
+.c-page-header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .page-header-text {
+        width: 90%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        border-bottom: solid 1px var(--border-color);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 30px;
+        font-weight: 500;
+        padding-left: 8px;
+    }
+}

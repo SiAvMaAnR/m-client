@@ -1,0 +1,19 @@
+.p-users {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+
+    .users-header {}
+
+    .users-content {
+        height: 75%;
+    }
+
+    .users-pagination {
+        width: 55%;
+        margin: auto;
+    }
+}

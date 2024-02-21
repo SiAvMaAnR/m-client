@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import api from '../../../api/api'
+import { UserItem, PageHeader, Pagination } from '../../../components/_exports'
 import './Users.scss'
-import { UserItem } from '../../../components/_exports'
 
 const pageSize = 10
 
@@ -47,11 +47,15 @@ function Users() {
 
   return (
     <div className="p-users">
+      <PageHeader className="users-header" text="Users" />
+
       <div className="users-content">
         {users.map((user) => (
           <UserItem key={user.id} userInfo={user} />
         ))}
       </div>
+
+      <Pagination className="users-pagination" />
     </div>
   )
 }

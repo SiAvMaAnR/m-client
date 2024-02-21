@@ -46,6 +46,10 @@
     --default-background-color: #{$c-dark-neutral-2};
     --default-item-color: #{$c-dark-primary-3};
   }
+
+  .c-pagination {
+    --current-index-color: #{$c-purple-0};
+  }
 }
 
 .app[data-theme='light'] {
@@ -80,5 +84,9 @@
     --menu-icon-background-color: #{$c-light-neutral-2};
     --default-background-color: #{$c-light-neutral-2};
     --default-item-color: #{$c-light-primary-3};
+  }
+
+  .c-pagination {
+    --current-index-color: #{$c-purple-0};
   }
 }

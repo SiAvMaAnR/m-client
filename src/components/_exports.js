@@ -14,6 +14,8 @@ import FormDesc from './common/Text/FormDesc/FormDesc'
 import ToolTip1 from './common/ToolTip/ToolTip1/ToolTip1'
 import StatusIcon from './common/StatusIcon/StatusIcon'
 import UserItem from './usersPage/UserItem/UserItem'
+import PageHeader from './common/PageHeader/PageHeader'
+import Pagination from './common/Pagination/Pagination'
 
 export {
   SidebarLayout,
@@ -31,5 +33,7 @@ export {
   ToolTip1,
   DateInput,
   StatusIcon,
-  UserItem
+  UserItem,
+  PageHeader,
+  Pagination
 }
