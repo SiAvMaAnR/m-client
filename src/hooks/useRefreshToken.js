@@ -39,11 +39,11 @@ const useRefreshToken = () => {
   }, [accessTokenExp, refreshToken, refreshTokenExp, isLogged, updateAccessToken, logOut, navigate])
 
   useEffect(() => {
-    if (!accessToken) {
+    if (isLogged && !accessToken) {
       logOut()
       navigate(page.login)
     }
-  }, [accessToken, logOut, navigate])
+  }, [accessToken, logOut, navigate, isLogged])
 }
 
 export default useRefreshToken

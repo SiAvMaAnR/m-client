@@ -17,7 +17,19 @@ const adminApi = {
 
     const response = await axiosInstance.get(`${path}/users?${params.join('&')}`)
     return response
-  }
+  },
+
+  blockUser: async ({ id }) => {
+    const body = { id }
+    const response = await axiosInstance.post(`${path}/block-user`, body)
+    return response
+  },
+
+  unblockUser: async ({ id }) => {
+    const body = { id }
+    const response = await axiosInstance.post(`${path}/unblock-user`, body)
+    return response
+  },
 }
 
 export default adminApi

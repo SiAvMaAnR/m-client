@@ -8,46 +8,50 @@ const useAuth = () => {
 
   const updateAccessToken = useCallback(
     ({ accessToken }) => {
-      localStorage.setItem('accessToken', accessToken)
+      if (accessToken) {
+        localStorage.setItem('accessToken', accessToken)
 
-      const tokenHelper = new TokenHelper(accessToken)
-      const tokenPayload = tokenHelper.getPayload()
+        const tokenHelper = new TokenHelper(accessToken)
+        const tokenPayload = tokenHelper.getPayload()
 
-      const { id, role, exp: accessTokenExp } = tokenPayload || {}
-      const isLogged = true
+        const { id, role, exp: accessTokenExp } = tokenPayload || {}
+        const isLogged = true
 
-      dispatch(
-        updateInfo({
-          id,
-          role,
-          isLogged,
-          accessTokenExp: (accessTokenExp || 0) * 1000
-        })
-      )
+        dispatch(
+          updateInfo({
+            id,
+            role,
+            isLogged,
+            accessTokenExp: (accessTokenExp || 0) * 1000
+          })
+        )
+      }
     },
     [dispatch]
   )
 
   const logIn = useCallback(
     ({ accessToken, refreshToken, refreshTokenExp }) => {
-      localStorage.setItem('accessToken', accessToken)
-      localStorage.setItem('refreshToken', refreshToken)
+      if (accessToken) {
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
 
-      const tokenHelper = new TokenHelper(accessToken)
-      const tokenPayload = tokenHelper.getPayload()
+        const tokenHelper = new TokenHelper(accessToken)
+        const tokenPayload = tokenHelper.getPayload()
 
-      const { id, role, exp: accessTokenExp } = tokenPayload || {}
-      const isLogged = true
+        const { id, role, exp: accessTokenExp } = tokenPayload || {}
+        const isLogged = true
 
-      dispatch(
-        setInfo({
-          id,
-          role,
-          isLogged,
-          accessTokenExp: (accessTokenExp || 0) * 1000,
-          refreshTokenExp: new Date(refreshTokenExp).getTime()
-        })
-      )
+        dispatch(
+          setInfo({
+            id,
+            role,
+            isLogged,
+            accessTokenExp: (accessTokenExp || 0) * 1000,
+            refreshTokenExp: new Date(refreshTokenExp).getTime()
+          })
+        )
+      }
     },
     [dispatch]
   )

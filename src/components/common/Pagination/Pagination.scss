@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    user-select: none;
 
     .pagination-previous,
     .pagination-next {
@@ -24,6 +25,12 @@
             border-color: var(--border-color);
         }
 
+        .pagination-arrow {
+            .pagination-arrow-icon {
+                transform: scale(0.8);
+            }
+        }
+
         .pagination-text {
             padding: 0 4px;
         }
@@ -41,6 +48,9 @@
         font-weight: 300;
         cursor: pointer;
         display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
         gap: 6px;
 
         .current-index {

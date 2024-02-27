@@ -64,7 +64,7 @@ function SidebarProfile({ className, isExpand }) {
       </div>
 
       <div className="sidebar-profile-menu">
-        <DropDown items={menuItems}>
+        <DropDown items={menuItems} className="right">
           <MenuIcon className="menu-icon" />
         </DropDown>
       </div>
