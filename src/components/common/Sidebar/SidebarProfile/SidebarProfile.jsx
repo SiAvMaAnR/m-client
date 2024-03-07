@@ -20,6 +20,7 @@ function SidebarProfile({ className, isExpand }) {
   const userRole = useRole()
   const { logOut } = useAuth()
   const navigate = useNavigate()
+  const roleApi = userRole === role.user ? api.user : api.admin
 
   useEffect(() => {
     api.account.image().then((result) => {
@@ -28,13 +29,11 @@ function SidebarProfile({ className, isExpand }) {
   }, [])
 
   useEffect(() => {
-    const roleApi = userRole === role.user ? api.user : api.admin
-
     roleApi.profile().then((result) => {
       setEmail(result?.data?.email ?? 'none')
       setLogin(result?.data?.login ?? 'none')
     })
-  }, [userRole])
+  }, [userRole, roleApi])
 
   const menuItems = [
     {

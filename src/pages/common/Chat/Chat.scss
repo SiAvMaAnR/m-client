@@ -1,0 +1,40 @@
+.p-chat {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    background: var(--background-color-1);
+
+    .channels {
+        flex: 0 0 300px;
+        margin: 12px 0;
+
+        .channels-header {
+            height: 50px;
+            background: green;
+
+            .header-menu {}
+
+            .header-search {}
+
+            .header-new-channel {}
+        }
+
+        .channels-list {}
+    }
+
+    .chat {
+        flex: 1 1;
+        background: var(--background-color);
+        border-radius: 25px 0 0 25px;
+
+        .chat-header {}
+
+        .chat-content {
+            .chat-messages {}
+
+            .chat-input {}
+        }
+    }
+}

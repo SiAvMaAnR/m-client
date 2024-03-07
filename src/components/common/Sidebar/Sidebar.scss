@@ -31,14 +31,15 @@
   .sidebar-expander-container {
     position: absolute;
     top: 15px;
-    right: -40px;
+    right: -35px;
     display: none;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 0 8px 8px 0;
     cursor: pointer;
     border: solid 1px var(--border-color);
     place-items: center;
+    background: var(--background-color);
   }
 
   .sidebar-header-container {
