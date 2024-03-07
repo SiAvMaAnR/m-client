@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import LightThemeIcon from './LightThemeIcon/LightThemeIcon'
 import DarkThemeIcon from './DarkThemeIcon/DarkThemeIcon'
-import { theme } from '../../../../utils/constants/system'
+import { theme } from '../../../../constants/system'
 import { setTheme } from '../../../../redux/slices/systemSlice'
 import './SidebarTheme.scss'
 

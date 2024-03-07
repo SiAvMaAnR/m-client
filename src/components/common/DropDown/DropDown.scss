@@ -1,11 +1,12 @@
 .c-dropdown {
     position: relative;
+    overflow: visible;
 
     .dropdown {
+        user-select: none;
         position: absolute;
-        bottom: 0px;
-        left: 50px;
-        width: 120px;
+        width: 150px;
+        background: var(--background-color);
         box-shadow: 0px 0 10px 6px var(--shadow-color);
         border-radius: 8px;
         padding: 2px 4px;
@@ -14,5 +15,15 @@
         font-weight: 300;
         white-space: pre-wrap;
         z-index: 99;
+    }
+
+    &.right .dropdown {
+        bottom: 0px;
+        left: 50px;
+    }
+
+    &.bottom .dropdown {
+        top: 40px;
+        right: 70px;
     }
 }

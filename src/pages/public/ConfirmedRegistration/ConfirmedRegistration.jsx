@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Brand, FormButton, Logo, NavLink } from '../../../components/_exports'
 import './ConfirmedRegistration.scss'
-import { page } from '../../../utils/constants/system'
+import { page } from '../../../constants/system'
 import api from '../../../api/api'
 import useAuth from '../../../hooks/useAuth'
 
@@ -64,8 +64,8 @@ function ConfirmedRegistration() {
   }, [confirmAsync])
 
   return (
-    <div className="p-confirmed-registration">
-      <div className="confirmed-registration-header">
+    <div className="p-confirm-registration">
+      <div className="confirm-registration-header">
         <div className="brand-wrapper">
           <Brand className="brand">Safe|Book</Brand>
         </div>
@@ -76,8 +76,8 @@ function ConfirmedRegistration() {
         </div>
       </div>
 
-      <div className="confirmed-registration-content">
-        <div className="confirmed-registration-panel">
+      <div className="confirm-registration-content">
+        <div className="confirm-registration-panel">
           <div className="logo-wrapper">
             <Logo className="logo" />
           </div>

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { role } from '../utils/constants/system'
+import { role } from '../constants/system'
 
 const useRole = () => {
   const currentRole = useSelector((state) => state.auth.info.role)

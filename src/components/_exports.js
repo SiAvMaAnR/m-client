@@ -1,5 +1,6 @@
 import SidebarLayout from './common/SidebarLayout/SidebarLayout'
-import PermissionGuard from './permission/PermissionGuard'
+import RoutePermissionGuard from './permission/RoutePermissionGuard'
+import ComponentPermissionGuard from './permission/ComponentPermissionGuard'
 import FormInput from './common/Input/FormInput/FormInput'
 import DateInput from './common/Input/DateInput/DateInput'
 import Sidebar from './common/Sidebar/Sidebar'
@@ -12,10 +13,14 @@ import FormTitle from './common/Text/FormTitle/FormTitle'
 import FormDesc from './common/Text/FormDesc/FormDesc'
 import ToolTip1 from './common/ToolTip/ToolTip1/ToolTip1'
 import StatusIcon from './common/StatusIcon/StatusIcon'
+import UserItem from './usersPage/UserItem/UserItem'
+import PageHeader from './common/PageHeader/PageHeader'
+import Pagination from './common/Pagination/Pagination'
 
 export {
   SidebarLayout,
-  PermissionGuard,
+  RoutePermissionGuard,
+  ComponentPermissionGuard,
   FormInput,
   Sidebar,
   SidebarItem,
@@ -27,5 +32,8 @@ export {
   FormDesc,
   ToolTip1,
   DateInput,
-  StatusIcon
+  StatusIcon,
+  UserItem,
+  PageHeader,
+  Pagination
 }

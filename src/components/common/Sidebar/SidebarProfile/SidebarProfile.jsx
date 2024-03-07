@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import api from '../../../../api/api'
-import { page, role } from '../../../../utils/constants/system'
+import { page, role } from '../../../../constants/system'
 import useRole from '../../../../hooks/useRole'
 import useAuth from '../../../../hooks/useAuth'
-import defaultProfileImg from '../../../../utils/constants/defaultProfileImg'
+import defaultProfileImg from '../../../../constants/defaultProfileImg'
 import MenuIcon from './MenuIcon/MenuIcon'
 import DropDown from '../../DropDown/DropDown'
 import LogoutIcon from './MenuIcons/LogoutIcon/LogoutIcon'
@@ -20,6 +20,7 @@ function SidebarProfile({ className, isExpand }) {
   const userRole = useRole()
   const { logOut } = useAuth()
   const navigate = useNavigate()
+  const roleApi = userRole === role.user ? api.user : api.admin
 
   useEffect(() => {
     api.account.image().then((result) => {
@@ -28,13 +29,11 @@ function SidebarProfile({ className, isExpand }) {
   }, [])
 
   useEffect(() => {
-    const roleApi = userRole === role.user ? api.user : api.admin
-
     roleApi.profile().then((result) => {
       setEmail(result?.data?.email ?? 'none')
       setLogin(result?.data?.login ?? 'none')
     })
-  }, [userRole])
+  }, [userRole, roleApi])
 
   const menuItems = [
     {
@@ -64,7 +63,7 @@ function SidebarProfile({ className, isExpand }) {
       </div>
 
       <div className="sidebar-profile-menu">
-        <DropDown items={menuItems}>
+        <DropDown items={menuItems} className="right">
           <MenuIcon className="menu-icon" />
         </DropDown>
       </div>

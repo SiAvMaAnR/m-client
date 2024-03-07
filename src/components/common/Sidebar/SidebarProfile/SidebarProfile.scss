@@ -38,10 +38,22 @@
         .sidebar-profile-login {
             font-size: 14px;
             font-weight: 600;
+            overflow-x: auto;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
 
         .sidebar-profile-email {
             font-size: 12px;
+            overflow-x: auto;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
     }
 
@@ -62,7 +74,6 @@
             transition: all 0.3s linear;
             max-width: 0;
 
-
             &:hover {
                 background: var(--menu-icon-background-color);
                 transition: all 0.3s linear;
@@ -78,7 +89,7 @@
     &.expand {
 
         .sidebar-profile-info {
-            max-width: 125px;
+            max-width: 155px;
             transition: all 0.3s linear;
         }
 

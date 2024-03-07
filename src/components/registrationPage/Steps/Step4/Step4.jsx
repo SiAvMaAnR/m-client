@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { DateInput, FormDesc, FormTitle } from '../../../../_exports'
+import { DateInput, FormDesc, FormTitle } from '../../../_exports'
 import './Step4.scss'
 
 function Step4({ className, setRegistrationData, registrationData, setIsValid }) {

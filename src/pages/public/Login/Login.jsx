@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import useAuth from '../../../hooks/useAuth'
 import api from '../../../api/api'
-import { page } from '../../../utils/constants/system'
+import { page } from '../../../constants/system'
 import { Brand, FormButton, Logo, NavLink, FormInput } from '../../../components/_exports'
 import './Login.scss'
 
@@ -18,17 +18,17 @@ function Login() {
   const { email, password } = loginData
 
   useEffect(() => {
-    const isValid = true
+    const isActive = loginData.email && loginData.password
 
     setMessage(defaultClientMessage)
-    setIsActiveBtn(isValid)
+    setIsActiveBtn(!!isActive)
   }, [loginData])
 
   const loginHandler = async () => {
     try {
       setIsLoading(true)
 
-      const { data, response } = await api.account.login({ email, password })
+      const { data, response } = await api.auth.login({ email, password })
 
       if (response?.data?.errors) {
         throw new Error('Validation error')
@@ -36,6 +36,10 @@ function Login() {
 
       if (response?.data?.clientMessage) {
         throw new Error(response.data.clientMessage)
+      }
+
+      if (!data) {
+        throw new Error('Something went wrong')
       }
 
       logIn(data)

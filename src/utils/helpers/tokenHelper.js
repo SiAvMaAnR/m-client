@@ -20,4 +20,16 @@ class TokenHelper {
   }
 }
 
+function getAuthTokens() {
+  return {
+    accessToken: localStorage.getItem('accessToken'),
+    refreshToken: localStorage.getItem('refreshToken')
+  }
+}
+
+function getAccessToken() {
+  return localStorage.getItem('accessToken')
+}
+
 export default TokenHelper
+export { getAuthTokens, getAccessToken }

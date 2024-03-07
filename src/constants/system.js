@@ -9,6 +9,11 @@ const role = {
   user: 'user'
 }
 
+const activityStatus = {
+  online: 'online',
+  offline: 'offline'
+}
+
 const theme = {
   dark: 'dark',
   light: 'light'
@@ -24,4 +29,9 @@ const page = {
   users: '/users'
 }
 
-export { language, theme, role, page }
+const hub = {
+  chat: 'chat',
+  state: 'state'
+}
+
+export { language, theme, role, page, hub, activityStatus }
