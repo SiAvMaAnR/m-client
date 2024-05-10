@@ -6,6 +6,7 @@ import api from '../../../api/api'
 import UnblockIcon from './DropDownIcons/Unblock/UnblockIcon'
 import BlockIcon from './DropDownIcons/BlockIcon/BlockIcon'
 import './UserItem.scss'
+import config from '../../../config/configuration'
 
 function UserItem({ className, userInfo, loadUsers }) {
   const { id, login, email, birthday, activityStatus: status, isBanned, image } = userInfo
@@ -29,7 +30,9 @@ function UserItem({ className, userInfo, loadUsers }) {
         }
   ]
 
-  const imageSrc = image ? `data:image/jpeg;base64, ${image}` : `./defaultImages/direct-channel.jpg`
+  const imageSrc = image
+    ? `data:image/jpeg;base64, ${image}`
+    : `${config.app.publicPath}/defaultImages/direct-channel.jpg`
 
   return (
     <tr className={`c-user-item ${className}`}>

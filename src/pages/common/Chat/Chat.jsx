@@ -1,23 +1,25 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useCallback, useEffect, useState } from 'react'
 import api from '../../../api/api'
 import CreateChannelIcon from '../../../components/chatPage/CreateChannelIcon/CreateChannelIcon'
 import ChannelSearch from '../../../components/chatPage/ChannelSearch/ChannelSearch'
 import Channel from '../../../components/chatPage/Channel/Channel'
 import CreateChannelModal from '../../../components/chatPage/Modals/CreateChannelModal/CreateChannelModal'
+import { page } from '../../../constants/system'
 import './Chat.scss'
 
 const pageSize = 15
 
 function Chat() {
-  const { channelId } = useParams()
+  const navigate = useNavigate()
+  const { id } = useParams()
   const [isLoading, setIsLoading] = useState(false)
   const [channels, setChannels] = useState([])
-  const [selectedChannel, setSelectedChannel] = useState(channelId)
+  const [selectedChannel, setSelectedChannel] = useState(id)
+
   const [pageNumber, setPageNumber] = useState(0)
   const [pagesCount, setPagesCount] = useState(0)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
-
 
   const loadChannels = useCallback(async () => {
     try {
@@ -80,8 +82,11 @@ function Chat() {
           {channels.map((channel) => (
             <Channel
               key={channel.id}
-              onClick={() => setSelectedChannel(channel.id)}
-              isActive={selectedChannel === channel.id}
+              onClick={() => {
+                setSelectedChannel(channel.id)
+                navigate(`${page.chat}/${channel.id}`)
+              }}
+              isActive={+selectedChannel === channel.id}
               data={channel}
             />
           ))}

@@ -10,6 +10,7 @@ import DropDown from '../../DropDown/DropDown'
 import LogoutIcon from './MenuIcons/LogoutIcon/LogoutIcon'
 import SettingsIcon from './MenuIcons/SettingsIcon/SettingsIcon'
 import './SidebarProfile.scss'
+import config from '../../../../config/configuration'
 
 function SidebarProfile({ className, isExpand }) {
   const [image, setImage] = useState(null)
@@ -53,7 +54,7 @@ function SidebarProfile({ className, isExpand }) {
 
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
-    : `./defaultImages/sidebar-profile.jpg`
+    : `${config.app.publicPath}/defaultImages/sidebar-profile.jpg`
 
   return (
     <div className={`c-sidebar-profile ${className} ${expandClass}`}>

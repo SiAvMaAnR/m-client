@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { channelType } from '../../../constants/chat'
+import config from '../../../config/configuration'
 import './Channel.scss'
 
 const defaultImageMapper = {
@@ -25,11 +26,11 @@ function Channel({ onClick, isActive, className, data }) {
 
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
-    : `./defaultImages/${defaultImageMapper[type]}.jpg`
+    : `${config.app.publicPath}/defaultImages/${defaultImageMapper[type]}.jpg`
 
   return (
     <div
-      className={`c-channel ${className} ${isActiveClass}`}
+      className={`c-channel ${isActiveClass} ${className}`}
       onClick={onClick}
       role="presentation"
     >
