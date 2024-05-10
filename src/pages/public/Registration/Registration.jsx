@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState } from 'react'
 import api from '../../../api/api'
 import { page } from '../../../constants/system'
@@ -24,31 +25,18 @@ function Registration() {
 
   const { login, email, password, birthday } = registrationData
 
+  const stepParams = {
+    className: 'step',
+    registrationData,
+    setRegistrationData,
+    setIsValid
+  }
+
   const steps = [
-    <Step1
-      className="step"
-      registrationData={registrationData}
-      setRegistrationData={setRegistrationData}
-      setIsValid={setIsValid}
-    />,
-    <Step2
-      className="step"
-      registrationData={registrationData}
-      setRegistrationData={setRegistrationData}
-      setIsValid={setIsValid}
-    />,
-    <Step3
-      className="step"
-      registrationData={registrationData}
-      setRegistrationData={setRegistrationData}
-      setIsValid={setIsValid}
-    />,
-    <Step4
-      className="step"
-      registrationData={registrationData}
-      setRegistrationData={setRegistrationData}
-      setIsValid={setIsValid}
-    />
+    <Step1 {...stepParams} />,
+    <Step2 {...stepParams} />,
+    <Step3 {...stepParams} />,
+    <Step4 {...stepParams} />
   ]
 
   useEffect(() => {

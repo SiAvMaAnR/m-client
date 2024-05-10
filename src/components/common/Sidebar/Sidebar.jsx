@@ -10,12 +10,11 @@ import SidebarExpander from './SidebarExpander/SidebarExpander'
 import HomeIcon from './SidebarIcons/HomeIcon/HomeIcon'
 import MessengerIcon from './SidebarIcons/MessengerIcon/MessengerIcon'
 import UsersIcon from './SidebarIcons/UsersIcon/UsersIcon'
-import './Sidebar.scss'
 import ComponentPermissionGuard from '../../permission/ComponentPermissionGuard'
+import './Sidebar.scss'
 
 function Sidebar() {
   const [expand, setExpand] = useState(false)
-  // counters to slice
 
   const expandHandler = () => {
     setExpand(!expand)

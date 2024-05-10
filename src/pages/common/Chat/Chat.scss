@@ -5,23 +5,70 @@
     justify-content: stretch;
     align-items: stretch;
     background: var(--background-color-1);
+    border-radius: 20px 0 0 20px;
 
     .channels {
-        flex: 0 0 300px;
+        flex: 0 0 320px;
         margin: 12px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        gap: 10px;
 
         .channels-header {
-            height: 50px;
-            background: green;
+            height: 37px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 0 10px;
 
-            .header-menu {}
+            .header-search {
+                flex: 1 1;
+                display: grid;
+                place-items: center;
 
-            .header-search {}
+                .channel-search {}
+            }
 
-            .header-new-channel {}
+            .header-new-channel {
+                flex-basis: 60px;
+                display: grid;
+                place-items: center;
+
+                .new-channel-icon {
+                    height: 35px;
+                    width: 35px;
+                    border-radius: 50%;
+                    background: var(--background-color);
+                    border: solid 1px var(--border-color);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        background: var(--background-color-1);
+                    }
+                }
+            }
         }
 
-        .channels-list {}
+        .channels-filters {
+            border-top: solid 3px var(--background-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 5px;
+            gap: 5px;
+        }
+
+        .channels-list {
+            border-top: solid 3px var(--background-color);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: stretch;
+            padding: 10px 5px;
+            gap: 5px;
+        }
     }
 
     .chat {

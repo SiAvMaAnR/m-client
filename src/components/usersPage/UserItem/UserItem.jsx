@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import defaultProfileImg from '../../../constants/defaultProfileImg'
 import ToolsIcon from './ToolsIcon/ToolsIcon'
 import DropDown from '../../common/DropDown/DropDown'
 import { activityStatus } from '../../../constants/system'
@@ -9,8 +8,7 @@ import BlockIcon from './DropDownIcons/BlockIcon/BlockIcon'
 import './UserItem.scss'
 
 function UserItem({ className, userInfo, loadUsers }) {
-  const { id, login, email, birthday, activityStatus: status, isBanned } = userInfo
-  const image = userInfo.image || defaultProfileImg
+  const { id, login, email, birthday, activityStatus: status, isBanned, image } = userInfo
   const activityStatusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
   const bannedClass = isBanned ? 'yes' : ''
   const dropDownItems = [
@@ -31,10 +29,12 @@ function UserItem({ className, userInfo, loadUsers }) {
         }
   ]
 
+  const imageSrc = image ? `data:image/jpeg;base64, ${image}` : `./defaultImages/direct-channel.jpg`
+
   return (
     <tr className={`c-user-item ${className}`}>
       <td id="image">
-        <img src={image ? `data:image/jpeg;base64, ${image}` : ''} alt="profile-img" />
+        <img src={imageSrc} alt="user-img" />
       </td>
       <td id="id">{id}</td>
       <td id="email">{email}</td>

@@ -48,12 +48,26 @@
     --default-item-color: #{$c-dark-primary-3};
   }
 
-  .c-dropdown{
+  .c-dropdown {
     --menu-icon-background-color: #{$c-dark-neutral-2};
   }
 
   .c-pagination {
     --current-index-color: #{$c-purple-0};
+  }
+
+  .c-channel {
+    --hover-background-color: #{$c-dark-neutral-2};
+    --font-color: #{$c-black-0};
+    --selected-font-color: #{$c-white-0};
+    --last-message-font-color: #{$c-black-0};
+    --last-message-author-font-color: #{$c-purple-0};
+  }
+
+  .c-base-modal {
+    --modal-background-color: #{$c-dark-neutral-0};
+    --background-color: #{$c-dark-neutral-3};
+    --border-color: #{$c-dark-secondary-4};
   }
 }
 
@@ -92,11 +106,25 @@
     --default-item-color: #{$c-light-primary-3};
   }
 
-  .c-dropdown{
+  .c-dropdown {
     --menu-icon-background-color: #{$c-light-neutral-2};
   }
 
   .c-pagination {
     --current-index-color: #{$c-purple-0};
+  }
+
+  .c-channel {
+    --hover-background-color: #{$c-light-neutral-2};
+    --font-color: #{$c-black-0};
+    --selected-font-color: #{$c-white-0};
+    --last-message-font-color: #{$c-black-0};
+    --last-message-author-font-color: #{$c-purple-0};
+  }
+
+  .c-base-modal {
+    --modal-background-color: #{$c-light-neutral-0};
+    --background-color: #{$c-light-neutral-3};
+    --border-color: #{$c-light-secondary-4};
   }
 }

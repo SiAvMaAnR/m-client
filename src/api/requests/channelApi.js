@@ -25,6 +25,11 @@ const channelApi = {
     const body = { channelId }
     const response = await axiosInstance.post(`${path}/connect`, body)
     return response
+  },
+
+  accountChannels: async () => {
+    const response = await axiosInstance.get(`${path}/account-channels`)
+    return response
   }
 }
 
