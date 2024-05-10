@@ -6,6 +6,7 @@ import ChannelSearch from '../../../components/chatPage/ChannelSearch/ChannelSea
 import Channel from '../../../components/chatPage/Channel/Channel'
 import CreateChannelModal from '../../../components/chatPage/Modals/CreateChannelModal/CreateChannelModal'
 import { page } from '../../../constants/system'
+import { useDebounce } from '../../../hooks/_exports'
 import './Chat.scss'
 
 const pageSize = 15
@@ -16,7 +17,8 @@ function Chat() {
   const [isLoading, setIsLoading] = useState(false)
   const [channels, setChannels] = useState([])
   const [selectedChannel, setSelectedChannel] = useState(id)
-
+  const [searchChannel, setSearchChannel] = useState('')
+  const debouncedSearchChannel = useDebounce(searchChannel, 500)
   const [pageNumber, setPageNumber] = useState(0)
   const [pagesCount, setPagesCount] = useState(0)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
@@ -26,6 +28,7 @@ function Chat() {
       setIsLoading(true)
 
       const { data, response } = await api.channel.accountChannels({
+        searchField: debouncedSearchChannel,
         pageNumber,
         pageSize
       })
@@ -47,7 +50,11 @@ function Chat() {
     } finally {
       setIsLoading(false)
     }
-  }, [pageNumber])
+  }, [pageNumber, debouncedSearchChannel])
+
+  const onChangeChannelSearchHandler = (event) => {
+    setSearchChannel(event.target.value)
+  }
 
   useEffect(() => {
     loadChannels()
@@ -63,7 +70,7 @@ function Chat() {
       <div className="channels">
         <div className="channels-header">
           <div className="header-search">
-            <ChannelSearch className="channel-search" />
+            <ChannelSearch className="channel-search" onChange={onChangeChannelSearchHandler} />
           </div>
           <div
             className="header-new-channel"

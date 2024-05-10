@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import useAuth from '../../../hooks/useAuth'
+import { useAuth } from '../../../hooks/_exports'
 import api from '../../../api/api'
 import { page } from '../../../constants/system'
 import { Brand, FormButton, Logo, NavLink, FormInput } from '../../../components/_exports'

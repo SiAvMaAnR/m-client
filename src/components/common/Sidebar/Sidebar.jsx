@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { page, role } from '../../../constants/system'
-import useKeyDown from '../../../hooks/useKeyDown'
+import { useKeyDown } from '../../../hooks/_exports'
 import SidebarItem from './SidebarItem/SidebarItem'
 import SidebarHeader from './SidebarHeader/SidebarHeader'
 import SidebarSearch from './SidebarSearch/SidebarSearch'

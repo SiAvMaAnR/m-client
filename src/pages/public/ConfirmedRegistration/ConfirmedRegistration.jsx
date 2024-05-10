@@ -4,7 +4,7 @@ import { Brand, FormButton, Logo, NavLink } from '../../../components/_exports'
 import './ConfirmedRegistration.scss'
 import { page } from '../../../constants/system'
 import api from '../../../api/api'
-import useAuth from '../../../hooks/useAuth'
+import { useAuth } from '../../../hooks/_exports'
 
 function ConfirmedRegistration() {
   const navigate = useNavigate()
