@@ -104,7 +104,7 @@ FormInput.defaultProps = {
   pattern: null,
   isPassword: false,
   validator: null,
-  onValid: () => {},
+  onValid: () => {}
 }
 
 FormInput.propTypes = {
@@ -118,7 +118,7 @@ FormInput.propTypes = {
   pattern: PropTypes.string,
   isPassword: PropTypes.bool,
   validator: PropTypes.func,
-  onValid: PropTypes.func,
+  onValid: PropTypes.func
 }
 
 export default FormInput

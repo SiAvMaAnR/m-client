@@ -26,7 +26,6 @@ function Chat() {
   const loadChannels = async ({ searchField, pageNumber, pageSize }) => {
     try {
       setIsLoading(true)
-      console.log('updated')
       const { data, response } = await api.channel.accountChannels({
         searchField,
         pageNumber,
@@ -54,7 +53,6 @@ function Chat() {
   }
 
   const resetPage = () => {
-    console.log('resetPage')
     pageNumberRef.current = 0
   }
 
@@ -73,7 +71,6 @@ function Chat() {
   }
 
   useEffect(() => {
-    console.log('use effect')
     refreshChannels(debouncedSearchChannel)
   }, [debouncedSearchChannel, refreshChannels])
 
@@ -82,12 +79,9 @@ function Chat() {
       const { scrollHeight, scrollTop } = event.target
       const targetHeight = event.target.getBoundingClientRect().height
 
-      console.log(scrollHeight, scrollTop + targetHeight)
-
-      const isNeedUpdate = scrollHeight - (scrollTop + targetHeight) < 50
+      const isNeedUpdate = scrollHeight - (scrollTop + targetHeight) < 100
 
       if (isNeedUpdate) {
-        console.log('Page number changed')
         pageNumberRef.current += 1
         loadChannels({
           pageNumber: pageNumberRef.current,

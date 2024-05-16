@@ -1,53 +1,53 @@
 .c-user-item {
-    #image {
-        img {
-            vertical-align: middle;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-        }
+  #image {
+    img {
+      vertical-align: middle;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
     }
+  }
 
-    #id {
-        font-size: 16px;
+  #id {
+    font-size: 16px;
+  }
+
+  #email {
+    user-select: text;
+  }
+
+  #activity-status {
+    &.online {
+      color: var(--font-color-primary-0);
     }
+  }
 
-    #email {
-        user-select: text;
+  #banned {
+    &.yes {
+      color: var(--font-color-primary-0);
     }
+  }
 
-    #activity-status {
-        &.online{
-            color: var(--font-color-primary-0)
-        }
+  #tools {
+    height: 100%;
+
+    .tools-icon {
+      margin: auto;
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.3s linear;
+
+      &:hover {
+        background: var(--icon-background-color);
+        transition: all 0.3s linear;
+      }
+
+      svg {
+        height: 20px;
+        width: 20px;
+      }
     }
-
-    #banned{
-        &.yes{
-            color: var(--font-color-primary-0)
-        }
-    }
-
-    #tools {
-        height: 100%;
-
-        .tools-icon {
-            margin: auto;
-            height: 40px;
-            width: 40px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: all 0.3s linear;
-
-            &:hover {
-                background: var(--icon-background-color);
-                transition: all 0.3s linear;
-            }
-
-            svg {
-                height: 20px;
-                width: 20px;
-            }
-        }
-    }
+  }
 }

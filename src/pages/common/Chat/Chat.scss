@@ -1,101 +1,105 @@
 .p-chat {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  background: var(--background-color-1);
+  border-radius: 20px 0 0 20px;
+
+  .channels {
+    flex: 0 0 320px;
+    margin: 12px 0 8px;
     display: flex;
+    flex-direction: column;
     justify-content: stretch;
-    align-items: stretch;
-    background: var(--background-color-1);
-    border-radius: 20px 0 0 20px;
+    gap: 10px;
 
-    .channels {
-        flex: 0 0 320px;
-        margin: 12px 0 8px;
-        display: flex;
-        flex-direction: column;
-        justify-content: stretch;
-        gap: 10px;
+    .channels-header {
+      height: 37px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 10px;
 
-        .channels-header {
-            height: 37px;
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 0 10px;
-
-            .header-search {
-                flex: 1 1;
-                display: grid;
-                place-items: center;
-
-                .channel-search {}
-            }
-
-            .header-new-channel {
-                flex-basis: 60px;
-                display: grid;
-                place-items: center;
-
-                .new-channel-icon {
-                    height: 35px;
-                    width: 35px;
-                    border-radius: 50%;
-                    background: var(--background-color);
-                    border: solid 1px var(--border-color);
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-
-                    &:hover {
-                        background: var(--background-color-1);
-                    }
-                }
-            }
-        }
-
-        .channels-filters {
-            border-top: solid 3px var(--background-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px 5px;
-            gap: 5px;
-        }
-
-        .channels-list {
-            border-top: solid 3px var(--background-color);
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            justify-content: stretch;
-            padding: 10px 5px 5px;
-            gap: 5px;
-
-            overflow-x: auto;
-
-            &::-webkit-scrollbar {
-                width: 2px;
-            }
-
-            &::-webkit-scrollbar-track {
-                background: transparent;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background: radial-gradient(circle, var(--font-color-primary-0) 80%, transparent 100%);
-            }
-        }
-    }
-
-    .chat {
+      .header-search {
         flex: 1 1;
-        background: var(--background-color);
-        border-radius: 25px 0 0 25px;
+        display: grid;
+        place-items: center;
 
-        .chat-header {}
-
-        .chat-content {
-            .chat-messages {}
-
-            .chat-input {}
+        .channel-search {
         }
+      }
+
+      .header-new-channel {
+        flex-basis: 60px;
+        display: grid;
+        place-items: center;
+
+        .new-channel-icon {
+          height: 35px;
+          width: 35px;
+          border-radius: 50%;
+          background: var(--background-color);
+          border: solid 1px var(--border-color);
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: var(--background-color-1);
+          }
+        }
+      }
     }
+
+    .channels-filters {
+      border-top: solid 3px var(--background-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 5px;
+      gap: 5px;
+    }
+
+    .channels-list {
+      border-top: solid 3px var(--background-color);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: stretch;
+      padding: 10px 5px 5px;
+      gap: 5px;
+
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: radial-gradient(circle, var(--font-color-primary-0) 80%, transparent 100%);
+      }
+    }
+  }
+
+  .chat {
+    flex: 1 1;
+    background: var(--background-color);
+    border-radius: 25px 0 0 25px;
+
+    .chat-header {
+    }
+
+    .chat-content {
+      .chat-messages {
+      }
+
+      .chat-input {
+      }
+    }
+  }
 }

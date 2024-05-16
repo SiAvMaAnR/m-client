@@ -31,7 +31,7 @@ const authApi = {
     const body = { resetToken, password }
     const response = await axiosInstance.post(`${path}/reset-password`, body)
     return response
-  },
+  }
 }
 
 export default authApi

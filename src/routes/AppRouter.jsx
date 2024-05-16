@@ -37,7 +37,7 @@ function AppRouter() {
 
         <Route element={<RoutePermissionGuard permittedRoles={[role.user, role.admin]} />}>
           <Route path="home" element={<SidebarLayout page={<Home />} />} />
-          <Route path="chat/:id?" element={<SidebarLayout page={<Chat />} />}/>
+          <Route path="chat/:id?" element={<SidebarLayout page={<Chat />} />} />
         </Route>
       </Routes>
     </div>

@@ -7,7 +7,7 @@ const chatApi = {
     const body = { message }
     const response = await axiosInstance.post(`${path}/send-message`, body)
     return response
-  },
+  }
 }
 
 export default chatApi

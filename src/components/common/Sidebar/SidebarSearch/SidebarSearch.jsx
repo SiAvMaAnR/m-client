@@ -12,7 +12,7 @@ function SidebarSearch({ className, isExpand }) {
       </div>
 
       <div className="search-input-container">
-        <input type="text" placeholder='Search'/>
+        <input type="text" placeholder="Search" />
       </div>
     </div>
   )

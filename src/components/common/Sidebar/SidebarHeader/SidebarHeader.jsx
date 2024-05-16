@@ -4,7 +4,7 @@ import Brand from '../../Brand/Brand'
 import './SidebarHeader.scss'
 
 function SidebarHeader({ className, isExpand }) {
-  const expandClass = isExpand ? "expand" : ""
+  const expandClass = isExpand ? 'expand' : ''
 
   return (
     <div className={`c-sidebar-header ${className} ${expandClass}`}>

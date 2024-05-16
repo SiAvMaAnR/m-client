@@ -29,7 +29,7 @@ const adminApi = {
     const body = { id }
     const response = await axiosInstance.post(`${path}/unblock-user`, body)
     return response
-  },
+  }
 }
 
 export default adminApi
