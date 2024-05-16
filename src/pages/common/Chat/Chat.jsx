@@ -78,7 +78,7 @@ function Chat() {
   }, [debouncedSearchChannel, refreshChannels])
 
   const scrollHandler = (event) => {
-    if (!isLoading && pageNumberRef.current < pagesCount) {
+    if (!isLoading && pageNumberRef.current < pagesCount - 1) {
       const { scrollHeight, scrollTop } = event.target
       const targetHeight = event.target.getBoundingClientRect().height
 
@@ -103,7 +103,7 @@ function Chat() {
       <CreateChannelModal
         setIsActive={setIsActiveCreateChannelModal}
         isActive={isActiveCreateChannelModal}
-        onCreatedChannel={refreshChannels}
+        onCreatedChannel={() => refreshChannels(debouncedSearchChannel)}
       />
 
       <div className="channels">
