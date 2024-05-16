@@ -1,0 +1,28 @@
+.c-chat-user-item {
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    background: var(--background-color);
+    height: 55px;
+    cursor: pointer;
+    gap: 5px;
+
+    #image {
+        flex-basis: 16%;
+        display: grid;
+        place-items: center;
+
+        img {
+            vertical-align: middle;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    #login {
+        flex-basis: 55%;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 16px;
+    }
+}

@@ -61,12 +61,11 @@
     --font-color: #{$c-black-0};
     --selected-font-color: #{$c-white-0};
     --last-message-font-color: #{$c-black-0};
-    --last-message-author-font-color: #{$c-purple-0};
   }
 
   .c-base-modal {
     --modal-background-color: #{$c-dark-neutral-0};
-    --background-color: #{$c-dark-neutral-3};
+    --modal-background-color-1: #{$c-dark-neutral-3};
     --border-color: #{$c-dark-secondary-4};
   }
 }
@@ -119,12 +118,11 @@
     --font-color: #{$c-black-0};
     --selected-font-color: #{$c-white-0};
     --last-message-font-color: #{$c-black-0};
-    --last-message-author-font-color: #{$c-purple-0};
   }
 
   .c-base-modal {
     --modal-background-color: #{$c-light-neutral-0};
-    --background-color: #{$c-light-neutral-3};
+    --modal-background-color-1: #{$c-light-neutral-3};
     --border-color: #{$c-light-secondary-4};
   }
 }

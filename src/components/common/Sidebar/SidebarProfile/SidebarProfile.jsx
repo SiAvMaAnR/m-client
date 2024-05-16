@@ -53,7 +53,7 @@ function SidebarProfile({ className, isExpand }) {
 
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/sidebar-profile.jpg`
+    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
 
   return (
     <div className={`c-sidebar-profile ${className} ${expandClass}`}>

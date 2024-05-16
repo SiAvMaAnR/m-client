@@ -1,6 +1,76 @@
 .c-create-channel-modal {
+    user-select: none;
+
     .base-modal {
         height: 550px;
         width: 470px;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: stretch;
+
+        .header {
+            flex-basis: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+
+            .brand {
+                padding-left: 8px;
+            }
+
+            .search {
+                .user-search {
+                    border-radius: 20px;
+                    height: 38px;
+                }
+            }
+        }
+
+        .content {
+            flex: 1 0;
+            background: var(--background-color-1);
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            align-items: stretch;
+            gap: 2px;
+            padding: 2px 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+
+            .channel-name-input {
+                flex-basis: 50%;
+
+                .form-input {
+                    height: 42px;
+                    width: 240px;
+                    font-size: 15px;
+
+                    &::placeholder {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            .channel-create-btn {
+
+                .create-btn {
+                    height: 42px;
+                    width: 120px;
+                    border-radius: 13px;
+                }
+            }
+
+
+        }
     }
 }

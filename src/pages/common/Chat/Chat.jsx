@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import api from '../../../api/api'
 import CreateChannelIcon from '../../../components/chatPage/CreateChannelIcon/CreateChannelIcon'
 import ChannelSearch from '../../../components/chatPage/ChannelSearch/ChannelSearch'
@@ -19,52 +19,85 @@ function Chat() {
   const [selectedChannel, setSelectedChannel] = useState(id)
   const [searchChannel, setSearchChannel] = useState('')
   const debouncedSearchChannel = useDebounce(searchChannel, 500)
-  const [pageNumber, setPageNumber] = useState(0)
-  const [pagesCount, setPagesCount] = useState(0)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
+  const [pagesCount, setPagesCount] = useState(0)
+  const pageNumber = useRef(0)
 
   const loadChannels = useCallback(async () => {
     try {
       setIsLoading(true)
-
+      console.log('updated')
       const { data, response } = await api.channel.accountChannels({
         searchField: debouncedSearchChannel,
-        pageNumber,
+        pageNumber: pageNumber.current,
         pageSize
       })
-
-      if (response?.data?.errors) {
-        throw new Error('Something went wrong')
-      }
 
       if (response?.data?.clientMessage) {
         throw new Error(response.data.clientMessage)
       }
 
-      if (!data) {
+      if (!data || response?.data?.errors) {
         throw new Error('Something went wrong')
       }
+      
+      if (pageNumber.current === 0) {
+        setChannels(data.channels || [])
+      } else {
+        setChannels((prevChannels) => [...prevChannels, ...(data.channels || [])])
+      }
 
-      setChannels(data.channels || [])
-      setPagesCount(data.meta?.pagesCount || 0)
+      setPagesCount(data.meta.pagesCount)
     } finally {
       setIsLoading(false)
     }
-  }, [pageNumber, debouncedSearchChannel])
+  }, [debouncedSearchChannel])
+
+  const refreshChannels = useCallback(() => {
+    // зачищается сразу
+    pageNumber.current = 0
+    loadChannels()
+
+    // может остаться прошлым
+    // мб pagenumber is useRef?
+  }, [loadChannels])
+
+  useEffect(() => {
+    refreshChannels()
+  }, [debouncedSearchChannel, refreshChannels])
 
   const onChangeChannelSearchHandler = (event) => {
     setSearchChannel(event.target.value)
   }
 
   useEffect(() => {
+    console.log('use effect')
     loadChannels()
   }, [loadChannels])
+
+  const scrollHandler = (event) => {
+    if (!isLoading && pageNumber.current < pagesCount) {
+      const { scrollHeight, scrollTop } = event.target
+      const targetHeight = event.target.getBoundingClientRect().height
+
+      console.log(scrollHeight, scrollTop + targetHeight)
+
+      const isNeedUpdate = scrollHeight - (scrollTop + targetHeight) < 50
+
+      if (isNeedUpdate) {
+        console.log('Page number changed')
+        pageNumber.current += 1
+        loadChannels()
+      }
+    }
+  }
 
   return (
     <div className="p-chat">
       <CreateChannelModal
         setIsActive={setIsActiveCreateChannelModal}
         isActive={isActiveCreateChannelModal}
+        onCreatedChannel={refreshChannels}
       />
 
       <div className="channels">
@@ -77,7 +110,7 @@ function Chat() {
             onClick={() => setIsActiveCreateChannelModal(true)}
             role="presentation"
           >
-            <CreateChannelIcon on className="new-channel-icon" />
+            <CreateChannelIcon className="new-channel-icon" />
           </div>
         </div>
 
@@ -85,7 +118,7 @@ function Chat() {
           <div className="title">{}</div>
         </div>
 
-        <div className="channels-list">
+        <div className="channels-list" onScroll={scrollHandler}>
           {channels.map((channel) => (
             <Channel
               key={channel.id}

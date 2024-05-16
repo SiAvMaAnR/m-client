@@ -9,7 +9,7 @@
 
     .channels {
         flex: 0 0 320px;
-        margin: 12px 0;
+        margin: 12px 0 8px;
         display: flex;
         flex-direction: column;
         justify-content: stretch;
@@ -66,8 +66,22 @@
             flex-direction: column;
             align-items: stretch;
             justify-content: stretch;
-            padding: 10px 5px;
+            padding: 10px 5px 5px;
             gap: 5px;
+
+            overflow-x: auto;
+
+            &::-webkit-scrollbar {
+                width: 2px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: radial-gradient(circle, var(--font-color-primary-0) 80%, transparent 100%);
+            }
         }
     }
 

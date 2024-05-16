@@ -12,6 +12,18 @@ const accountApi = {
     const body = { file }
     const response = await axiosInstance.post(`${path}/upload-image`, body)
     return response
+  },
+
+  accounts: async ({ pageNumber, pageSize, isLoadImage, searchField }) => {
+    const params = [
+      `pagination.pageNumber=${pageNumber || 0}`,
+      `pagination.pageSize=${pageSize || 100}`,
+      `isLoadImage=${isLoadImage || false}`,
+      `searchField=${searchField}`
+    ]
+
+    const response = await axiosInstance.get(`${path}/accounts?${params.join('&')}`)
+    return response
   }
 }
 

@@ -48,8 +48,10 @@ function Channel({ onClick, isActive, className, data }) {
           {lastMessage && (
             <>
               <div className="message">
-                <span>{lastMessage.author}</span>
-                <span>: </span>
+                <b>
+                  <span>{lastMessage.author}</span>
+                  <span>: </span>
+                </b>
                 <span>{lastMessage.content}</span>
               </div>
               <div className="counter">
