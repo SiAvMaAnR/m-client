@@ -9,7 +9,7 @@ import { page } from '../../../constants/system'
 import { useDebounce } from '../../../hooks/_exports'
 import './Chat.scss'
 
-const pageSize = 15
+const defaultPageSize = 15
 
 function Chat() {
   const navigate = useNavigate()
@@ -21,15 +21,15 @@ function Chat() {
   const debouncedSearchChannel = useDebounce(searchChannel, 500)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
   const [pagesCount, setPagesCount] = useState(0)
-  const pageNumber = useRef(0)
+  const pageNumberRef = useRef(0)
 
-  const loadChannels = useCallback(async () => {
+  const loadChannels = async ({ searchField, pageNumber, pageSize }) => {
     try {
       setIsLoading(true)
       console.log('updated')
       const { data, response } = await api.channel.accountChannels({
-        searchField: debouncedSearchChannel,
-        pageNumber: pageNumber.current,
+        searchField,
+        pageNumber,
         pageSize
       })
 
@@ -40,8 +40,8 @@ function Chat() {
       if (!data || response?.data?.errors) {
         throw new Error('Something went wrong')
       }
-      
-      if (pageNumber.current === 0) {
+
+      if (pageNumber === 0) {
         setChannels(data.channels || [])
       } else {
         setChannels((prevChannels) => [...prevChannels, ...(data.channels || [])])
@@ -51,20 +51,22 @@ function Chat() {
     } finally {
       setIsLoading(false)
     }
-  }, [debouncedSearchChannel])
+  }
 
-  const refreshChannels = useCallback(() => {
-    // зачищается сразу
-    pageNumber.current = 0
-    loadChannels()
+  const resetPage = () => {
+    console.log('resetPage')
+    pageNumberRef.current = 0
+  }
 
-    // может остаться прошлым
-    // мб pagenumber is useRef?
-  }, [loadChannels])
+  const refreshChannels = useCallback((search) => {
+    resetPage()
 
-  useEffect(() => {
-    refreshChannels()
-  }, [debouncedSearchChannel, refreshChannels])
+    loadChannels({
+      pageNumber: pageNumberRef.current,
+      pageSize: defaultPageSize,
+      searchField: search
+    })
+  }, [])
 
   const onChangeChannelSearchHandler = (event) => {
     setSearchChannel(event.target.value)
@@ -72,11 +74,11 @@ function Chat() {
 
   useEffect(() => {
     console.log('use effect')
-    loadChannels()
-  }, [loadChannels])
+    refreshChannels(debouncedSearchChannel)
+  }, [debouncedSearchChannel, refreshChannels])
 
   const scrollHandler = (event) => {
-    if (!isLoading && pageNumber.current < pagesCount) {
+    if (!isLoading && pageNumberRef.current < pagesCount) {
       const { scrollHeight, scrollTop } = event.target
       const targetHeight = event.target.getBoundingClientRect().height
 
@@ -86,8 +88,12 @@ function Chat() {
 
       if (isNeedUpdate) {
         console.log('Page number changed')
-        pageNumber.current += 1
-        loadChannels()
+        pageNumberRef.current += 1
+        loadChannels({
+          pageNumber: pageNumberRef.current,
+          pageSize: defaultPageSize,
+          searchField: debouncedSearchChannel
+        })
       }
     }
   }
