@@ -35,10 +35,22 @@
       flex-direction: column;
       justify-content: stretch;
       align-items: stretch;
-      gap: 2px;
-      padding: 2px 0;
+      gap: 3px;
+      padding: 8px 6px;
       overflow-y: auto;
       overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: radial-gradient(circle, var(--font-color-primary-0) 80%, transparent 100%);
+      }
     }
 
     .footer {

@@ -3,9 +3,15 @@
   justify-content: stretch;
   align-items: center;
   background: var(--background-color);
-  height: 55px;
+  min-height: 50px;
   cursor: pointer;
   gap: 5px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--background-color-1);
+  }
 
   #image {
     flex-basis: 16%;

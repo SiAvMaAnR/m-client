@@ -22,6 +22,7 @@ function Chat() {
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
   const [pagesCount, setPagesCount] = useState(0)
   const pageNumberRef = useRef(0)
+  const channelListRef = useRef()
 
   const loadChannels = async ({ searchField, pageNumber, pageSize }) => {
     try {
@@ -92,12 +93,20 @@ function Chat() {
     }
   }
 
+  const onCreatedChannelHandler = () => {
+    refreshChannels(debouncedSearchChannel)
+    channelListRef.current.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
   return (
     <div className="p-chat">
       <CreateChannelModal
         setIsActive={setIsActiveCreateChannelModal}
         isActive={isActiveCreateChannelModal}
-        onCreatedChannel={() => refreshChannels(debouncedSearchChannel)}
+        onCreatedChannel={onCreatedChannelHandler}
       />
 
       <div className="channels">
@@ -105,12 +114,11 @@ function Chat() {
           <div className="header-search">
             <ChannelSearch className="channel-search" onChange={onChangeChannelSearchHandler} />
           </div>
-          <div
-            className="header-new-channel"
-            onClick={() => setIsActiveCreateChannelModal(true)}
-            role="presentation"
-          >
-            <CreateChannelIcon className="new-channel-icon" />
+          <div className="header-new-channel">
+            <CreateChannelIcon
+              onClick={() => setIsActiveCreateChannelModal(true)}
+              className="new-channel-icon"
+            />
           </div>
         </div>
 
@@ -118,7 +126,7 @@ function Chat() {
           <div className="title">{}</div>
         </div>
 
-        <div className="channels-list" onScroll={scrollHandler}>
+        <div className="channels-list" onScroll={scrollHandler} ref={channelListRef}>
           {channels.map((channel) => (
             <Channel
               key={channel.id}

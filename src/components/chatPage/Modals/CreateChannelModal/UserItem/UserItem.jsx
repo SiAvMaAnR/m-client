@@ -18,6 +18,15 @@ function UserItem({ className, userInfo }) {
         <img src={imageSrc} alt="user-img" />
       </div>
       <div id="login">{login}</div>
+
+      <div className="options">
+        <div className="message">
+.
+        </div>
+        <div className="select">
+.
+        </div>
+      </div>
     </div>
   )
 }
