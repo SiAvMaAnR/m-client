@@ -3,7 +3,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
+  justify-content: space-between;
   align-items: stretch;
 
   .users-header {
@@ -11,17 +11,18 @@
   }
 
   .users-content {
-    height: 75%;
+    height: 78%;
     width: 90%;
     margin: 0 auto;
     border: solid 1px var(--border-color);
     border-radius: 18px;
     scrollbar-width: 1px;
     scroll-behavior: smooth;
-    overflow: auto;
+    overflow-y: auto;
+
 
     &::-webkit-scrollbar {
-      width: 2px;
+      width: 1px;
     }
 
     &::-webkit-scrollbar-track {
@@ -29,7 +30,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: radial-gradient(circle, var(--font-color-primary-0) 70%, transparent 100%);
+      background: radial-gradient(circle, var(--font-color-primary-0) 60%, transparent 100%);
     }
 
     .users-table {
@@ -37,16 +38,22 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       font-weight: 500;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       position: relative;
+      overflow-y: auto;
 
       .table-head {
         height: 50px;
         font-size: 16px;
-        border-bottom: solid 1px var(--border-color);
         user-select: none;
 
-        .table-head-row {
+        th {
+          border-bottom: solid 1px var(--border-color-1);
+          position: sticky;
+          top: 0;
+          background: var(--background-color);
+          z-index: 99;
           text-align: center;
           color: var(--font-color-primary-0);
         }
@@ -55,10 +62,10 @@
       .table-body {
         user-select: none;
 
-        .table-item {
+        td {
+          border-bottom: solid 1px var(--border-color);
           height: 61px;
           text-align: center;
-          border-bottom: solid 1px var(--border-color);
         }
       }
     }

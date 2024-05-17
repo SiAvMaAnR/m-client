@@ -63,7 +63,7 @@ function Users() {
       <div className="users-content">
         <table className="users-table">
           <thead className="table-head">
-            <tr className="table-head-row">
+            <tr>
               <th width="5%" aria-label="image">
                 {}
               </th>
@@ -81,12 +81,7 @@ function Users() {
 
           <tbody className="table-body">
             {users.map((user) => (
-              <UserItem
-                className="table-item"
-                key={user.id}
-                userInfo={user}
-                loadUsers={loadUsers}
-              />
+              <UserItem key={user.id} userInfo={user} loadUsers={loadUsers} />
             ))}
           </tbody>
         </table>

@@ -27,8 +27,7 @@
         display: grid;
         place-items: center;
 
-        .channel-search {
-        }
+        .channel-search {}
       }
 
       .header-new-channel {
@@ -81,7 +80,7 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background: radial-gradient(circle, var(--font-color-primary-0) 80%, transparent 100%);
+        background: var(--font-color-primary-0);
       }
     }
   }
@@ -91,15 +90,12 @@
     background: var(--background-color);
     border-radius: 25px 0 0 25px;
 
-    .chat-header {
-    }
+    .chat-header {}
 
     .chat-content {
-      .chat-messages {
-      }
+      .chat-messages {}
 
-      .chat-input {
-      }
+      .chat-input {}
     }
   }
 }
