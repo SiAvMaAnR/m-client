@@ -69,6 +69,11 @@
     --modal-background-color-1: #{$c-dark-neutral-3};
     --border-color: #{$c-dark-secondary-4};
   }
+
+  .c-round-checkbox{
+    --border-color: #{$c-dark-secondary-4};
+    --checked-background-color: #{$c-purple-0};
+  }
 }
 
 .app[data-theme='light'] {
@@ -126,5 +131,10 @@
     --modal-background-color: #{$c-light-neutral-0};
     --modal-background-color-1: #{$c-light-neutral-3};
     --border-color: #{$c-light-secondary-4};
+  }
+
+  .c-round-checkbox{
+    --border-color: #{$c-light-secondary-4};
+    --checked-background-color: #{$c-purple-0};
   }
 }

@@ -16,13 +16,17 @@ function Chat() {
   const { id } = useParams()
   const [isLoading, setIsLoading] = useState(false)
   const [channels, setChannels] = useState([])
-  const [selectedChannel, setSelectedChannel] = useState(id)
+  const [selectedChannel, setSelectedChannel] = useState(null)
   const [searchChannel, setSearchChannel] = useState('')
   const debouncedSearchChannel = useDebounce(searchChannel, 500)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
   const [pagesCount, setPagesCount] = useState(0)
   const pageNumberRef = useRef(0)
   const channelListRef = useRef()
+
+  useEffect(() => {
+    setSelectedChannel(id)
+  }, [id])
 
   const loadChannels = async ({ searchField, pageNumber, pageSize }) => {
     try {

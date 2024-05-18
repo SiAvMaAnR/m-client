@@ -25,6 +25,7 @@ function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel
   const [pageNumber, setPageNumber] = useState(0)
   const [pagesCount, setPagesCount] = useState(0)
   const [errorMessage, setErrorMessage] = useState(null)
+  const pageNumberRef = useRef(0)
 
   const createChannelHandler = async () => {
     try {

@@ -15,6 +15,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 15px;
+      border-bottom: solid 1px var(--border-color);
 
       .brand {
         padding-left: 8px;
@@ -49,7 +50,7 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background: radial-gradient(circle, var(--font-color-primary-0) 80%, transparent 100%);
+        background:  var(--font-color-primary-0) ;
       }
     }
 
@@ -58,6 +59,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 15px;
+      border-top: solid 1px var(--border-color);
 
       .channel-name-input {
         flex-basis: 50%;

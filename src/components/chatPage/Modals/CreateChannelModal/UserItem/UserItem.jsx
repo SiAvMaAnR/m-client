@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import config from '../../../../../config/configuration'
 import { activityStatus } from '../../../../../constants/system'
+import { MessageIcon, RoundCheckbox } from '../../../../_exports'
 import './UserItem.scss'
 
 function UserItem({ className, userInfo }) {
@@ -21,10 +22,11 @@ function UserItem({ className, userInfo }) {
 
       <div className="options">
         <div className="message">
-.
+          <MessageIcon className="message-icon" />
         </div>
+        
         <div className="select">
-.
+          <RoundCheckbox className="round-checkbox" />
         </div>
       </div>
     </div>
