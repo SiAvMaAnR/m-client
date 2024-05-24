@@ -3,6 +3,11 @@ import axiosInstance from '../axios'
 const path = '/api/account'
 
 const accountApi = {
+  profile: async () => {
+    const response = await axiosInstance.get(`${path}/profile`)
+    return response
+  },
+
   image: async () => {
     const response = await axiosInstance.get(`${path}/image`)
     return response

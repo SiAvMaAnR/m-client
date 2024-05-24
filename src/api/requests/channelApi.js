@@ -9,14 +9,14 @@ const channelApi = {
     return response
   },
 
-  createPublic: async ({ name }) => {
-    const body = { name }
+  createPublic: async ({ name, members }) => {
+    const body = { name, members }
     const response = await axiosInstance.post(`${path}/create-public`, body)
     return response
   },
 
-  createPrivate: async ({ name }) => {
-    const body = { name }
+  createPrivate: async ({ name, members }) => {
+    const body = { name, members }
     const response = await axiosInstance.post(`${path}/create-private`, body)
     return response
   },

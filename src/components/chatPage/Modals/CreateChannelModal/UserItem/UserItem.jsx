@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types'
 import config from '../../../../../config/configuration'
 import { activityStatus } from '../../../../../constants/system'
-import { MessageIcon, RoundCheckbox } from '../../../../_exports'
+import { RoundCheckbox } from '../../../../_exports'
+import ArrowIcon from '../../../../common/Icon/ArrowIcon/ArrowIcon'
 import './UserItem.scss'
 
-function UserItem({ className, userInfo }) {
-  const { login, activityStatus: status, isBanned, image } = userInfo
+function UserItem({ className, userInfo, isChecked, onToggle }) {
+  const { id, login, activityStatus: status, isBanned, image } = userInfo
   const statusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
   const bannedClass = isBanned ? 'yes' : ''
 
@@ -13,21 +14,33 @@ function UserItem({ className, userInfo }) {
     ? `data:image/jpeg;base64, ${image}`
     : `${config.app.publicPath}/defaultImages/user-profile.jpg`
 
+  const onClickHandler = () => {
+    onToggle(id)
+  }
+
+  const onClickDirectHandler = (event) => {
+    event.stopPropagation()
+    // go to direct
+  }
+
   return (
-    <div className={`c-chat-user-item ${className} ${statusClass} ${bannedClass}`}>
+    <div
+      className={`c-chat-user-item ${className} ${statusClass} ${bannedClass}`}
+      onClick={onClickHandler}
+      role="presentation"
+    >
+      <div className="select">
+        <RoundCheckbox className="round-checkbox" checked={isChecked} />
+      </div>
+
       <div id="image">
         <img src={imageSrc} alt="user-img" />
       </div>
+
       <div id="login">{login}</div>
 
-      <div className="options">
-        <div className="message">
-          <MessageIcon className="message-icon" />
-        </div>
-        
-        <div className="select">
-          <RoundCheckbox className="round-checkbox" />
-        </div>
+      <div className="direct" onClick={onClickDirectHandler} role="presentation">
+        <ArrowIcon className="arrow-icon" />
       </div>
     </div>
   )
@@ -35,7 +48,9 @@ function UserItem({ className, userInfo }) {
 
 UserItem.defaultProps = {
   className: '',
-  userInfo: null
+  userInfo: null,
+  isChecked: false,
+  onToggle: () => {}
 }
 
 UserItem.propTypes = {
@@ -48,7 +63,9 @@ UserItem.propTypes = {
     image: PropTypes.string,
     activityStatus: PropTypes.string,
     isBanned: PropTypes.bool
-  })
+  }),
+  isChecked: PropTypes.bool,
+  onToggle: PropTypes.func
 }
 
 export default UserItem

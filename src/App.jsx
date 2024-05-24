@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux'
 import AppRouter from './routes/AppRouter'
 import useRefreshToken from './hooks/useRefreshToken'
-import './App.scss'
 import useSignalRHub from './hooks/useSignalRHub'
 import { hub } from './constants/system'
+import './App.scss'
 
 function App() {
   const theme = useSelector((state) => state.system.theme)

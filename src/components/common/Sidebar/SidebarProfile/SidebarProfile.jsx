@@ -8,8 +8,8 @@ import MenuIcon from './MenuIcon/MenuIcon'
 import DropDown from '../../DropDown/DropDown'
 import LogoutIcon from './MenuIcons/LogoutIcon/LogoutIcon'
 import SettingsIcon from './MenuIcons/SettingsIcon/SettingsIcon'
-import './SidebarProfile.scss'
 import config from '../../../../config/configuration'
+import './SidebarProfile.scss'
 
 function SidebarProfile({ className, isExpand }) {
   const [image, setImage] = useState(null)
@@ -27,9 +27,7 @@ function SidebarProfile({ className, isExpand }) {
   }, [])
 
   useEffect(() => {
-    const roleApi = userRole === role.user ? api.user : api.admin
-
-    roleApi.profile().then((result) => {
+    api.account.profile().then((result) => {
       setEmail(result?.data?.email ?? 'none')
       setLogin(result?.data?.login ?? 'none')
     })

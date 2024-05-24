@@ -2,7 +2,7 @@
   user-select: none;
 
   .base-modal {
-    height: 550px;
+    height: 570px;
     width: 470px;
     display: flex;
     flex-direction: column;
@@ -10,11 +10,11 @@
     align-items: stretch;
 
     .header {
-      flex-basis: 40px;
+      flex-basis: 38px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 15px;
+      padding: 13px 15px;
       border-bottom: solid 1px var(--border-color);
 
       .brand {
@@ -28,6 +28,50 @@
         }
       }
     }
+
+    .message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+      height: 30px;
+      border-bottom: solid 1px var(--border-color);
+      color: var(--error-color);
+      gap: 10px;
+
+      .valid-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+      }
+    }
+
+    .message-enter {
+      opacity: 0;
+      max-height: 0;
+    }
+  
+    .message-enter-active {
+      opacity: 1;
+      max-height: 100px;
+      transition: all 0.5s ease;
+    }
+  
+    .message-exit {
+      opacity: 1;
+      max-height: 100px;
+    }
+  
+    .message-exit-active {
+      opacity: 0;
+      transition: all 0.5s ease;
+      max-height: 0;
+    }
+    
 
     .content {
       flex: 1 0;
@@ -50,7 +94,7 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background:  var(--font-color-primary-0) ;
+        background: var(--font-color-primary-0);
       }
     }
 

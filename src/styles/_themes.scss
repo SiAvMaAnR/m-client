@@ -2,6 +2,7 @@
 
 .app {
   --font-color-primary-0: #{$c-purple-0};
+  --font-color-primary-1: #{$c-black-0};
 
   .c-brand {
     --font-color-1: #{$c-purple-0};
@@ -21,6 +22,7 @@
   --border-color: #{$c-dark-secondary-4};
   --border-color-1: #{$c-purple-0};
   --icon-background-color: #{$c-dark-neutral-2};
+  --error-color: #{$c-dark-primary-2};
 
   .c-nav-link {
     --font-color: #{$c-white-0};
@@ -37,7 +39,6 @@
     --text-fill-color: #{$c-black-0};
     --toggle-background-color: #{$c-dark-secondary-2};
     --toggle-stroke-color: #{$c-dark-secondary-3};
-    --invalid-error-color: #{$c-dark-primary-2};
   }
 
   .c-sidebar {
@@ -84,6 +85,7 @@
   --border-color: #{$c-light-secondary-4};
   --border-color-1: #{$c-purple-0};
   --icon-background-color: #{$c-light-neutral-2};
+  --error-color: #{$c-dark-primary-2};
 
   .c-nav-link {
     --font-color: #{$c-black-0};
@@ -100,7 +102,6 @@
     --text-fill-color: #{$c-black-0};
     --toggle-background-color: #{$c-light-secondary-2};
     --toggle-stroke-color: #{$c-light-secondary-3};
-    --invalid-error-color: #{$c-light-primary-2};
   }
 
   .c-sidebar {
