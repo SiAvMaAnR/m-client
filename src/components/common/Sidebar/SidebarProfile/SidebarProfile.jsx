@@ -56,7 +56,12 @@ function SidebarProfile({ className, isExpand }) {
   return (
     <div className={`c-sidebar-profile ${className} ${expandClass}`}>
       <div className="sidebar-profile-image">
-        <img src={imageSrc} alt="profile-img" />
+        <img
+          src={imageSrc}
+          alt="profile-img"
+          onClick={() => navigate(page.profile)}
+          role="presentation"
+        />
       </div>
 
       <div className="sidebar-profile-info">
