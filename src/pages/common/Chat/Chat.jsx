@@ -7,6 +7,7 @@ import Channel from '../../../components/chatPage/Channel/Channel'
 import CreateChannelModal from '../../../components/chatPage/Modals/CreateChannelModal/CreateChannelModal'
 import { page } from '../../../constants/system'
 import { useDebounce } from '../../../hooks/_exports'
+import { ChannelFilter } from '../../../components/_exports'
 import './Chat.scss'
 
 const defaultPageSize = 15
@@ -21,6 +22,7 @@ function Chat() {
   const debouncedSearchChannel = useDebounce(searchChannel, 500)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
   const [pagesCount, setPagesCount] = useState(0)
+  const [activeChannelType, setActiveChannelCount] = useState(null)
   const pageNumberRef = useRef(0)
   const channelListRef = useRef()
 
@@ -28,13 +30,14 @@ function Chat() {
     setSelectedChannel(id)
   }, [id])
 
-  const loadChannels = async ({ searchField, pageNumber, pageSize }) => {
+  const loadChannels = async ({ searchField, pageNumber, pageSize, type }) => {
     try {
       setIsLoading(true)
       const { data, response } = await api.channel.accountChannels({
         searchField,
         pageNumber,
-        pageSize
+        pageSize,
+        channelType: type
       })
 
       if (response?.data?.clientMessage) {
@@ -61,15 +64,26 @@ function Chat() {
     pageNumberRef.current = 0
   }
 
-  const refreshChannels = useCallback((search) => {
-    resetPage()
+  const refreshChannels = useCallback(
+    (search, isSmoothScroll) => {
+      const scrollBehavior = isSmoothScroll ? 'smooth' : 'auto'
 
-    loadChannels({
-      pageNumber: pageNumberRef.current,
-      pageSize: defaultPageSize,
-      searchField: search
-    })
-  }, [])
+      resetPage()
+
+      channelListRef.current.scrollTo({
+        top: 0,
+        behavior: scrollBehavior
+      })
+
+      loadChannels({
+        pageNumber: pageNumberRef.current,
+        pageSize: defaultPageSize,
+        searchField: search,
+        type: activeChannelType
+      })
+    },
+    [activeChannelType]
+  )
 
   const onChangeChannelSearchHandler = (event) => {
     setSearchChannel(event.target.value)
@@ -91,18 +105,15 @@ function Chat() {
         loadChannels({
           pageNumber: pageNumberRef.current,
           pageSize: defaultPageSize,
-          searchField: debouncedSearchChannel
+          searchField: debouncedSearchChannel,
+          type: activeChannelType
         })
       }
     }
   }
 
   const onCreatedChannelHandler = () => {
-    refreshChannels(debouncedSearchChannel)
-    channelListRef.current.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
+    refreshChannels(debouncedSearchChannel, true)
   }
 
   return (
@@ -127,7 +138,11 @@ function Chat() {
         </div>
 
         <div className="channels-filters">
-          <div className="title">{}</div>
+          <ChannelFilter
+            className="filter"
+            setType={setActiveChannelCount}
+            type={activeChannelType}
+          />
         </div>
 
         <div className="channels-list" onScroll={scrollHandler} ref={channelListRef}>

@@ -27,11 +27,12 @@ const channelApi = {
     return response
   },
 
-  accountChannels: async ({ pageNumber, pageSize, searchField }) => {
+  accountChannels: async ({ pageNumber, pageSize, searchField, channelType }) => {
     const params = [
       `pagination.pageNumber=${pageNumber || 0}`,
       `pagination.pageSize=${pageSize || 100}`,
-      `searchField=${searchField || ''}`
+      `searchField=${searchField || ''}`,
+      `channelType=${channelType || ''}`
     ]
 
     const response = await axiosInstance.get(`${path}/account-channels?${params.join('&')}`)

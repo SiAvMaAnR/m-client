@@ -1,0 +1,38 @@
+.c-channel-filter {
+  width: 100%;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  height: 40px;
+  padding: 2px;
+  gap: 3px;
+  user-select: none;
+
+  .filter {
+    height: 100%;
+    cursor: pointer;
+    flex-basis: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    border-bottom: solid 2px transparent;
+
+
+    &.selected {
+      border-color: var(--border-color-1);
+      color: var(--font-color-primary-0);
+    }
+
+    &:hover {
+      background: var(--background-color);
+      border-radius: 6px 6px 0 0;
+    }
+
+    .title {
+      font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+    }
+  }
+
+}

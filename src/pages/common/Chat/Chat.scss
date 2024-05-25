@@ -53,20 +53,23 @@
 
     .channels-filters {
       border-top: solid 3px var(--background-color);
+      border-bottom: solid 3px var(--background-color);
+
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 5px 5px;
+      justify-content: stretch;
+      padding: 2px 2px;
       gap: 5px;
+
+      .filter {}
     }
 
     .channels-list {
-      border-top: solid 3px var(--background-color);
       display: flex;
       flex-direction: column;
       align-items: stretch;
       justify-content: stretch;
-      padding: 10px 5px 5px;
+      padding: 5px 5px 5px;
       gap: 5px;
       overflow-x: auto;
 

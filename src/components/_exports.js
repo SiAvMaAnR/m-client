@@ -20,6 +20,7 @@ import SearchInput from './common/Input/SearchInput/SearchInput'
 import BaseModal from './common/Modal/BaseModal/BaseModal'
 import MessageIcon from './common/Icon/MessageIcon/MessageIcon'
 import RoundCheckbox from './common/Checkbox/RoundCheckbox/RoundCheckbox'
+import ChannelFilter from './chatPage/ChannelFilter/ChannelFilter'
 
 export {
   SidebarLayout,
@@ -43,5 +44,6 @@ export {
   SearchInput,
   BaseModal,
   MessageIcon,
-  RoundCheckbox
+  RoundCheckbox,
+  ChannelFilter
 }
