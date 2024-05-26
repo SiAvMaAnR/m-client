@@ -3,11 +3,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import api from '../../../api/api'
 import CreateChannelIcon from '../../../components/chatPage/CreateChannelIcon/CreateChannelIcon'
 import ChannelSearch from '../../../components/chatPage/ChannelSearch/ChannelSearch'
+import ChannelFilter from '../../../components/chatPage/ChannelFilter/ChannelFilter'
 import Channel from '../../../components/chatPage/Channel/Channel'
 import CreateChannelModal from '../../../components/chatPage/Modals/CreateChannelModal/CreateChannelModal'
 import { page } from '../../../constants/system'
 import { useDebounce } from '../../../hooks/_exports'
-import { ChannelFilter } from '../../../components/_exports'
+import ChatHeader from '../../../components/chatPage/ChatHeader/ChatHeader'
 import './Chat.scss'
 
 const defaultPageSize = 15
@@ -17,7 +18,7 @@ function Chat() {
   const { id } = useParams()
   const [isLoading, setIsLoading] = useState(false)
   const [channels, setChannels] = useState([])
-  const [selectedChannel, setSelectedChannel] = useState(null)
+  const [selectedChannel, setSelectedChannel] = useState(id)
   const [searchChannel, setSearchChannel] = useState('')
   const debouncedSearchChannel = useDebounce(searchChannel, 500)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
@@ -25,10 +26,6 @@ function Chat() {
   const [activeChannelType, setActiveChannelCount] = useState(null)
   const pageNumberRef = useRef(0)
   const channelListRef = useRef()
-
-  useEffect(() => {
-    setSelectedChannel(id)
-  }, [id])
 
   const loadChannels = async ({ searchField, pageNumber, pageSize, type }) => {
     try {
@@ -115,7 +112,7 @@ function Chat() {
   const onCreatedChannelHandler = () => {
     refreshChannels(debouncedSearchChannel, true)
   }
-
+  
   return (
     <div className="p-chat">
       <CreateChannelModal
@@ -161,7 +158,9 @@ function Chat() {
       </div>
 
       <div className="chat">
-        <div className="chat-header">.</div>
+        <div className="chat-header-container">
+          <ChatHeader className="chat-header" channelId={+selectedChannel} />
+        </div>
         <div className="chat-content">
           <div className="chat-messages">.</div>
           <div className="chat-input">.</div>

@@ -4,12 +4,15 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  border-radius: 12px;
+  transition: all 0.3s ease;
 
   .sidebar-profile-image {
     flex: 0 0 60px;
     display: grid;
     place-items: center;
     height: 100%;
+    border-radius: 12px;
 
     img {
       width: 45px;
@@ -17,6 +20,7 @@
       object-fit: cover;
       border-radius: 50%;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
   }
 
@@ -35,6 +39,8 @@
     justify-content: center;
     gap: 2px;
     user-select: text;
+
+
 
     .sidebar-profile-login {
       font-size: 14px;

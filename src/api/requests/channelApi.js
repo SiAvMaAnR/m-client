@@ -37,6 +37,11 @@ const channelApi = {
 
     const response = await axiosInstance.get(`${path}/account-channels?${params.join('&')}`)
     return response
+  },
+
+  accountChannel: async ({ id }) => {
+    const response = await axiosInstance.get(`${path}/account-channels/${id}`)
+    return response
   }
 }
 

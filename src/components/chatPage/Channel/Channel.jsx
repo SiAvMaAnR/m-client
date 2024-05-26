@@ -1,15 +1,9 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import { channelType } from '../../../constants/chat'
 import config from '../../../config/configuration'
+import defaultImageMapper from '../../../utils/mappers/defaultImageMapper'
 import './Channel.scss'
-
-const defaultImageMapper = {
-  [channelType.direct]: 'direct-channel',
-  [channelType.public]: 'public-channel',
-  [channelType.private]: 'private-channel'
-}
 
 function Channel({ onClick, isActive, className, data }) {
   const [counter, setCounter] = useState(99)

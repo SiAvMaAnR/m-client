@@ -90,9 +90,17 @@
   .chat {
     flex: 1 1;
     background: var(--background-color);
-    border-radius: 25px 0 0 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
 
-    .chat-header {}
+    .chat-header-container {
+      height: 59px;
+      margin-left: 3px;
+
+      .chat-header {}
+    }
 
     .chat-content {
       .chat-messages {}

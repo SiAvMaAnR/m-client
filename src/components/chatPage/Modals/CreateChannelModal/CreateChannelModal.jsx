@@ -51,11 +51,10 @@ function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel
       if (!data || response?.data?.errors) {
         throw new Error('Something went wrong')
       }
-
+console.log(data, response);
       if (data.isSuccess) {
         setIsActive(false)
         onCreatedChannel()
-        setChannelName('')
       }
     } catch (error) {
       setErrorMessage(error.message)
@@ -117,6 +116,13 @@ function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel
   useEffect(() => {
     refreshUsers(debouncedUserSearch)
   }, [debouncedUserSearch, refreshUsers])
+
+  useEffect(() => {
+    if(!isActive){
+      setChannelName('')
+      setSelectedUserIds(new Set())
+    }
+  }, [isActive])
 
   const submitKeyDownHandler = (event) => {
     if (event.key === 'Enter') {
