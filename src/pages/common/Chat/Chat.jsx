@@ -10,6 +10,7 @@ import { page } from '../../../constants/system'
 import { useDebounce } from '../../../hooks/_exports'
 import ChatHeader from '../../../components/chatPage/ChatHeader/ChatHeader'
 import './Chat.scss'
+import { ToolTip1 } from '../../../components/_exports'
 
 const defaultPageSize = 15
 
@@ -112,7 +113,7 @@ function Chat() {
   const onCreatedChannelHandler = () => {
     refreshChannels(debouncedSearchChannel, true)
   }
-  
+
   return (
     <div className="p-chat">
       <CreateChannelModal
@@ -127,10 +128,12 @@ function Chat() {
             <ChannelSearch className="channel-search" onChange={onChangeChannelSearchHandler} />
           </div>
           <div className="header-new-channel">
-            <CreateChannelIcon
-              onClick={() => setIsActiveCreateChannelModal(true)}
-              className="new-channel-icon"
-            />
+            <ToolTip1 text="Create new channel" >
+              <CreateChannelIcon
+                onClick={() => setIsActiveCreateChannelModal(true)}
+                className="new-channel-icon"
+              />
+            </ToolTip1>
           </div>
         </div>
 

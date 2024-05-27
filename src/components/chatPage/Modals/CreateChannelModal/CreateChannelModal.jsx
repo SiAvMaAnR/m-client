@@ -51,7 +51,7 @@ function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel
       if (!data || response?.data?.errors) {
         throw new Error('Something went wrong')
       }
-console.log(data, response);
+      
       if (data.isSuccess) {
         setIsActive(false)
         onCreatedChannel()

@@ -35,6 +35,12 @@
         display: grid;
         place-items: center;
 
+        .tooltip {
+          top: 45px;
+          
+          transform: translateX(30px);
+        }
+
         .new-channel-icon {
           height: 35px;
           width: 35px;
