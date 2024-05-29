@@ -1,0 +1,85 @@
+.c-channels-panel {
+    flex: 0 0 320px;
+    margin: 12px 0 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    gap: 10px;
+
+    .channels-header {
+        height: 37px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 0 10px;
+
+        .header-search {
+            flex: 1 1;
+            display: grid;
+            place-items: center;
+
+            .channel-search {}
+        }
+
+        .header-new-channel {
+            flex-basis: 60px;
+            display: grid;
+            place-items: center;
+
+            .tooltip {
+                top: 45px;
+
+                transform: translateX(30px);
+            }
+
+            .new-channel-icon {
+                height: 35px;
+                width: 35px;
+                border-radius: 50%;
+                background: var(--background-color);
+                border: solid 1px var(--border-color);
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: var(--background-color-1);
+                }
+            }
+        }
+    }
+
+    .channels-filters {
+        border-top: solid 3px var(--background-color);
+        border-bottom: solid 3px var(--background-color);
+
+        display: flex;
+        align-items: center;
+        justify-content: stretch;
+        padding: 2px 2px;
+        gap: 5px;
+
+        .filter {}
+    }
+
+    .channels-list {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: stretch;
+        padding: 5px 5px 5px;
+        gap: 5px;
+        overflow-x: auto;
+
+        &::-webkit-scrollbar {
+            width: 2px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--font-color-primary-0);
+        }
+    }
+}

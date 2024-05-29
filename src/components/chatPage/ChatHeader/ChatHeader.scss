@@ -4,36 +4,19 @@
     background-color: var(--background-color-1);
     display: flex;
     justify-content: stretch;
+    align-items: center;
     padding: 0 15px;
 
-    &-enter {
-        opacity: 0;
-    }
-
-    &-enter-active {
-        opacity: 1;
-        transition: all 0.2s ease-out;
-    }
-
-    &-exit {
-        opacity: 1;
-    }
-
-    &-exit-active {
-        opacity: 0;
-        transition: all 0.2s ease-out;
-    }
-
     .image {
-        flex: 0 0 100px;
+        flex: 0 0 90px;
         display: grid;
         place-items: center;
         height: 100%;
         user-select: none;
 
         img {
-            width: 48px;
-            height: 48px;
+            width: 45px;
+            height: 45px;
             object-fit: cover;
             border-radius: 50%;
             cursor: pointer;

@@ -30,65 +30,49 @@ const getActivityStatus = (channelInfo) => {
   return result
 }
 
-function ChatHeader({ className, channelId }) {
-  const transitionRef = useRef()
-  const [channel, setChannel] = useState(null)
-
-  const loadChannel = async (id) => {
-    const result = await api.channel.accountChannel({ id })
-
-    setChannel(result.data)
-  }
-
-  useEffect(() => {
-    loadChannel(channelId)
-  }, [channelId])
-
+function ChatHeader({ className, channel }) {
   const imageSrc = channel?.image
     ? `data:image/jpeg;base64, ${channel.image}`
     : `${config.app.publicPath}/defaultImages/${defaultImageMapper[channel?.type]}.jpg`
 
   return (
-    <CSSTransition
-      classNames="c-chat-header"
-      in={!!channel}
-      nodeRef={transitionRef}
-      timeout={300}
-      unmountOnExit
-    >
-      <div ref={transitionRef} className={`c-chat-header ${className}`}>
-        <div className="image">
-          <img src={imageSrc} alt="channel-img" />
-        </div>
-
-        <div className="info">
-          <div className="channel-name">{channel?.name}</div>
-
-          <div className="additional-info">
-            {channel?.type === channelType.direct ? (
-              <div className="status-info">{getActivityStatus(channel)}</div>
-            ) : (
-              <div className="members-count">{channel?.membersCount} members</div>
-            )}
-          </div>
-        </div>
-
-        <div className="search">.</div>
-
-        <div className="menu">.</div>
+    <div className={`c-chat-header ${className}`}>
+      <div className="image">
+        <img src={imageSrc} alt="channel-img" />
       </div>
-    </CSSTransition>
+
+      <div className="info">
+        <div className="channel-name">{channel?.name}</div>
+
+        <div className="additional-info">
+          {channel?.type === channelType.direct ? (
+            <div className="status-info">{getActivityStatus(channel)}</div>
+          ) : (
+            <div className="members-count">{channel?.membersCount} members</div>
+          )}
+        </div>
+      </div>
+
+      <div className="search">.</div>
+
+      <div className="menu">.</div>
+    </div>
   )
 }
 
 ChatHeader.defaultProps = {
   className: '',
-  channelId: null
+  channel: null
 }
 
 ChatHeader.propTypes = {
   className: PropTypes.string,
-  channelId: PropTypes.number
+  channel: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+    image: PropTypes.string,
+    membersCount: PropTypes.number
+  })
 }
 
 export default ChatHeader
