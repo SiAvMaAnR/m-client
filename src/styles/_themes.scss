@@ -3,6 +3,7 @@
 .app {
   --font-color-primary-0: #{$c-purple-0};
   --font-color-primary-1: #{$c-black-0};
+  --font-color-primary-2: #{$c-white-0};
 
   .c-brand {
     --font-color-1: #{$c-purple-0};
@@ -71,9 +72,14 @@
     --border-color: #{$c-dark-secondary-4};
   }
 
-  .c-round-checkbox{
+  .c-round-checkbox {
     --border-color: #{$c-dark-secondary-4};
     --checked-background-color: #{$c-purple-0};
+  }
+
+  .c-message-list {
+    --message-background-color: #{$c-light-neutral-2};
+    --my-message-background-color: #{$c-purple-0};
   }
 }
 
@@ -134,8 +140,13 @@
     --border-color: #{$c-light-secondary-4};
   }
 
-  .c-round-checkbox{
+  .c-round-checkbox {
     --border-color: #{$c-light-secondary-4};
     --checked-background-color: #{$c-purple-0};
+  }
+
+  .c-message-list {
+    --message-background-color: #{$c-light-neutral-2};
+    --my-message-background-color: #{$c-purple-0};
   }
 }

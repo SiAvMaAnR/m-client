@@ -1,20 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
-import Channel from '../Channel/Channel'
-import ChannelFilter from '../ChannelFilter/ChannelFilter'
-import CreateChannelIcon from '../CreateChannelIcon/CreateChannelIcon'
+import Channel from './Channel/Channel'
+import ChannelFilter from './ChannelFilter/ChannelFilter'
+import CreateChannelIcon from './CreateChannelIcon/CreateChannelIcon'
 import { ToolTip1 } from '../../_exports'
-import ChannelSearch from '../ChannelSearch/ChannelSearch'
+import ChannelSearch from './ChannelSearch/ChannelSearch'
 import api from '../../../api/api'
 import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal'
 import { useDebounce } from '../../../hooks/_exports'
 import { page } from '../../../constants/system'
-import './ChannelsPanel.scss'
+import './ChannelList.scss'
 
 const defaultPageSize = 15
 
-function ChannelsPanel({ className, selectedChannelId, setSelectedChannelId }) {
+function ChannelList({ className, selectedChannelId, setSelectedChannelId }) {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [channels, setChannels] = useState([])
@@ -56,15 +56,11 @@ function ChannelsPanel({ className, selectedChannelId, setSelectedChannelId }) {
     }
   }
 
-  const resetPage = () => {
-    pageNumberRef.current = 0
-  }
-
   const refreshChannels = useCallback(
     (search, isSmoothScroll) => {
       const scrollBehavior = isSmoothScroll ? 'smooth' : 'auto'
 
-      resetPage()
+      pageNumberRef.current = 0
 
       channelListRef.current.scrollTo({
         top: 0,
@@ -113,62 +109,64 @@ function ChannelsPanel({ className, selectedChannelId, setSelectedChannelId }) {
   }
 
   return (
-    <div className={`c-channels-panel ${className}`}>
+    <>
       <CreateChannelModal
         setIsActive={setIsActiveCreateChannelModal}
         isActive={isActiveCreateChannelModal}
         onCreatedChannel={onCreatedChannelHandler}
       />
 
-      <div className="channels-header">
-        <div className="header-search">
-          <ChannelSearch className="channel-search" onChange={onChangeChannelSearchHandler} />
+      <div className={`c-channel-list ${className}`}>
+        <div className="channels-header">
+          <div className="header-search">
+            <ChannelSearch className="channel-search" onChange={onChangeChannelSearchHandler} />
+          </div>
+          <div className="header-new-channel">
+            <ToolTip1 text="Create new channel">
+              <CreateChannelIcon
+                onClick={() => setIsActiveCreateChannelModal(true)}
+                className="new-channel-icon"
+              />
+            </ToolTip1>
+          </div>
         </div>
-        <div className="header-new-channel">
-          <ToolTip1 text="Create new channel">
-            <CreateChannelIcon
-              onClick={() => setIsActiveCreateChannelModal(true)}
-              className="new-channel-icon"
-            />
-          </ToolTip1>
-        </div>
-      </div>
 
-      <div className="channels-filters">
-        <ChannelFilter
-          className="filter"
-          setType={setActiveChannelCount}
-          type={activeChannelType}
-        />
-      </div>
-
-      <div className="channels-list" onScroll={scrollHandler} ref={channelListRef}>
-        {channels.map((channel) => (
-          <Channel
-            key={channel.id}
-            onClick={() => {
-              setSelectedChannelId(channel.id)
-              navigate(`${page.chat}/${channel.id}`)
-            }}
-            isActive={+selectedChannelId === channel.id}
-            data={channel}
+        <div className="channels-filters">
+          <ChannelFilter
+            className="filter"
+            setType={setActiveChannelCount}
+            type={activeChannelType}
           />
-        ))}
+        </div>
+
+        <div className="list" onScroll={scrollHandler} ref={channelListRef}>
+          {channels.map((channel) => (
+            <Channel
+              key={channel.id}
+              onClick={() => {
+                setSelectedChannelId(channel.id)
+                navigate(`${page.chat}/${channel.id}`)
+              }}
+              isActive={+selectedChannelId === channel.id}
+              data={channel}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
-ChannelsPanel.defaultProps = {
+ChannelList.defaultProps = {
   className: '',
   selectedChannelId: null,
   setSelectedChannelId: () => {}
 }
 
-ChannelsPanel.propTypes = {
+ChannelList.propTypes = {
   className: PropTypes.string,
   selectedChannelId: PropTypes.number,
   setSelectedChannelId: PropTypes.func
 }
 
-export default ChannelsPanel
+export default ChannelList

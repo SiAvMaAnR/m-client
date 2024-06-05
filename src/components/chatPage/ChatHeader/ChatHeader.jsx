@@ -1,8 +1,5 @@
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import { useEffect, useRef, useState } from 'react'
-import { CSSTransition } from 'react-transition-group'
-import api from '../../../api/api'
 import defaultImageMapper from '../../../utils/mappers/defaultImageMapper'
 import config from '../../../config/configuration'
 import { channelType } from '../../../constants/chat'

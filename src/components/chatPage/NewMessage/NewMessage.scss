@@ -1,0 +1,58 @@
+.c-new-message {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 0 20%;
+
+    .attachments {
+        user-select: none;
+    }
+
+    .message-input {
+        border: solid 1px var(--border-color);
+        border-radius: 30px;
+        height: 48px;
+        width: 500px;
+        padding: 5px 25px;
+        background: var(--background-color-1);
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease;
+
+        &.focused {
+            border-color: var(--border-color-1);
+        }
+
+        input {
+            height: 100%;
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
+            font-family: 'Roboto', sans-serif;
+            resize: none;
+        }
+    }
+
+    .send-btn {
+        min-height: 50px;
+        min-width: 50px;
+        border: none;
+        border-radius: 50%;
+        background: var(--font-color-primary-0);
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: grid;
+        place-items: center;
+        user-select: none;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+}

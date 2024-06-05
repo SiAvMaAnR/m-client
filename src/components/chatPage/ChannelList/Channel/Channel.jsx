@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import config from '../../../config/configuration'
-import defaultImageMapper from '../../../utils/mappers/defaultImageMapper'
+import config from '../../../../config/configuration'
+import defaultImageMapper from '../../../../utils/mappers/defaultImageMapper'
 import './Channel.scss'
 
 function Channel({ onClick, isActive, className, data }) {

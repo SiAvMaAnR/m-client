@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { channelType } from '../../../constants/chat'
+import { channelType } from '../../../../constants/chat'
 import './ChannelFilter.scss'
 
 const filtersInfo = [

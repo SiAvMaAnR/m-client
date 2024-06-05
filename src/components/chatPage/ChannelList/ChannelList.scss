@@ -1,4 +1,4 @@
-.c-channels-panel {
+.c-channel-list {
     flex: 0 0 320px;
     margin: 12px 0 8px;
     display: flex;
@@ -61,7 +61,7 @@
         .filter {}
     }
 
-    .channels-list {
+    .list {
         display: flex;
         flex-direction: column;
         align-items: stretch;

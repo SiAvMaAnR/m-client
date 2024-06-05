@@ -1,0 +1,32 @@
+.c-message {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    transition: all 0.3s ease;
+    user-select: none;
+
+    &.my-message {
+        justify-content: end;
+
+        .data-wrapper {
+            background: var(--my-message-background-color);
+            color: var(--font-color-primary-2);
+        }
+    }
+
+    .data-wrapper {
+        background: var(--message-background-color);
+        padding: 10px 14px;
+        width: fit-content;
+        display: flex;
+        border-radius: 14px;
+
+        .author-img {}
+
+        .message-text {
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+        }
+    }
+}

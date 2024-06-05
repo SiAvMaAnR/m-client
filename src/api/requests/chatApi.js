@@ -9,12 +9,13 @@ const chatApi = {
     return response
   },
 
-  messages: async ({ channelId, pageNumber, pageSize, searchField }) => {
+  messages: async ({ channelId, pageNumber, pageSize, skip, searchField }) => {
     const params = [
       `channelId=${channelId}`,
       `searchField=${searchField || ''}`,
       `pagination.pageNumber=${pageNumber || 0}`,
-      `pagination.pageSize=${pageSize || 100}`
+      `pagination.pageSize=${pageSize || 100}`,
+      `pagination.skip=${skip || 0}`
     ]
 
     const response = await axiosInstance.get(`${path}/messages?${params.join('&')}`)
