@@ -51,7 +51,7 @@ function Chat() {
                 <MessageList chatId={+selectedChannelId} />
               </div>
               <div className="chat-input">
-                <NewMessage channelId={+selectedChannelId}/>
+                <NewMessage channelId={+selectedChannelId} />
               </div>
             </div>
           </div>

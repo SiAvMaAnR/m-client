@@ -1,5 +1,8 @@
 const chatMethod = {
-  sendMessage: 'SendMessageAsync'
+  sendMessage: 'SendMessageAsync',
+  sendMessageRes: 'SendMessageResponse',
+  channel: "ChannelAsync",
+  channelRes: "ChannelResponse",
 }
 
 const stateMethod = {}

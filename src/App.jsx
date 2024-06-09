@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AppRouter from './routes/AppRouter'
 import useRefreshToken from './hooks/useRefreshToken'
@@ -14,8 +15,10 @@ function App() {
   const stateConnection = useSignalRHub(hub.state)
   const chatConnection = useSignalRHub(hub.chat)
 
-  dispatch(setChatConnection(chatConnection))
-  dispatch(setStateConnection(stateConnection))
+  useEffect(() => {
+    dispatch(setChatConnection(chatConnection))
+    dispatch(setStateConnection(stateConnection))
+  }, [dispatch, stateConnection, chatConnection])
 
   return (
     <div className="app" data-theme={theme}>

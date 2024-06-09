@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import './Message.scss'
 import { useSelector } from 'react-redux'
+import './Message.scss'
 
 function Message({ onClick, className, data, isMainMessage }) {
   const { authorId, text } = data

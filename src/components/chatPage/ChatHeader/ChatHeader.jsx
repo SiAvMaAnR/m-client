@@ -1,9 +1,12 @@
 import moment from 'moment'
+import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import defaultImageMapper from '../../../utils/mappers/defaultImageMapper'
 import config from '../../../config/configuration'
 import { channelType } from '../../../constants/chat'
 import { activityStatus } from '../../../constants/system'
+import MenuIcon from '../../common/Icon/MenuIcon/MenuIcon'
+import SearchIcon from '../../common/Icon/SearchIcon/SearchIcon'
 import './ChatHeader.scss'
 
 function formatLastOnlineAt(lastOnlineAt) {
@@ -50,16 +53,20 @@ function ChatHeader({ className, channel }) {
         </div>
       </div>
 
-      <div className="search">.</div>
+      <div className="search">
+        <SearchIcon className="search-icon" />
+      </div>
 
-      <div className="menu">.</div>
+      <div className="menu">
+        <MenuIcon className="menu-icon" />
+      </div>
     </div>
   )
 }
 
 ChatHeader.defaultProps = {
   className: '',
-  channel: null
+  channel: null,
 }
 
 ChatHeader.propTypes = {
@@ -69,7 +76,8 @@ ChatHeader.propTypes = {
     type: PropTypes.string,
     image: PropTypes.string,
     membersCount: PropTypes.number
-  })
+  }),
+  
 }
 
 export default ChatHeader

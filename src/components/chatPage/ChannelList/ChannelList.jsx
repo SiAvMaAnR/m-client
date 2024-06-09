@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Channel from './Channel/Channel'
 import ChannelFilter from './ChannelFilter/ChannelFilter'
@@ -10,7 +11,9 @@ import api from '../../../api/api'
 import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal'
 import { useDebounce } from '../../../hooks/_exports'
 import { page } from '../../../constants/system'
+import { chatMethod } from '../../../socket/hubHandlers'
 import './ChannelList.scss'
+import { channelType } from '../../../constants/chat'
 
 const defaultPageSize = 15
 
@@ -25,6 +28,28 @@ function ChannelList({ className, selectedChannelId, setSelectedChannelId }) {
   const [activeChannelType, setActiveChannelCount] = useState(null)
   const pageNumberRef = useRef(0)
   const channelListRef = useRef()
+  const chatHub = useSelector((state) => state.signalR.chatHubConnection)
+
+  useEffect(() => {
+    if (chatHub) {
+      const updateChannelsHandler = (curChannels, updatedChannel) => {
+        const prevChannels = curChannels.filter((channel) => channel.id !== updatedChannel.id)
+        return [updatedChannel, ...prevChannels]
+      }
+
+      chatHub.on(chatMethod.channelRes, (updatedChannel) => {
+        if (activeChannelType === null || activeChannelType === updatedChannel.type) {
+          setChannels((curChannels) => updateChannelsHandler(curChannels, updatedChannel))
+        }
+      })
+    }
+
+    return () => {
+      if (chatHub) {
+        chatHub.off(chatMethod.channelRes)
+      }
+    }
+  }, [chatHub, activeChannelType])
 
   const loadChannels = async ({ searchField, pageNumber, pageSize, type }) => {
     try {

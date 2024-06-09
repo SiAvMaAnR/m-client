@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { createRef, useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import api from '../../../api/api'
 import { useDebounce } from '../../../hooks/_exports'
 import Message from './Message/Message'
+import { chatMethod } from '../../../socket/hubHandlers'
 import './MessageList.scss'
 
 const defaultPageSize = 25
@@ -20,13 +22,23 @@ function MessageList({ className, chatId }) {
   const chatHub = useSelector((state) => state.signalR.chatHubConnection)
 
   useEffect(() => {
-    chatHub.on('SendMessageResponse', (data) => {
+    chatHub.on(chatMethod.sendMessageRes, (data) => {
       setMessages((messageList) => [data, ...messageList])
+
+      const { channelId } = data
+
       skipRef.current += 1
+
+      messageListRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+
+      chatHub.invoke(chatMethod.channel, { channelId })
     })
 
     return () => {
-      chatHub.off('SendMessageResponse')
+      chatHub.off(chatMethod.sendMessageRes)
     }
   }, [chatHub])
 
@@ -115,9 +127,18 @@ function MessageList({ className, chatId }) {
   return (
     <div className={`c-message-list ${className}`}>
       <div className="list" onScroll={scrollHandler} ref={messageListRef}>
-        {messages.map((message) => (
-          <Message key={message.id} onClick={() => {}} data={message} />
-        ))}
+        <TransitionGroup component={null}>
+          {messages.map((message) => {
+            const nodeRef = createRef()
+            return (
+              <CSSTransition key={message.id} nodeRef={nodeRef} timeout={100} classNames="message">
+                <div ref={nodeRef}>
+                  <Message key={message.id} onClick={() => {}} data={message} />
+                </div>
+              </CSSTransition>
+            )
+          })}
+        </TransitionGroup>
       </div>
     </div>
   )
