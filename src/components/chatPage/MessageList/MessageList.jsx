@@ -45,6 +45,11 @@ function MessageList({ className, chatId }) {
   const loadMessages = async ({ channelId, pageNumber, pageSize, skip, searchField }) => {
     try {
       setIsLoading(true)
+
+      if (!channelId) {
+        return
+      }
+
       const { data, response } = await api.chat.messages({
         channelId,
         pageNumber,

@@ -13,11 +13,10 @@ import { useDebounce } from '../../../hooks/_exports'
 import { page } from '../../../constants/system'
 import { chatMethod } from '../../../socket/hubHandlers'
 import './ChannelList.scss'
-import { channelType } from '../../../constants/chat'
 
 const defaultPageSize = 15
 
-function ChannelList({ className, selectedChannelId, setSelectedChannelId }) {
+function ChannelList({ className, selectedChannelId }) {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [channels, setChannels] = useState([])
@@ -38,6 +37,7 @@ function ChannelList({ className, selectedChannelId, setSelectedChannelId }) {
       }
 
       chatHub.on(chatMethod.channelRes, (updatedChannel) => {
+        console.log('on', updatedChannel)
         if (activeChannelType === null || activeChannelType === updatedChannel.type) {
           setChannels((curChannels) => updateChannelsHandler(curChannels, updatedChannel))
         }
@@ -169,7 +169,6 @@ function ChannelList({ className, selectedChannelId, setSelectedChannelId }) {
             <Channel
               key={channel.id}
               onClick={() => {
-                setSelectedChannelId(channel.id)
                 navigate(`${page.chat}/${channel.id}`)
               }}
               isActive={+selectedChannelId === channel.id}
@@ -184,14 +183,12 @@ function ChannelList({ className, selectedChannelId, setSelectedChannelId }) {
 
 ChannelList.defaultProps = {
   className: '',
-  selectedChannelId: null,
-  setSelectedChannelId: () => {}
+  selectedChannelId: null
 }
 
 ChannelList.propTypes = {
   className: PropTypes.string,
-  selectedChannelId: PropTypes.number,
-  setSelectedChannelId: PropTypes.func
+  selectedChannelId: PropTypes.number
 }
 
 export default ChannelList

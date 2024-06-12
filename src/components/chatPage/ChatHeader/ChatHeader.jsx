@@ -1,13 +1,12 @@
 import moment from 'moment'
-import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import defaultImageMapper from '../../../utils/mappers/defaultImageMapper'
 import config from '../../../config/configuration'
 import { channelType } from '../../../constants/chat'
-import { activityStatus } from '../../../constants/system'
 import MenuIcon from '../../common/Icon/MenuIcon/MenuIcon'
 import SearchIcon from '../../common/Icon/SearchIcon/SearchIcon'
 import './ChatHeader.scss'
+import { activityStatus } from '../../../constants/system'
 
 function formatLastOnlineAt(lastOnlineAt) {
   if (!lastOnlineAt) {
@@ -22,10 +21,10 @@ function formatLastOnlineAt(lastOnlineAt) {
   return formattedDate
 }
 
-const getActivityStatus = (channelInfo) => {
-  const isOnline = channelInfo.userActivityStatus?.toLowerCase() === activityStatus.online
+export const getActivityStatus = ({ status, lastOnlineAt }) => {
+  const isOnline = status?.toLowerCase() === activityStatus.online
 
-  const result = isOnline ? 'Online now' : formatLastOnlineAt(channelInfo.userLastOnlineAt)
+  const result = isOnline ? 'Online now' : formatLastOnlineAt(lastOnlineAt)
 
   return result
 }
@@ -35,18 +34,21 @@ function ChatHeader({ className, channel }) {
     ? `data:image/jpeg;base64, ${channel.image}`
     : `${config.app.publicPath}/defaultImages/${defaultImageMapper[channel?.type]}.jpg`
 
+  const adaptedChatInfo = getActivityStatus({
+    activityStatus: channel?.userActivityStatus,
+    lastOnlineAt: channel?.userLastOnlineAt
+  })
+
   return (
     <div className={`c-chat-header ${className}`}>
-      <div className="image">
-        <img src={imageSrc} alt="channel-img" />
-      </div>
+      <div className="image">{channel && <img src={imageSrc} alt="channel-img" />}</div>
 
       <div className="info">
         <div className="channel-name">{channel?.name}</div>
 
         <div className="additional-info">
           {channel?.type === channelType.direct ? (
-            <div className="status-info">{getActivityStatus(channel)}</div>
+            <div className="status-info">{adaptedChatInfo}</div>
           ) : (
             <div className="members-count">{channel?.membersCount} members</div>
           )}
@@ -66,7 +68,7 @@ function ChatHeader({ className, channel }) {
 
 ChatHeader.defaultProps = {
   className: '',
-  channel: null,
+  channel: null
 }
 
 ChatHeader.propTypes = {
@@ -75,9 +77,10 @@ ChatHeader.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string,
     image: PropTypes.string,
-    membersCount: PropTypes.number
-  }),
-  
+    membersCount: PropTypes.number,
+    userActivityStatus: PropTypes.string,
+    userLastOnlineAt: PropTypes.string
+  })
 }
 
 export default ChatHeader

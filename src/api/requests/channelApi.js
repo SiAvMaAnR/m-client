@@ -42,6 +42,12 @@ const channelApi = {
   accountChannel: async ({ id }) => {
     const response = await axiosInstance.get(`${path}/account-channels/${id}`)
     return response
+  },
+
+  setUpDirectChannel: async ({ partnerId }) => {
+    const body = { partnerId }
+    const response = await axiosInstance.post(`${path}/setup-direct`, body)
+    return response
   }
 }
 

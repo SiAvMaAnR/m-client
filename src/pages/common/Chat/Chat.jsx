@@ -13,7 +13,6 @@ function Chat() {
   const [selectedChannelId, setSelectedChannelId] = useState(id)
   const [selectedChannel, setSelectedChannel] = useState(null)
   const chatTransitionRef = useRef()
-
   const loadChannel = async (channelId) => {
     const result = await api.channel.accountChannel({ id: channelId })
 
@@ -23,8 +22,14 @@ function Chat() {
   useEffect(() => {
     if (selectedChannelId) {
       loadChannel(selectedChannelId)
+    } else {
+      setSelectedChannel(null)
     }
   }, [selectedChannelId])
+
+  useEffect(() => {
+    setSelectedChannelId(id)
+  }, [id])
 
   return (
     <div className="p-chat">
@@ -39,7 +44,7 @@ function Chat() {
           classNames="chat"
           in={!!selectedChannel}
           nodeRef={chatTransitionRef}
-          timeout={300}
+          timeout={100}
           unmountOnExit
         >
           <div ref={chatTransitionRef} className="chat">

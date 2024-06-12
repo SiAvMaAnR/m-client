@@ -51,7 +51,7 @@ function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel
       if (!data || response?.data?.errors) {
         throw new Error('Something went wrong')
       }
-      
+
       if (data.isSuccess) {
         setIsActive(false)
         onCreatedChannel()
@@ -118,7 +118,7 @@ function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel
   }, [debouncedUserSearch, refreshUsers])
 
   useEffect(() => {
-    if(!isActive){
+    if (!isActive) {
       setChannelName('')
       setSelectedUserIds(new Set())
     }
@@ -209,6 +209,7 @@ function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel
                 userInfo={user}
                 isChecked={selectedUserIds.has(user.id)}
                 onToggle={toggleUserSelection}
+                setIsActive={setIsActive}
               />
             ))}
           </div>
@@ -246,14 +247,14 @@ CreateChannelModal.defaultProps = {
   className: '',
   isActive: false,
   setIsActive: () => {},
-  onCreatedChannel: () => {}
+  onCreatedChannel: () => {},
 }
 
 CreateChannelModal.propTypes = {
   className: PropTypes.string,
   isActive: PropTypes.bool,
   setIsActive: PropTypes.func,
-  onCreatedChannel: PropTypes.func
+  onCreatedChannel: PropTypes.func,
 }
 
 export default CreateChannelModal

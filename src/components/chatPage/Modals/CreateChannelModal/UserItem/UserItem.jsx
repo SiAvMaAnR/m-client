@@ -1,27 +1,44 @@
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 import config from '../../../../../config/configuration'
-import { activityStatus } from '../../../../../constants/system'
+import { activityStatus, page } from '../../../../../constants/system'
 import { RoundCheckbox } from '../../../../_exports'
 import ArrowIcon from '../../../../common/Icon/ArrowIcon/ArrowIcon'
+import api from '../../../../../api/api'
 import './UserItem.scss'
+import { getActivityStatus } from '../../../ChatHeader/ChatHeader'
 
-function UserItem({ className, userInfo, isChecked, onToggle }) {
+function UserItem({ className, userInfo, isChecked, onToggle, setIsActive }) {
+  const navigate = useNavigate()
   const { id, login, activityStatus: status, isBanned, image } = userInfo
   const statusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
   const bannedClass = isBanned ? 'yes' : ''
 
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
+    : `${config.app.publicPath}/defaultImages/direct-channel.jpg`
 
   const onClickHandler = () => {
     onToggle(id)
   }
 
-  const onClickDirectHandler = (event) => {
+  const onClickDirectHandler = async (event) => {
     event.stopPropagation()
-    // go to direct
+
+    const { data: chatId } = await api.channel.setUpDirectChannel({
+      partnerId: id
+    })
+
+    if (chatId) {
+      navigate(`${page.chat}/${chatId}`)
+      setIsActive(false)
+    }
   }
+
+  const adaptedActivityStatus = getActivityStatus({
+    status: userInfo.activityStatus,
+    lastOnlineAt: userInfo.lastOnlineAt
+  })
 
   return (
     <div
@@ -37,7 +54,10 @@ function UserItem({ className, userInfo, isChecked, onToggle }) {
         <img src={imageSrc} alt="user-img" />
       </div>
 
-      <div id="login">{login}</div>
+      <div className="user-info">
+        <div id="login">{login}</div>
+        <div id="activity">{adaptedActivityStatus}</div>
+      </div>
 
       <div className="direct" onClick={onClickDirectHandler} role="presentation">
         <ArrowIcon className="arrow-icon" />
@@ -50,7 +70,8 @@ UserItem.defaultProps = {
   className: '',
   userInfo: null,
   isChecked: false,
-  onToggle: () => {}
+  onToggle: () => {},
+  setIsActive: () => {}
 }
 
 UserItem.propTypes = {
@@ -62,10 +83,12 @@ UserItem.propTypes = {
     role: PropTypes.string,
     image: PropTypes.string,
     activityStatus: PropTypes.string,
+    lastOnlineAt: PropTypes.string,
     isBanned: PropTypes.bool
   }),
   isChecked: PropTypes.bool,
-  onToggle: PropTypes.func
+  onToggle: PropTypes.func,
+  setIsActive: PropTypes.func
 }
 
 export default UserItem
