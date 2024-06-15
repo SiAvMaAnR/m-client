@@ -13,6 +13,7 @@ function Chat() {
   const [selectedChannelId, setSelectedChannelId] = useState(id)
   const [selectedChannel, setSelectedChannel] = useState(null)
   const chatTransitionRef = useRef()
+  
   const loadChannel = async (channelId) => {
     const result = await api.channel.accountChannel({ id: channelId })
 

@@ -2,8 +2,9 @@
     height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: stretch;
+    justify-content: stretch;
 
     .list {
         margin: 5px;
@@ -11,10 +12,17 @@
         padding: 40px 25%;
         display: flex;
         flex-direction: column-reverse;
-        gap: 3px;
-        overflow-y: scroll;
         overflow-x: hidden;
         scroll-behavior: smooth;
+
+        .infinity-scroll {
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: stretch;
+            align-items: stretch;
+            gap: 3px;
+
+        }
 
         &::-webkit-scrollbar {
             width: 3px;
@@ -26,24 +34,6 @@
 
         &::-webkit-scrollbar-thumb {
             background: var(--font-color-primary-0);
-        }
-
-        .message-enter {
-            opacity: 0;
-        }
-
-        .message-enter-active {
-            opacity: 1;
-            transition: all 0.1s ease-out;
-        }
-
-        .message-exit {
-            opacity: 1;
-        }
-
-        .message-exit-active {
-            opacity: 0;
-            transition: all 0.1s ease-out;
         }
     }
 }

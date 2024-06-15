@@ -1,6 +1,6 @@
+import InfiniteScroll from 'react-infinite-scroll-component'
 import PropTypes from 'prop-types'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { createRef, useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import api from '../../../api/api'
 import { useDebounce } from '../../../hooks/_exports'
@@ -8,11 +8,11 @@ import Message from './Message/Message'
 import { chatMethod } from '../../../socket/hubHandlers'
 import './MessageList.scss'
 
-const defaultPageSize = 25
+const defaultPageSize = 30
 
 function MessageList({ className, chatId }) {
   const [messages, setMessages] = useState([])
-  const [pagesCount, setPagesCount] = useState(0)
+  const [hasMore, setHasMore] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   const [searchMessage, setSearchMessage] = useState('')
   const debouncedSearchMessage = useDebounce(searchMessage, 500)
@@ -28,7 +28,6 @@ function MessageList({ className, chatId }) {
       const { channelId } = data
 
       skipRef.current += 1
-
       messageListRef.current.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -72,23 +71,16 @@ function MessageList({ className, chatId }) {
         setMessages((prevMessages) => [...prevMessages, ...(data.messages || [])])
       }
 
-      setPagesCount(data.meta.pagesCount)
+      setHasMore(pageNumberRef.current < data.meta.pagesCount - 1)
     } finally {
       setIsLoading(false)
     }
   }
 
   const refreshMessages = useCallback(
-    (search, isSmoothScroll) => {
-      const scrollBehavior = isSmoothScroll ? 'smooth' : 'auto'
-
+    (search) => {
       pageNumberRef.current = 0
       skipRef.current = 0
-
-      messageListRef.current.scrollTo({
-        top: 0,
-        behavior: scrollBehavior
-      })
 
       loadMessages({
         channelId: chatId,
@@ -109,41 +101,35 @@ function MessageList({ className, chatId }) {
     refreshMessages(debouncedSearchMessage)
   }, [debouncedSearchMessage, refreshMessages])
 
-  const scrollHandler = (event) => {
-    if (!isLoading && pageNumberRef.current < pagesCount - 1) {
-      const { scrollHeight, scrollTop } = event.target
-      const targetHeight = event.target.getBoundingClientRect().height
-
-      const isNeedUpdate = scrollHeight - (scrollTop + targetHeight) < 100
-
-      if (isNeedUpdate) {
-        pageNumberRef.current += 1
-        loadMessages({
-          channelId: chatId,
-          pageNumber: pageNumberRef.current,
-          pageSize: defaultPageSize,
-          searchField: debouncedSearchMessage,
-          skip: skipRef.current
-        })
-      }
+  const fetchMoreMessages = () => {
+    if (!isLoading) {
+      pageNumberRef.current += 1
+      loadMessages({
+        channelId: chatId,
+        pageNumber: pageNumberRef.current,
+        pageSize: defaultPageSize,
+        searchField: debouncedSearchMessage,
+        skip: skipRef.current
+      })
     }
   }
 
   return (
     <div className={`c-message-list ${className}`}>
-      <div className="list" onScroll={scrollHandler} ref={messageListRef}>
-        <TransitionGroup component={null}>
-          {messages.map((message) => {
-            const nodeRef = createRef()
-            return (
-              <CSSTransition key={message.id} nodeRef={nodeRef} timeout={100} classNames="message">
-                <div ref={nodeRef}>
-                  <Message key={message.id} onClick={() => {}} data={message} />
-                </div>
-              </CSSTransition>
-            )
-          })}
-        </TransitionGroup>
+      <div className="list" id="scrollableDiv" ref={messageListRef}>
+        <InfiniteScroll
+          className="infinity-scroll"
+          dataLength={messages.length}
+          next={fetchMoreMessages}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          scrollableTarget="scrollableDiv"
+          inverse
+        >
+          {messages.map((message) => (
+            <Message key={message.id} data={message} />
+          ))}
+        </InfiniteScroll>
       </div>
     </div>
   )
