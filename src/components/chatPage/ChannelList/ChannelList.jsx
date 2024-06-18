@@ -37,7 +37,6 @@ function ChannelList({ className, selectedChannelId }) {
       }
 
       chatHub.on(chatMethod.channelRes, (updatedChannel) => {
-        console.log('on', updatedChannel)
         if (activeChannelType === null || activeChannelType === updatedChannel.type) {
           setChannels((curChannels) => updateChannelsHandler(curChannels, updatedChannel))
         }

@@ -26,6 +26,7 @@ function Chat() {
     } else {
       setSelectedChannel(null)
     }
+
   }, [selectedChannelId])
 
   useEffect(() => {

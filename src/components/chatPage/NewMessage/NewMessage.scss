@@ -1,11 +1,11 @@
 .c-new-message {
-    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 60px;
+    align-items: end;
+    gap: 45px;
     padding: 0 20%;
+    margin-bottom: 30px;
 
     .attachments {
         user-select: none;
@@ -13,10 +13,9 @@
 
     .message-input {
         border: solid 1px var(--border-color);
-        border-radius: 30px;
-        height: 48px;
-        width: 500px;
-        padding: 5px 25px;
+        border-radius: 25px;
+        width: 460px;
+        padding: 12px 12px;
         background: var(--background-color-1);
         display: flex;
         align-items: center;
@@ -26,8 +25,11 @@
             border-color: var(--border-color-1);
         }
 
-        input {
-            height: 100%;
+        textarea {
+            padding: 3px 15px;
+            max-height: 70px;
+            overflow-y: auto;
+            overflow-x: hidden;
             width: 100%;
             border: none;
             outline: none;
@@ -35,6 +37,19 @@
             background: transparent;
             font-family: 'Roboto', sans-serif;
             resize: none;
+            white-space: pre-line;
+
+            &::-webkit-scrollbar {
+                width: 2px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: var(--font-color-primary-0);
+            }
         }
     }
 

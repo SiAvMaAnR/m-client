@@ -5,6 +5,26 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: stretch;
+    position: relative;
+
+    .loader {
+        width: 100%;
+        height: 80px;
+        display: grid;
+        place-items: center;
+        position: absolute;
+        top: 0px;
+        left: 0; 
+        right: 0; 
+        svg {
+            width: 80px;
+            height: 80px;
+
+            circle {
+                fill: var(--font-color-primary-0);
+            }
+        }
+    }
 
     .list {
         margin: 5px;
@@ -13,15 +33,13 @@
         display: flex;
         flex-direction: column-reverse;
         overflow-x: hidden;
-        scroll-behavior: smooth;
 
         .infinity-scroll {
             display: flex;
             flex-direction: column-reverse;
             justify-content: stretch;
             align-items: stretch;
-            gap: 3px;
-
+            gap: 12px;
         }
 
         &::-webkit-scrollbar {

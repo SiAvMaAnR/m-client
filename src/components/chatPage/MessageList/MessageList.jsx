@@ -6,6 +6,7 @@ import api from '../../../api/api'
 import { useDebounce } from '../../../hooks/_exports'
 import Message from './Message/Message'
 import { chatMethod } from '../../../socket/hubHandlers'
+import Loader1 from '../../common/Loader/Loader1/Loader1'
 import './MessageList.scss'
 
 const defaultPageSize = 30
@@ -15,6 +16,7 @@ function MessageList({ className, chatId }) {
   const [hasMore, setHasMore] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   const [searchMessage, setSearchMessage] = useState('')
+  const [memberImages, setMemberImages] = useState([])
   const debouncedSearchMessage = useDebounce(searchMessage, 500)
   const skipRef = useRef(0)
   const pageNumberRef = useRef(0)
@@ -28,10 +30,13 @@ function MessageList({ className, chatId }) {
       const { channelId } = data
 
       skipRef.current += 1
-      messageListRef.current.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
+
+      setTimeout(() => {
+        messageListRef.current.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })
+      }, 100)
 
       chatHub.invoke(chatMethod.channel, { channelId })
     })
@@ -40,6 +45,18 @@ function MessageList({ className, chatId }) {
       chatHub.off(chatMethod.sendMessageRes)
     }
   }, [chatHub])
+
+  useEffect(() => {
+    messageListRef.current.scrollTo({
+      top: 0
+    })
+  }, [chatId])
+
+  useEffect(() => {
+    api.channel.memberImages({ channelId: chatId }).then(({ data }) => {
+      setMemberImages(data?.memberImages || [])
+    })
+  }, [chatId])
 
   const loadMessages = async ({ channelId, pageNumber, pageSize, skip, searchField }) => {
     try {
@@ -104,6 +121,7 @@ function MessageList({ className, chatId }) {
   const fetchMoreMessages = () => {
     if (!isLoading) {
       pageNumberRef.current += 1
+
       loadMessages({
         channelId: chatId,
         pageNumber: pageNumberRef.current,
@@ -122,12 +140,16 @@ function MessageList({ className, chatId }) {
           dataLength={messages.length}
           next={fetchMoreMessages}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
+          loader={<Loader1 className="loader" />}
           scrollableTarget="scrollableDiv"
           inverse
         >
           {messages.map((message) => (
-            <Message key={message.id} data={message} />
+            <Message
+              key={message.id}
+              data={message}
+              image={memberImages.find((member) => member.id === message.authorId)?.image}
+            />
           ))}
         </InfiniteScroll>
       </div>

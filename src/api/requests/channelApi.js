@@ -48,6 +48,13 @@ const channelApi = {
     const body = { partnerId }
     const response = await axiosInstance.post(`${path}/setup-direct`, body)
     return response
+  },
+
+  memberImages: async ({ channelId }) => {
+    const params = [`channelId=${channelId}`]
+
+    const response = await axiosInstance.get(`${path}/member-images?${params.join('&')}`)
+    return response
   }
 }
 

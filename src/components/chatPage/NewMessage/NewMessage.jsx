@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import SendIcon from '../../common/Icon/SendIcon/SendIcon'
@@ -10,6 +10,7 @@ function NewMessage({ className, channelId }) {
   const [isFocused, setIsFocused] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
   const chatHub = useSelector((state) => state.signalR.chatHubConnection)
+  const textareaRef = useRef(null)
 
   const sendMessageHandler = () => {
     if (channelId && message) {
@@ -27,8 +28,9 @@ function NewMessage({ className, channelId }) {
     }
   }
 
-  const sendMessageKeyDownHandler = (event) => {
-    if (event.key === 'Enter') {
+  const onKeyDownHandler = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault()
       sendMessageHandler()
     }
   }
@@ -41,17 +43,31 @@ function NewMessage({ className, channelId }) {
     setIsFocused(false)
   }
 
+  const autoResize = () => {
+    textareaRef.current.style.height = 'auto'
+    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+  }
+
+  useEffect(() => {
+    autoResize()
+  }, [message])
+
   return (
     <div className={`c-new-message ${className}`}>
-      <div className="attachments">{}</div>
+
+      {/* temp send btn class ============================================================================= */}
+      <div className="attachments send-btn">
+        <SendIcon />
+      </div>
       <div className={`message-input ${isFocused ? 'focused' : ''}`}>
-        <input
-          type="text"
+        <textarea
+          ref={textareaRef}
+          rows={1}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={(e) => setMessage(e.target.value)}
           value={message}
-          onKeyDown={sendMessageKeyDownHandler}
+          onKeyDown={onKeyDownHandler}
           placeholder="Enter message"
           required
         />

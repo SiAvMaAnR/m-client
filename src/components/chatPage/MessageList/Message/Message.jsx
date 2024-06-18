@@ -1,11 +1,19 @@
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
+import moment from 'moment'
+import config from '../../../../config/configuration'
 import './Message.scss'
 
-function Message({ onClick, className, data, isMainMessage }) {
-  const { authorId, text } = data
+function Message({ onClick, className, data, image }) {
+  const { authorId, authorLogin, text, createdAt } = data
   const userId = useSelector((state) => state.auth.info.id)
   const myMessageClass = +userId === +authorId ? 'my-message' : ''
+
+  const imageSrc = image
+    ? `data:image/jpeg;base64, ${image}`
+    : `${config.app.publicPath}/defaultImages/direct-channel.jpg`
+
+  const formattedDate = moment(createdAt).format('HH:mm')
 
   return (
     <div
@@ -13,9 +21,19 @@ function Message({ onClick, className, data, isMainMessage }) {
       onClick={onClick}
       role="presentation"
     >
+      <div className="author-img">
+        <img src={imageSrc} alt="user-img" />
+      </div>
+
       <div className="data-wrapper">
-        <div className="author-img">{}</div>
-        <div className="message-text">{text}</div>
+        <div className="message-header">
+          <div className="message-author">{authorLogin}</div>
+          <div className="message-time">{formattedDate}</div>
+        </div>
+
+        <div className="message-content">
+          <div className="message-text">{text}</div>
+        </div>
       </div>
     </div>
   )
@@ -25,7 +43,7 @@ Message.defaultProps = {
   onClick: () => {},
   className: '',
   data: null,
-  isMainMessage: true
+  image: null
 }
 
 Message.propTypes = {
@@ -34,9 +52,11 @@ Message.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number,
     text: PropTypes.string,
-    authorId: PropTypes.number
+    authorId: PropTypes.number,
+    authorLogin: PropTypes.string,
+    createdAt: PropTypes.string
   }),
-  isMainMessage: PropTypes.bool
+  image: PropTypes.string
 }
 
 export default Message
