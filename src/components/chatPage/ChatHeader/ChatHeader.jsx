@@ -50,7 +50,7 @@ function ChatHeader({ className, channel }) {
           {channel?.type === channelType.direct ? (
             <div className="status-info">{adaptedChatInfo}</div>
           ) : (
-            <div className="members-count">{channel?.membersCount} members</div>
+            <div className="members-count">Members: {channel?.membersCount}</div>
           )}
         </div>
       </div>

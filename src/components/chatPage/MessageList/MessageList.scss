@@ -14,8 +14,9 @@
         place-items: center;
         position: absolute;
         top: 0px;
-        left: 0; 
-        right: 0; 
+        left: 0;
+        right: 0;
+
         svg {
             width: 80px;
             height: 80px;
@@ -39,7 +40,40 @@
             flex-direction: column-reverse;
             justify-content: stretch;
             align-items: stretch;
-            gap: 12px;
+
+            .group-date {
+                display: flex;
+                flex-direction: column-reverse;
+                justify-content: stretch;
+                align-items: stretch;
+                gap: 25px;
+
+                .messages-date-wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 20px;
+
+                    &:before,
+                    &:after {
+                        content: '';
+                        flex: 1;
+                        border-bottom: solid 1px var(--border-color);
+                        margin: auto 10px;
+                    }
+
+                    .messages-date {
+                        border: solid 1px var(--border-color);
+                        border-radius: 18px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 13px;
+                        font-family: 'Montserrat', sans-serif;
+                        padding: 5px 8px;
+                    }
+                }
+            }
         }
 
         &::-webkit-scrollbar {

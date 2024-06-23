@@ -3,12 +3,30 @@
     display: flex;
     justify-content: center;
     align-items: end;
-    gap: 45px;
+    gap: 50px;
     padding: 0 20%;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 
     .attachments {
+        min-height: 50px;
+        min-width: 50px;
+        border: solid 1px var(--border-color);
+        border-radius: 50%;
+        background: var(--background-color-1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: grid;
+        place-items: center;
         user-select: none;
+
+        &:hover {
+            border-color: var(--common-color-0);
+        }
+
+        svg {
+            height: 40px;
+            width: 40px;
+        }
     }
 
     .message-input {
@@ -22,7 +40,7 @@
         transition: all 0.3s ease;
 
         &.focused {
-            border-color: var(--border-color-1);
+            border-color: var(--common-color-0);
         }
 
         textarea {
@@ -56,10 +74,9 @@
     .send-btn {
         min-height: 50px;
         min-width: 50px;
-        border: none;
+        border: solid 1px transparent;
         border-radius: 50%;
-        background: var(--font-color-primary-0);
-        color: white;
+        background: var(--common-color-0);
         cursor: pointer;
         transition: all 0.3s ease;
         display: grid;
@@ -67,7 +84,7 @@
         user-select: none;
 
         &:hover {
-            opacity: 0.9;
+            opacity: 0.8;
         }
     }
 }

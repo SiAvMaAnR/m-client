@@ -6,7 +6,7 @@
     justify-content: stretch;
     align-items: center;
     padding: 0 25px;
-    gap: 4px;
+    gap: 16px;
 
     .image {
         flex: 0 0 90px;
@@ -30,7 +30,7 @@
         flex-direction: column;
         align-items: stretch;
         justify-content: center;
-        gap: 3px;
+        gap: 4px;
         user-select: none;
         padding-bottom: 4px;
 
@@ -38,6 +38,7 @@
             font-size: 18px;
             font-family: 'Roboto', sans-serif;
             font-weight: 500;
+            color: var(--common-color-0);
         }
 
         .additional-info {

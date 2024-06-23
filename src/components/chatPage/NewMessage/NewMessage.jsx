@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import SendIcon from '../../common/Icon/SendIcon/SendIcon'
+import AttachmentIcon from '../../common/Icon/AttachmentIcon/AttachmentIcon'
 import { chatMethod } from '../../../socket/hubHandlers'
 import './NewMessage.scss'
 
@@ -17,7 +18,7 @@ function NewMessage({ className, channelId }) {
       chatHub
         .invoke(chatMethod.sendMessage, {
           channelId,
-          message
+          message: message.trim()
         })
         .catch((err) => {
           setErrorMessage(err.message)
@@ -54,11 +55,10 @@ function NewMessage({ className, channelId }) {
 
   return (
     <div className={`c-new-message ${className}`}>
-
-      {/* temp send btn class ============================================================================= */}
-      <div className="attachments send-btn">
-        <SendIcon />
+      <div className="attachments">
+        <AttachmentIcon />
       </div>
+
       <div className={`message-input ${isFocused ? 'focused' : ''}`}>
         <textarea
           ref={textareaRef}
@@ -72,6 +72,7 @@ function NewMessage({ className, channelId }) {
           required
         />
       </div>
+
       <div className="send-btn" onClick={sendMessageHandler} role="presentation">
         <SendIcon />
       </div>

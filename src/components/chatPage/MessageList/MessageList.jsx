@@ -4,15 +4,17 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import api from '../../../api/api'
 import { useDebounce } from '../../../hooks/_exports'
-import Message from './Message/Message'
 import { chatMethod } from '../../../socket/hubHandlers'
 import Loader1 from '../../common/Loader/Loader1/Loader1'
+import MessageGroup from './MessageGroup/MessageGroup'
+import groupMessages from './helpers/groupMessages'
 import './MessageList.scss'
 
 const defaultPageSize = 30
 
 function MessageList({ className, chatId }) {
   const [messages, setMessages] = useState([])
+  const [groupedMessages, setGroupedMessages] = useState([])
   const [hasMore, setHasMore] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   const [searchMessage, setSearchMessage] = useState('')
@@ -132,6 +134,11 @@ function MessageList({ className, chatId }) {
     }
   }
 
+  useEffect(() => {
+    const groupedMessageList = groupMessages(messages, memberImages)
+    setGroupedMessages(groupedMessageList)
+  }, [messages, memberImages])
+
   return (
     <div className={`c-message-list ${className}`}>
       <div className="list" id="scrollableDiv" ref={messageListRef}>
@@ -144,13 +151,21 @@ function MessageList({ className, chatId }) {
           scrollableTarget="scrollableDiv"
           inverse
         >
-          {messages.map((message) => (
-            <Message
-              key={message.id}
-              data={message}
-              image={memberImages.find((member) => member.id === message.authorId)?.image}
-            />
-          ))}
+          {groupedMessages.map((groupsInfo) => {
+            const [groupDate, groups] = groupsInfo
+
+            return (
+              <div key={groupDate} className="group-date">
+                {groups.map((group) => (
+                  <MessageGroup key={group.id} group={group} />
+                ))}
+
+                <div className="messages-date-wrapper">
+                  <div className="messages-date">{groupDate}</div>
+                </div>
+              </div>
+            )
+          })}
         </InfiniteScroll>
       </div>
     </div>
