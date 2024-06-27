@@ -17,6 +17,7 @@
 
 .app[data-theme='dark'] {
   --common-color-0: #{$c-dark-primary-4};
+  --common-color-1: #{$c-dark-neutral-4};
   --background-color: #{$c-dark-neutral-0};
   --background-color-1: #{$c-dark-neutral-2};
   --background-color-2: #{$c-purple-0};
@@ -87,6 +88,7 @@
 
 .app[data-theme='light'] {
   --common-color-0: #{$c-light-primary-4};
+  --common-color-1: #{$c-light-neutral-4};
   --background-color: #{$c-light-neutral-0};
   --background-color-1: #{$c-light-neutral-2};
   --background-color-2: #{$c-purple-0};

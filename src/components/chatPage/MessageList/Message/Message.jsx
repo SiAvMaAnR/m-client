@@ -1,11 +1,34 @@
 import PropTypes from 'prop-types'
+import { useEffect, useRef } from 'react'
 import './Message.scss'
 
-function Message({ onClick, className, message }) {
-  const { text } = message
+function Message({ onClick, className, message, observerRef }) {
+  const messageRef = useRef(null)
+  const { id, text } = message
+
+  useEffect(() => {
+    const currentObserver = observerRef.current
+    const currentMessage = messageRef.current
+
+    if (currentMessage && currentObserver) {
+      currentObserver.observe(currentMessage)
+    }
+
+    return () => {
+      if (currentMessage && currentObserver) {
+        currentObserver.unobserve(currentMessage)
+      }
+    }
+  }, [observerRef])
 
   return (
-    <div className={`c-message ${className}`} onClick={onClick} role="presentation">
+    <div
+      ref={messageRef}
+      data-id={id}
+      className={`c-message ${className}`}
+      onClick={onClick}
+      role="presentation"
+    >
       <div className="message-text">{text}</div>
     </div>
   )
@@ -14,7 +37,8 @@ function Message({ onClick, className, message }) {
 Message.defaultProps = {
   onClick: () => {},
   className: '',
-  message: null
+  message: null,
+  observerRef: null
 }
 
 Message.propTypes = {
@@ -23,6 +47,9 @@ Message.propTypes = {
   message: PropTypes.shape({
     id: PropTypes.number,
     text: PropTypes.string
+  }),
+  observerRef: PropTypes.shape({
+    current: PropTypes.instanceOf(IntersectionObserver)
   })
 }
 

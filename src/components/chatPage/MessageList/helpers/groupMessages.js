@@ -9,6 +9,7 @@ function groupMessages(messages, memberImages) {
     if (
       lastGroup?.messages &&
       lastGroup.authorId === message.authorId &&
+      lastGroup.isRead === message.isRead &&
       new Date(message.createdAt).getMinutes() === new Date(lastGroup.createdAt).getMinutes()
     ) {
       lastGroup.messages.unshift(message)
@@ -18,6 +19,7 @@ function groupMessages(messages, memberImages) {
         authorLogin: message.authorLogin,
         authorId: message.authorId,
         createdAt: message.createdAt,
+        isRead: message.isRead,
         image: memberImages.find((member) => member.id === message.authorId)?.image,
         messages: [message]
       })
