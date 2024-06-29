@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import config from '../../../../config/configuration'
@@ -6,9 +6,9 @@ import defaultImageMapper from '../../../../utils/mappers/defaultImageMapper'
 import './Channel.scss'
 
 function Channel({ onClick, isActive, className, data }) {
-  const [counter, setCounter] = useState(99)
+  const [counter, setCounter] = useState(0)
 
-  const { image, lastMessage, name, lastActivity, type } = data
+  const { image, lastMessage, name, lastActivity, type, unreadMessagesCount } = data
 
   const date = moment(lastActivity)
 
@@ -21,6 +21,10 @@ function Channel({ onClick, isActive, className, data }) {
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
     : `${config.app.publicPath}/defaultImages/${defaultImageMapper[type]}.jpg`
+
+  useEffect(() => {
+    setCounter(unreadMessagesCount)
+  }, [unreadMessagesCount])
 
   return (
     <div
@@ -48,9 +52,11 @@ function Channel({ onClick, isActive, className, data }) {
                 </b>
                 <span>{lastMessage.content}</span>
               </div>
-              <div className="counter">
-                <div>{counter}</div>
-              </div>
+              {!!counter && (
+                <div className="counter">
+                  <div>{counter}</div>
+                </div>
+              )}
             </>
           )}
         </div>
@@ -77,7 +83,8 @@ Channel.propTypes = {
     }),
     name: PropTypes.string,
     lastActivity: PropTypes.string,
-    type: PropTypes.string
+    type: PropTypes.string,
+    unreadMessagesCount: PropTypes.number
   }),
   isActive: PropTypes.bool
 }

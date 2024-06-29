@@ -10,7 +10,7 @@
     .attachments {
         min-height: 50px;
         min-width: 50px;
-        border: solid 1px var(--border-color);
+        border: solid 2px var(--font-color-primary-0);
         border-radius: 50%;
         background: var(--background-color-1);
         cursor: pointer;
@@ -20,12 +20,23 @@
         user-select: none;
 
         &:hover {
-            border-color: var(--common-color-0);
+            background: var(--font-color-primary-0);
+
+            svg {
+                path {
+                    stroke: var(--font-color-primary-2);
+                }
+            }
         }
 
         svg {
             height: 40px;
             width: 40px;
+
+            path {
+                transition: all 0.3s ease;
+                stroke: var(--font-color-primary-0);
+            }
         }
     }
 
@@ -84,7 +95,7 @@
         user-select: none;
 
         &:hover {
-            opacity: 0.8;
+            opacity: 0.7;
         }
     }
 }

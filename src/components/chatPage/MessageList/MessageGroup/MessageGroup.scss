@@ -48,6 +48,7 @@
             height: 45px;
             object-fit: cover;
             border-radius: 50%;
+            cursor: pointer;
         }
     }
 
@@ -68,6 +69,12 @@
                 font-family: 'Roboto', sans-serif;
                 font-weight: 600;
                 white-space: nowrap;
+                cursor: pointer;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: var(--common-color-0);
+                }
             }
 
             .group-time {

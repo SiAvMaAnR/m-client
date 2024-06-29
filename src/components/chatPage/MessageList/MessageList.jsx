@@ -4,14 +4,22 @@ import moment from 'moment'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import api from '../../../api/api'
-import { useDebounce } from '../../../hooks/_exports'
+import { useDebounce, useKeyDown } from '../../../hooks/_exports'
 import { chatMethod } from '../../../socket/hubHandlers'
 import Loader1 from '../../common/Loader/Loader1/Loader1'
 import MessageGroup from './MessageGroup/MessageGroup'
 import groupMessages from './helpers/groupMessages'
+import MessagesScrollToEnd from './MessagesScrollToEnd/MessagesScrollToEnd'
 import './MessageList.scss'
 
 const defaultPageSize = 30
+
+function scrollToEnd(element, isSmooth) {
+  element.scrollTo({
+    top: 0,
+    behavior: isSmooth ? 'smooth' : 'auto'
+  })
+}
 
 function MessageList({ className, chatId }) {
   const [messages, setMessages] = useState([])
@@ -20,6 +28,7 @@ function MessageList({ className, chatId }) {
   const [isLoading, setIsLoading] = useState(false)
   const [searchMessage, setSearchMessage] = useState('')
   const [memberImages, setMemberImages] = useState([])
+  const [isShowFastScroll, setIsShowFastScroll] = useState(false)
   const debouncedSearchMessage = useDebounce(searchMessage, 500)
   const skipRef = useRef(0)
   const pageNumberRef = useRef(0)
@@ -46,12 +55,7 @@ function MessageList({ className, chatId }) {
         skipRef.current += 1
 
         if (messageListRef.current.scrollTop > -800) {
-          setTimeout(() => {
-            messageListRef.current.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            })
-          }, 100)
+          setTimeout(() => scrollToEnd(messageListRef.current, true), 100)
         }
       }
     })
@@ -100,11 +104,7 @@ function MessageList({ className, chatId }) {
     }
   }, [])
 
-  useEffect(() => {
-    messageListRef.current.scrollTo({
-      top: 0
-    })
-  }, [chatId])
+  useEffect(() => scrollToEnd(messageListRef.current), [chatId])
 
   useEffect(() => {
     api.channel.memberImages({ channelId: chatId }).then(({ data }) => {
@@ -191,8 +191,28 @@ function MessageList({ className, chatId }) {
     setGroupedMessages(groupedMessageList)
   }, [messages, memberImages])
 
+  const onScrollHandler = () => {
+    setIsShowFastScroll(messageListRef.current.scrollTop < -800)
+  }
+
+  useKeyDown(
+    (event) => {
+      event.preventDefault()
+      if (event.ctrlKey) {
+        scrollToEnd(messageListRef.current, true)
+      }
+    },
+    ['Q', 'q']
+  )
+
   return (
     <div className={`c-message-list ${className}`}>
+      <MessagesScrollToEnd
+        className="messages-scroll"
+        isVisible={isShowFastScroll}
+        onClick={() => scrollToEnd(messageListRef.current, true)}
+      />
+
       <div className="list" id="scrollableDiv" ref={messageListRef}>
         <InfiniteScroll
           className="infinity-scroll"
@@ -201,6 +221,7 @@ function MessageList({ className, chatId }) {
           hasMore={hasMore}
           loader={<Loader1 className="loader" />}
           scrollableTarget="scrollableDiv"
+          onScroll={onScrollHandler}
           inverse
         >
           {groupedMessages.map((groupsInfo) => {
