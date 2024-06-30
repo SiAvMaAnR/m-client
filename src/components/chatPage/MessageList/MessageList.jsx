@@ -104,7 +104,10 @@ function MessageList({ className, chatId }) {
     }
   }, [])
 
-  useEffect(() => scrollToEnd(messageListRef.current), [chatId])
+  useEffect(() => {
+    scrollToEnd(messageListRef.current)
+    setLastVisibleMessage(null)
+  }, [chatId])
 
   useEffect(() => {
     api.channel.memberImages({ channelId: chatId }).then(({ data }) => {

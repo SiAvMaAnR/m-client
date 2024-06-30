@@ -5,6 +5,7 @@ import { page } from '../../../constants/system'
 import { Brand, FormButton, FormDesc, FormTitle, Logo, NavLink } from '../../../components/_exports'
 import { Step1, Step2, Step3, Step4 } from '../../../components/registrationPage/Steps/_exports'
 import './Registration.scss'
+import ArrowIcon from '../../../components/common/Icon/ArrowIcon/ArrowIcon'
 
 function Registration() {
   const [registrationData, setRegistrationData] = useState({
@@ -83,6 +84,19 @@ function Registration() {
     }
   }
 
+  const prevStepHandler = async () => {
+    const prevStep = currentStepNumber - 1
+
+    if (result.isCompleted) {
+      setResult((prevResult) => ({
+        ...prevResult,
+        isCompleted: false
+      }))
+    } else if (prevStep >= 0) {
+      setCurrentStepNumber(prevStep)
+    }
+  }
+
   const nextStepHandler = async () => {
     const nextStep = currentStepNumber + 1
 
@@ -111,9 +125,12 @@ function Registration() {
           </NavLink>
         </div>
       </div>
-
       <div className="registration-content">
         <div className="registration-panel">
+          <div className="go-to-back">
+            <ArrowIcon onClick={prevStepHandler} className="arrow-icon" />
+          </div>
+
           <div className="description">
             <div className="title">Create your account</div>
             <div className="content">

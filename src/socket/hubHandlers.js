@@ -5,6 +5,7 @@ const chatMethod = {
   channelRes: "ChannelResponse",
   readMessage: "ReadMessageAsync",
   readMessageRes: "ReadMessageResponse",
+  readChannelRes: "ReadChannelResponse",
 }
 
 const stateMethod = {}

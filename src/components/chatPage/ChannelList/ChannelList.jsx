@@ -41,11 +41,20 @@ function ChannelList({ className, selectedChannelId }) {
           setChannels((curChannels) => updateChannelsHandler(curChannels, updatedChannel))
         }
       })
+
+      chatHub.on(chatMethod.readChannelRes, ({ channelId, unreadMessagesCount }) => {
+        setChannels((prevChannels) =>
+          prevChannels.map((channel) =>
+            channelId === channel.id ? { ...channel, unreadMessagesCount } : channel
+          )
+        )
+      })
     }
 
     return () => {
       if (chatHub) {
         chatHub.off(chatMethod.channelRes)
+        chatHub.off(chatMethod.readChannelRes)
       }
     }
   }, [chatHub, activeChannelType])

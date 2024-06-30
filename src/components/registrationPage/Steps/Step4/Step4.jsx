@@ -29,8 +29,8 @@ function Step4({ className, setRegistrationData, registrationData, setIsValid })
         <DateInput
           className="birthday-input"
           setValue={setValue}
-          onValid={setIsValid}
           value={birthday}
+          onValid={setIsValid}
         />
       </div>
     </div>
