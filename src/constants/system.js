@@ -20,6 +20,7 @@ const theme = {
 }
 
 const page = {
+  error: '/error',
   login: '/login',
   registration: '/registration',
   home: '/home',

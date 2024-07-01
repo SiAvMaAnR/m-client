@@ -27,13 +27,10 @@ function LoggedRouter() {
         <Route path="users" element={<SidebarLayout page={<Users />} />} />
       </Route>
 
-      <Route element={<RoutePermissionGuard permittedRoles={[role.user]} />}>
-        <Route path="profile" element={<SidebarLayout page={<Profile />} />} />
-      </Route>
-
       <Route element={<RoutePermissionGuard permittedRoles={[role.user, role.admin]} />}>
         <Route path="home" element={<SidebarLayout page={<Home />} />} />
         <Route path="chat/:id?" element={<SidebarLayout page={<Chat />} />} />
+        <Route path="profile" element={<SidebarLayout page={<Profile />} />} />
       </Route>
     </Routes>
   )
