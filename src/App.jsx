@@ -14,7 +14,7 @@ function App() {
   useRefreshToken()
   const stateConnection = useSignalRHub(hub.state)
   const chatConnection = useSignalRHub(hub.chat)
-
+  
   useEffect(() => {
     dispatch(setStateConnection(stateConnection))
     dispatch(setChatConnection(chatConnection))

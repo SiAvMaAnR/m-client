@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
-import { CSSTransition } from 'react-transition-group'
+import { useEffect, useState } from 'react'
 import api from '../../../api/api'
 import ChatHeader from '../../../components/chatPage/ChatHeader/ChatHeader'
 import ChannelList from '../../../components/chatPage/ChannelList/ChannelList'
@@ -12,8 +11,7 @@ function Chat() {
   const { id } = useParams()
   const [selectedChannelId, setSelectedChannelId] = useState(id)
   const [selectedChannel, setSelectedChannel] = useState(null)
-  const chatTransitionRef = useRef()
-  
+
   const loadChannel = async (channelId) => {
     const result = await api.channel.accountChannel({ id: channelId })
 
@@ -26,7 +24,6 @@ function Chat() {
     } else {
       setSelectedChannel(null)
     }
-
   }, [selectedChannelId])
 
   useEffect(() => {
@@ -42,14 +39,8 @@ function Chat() {
       />
 
       <div className="chat-wrapper">
-        <CSSTransition
-          classNames="chat"
-          in={!!selectedChannel}
-          nodeRef={chatTransitionRef}
-          timeout={100}
-          unmountOnExit
-        >
-          <div ref={chatTransitionRef} className="chat">
+        {!!selectedChannelId && (
+          <div className="chat">
             <div className="chat-header-container">
               <ChatHeader className="chat-header" channel={selectedChannel} />
             </div>
@@ -62,7 +53,7 @@ function Chat() {
               </div>
             </div>
           </div>
-        </CSSTransition>
+        )}
       </div>
     </div>
   )

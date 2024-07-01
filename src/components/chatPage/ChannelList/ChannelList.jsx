@@ -84,6 +84,8 @@ function ChannelList({ className, selectedChannelId }) {
       }
 
       setPagesCount(data.meta.pagesCount)
+    } catch (err) {
+      // temp
     } finally {
       setIsLoading(false)
     }

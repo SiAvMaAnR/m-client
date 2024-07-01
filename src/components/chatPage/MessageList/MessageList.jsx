@@ -44,33 +44,36 @@ function MessageList({ className, chatId }) {
   }, [messages])
 
   useEffect(() => {
-    chatHub.on(chatMethod.sendMessageRes, (data) => {
-      const { channelId } = data
+    if (chatHub) {
+      chatHub.on(chatMethod.sendMessageRes, (data) => {
+        const { channelId } = data
 
-      chatHub.invoke(chatMethod.channel, { channelId })
+        chatHub.invoke(chatMethod.channel, { channelId })
 
-      if (channelId === chatId) {
-        setMessages((messageList) => [data, ...messageList])
+        if (channelId === chatId) {
+          setMessages((messageList) => [data, ...messageList])
 
-        skipRef.current += 1
+          skipRef.current += 1
 
-        if (messageListRef.current.scrollTop > -800) {
-          setTimeout(() => scrollToEnd(messageListRef.current, true), 100)
+          if (messageListRef.current.scrollTop > -800) {
+            setTimeout(() => scrollToEnd(messageListRef.current, true), 100)
+          }
         }
-      }
-    })
+      })
 
-    chatHub.on(chatMethod.readMessageRes, (data) => {
-      setMessages((prevMessages) =>
-        prevMessages.map((message) =>
-          data.includes(message.id) ? { ...message, isRead: true } : message
+      chatHub.on(chatMethod.readMessageRes, (data) => {
+        setMessages((prevMessages) =>
+          prevMessages.map((message) =>
+            data.includes(message.id) ? { ...message, isRead: true } : message
+          )
         )
-      )
-    })
-
+      })
+    }
     return () => {
-      chatHub.off(chatMethod.sendMessageRes)
-      chatHub.off(chatMethod.readMessageRes)
+      if (chatHub) {
+        chatHub.off(chatMethod.sendMessageRes)
+        chatHub.off(chatMethod.readMessageRes)
+      }
     }
   }, [chatHub, chatId])
 

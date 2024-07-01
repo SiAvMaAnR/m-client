@@ -90,6 +90,8 @@ function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel
       }
 
       setPagesCount(data.meta.pagesCount)
+    } catch (err) {
+      // temp
     } finally {
       setIsUsersLoading(false)
     }
@@ -247,14 +249,14 @@ CreateChannelModal.defaultProps = {
   className: '',
   isActive: false,
   setIsActive: () => {},
-  onCreatedChannel: () => {},
+  onCreatedChannel: () => {}
 }
 
 CreateChannelModal.propTypes = {
   className: PropTypes.string,
   isActive: PropTypes.bool,
   setIsActive: PropTypes.func,
-  onCreatedChannel: PropTypes.func,
+  onCreatedChannel: PropTypes.func
 }
 
 export default CreateChannelModal

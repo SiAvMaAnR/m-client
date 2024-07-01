@@ -35,6 +35,8 @@ function Users() {
 
       setUsers(data.users || [])
       setPagesCount(data.meta?.pagesCount || 0)
+    } catch (err) {
+      // temp
     } finally {
       setIsLoading(false)
     }
