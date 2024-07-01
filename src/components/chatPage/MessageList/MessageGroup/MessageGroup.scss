@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: start;
+    align-items: flex-start;
     transition: all 0.3s ease;
     user-select: none;
 
@@ -10,10 +10,10 @@
         flex-direction: row-reverse;
 
         .data-wrapper {
-            align-items: end;
+            align-items: flex-end;
 
             .group-header {
-                justify-content: end;
+                justify-content: flex-end;
                 flex-direction: row-reverse;
 
                 .group-read {
@@ -32,7 +32,7 @@
             }
 
             .group-messages {
-                align-items: end;
+                align-items: flex-end;
             }
         }
     }
@@ -53,11 +53,11 @@
     .data-wrapper {
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: flex-start;
 
         .group-header {
             display: flex;
-            justify-content: start;
+            justify-content: flex-start;
             align-items: center;
             padding: 1px 5px 4px;
             gap: 10px;
@@ -97,7 +97,7 @@
         .group-messages {
             display: flex;
             flex-direction: column;
-            align-items: start;
+            align-items: flex-start;
             gap: 2px;
         }
     }
