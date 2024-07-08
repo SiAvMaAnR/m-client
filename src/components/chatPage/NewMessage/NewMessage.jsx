@@ -4,12 +4,18 @@ import PropTypes from 'prop-types'
 import SendIcon from '../../common/Icon/SendIcon/SendIcon'
 import AttachmentIcon from '../../common/Icon/AttachmentIcon/AttachmentIcon'
 import { chatMethod } from '../../../socket/hubHandlers'
+import DropDown from '../../common/DropDown/DropDown'
+import SettingsIcon from '../../common/Sidebar/SidebarProfile/MenuIcons/SettingsIcon/SettingsIcon'
+import ImgIcon from '../../common/Icon/ImgIcon/ImgIcon'
+import FileInput from './FileInput/FileInput'
 import './NewMessage.scss'
 
 function NewMessage({ className, channelId }) {
   const [message, setMessage] = useState('')
   const [isFocused, setIsFocused] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+  const fileInputRef = useRef(null)
+  const [attachFiles, setAttachFiles] = useState([])
   const chatHub = useSelector((state) => state.signalR.chatHubConnection)
   const textareaRef = useRef(null)
 
@@ -53,11 +59,36 @@ function NewMessage({ className, channelId }) {
     autoResize()
   }, [message])
 
+  const menuItems = [
+    {
+      icon: <ImgIcon />,
+      title: 'Image',
+      onClick: () => {
+        fileInputRef.current.click()
+      }
+    },
+    {
+      icon: <SettingsIcon />,
+      title: 'Settings',
+      onClick: () => {}
+    }
+  ]
+
+  const onChangeFile = (event) => {
+    const { files } = event.target
+
+    console.log(files)
+  }
+
   return (
     <div className={`c-new-message ${className}`}>
-      <div className="attachments">
-        <AttachmentIcon />
-      </div>
+      <FileInput fileInputRef={fileInputRef} onChangeFile={onChangeFile} />
+
+      <DropDown className="dropdown-wrapper" items={menuItems}>
+        <div className="attachments" onClick={() => {}} role="presentation">
+          <AttachmentIcon />
+        </div>
+      </DropDown>
 
       <div className={`message-input ${isFocused ? 'focused' : ''}`}>
         <textarea

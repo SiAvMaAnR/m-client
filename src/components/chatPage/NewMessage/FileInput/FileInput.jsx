@@ -1,0 +1,33 @@
+import PropTypes from 'prop-types'
+import './FileInput.scss'
+
+function FileInput({ className, fileInputRef, onChangeFile }) {
+  return (
+    <div className={`c-file-input ${className}`}>
+      <input
+        type="file"
+        ref={fileInputRef}
+        accept="image/*"
+        onChange={onChangeFile}
+        multiple
+      />
+    </div>
+  )
+}
+
+FileInput.defaultProps = {
+  className: '',
+  fileInputRef: null,
+  onChangeFile: () => {}
+}
+
+FileInput.propTypes = {
+  className: PropTypes.string,
+  fileInputRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+  ]),
+  onChangeFile: PropTypes.func
+}
+
+export default FileInput
