@@ -15,7 +15,7 @@ function Users() {
     try {
       setIsLoading(true)
 
-      const { data, response } = await api.admin.users({
+      const { data, response } = await api.user.users({
         pageNumber,
         pageSize,
         isLoadImage: true

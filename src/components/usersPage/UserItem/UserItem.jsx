@@ -18,14 +18,14 @@ function UserItem({ className, userInfo, loadUsers }) {
           icon: <UnblockIcon />,
           title: 'Unblock',
           onClick: () => {
-            api.admin.unblockUser({ id }).then(() => loadUsers())
+            api.user.unblockUser({ id }).then(() => loadUsers())
           }
         }
       : {
           icon: <BlockIcon />,
           title: 'Block',
           onClick: () => {
-            api.admin.blockUser({ id }).then(() => loadUsers())
+            api.user.blockUser({ id }).then(() => loadUsers())
           }
         }
   ]
