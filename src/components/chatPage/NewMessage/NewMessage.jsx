@@ -10,6 +10,9 @@ import ImgIcon from '../../common/Icon/ImgIcon/ImgIcon'
 import FileInput from './FileInput/FileInput'
 import './NewMessage.scss'
 
+const maxSizeFiles = 10000000
+const maxCountFiles = 5
+
 function NewMessage({ className, channelId }) {
   const [message, setMessage] = useState('')
   const [isFocused, setIsFocused] = useState(false)
@@ -24,7 +27,8 @@ function NewMessage({ className, channelId }) {
       chatHub
         .invoke(chatMethod.sendMessage, {
           channelId,
-          message: message.trim()
+          message: message.trim(),
+          attachFiles
         })
         .catch((err) => {
           setErrorMessage(err.message)
@@ -74,15 +78,51 @@ function NewMessage({ className, channelId }) {
     }
   ]
 
-  const onChangeFile = (event) => {
+  const getFilesSummary = (files) => {
+    const size = files.reduce((acc, cur) => acc + cur.size, 0)
+    const count = files.length
+
+    return { size, count }
+  }
+
+  const onChangeFiles = (event) => {
     const { files } = event.target
 
-    console.log(files)
+    try {
+      const { count, size } = getFilesSummary([...attachFiles, ...files])
+
+      if (count > maxCountFiles) {
+        throw new Error('Maximum number of attached files exceeded')
+      }
+
+      if (size > maxSizeFiles) {
+        throw new Error('Maximum size of attached files exceeded')
+      }
+
+      const checkUniqFile = (file) =>
+        attachFiles.every((currentFile) => currentFile.name !== file.name)
+
+      Array.from(files)
+        .filter((file) => checkUniqFile(file))
+        .forEach((file) => setAttachFiles((prevFiles) => [...prevFiles, file]))
+    } catch (err) {
+      setErrorMessage(err.message)
+    }
   }
+
+  // temp
+  useEffect(() => {
+    console.log(attachFiles)
+  }, [attachFiles])
+
+  // temp
+  useEffect(() => {
+    console.log(errorMessage)
+  }, [errorMessage])
 
   return (
     <div className={`c-new-message ${className}`}>
-      <FileInput fileInputRef={fileInputRef} onChangeFile={onChangeFile} />
+      <FileInput fileInputRef={fileInputRef} onChangeFile={onChangeFiles} />
 
       <DropDown className="dropdown-wrapper" items={menuItems}>
         <div className="attachments" onClick={() => {}} role="presentation">

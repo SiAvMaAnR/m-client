@@ -12,7 +12,11 @@ import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal'
 import { useDebounce } from '../../../hooks/_exports'
 import { page } from '../../../constants/system'
 import { chatMethod } from '../../../socket/hubHandlers'
+import DropDown from '../../common/DropDown/DropDown'
+import JoinIcon from '../../common/Icon/JoinIcon/JoinIcon'
+import CreateIcon from '../../common/Icon/CreateIcon/CreateIcon'
 import './ChannelList.scss'
+import JoinChannelModal from '../Modals/JoinChannelModal/JoinChannelModal'
 
 const defaultPageSize = 15
 
@@ -24,6 +28,7 @@ function ChannelList({ className, selectedChannelId }) {
   const [searchChannel, setSearchChannel] = useState('')
   const debouncedSearchChannel = useDebounce(searchChannel, 500)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
+  const [isActiveJoinChannelModal, setIsActiveJoinChannelModal] = useState(false)
   const [activeChannelType, setActiveChannelCount] = useState(null)
   const pageNumberRef = useRef(0)
   const channelListRef = useRef()
@@ -143,12 +148,29 @@ function ChannelList({ className, selectedChannelId }) {
     refreshChannels(debouncedSearchChannel, true)
   }
 
+  const dropDownItems = [
+    {
+      icon: <CreateIcon />,
+      title: 'Create chat',
+      onClick: () => setIsActiveCreateChannelModal(true)
+    },
+    {
+      icon: <JoinIcon />,
+      title: 'Join chat',
+      onClick: () => setIsActiveJoinChannelModal(true)
+    }
+  ]
+
   return (
     <>
       <CreateChannelModal
         setIsActive={setIsActiveCreateChannelModal}
         isActive={isActiveCreateChannelModal}
         onCreatedChannel={onCreatedChannelHandler}
+      />
+      <JoinChannelModal
+        setIsActive={setIsActiveJoinChannelModal}
+        isActive={isActiveJoinChannelModal}
       />
 
       <div className={`c-channel-list ${className}`}>
@@ -157,12 +179,11 @@ function ChannelList({ className, selectedChannelId }) {
             <ChannelSearch className="channel-search" onChange={onChangeChannelSearchHandler} />
           </div>
           <div className="header-new-channel">
-            <ToolTip1 text="Create new channel">
-              <CreateChannelIcon
-                onClick={() => setIsActiveCreateChannelModal(true)}
-                className="new-channel-icon"
-              />
-            </ToolTip1>
+            <DropDown className="dropdown-wrapper" items={dropDownItems}>
+              <ToolTip1 text="New channel">
+                <CreateChannelIcon className="new-channel-icon" />
+              </ToolTip1>
+            </DropDown>
           </div>
         </div>
 

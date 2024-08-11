@@ -27,21 +27,34 @@
             place-items: center;
 
             .tooltip {
-                top: 45px;
-                transform: translateX(30px);
+                top: 38px;
+                transform: translateX(20px);
             }
 
-            .new-channel-icon {
-                height: 35px;
-                width: 35px;
-                border-radius: 50%;
-                background: var(--background-color);
-                border: solid 1px var(--border-color);
-                cursor: pointer;
-                transition: all 0.3s ease;
+            .dropdown-wrapper {
+                .dropdown {
+                    top: 48px;
+                    right: -14px;
+                    width: 150px;
 
-                &:hover {
-                    background: var(--background-color-1);
+                    svg {
+                        height: 24px;
+                        width: 24px;
+                    }
+                }
+
+                .new-channel-icon {
+                    height: 35px;
+                    width: 35px;
+                    border-radius: 50%;
+                    background: var(--background-color);
+                    border: solid 1px var(--border-color);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        background: var(--background-color-1);
+                    }
                 }
             }
         }
