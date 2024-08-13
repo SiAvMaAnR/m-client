@@ -6,7 +6,7 @@ import { theme } from '../../../../constants/system'
 import { setTheme } from '../../../../redux/slices/systemSlice'
 import './SidebarTheme.scss'
 
-function SidebarTheme({ className, isExpand }) {
+function SidebarTheme({ className = '', isExpand = false }) {
   const systemTheme = useSelector((state) => state.system.theme)
   const dispatch = useDispatch()
 
@@ -37,11 +37,6 @@ function SidebarTheme({ className, isExpand }) {
       </div>
     </div>
   )
-}
-
-SidebarTheme.defaultProps = {
-  className: '',
-  isExpand: false
 }
 
 SidebarTheme.propTypes = {

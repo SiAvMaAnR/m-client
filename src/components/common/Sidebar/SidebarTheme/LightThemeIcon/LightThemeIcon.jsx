@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './LightThemeIcon.scss'
 
-function LightThemeIcon({ className }) {
+function LightThemeIcon({ className = '' }) {
   return (
     <div className={`c-light-theme-icon ${className}`}>
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,10 +20,6 @@ function LightThemeIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-LightThemeIcon.defaultProps = {
-  className: ''
 }
 
 LightThemeIcon.propTypes = {

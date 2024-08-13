@@ -11,7 +11,7 @@ import SettingsIcon from './MenuIcons/SettingsIcon/SettingsIcon'
 import config from '../../../../config/configuration'
 import './SidebarProfile.scss'
 
-function SidebarProfile({ className, isExpand }) {
+function SidebarProfile({ className = '', isExpand = false }) {
   const [image, setImage] = useState(null)
   const [email, setEmail] = useState('')
   const [login, setLogin] = useState('')
@@ -76,11 +76,6 @@ function SidebarProfile({ className, isExpand }) {
       </div>
     </div>
   )
-}
-
-SidebarProfile.defaultProps = {
-  className: '',
-  isExpand: false
 }
 
 SidebarProfile.propTypes = {

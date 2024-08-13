@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './MessageIcon.scss'
 
-function MessageIcon({ className }) {
+function MessageIcon({ className = '' }) {
   return (
     <div className={`c-message-icon ${className} `}>
       <svg
@@ -20,10 +20,6 @@ function MessageIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-MessageIcon.defaultProps = {
-  className: ''
 }
 
 MessageIcon.propTypes = {

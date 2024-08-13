@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './SendIcon.scss'
 
-function SendIcon({ className }) {
+function SendIcon({ className = '' }) {
   return (
     <div className={`c-send-icon ${className}`}>
       <svg
@@ -21,10 +21,6 @@ function SendIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-SendIcon.defaultProps = {
-  className: ''
 }
 
 SendIcon.propTypes = {

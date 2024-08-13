@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './DoubleTickIcon.scss'
 
-function DoubleTickIcon({ className }) {
+function DoubleTickIcon({ className = '' }) {
   return (
     <div className={`c-double-tick-icon ${className}`}>
       <svg
@@ -20,10 +20,6 @@ function DoubleTickIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-DoubleTickIcon.defaultProps = {
-  className: ''
 }
 
 DoubleTickIcon.propTypes = {

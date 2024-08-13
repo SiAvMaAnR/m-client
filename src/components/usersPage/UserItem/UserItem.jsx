@@ -8,7 +8,7 @@ import BlockIcon from './DropDownIcons/BlockIcon/BlockIcon'
 import config from '../../../config/configuration'
 import './UserItem.scss'
 
-function UserItem({ className, userInfo, loadUsers }) {
+function UserItem({ className = '', userInfo = null, loadUsers = null }) {
   const { id, login, email, birthday, activityStatus: status, isBanned, image } = userInfo
   const activityStatusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
   const bannedClass = isBanned ? 'yes' : ''
@@ -56,12 +56,6 @@ function UserItem({ className, userInfo, loadUsers }) {
       </td>
     </tr>
   )
-}
-
-UserItem.defaultProps = {
-  className: '',
-  userInfo: null,
-  loadUsers: null
 }
 
 UserItem.propTypes = {

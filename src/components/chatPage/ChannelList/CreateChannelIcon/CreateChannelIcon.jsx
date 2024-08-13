@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './CreateChannelIcon.scss'
 
-function CreateChannelIcon({ className, onClick }) {
+function CreateChannelIcon({ className = '', onClick = () => {} }) {
   return (
     <div className={`c-create-channel-icon ${className}`} onClick={onClick} role="presentation">
       <svg
@@ -19,11 +19,6 @@ function CreateChannelIcon({ className, onClick }) {
       </svg>
     </div>
   )
-}
-
-CreateChannelIcon.defaultProps = {
-  className: '',
-  onClick: () => {}
 }
 
 CreateChannelIcon.propTypes = {

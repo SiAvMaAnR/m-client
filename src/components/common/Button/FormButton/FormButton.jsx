@@ -2,7 +2,13 @@ import PropTypes from 'prop-types'
 import Loader2 from '../../Loader/Loader2/Loader2'
 import './FormButton.scss'
 
-function FormButton({ onClick, className, isActive, isLoading, children }) {
+function FormButton({
+  onClick = () => {},
+  className = '',
+  isActive = true,
+  isLoading = false,
+  children = ''
+}) {
   return (
     <button
       type="button"
@@ -13,14 +19,6 @@ function FormButton({ onClick, className, isActive, isLoading, children }) {
       {isLoading ? <Loader2 /> : children}
     </button>
   )
-}
-
-FormButton.defaultProps = {
-  onClick: () => {},
-  isLoading: false,
-  isActive: true,
-  children: '',
-  className: ''
 }
 
 FormButton.propTypes = {

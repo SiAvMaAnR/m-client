@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import SearchIcon from './SearchIcon/SearchIcon'
 import './SidebarSearch.scss'
 
-function SidebarSearch({ className, isExpand }) {
+function SidebarSearch({ className = '', isExpand = false }) {
   const expandClass = isExpand ? 'expand' : ''
 
   return (
@@ -16,11 +16,6 @@ function SidebarSearch({ className, isExpand }) {
       </div>
     </div>
   )
-}
-
-SidebarSearch.defaultProps = {
-  className: '',
-  isExpand: false
 }
 
 SidebarSearch.propTypes = {

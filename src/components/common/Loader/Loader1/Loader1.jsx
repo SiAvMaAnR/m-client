@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './Loader1.scss'
 
-function Loader1({ className }) {
+function Loader1({ className = '' }) {
   return (
     <div className={`c-loader-1 ${className}`}>
       <svg
@@ -44,10 +44,6 @@ function Loader1({ className }) {
       </svg>
     </div>
   )
-}
-
-Loader1.defaultProps = {
-  className: ''
 }
 
 Loader1.propTypes = {

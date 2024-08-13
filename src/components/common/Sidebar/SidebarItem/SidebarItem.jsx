@@ -2,7 +2,14 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './SidebarItem.scss'
 
-function SidebarItem({ isExpand, className, title, children, link, noticeCounter }) {
+function SidebarItem({
+  isExpand = false,
+  className = '',
+  title = '',
+  children = null,
+  link = '',
+  noticeCounter = 0
+}) {
   const expandClass = isExpand ? 'expand' : ''
   const counter = noticeCounter > 99 ? '99+' : noticeCounter
 
@@ -15,15 +22,6 @@ function SidebarItem({ isExpand, className, title, children, link, noticeCounter
       </div>
     </Link>
   )
-}
-
-SidebarItem.defaultProps = {
-  className: '',
-  isExpand: false,
-  title: '',
-  link: '',
-  noticeCounter: 0,
-  children: null
 }
 
 SidebarItem.propTypes = {

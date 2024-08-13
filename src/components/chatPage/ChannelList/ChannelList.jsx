@@ -20,7 +20,7 @@ import JoinChannelModal from '../Modals/JoinChannelModal/JoinChannelModal'
 
 const defaultPageSize = 15
 
-function ChannelList({ className, selectedChannelId }) {
+function ChannelList({ className = "", selectedChannelId = null }) {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [channels, setChannels] = useState([])
@@ -210,11 +210,6 @@ function ChannelList({ className, selectedChannelId }) {
       </div>
     </>
   )
-}
-
-ChannelList.defaultProps = {
-  className: '',
-  selectedChannelId: null
 }
 
 ChannelList.propTypes = {

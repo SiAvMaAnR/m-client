@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './MessengerIcon.scss'
 
-function MessengerIcon({ className }) {
+function MessengerIcon({ className = '' }) {
   return (
     <div className={`c-messenger-icon ${className}`}>
       <svg
@@ -21,10 +21,6 @@ function MessengerIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-MessengerIcon.defaultProps = {
-  className: ''
 }
 
 MessengerIcon.propTypes = {

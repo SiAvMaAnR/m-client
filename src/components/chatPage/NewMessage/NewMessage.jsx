@@ -13,7 +13,7 @@ import './NewMessage.scss'
 const maxSizeFiles = 10000000
 const maxCountFiles = 5
 
-function NewMessage({ className, channelId }) {
+function NewMessage({ className = '', channelId = null }) {
   const [message, setMessage] = useState('')
   const [isFocused, setIsFocused] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -149,11 +149,6 @@ function NewMessage({ className, channelId }) {
       </div>
     </div>
   )
-}
-
-NewMessage.defaultProps = {
-  className: '',
-  channelId: null
 }
 
 NewMessage.propTypes = {

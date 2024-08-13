@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './PaginationIcon.scss'
 
-function PaginationIcon({ className }) {
+function PaginationIcon({ className = '' }) {
   return (
     <div className={`c-pagination-icon ${className}`}>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
@@ -9,10 +9,6 @@ function PaginationIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-PaginationIcon.defaultProps = {
-  className: ''
 }
 
 PaginationIcon.propTypes = {

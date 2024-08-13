@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import { DateInput, FormDesc, FormTitle } from '../../../_exports'
 import './Step4.scss'
 
-function Step4({ className, setRegistrationData, registrationData, setIsValid }) {
+function Step4({
+  className = '',
+  setRegistrationData = null,
+  registrationData = null,
+  setIsValid = () => {}
+}) {
   const [value, setValue] = useState(null)
 
   const { birthday } = registrationData
@@ -35,13 +40,6 @@ function Step4({ className, setRegistrationData, registrationData, setIsValid })
       </div>
     </div>
   )
-}
-
-Step4.defaultProps = {
-  setRegistrationData: null,
-  registrationData: null,
-  className: '',
-  setIsValid: null
 }
 
 Step4.propTypes = {

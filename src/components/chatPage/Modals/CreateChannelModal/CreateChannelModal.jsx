@@ -16,7 +16,12 @@ const createChannelMapper = {
   [chatType.public]: api.channel.createPublic
 }
 
-function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel }) {
+function CreateChannelModal({
+  className = '',
+  isActive = false,
+  setIsActive = () => {},
+  onCreatedChannel = () => {}
+}) {
   const [channelName, setChannelName] = useState('')
   const [channelType, setChannelType] = useState(chatType.public)
   const [userSearch, setUserSearch] = useState('')
@@ -243,13 +248,6 @@ function CreateChannelModal({ className, isActive, setIsActive, onCreatedChannel
       </BaseModal>
     </div>
   )
-}
-
-CreateChannelModal.defaultProps = {
-  className: '',
-  isActive: false,
-  setIsActive: () => {},
-  onCreatedChannel: () => {}
 }
 
 CreateChannelModal.propTypes = {

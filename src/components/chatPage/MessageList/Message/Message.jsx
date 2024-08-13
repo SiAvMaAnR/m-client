@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useEffect, useRef } from 'react'
 import './Message.scss'
 
-function Message({ onClick, className, message, observerRef }) {
+function Message({ onClick = () => {}, className = '', message = null, observerRef = null }) {
   const messageRef = useRef(null)
   const { id, text } = message
 
@@ -32,13 +32,6 @@ function Message({ onClick, className, message, observerRef }) {
       <div className="message-text">{text}</div>
     </div>
   )
-}
-
-Message.defaultProps = {
-  onClick: () => {},
-  className: '',
-  message: null,
-  observerRef: null
 }
 
 Message.propTypes = {

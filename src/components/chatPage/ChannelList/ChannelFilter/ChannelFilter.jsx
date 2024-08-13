@@ -25,7 +25,7 @@ const filtersInfo = [
   }
 ]
 
-function ChannelFilter({ className, setType, type }) {
+function ChannelFilter({ className = '', setType = () => {}, type = null }) {
   return (
     <div className={`c-channel-filter ${className}`}>
       {filtersInfo.map((info) => (
@@ -40,12 +40,6 @@ function ChannelFilter({ className, setType, type }) {
       ))}
     </div>
   )
-}
-
-ChannelFilter.defaultProps = {
-  className: '',
-  setType: () => {},
-  type: null
 }
 
 ChannelFilter.propTypes = {

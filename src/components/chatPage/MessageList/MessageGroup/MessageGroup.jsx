@@ -6,7 +6,7 @@ import config from '../../../../config/configuration'
 import Message from '../Message/Message'
 import './MessageGroup.scss'
 
-function MessageGroup({ className, group, observerRef }) {
+function MessageGroup({ className = '', group = null, observerRef = null }) {
   const { authorId, authorLogin, image, createdAt, messages, isRead } = group
   const userId = useSelector((state) => state.auth.info.id)
   const myGroupClass = +userId === +authorId ? 'my-group' : ''
@@ -44,12 +44,6 @@ function MessageGroup({ className, group, observerRef }) {
       </div>
     </div>
   )
-}
-
-MessageGroup.defaultProps = {
-  className: '',
-  group: null,
-  observerRef: null
 }
 
 MessageGroup.propTypes = {

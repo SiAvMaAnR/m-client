@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './ImgIcon.scss'
 
-function ImgIcon({ className, onClick }) {
+function ImgIcon({ className = '', onClick = () => {} }) {
   return (
     <div onClick={onClick} className={`c-img-icon ${className}`} role="presentation">
       <svg
@@ -15,11 +15,6 @@ function ImgIcon({ className, onClick }) {
       </svg>
     </div>
   )
-}
-
-ImgIcon.defaultProps = {
-  className: '',
-  onClick: () => {}
 }
 
 ImgIcon.propTypes = {

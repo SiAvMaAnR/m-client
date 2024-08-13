@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import './ToolTip1.scss'
 import { CSSTransition } from 'react-transition-group'
+import './ToolTip1.scss'
 
-function ToolTip1({ children, text, className }) {
+function ToolTip1({ children = null, text = '', className = '' }) {
   const refSetTimeout = useRef()
   const transitionRef = useRef(null)
   const [showToolTip, setShowToolTip] = useState(false)
@@ -33,16 +33,12 @@ function ToolTip1({ children, text, className }) {
         timeout={300}
         unmountOnExit
       >
-        <div ref={transitionRef} className="tooltip">{text}</div>
+        <div ref={transitionRef} className="tooltip">
+          {text}
+        </div>
       </CSSTransition>
     </div>
   )
-}
-
-ToolTip1.defaultProps = {
-  children: null,
-  text: '',
-  className: ''
 }
 
 ToolTip1.propTypes = {

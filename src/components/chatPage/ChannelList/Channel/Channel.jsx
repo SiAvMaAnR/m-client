@@ -5,7 +5,7 @@ import config from '../../../../config/configuration'
 import defaultImageMapper from '../../../../utils/mappers/defaultImageMapper'
 import './Channel.scss'
 
-function Channel({ onClick, isActive, className, data }) {
+function Channel({ onClick = () => {}, isActive = false, className = '', data = null }) {
   const [counter, setCounter] = useState(0)
 
   const { image, lastMessage, name, lastActivity, type, unreadMessagesCount } = data
@@ -63,13 +63,6 @@ function Channel({ onClick, isActive, className, data }) {
       </div>
     </div>
   )
-}
-
-Channel.defaultProps = {
-  onClick: () => {},
-  className: '',
-  data: null,
-  isActive: false
 }
 
 Channel.propTypes = {

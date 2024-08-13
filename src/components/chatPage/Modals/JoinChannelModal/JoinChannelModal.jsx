@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { BaseModal } from '../../../_exports'
 import './JoinChannelModal.scss'
 
-function JoinChannelModal({ className, isActive, setIsActive }) {
+function JoinChannelModal({ className = '', isActive = false, setIsActive = () => {} }) {
   return (
     <div className="c-join-channel-modal" role="presentation">
       <BaseModal
@@ -17,12 +17,6 @@ function JoinChannelModal({ className, isActive, setIsActive }) {
       </BaseModal>
     </div>
   )
-}
-
-JoinChannelModal.defaultProps = {
-  className: '',
-  isActive: false,
-  setIsActive: () => {}
 }
 
 JoinChannelModal.propTypes = {

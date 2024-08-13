@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import SearchIcon from './SearchIcon/SearchIcon'
 import './SearchInput.scss'
 
-function SearchInput({ className, onChange }) {
+function SearchInput({ className = '', onChange = () => {} }) {
   return (
     <div className={`c-search-input ${className}`}>
       <div className="search-icon-container">
@@ -14,11 +14,6 @@ function SearchInput({ className, onChange }) {
       </div>
     </div>
   )
-}
-
-SearchInput.defaultProps = {
-  className: '',
-  onChange: () => {}
 }
 
 SearchInput.propTypes = {

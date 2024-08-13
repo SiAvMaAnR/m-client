@@ -8,7 +8,13 @@ import api from '../../../../../api/api'
 import './UserItem.scss'
 import { getActivityStatus } from '../../../ChatHeader/ChatHeader'
 
-function UserItem({ className, userInfo, isChecked, onToggle, setIsActive }) {
+function UserItem({
+  className = '',
+  userInfo = null,
+  isChecked = false,
+  onToggle = () => {},
+  setIsActive = () => {}
+}) {
   const navigate = useNavigate()
   const { id, login, activityStatus: status, isBanned, image } = userInfo
   const statusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
@@ -64,14 +70,6 @@ function UserItem({ className, userInfo, isChecked, onToggle, setIsActive }) {
       </div>
     </div>
   )
-}
-
-UserItem.defaultProps = {
-  className: '',
-  userInfo: null,
-  isChecked: false,
-  onToggle: () => {},
-  setIsActive: () => {}
 }
 
 UserItem.propTypes = {

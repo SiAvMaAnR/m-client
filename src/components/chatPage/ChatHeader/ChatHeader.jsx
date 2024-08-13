@@ -29,7 +29,7 @@ export const getActivityStatus = ({ status, lastOnlineAt }) => {
   return result
 }
 
-function ChatHeader({ className, channel }) {
+function ChatHeader({ className = '', channel = null }) {
   const imageSrc = channel?.image
     ? `data:image/jpeg;base64, ${channel.image}`
     : `${config.app.publicPath}/defaultImages/${defaultImageMapper[channel?.type]}.jpg`
@@ -64,11 +64,6 @@ function ChatHeader({ className, channel }) {
       </div>
     </div>
   )
-}
-
-ChatHeader.defaultProps = {
-  className: '',
-  channel: null
 }
 
 ChatHeader.propTypes = {

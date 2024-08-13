@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './JoinIcon.scss'
 
-function JoinIcon({ className }) {
+function JoinIcon({ className = '' }) {
   return (
     <div className={`c-join-icon ${className}`}>
       <svg
@@ -26,10 +26,6 @@ function JoinIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-JoinIcon.defaultProps = {
-  className: ''
 }
 
 JoinIcon.propTypes = {

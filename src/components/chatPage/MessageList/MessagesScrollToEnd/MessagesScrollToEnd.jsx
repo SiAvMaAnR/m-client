@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import ArrowIcon from '../../../common/Icon/ArrowIcon/ArrowIcon'
 import './MessagesScrollToEnd.scss'
 
-function MessagesScrollToEnd({ onClick, className, isVisible }) {
+function MessagesScrollToEnd({ onClick = () => {}, className = '', isVisible = false }) {
   const visibleClass = isVisible ? 'visible' : ''
 
   const onClickHandler = (event) => {
@@ -20,12 +20,6 @@ function MessagesScrollToEnd({ onClick, className, isVisible }) {
       <ArrowIcon className="arrow-icon" />
     </div>
   )
-}
-
-MessagesScrollToEnd.defaultProps = {
-  onClick: () => {},
-  className: '',
-  isVisible: false
 }
 
 MessagesScrollToEnd.propTypes = {

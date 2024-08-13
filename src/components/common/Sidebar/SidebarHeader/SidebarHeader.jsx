@@ -3,7 +3,7 @@ import Logo from '../../Logo/Logo'
 import Brand from '../../Brand/Brand'
 import './SidebarHeader.scss'
 
-function SidebarHeader({ className, isExpand }) {
+function SidebarHeader({ className = '', isExpand = false }) {
   const expandClass = isExpand ? 'expand' : ''
 
   return (
@@ -12,11 +12,6 @@ function SidebarHeader({ className, isExpand }) {
       <Brand className="brand">Safe|Book</Brand>
     </div>
   )
-}
-
-SidebarHeader.defaultProps = {
-  className: '',
-  isExpand: false
 }
 
 SidebarHeader.propTypes = {

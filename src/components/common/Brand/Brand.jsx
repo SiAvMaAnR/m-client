@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './Brand.scss'
 
-function Brand({ className, children }) {
+function Brand({ className = '', children = '' }) {
   const [word1, word2] = children.split('|')
 
   return (
@@ -10,11 +10,6 @@ function Brand({ className, children }) {
       <span className="second">{word2}</span>
     </div>
   )
-}
-
-Brand.defaultProps = {
-  children: '',
-  className: ''
 }
 
 Brand.propTypes = {

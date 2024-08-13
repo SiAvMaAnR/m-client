@@ -11,7 +11,7 @@ function dateAdapter(strDate) {
   return { day, month, year }
 }
 
-function DateInput({ setValue, className, onValid, value }) {
+function DateInput({ setValue = () => {}, className = '', onValid = () => {}, value = null }) {
   const [validDate, setValidDate] = useState({})
   const [errorMessage, setErrorMessage] = useState(null)
   const [date, setDate] = useState(dateAdapter(value))
@@ -102,13 +102,6 @@ function DateInput({ setValue, className, onValid, value }) {
       </div>
     </div>
   )
-}
-
-DateInput.defaultProps = {
-  setValue: () => {},
-  value: null,
-  className: '',
-  onValid: () => {}
 }
 
 DateInput.propTypes = {

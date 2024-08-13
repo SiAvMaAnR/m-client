@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './AttachmentIcon.scss'
 
-function AttachmentIcon({ className }) {
+function AttachmentIcon({ className = '' }) {
   return (
     <div className={`c-attachment-icon ${className}`}>
       <svg
@@ -21,10 +21,6 @@ function AttachmentIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-AttachmentIcon.defaultProps = {
-  className: ''
 }
 
 AttachmentIcon.propTypes = {

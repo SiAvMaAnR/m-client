@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './ArrowIcon.scss'
 
-function ArrowIcon({ className, onClick }) {
+function ArrowIcon({ className = '', onClick = () => {} }) {
   return (
     <div onClick={onClick} className={`c-arrow-icon ${className}`} role="presentation">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
@@ -9,11 +9,6 @@ function ArrowIcon({ className, onClick }) {
       </svg>
     </div>
   )
-}
-
-ArrowIcon.defaultProps = {
-  className: '',
-  onClick: () => {}
 }
 
 ArrowIcon.propTypes = {

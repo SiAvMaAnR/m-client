@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import SearchIcon from '../../../common/Icon/SearchIcon/SearchIcon'
 import './ChannelSearch.scss'
 
-function ChannelSearch({ className, onChange }) {
+function ChannelSearch({ className = '', onChange = () => {} }) {
   return (
     <div className={`c-channel-search ${className}`}>
       <div className="search-icon-container">
@@ -14,11 +14,6 @@ function ChannelSearch({ className, onChange }) {
       </div>
     </div>
   )
-}
-
-ChannelSearch.defaultProps = {
-  className: '',
-  onChange: () => {}
 }
 
 ChannelSearch.propTypes = {

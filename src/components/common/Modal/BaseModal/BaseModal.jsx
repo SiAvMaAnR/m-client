@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 import './BaseModal.scss'
 
-function BaseModal({ className, isActive, setIsActive, children }) {
+function BaseModal({ className = '', isActive = false, setIsActive = () => {}, children = null }) {
   const modalRef = useRef(null)
   const modalAnimationRef = useRef(null)
 
@@ -54,13 +54,6 @@ function BaseModal({ className, isActive, setIsActive, children }) {
       </CSSTransition>
     </div>
   )
-}
-
-BaseModal.defaultProps = {
-  className: '',
-  isActive: false,
-  setIsActive: () => {},
-  children: null
 }
 
 BaseModal.propTypes = {

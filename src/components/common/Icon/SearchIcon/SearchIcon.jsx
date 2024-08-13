@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './SearchIcon.scss'
 
-function SearchIcon({ className, isExpand }) {
+function SearchIcon({ className = '', isExpand = false }) {
   const expandClass = isExpand ? 'expand' : ''
 
   return (
@@ -49,11 +49,6 @@ function SearchIcon({ className, isExpand }) {
       </svg>
     </div>
   )
-}
-
-SearchIcon.defaultProps = {
-  className: '',
-  isExpand: false
 }
 
 SearchIcon.propTypes = {

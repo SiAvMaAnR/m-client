@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './ToolsIcon.scss'
 
-function ToolsIcon({ className }) {
+function ToolsIcon({ className = '' }) {
   return (
     <div className={`c-tools-icon ${className}`}>
       <svg
@@ -19,10 +19,6 @@ function ToolsIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-ToolsIcon.defaultProps = {
-  className: ''
 }
 
 ToolsIcon.propTypes = {

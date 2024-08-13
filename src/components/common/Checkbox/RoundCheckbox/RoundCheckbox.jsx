@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './RoundCheckbox.scss'
 
-function RoundCheckbox({ className, onChange, checked }) {
+function RoundCheckbox({ className = '', onChange = () => {}, checked = false }) {
   return (
     <input
       className={`c-round-checkbox ${className}`}
@@ -10,12 +10,6 @@ function RoundCheckbox({ className, onChange, checked }) {
       checked={checked}
     />
   )
-}
-
-RoundCheckbox.defaultProps = {
-  className: '',
-  onChange: () => {},
-  checked: false
 }
 
 RoundCheckbox.propTypes = {

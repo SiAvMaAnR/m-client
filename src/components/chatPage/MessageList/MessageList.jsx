@@ -21,7 +21,7 @@ function scrollToEnd(element, isSmooth) {
   })
 }
 
-function MessageList({ className, chatId }) {
+function MessageList({ className = '', chatId = null }) {
   const [messages, setMessages] = useState([])
   const [groupedMessages, setGroupedMessages] = useState([])
   const [hasMore, setHasMore] = useState(true)
@@ -251,11 +251,6 @@ function MessageList({ className, chatId }) {
       </div>
     </div>
   )
-}
-
-MessageList.defaultProps = {
-  className: '',
-  chatId: null
 }
 
 MessageList.propTypes = {
