@@ -1,13 +1,11 @@
-#!/bin/bash
-
-if [ -z "$1" ]; then
-  IMAGE_NAME="samarkinivan/messenger-client"
-else
-  IMAGE_NAME="$1"
-fi
+# image name
+IMAGE_NAME="${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}"
 
 # build image from Dockerfile
 docker buildx build -t $IMAGE_NAME .
+
+# login to docker
+docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
 
 # push to DockerHub
 docker push $IMAGE_NAME

@@ -1,8 +1,18 @@
-version: "3"
+version: '3'
 services:
   client-react:
     image: samarkinivan/messenger-client:latest
     container_name: messenger-client
     restart: on-failure
+    environment:
+      PORT: 3000
+      REACT_APP_SERVER_URL: 'chat-service:8080'
+      REACT_APP_SERVER_TIMEOUT: 5000
     ports:
-      - "3000:3000"
+      - '3000:3000'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
