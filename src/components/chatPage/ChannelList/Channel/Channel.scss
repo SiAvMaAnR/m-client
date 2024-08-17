@@ -55,12 +55,16 @@
       .title {
         font-size: 14px;
         font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .activity {
         text-align: center;
         font-size: 12px;
         padding: 0 14px;
+        white-space: nowrap;
       }
     }
 

@@ -7,6 +7,7 @@ import api from '../../../../api/api'
 import UserItem from './UserItem/UserItem'
 import { useDebounce } from '../../../../hooks/_exports'
 import ValidIcon from '../../../common/Input/FormInput/ValidIcon/ValidIcon'
+import channelNameValidator from '../../../../utils/validators/channelNameValidator'
 import './CreateChannelModal.scss'
 
 const defaultPageSize = 10
@@ -44,9 +45,7 @@ function CreateChannelModal({
         throw new Error('Channel type is not correct')
       }
 
-      if (channelName.length < 4) {
-        throw new Error('The channel name must be at least 4 characters long.')
-      }
+      channelNameValidator(channelName)
 
       const { data, response } = await createChannelMapper[channelType]({
         name: channelName,

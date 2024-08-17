@@ -1,6 +1,6 @@
 const loginMaxLength = 40
 const loginMinLength = 4
-const regex = /[a-zA-Z0-9]+/
+const regex = /^[a-zA-Z0-9]+$/
 
 function loginValidator(login) {
   const isValidMaxLength = login.length <= loginMaxLength
