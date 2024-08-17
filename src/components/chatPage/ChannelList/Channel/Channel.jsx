@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import config from '../../../../config/configuration'
 import defaultImageMapper from '../../../../utils/mappers/defaultImageMapper'
+import ImgWrapper from '../../../common/ImgWrapper/ImgWrapper'
 import './Channel.scss'
 
 function Channel({ onClick = () => {}, isActive = false, className = '', data = null }) {
@@ -33,7 +34,7 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
       role="presentation"
     >
       <div className="channel-image">
-        <img src={imageSrc} alt="channel-img" />
+        <ImgWrapper src={imageSrc} alt="channel-img" isLazy />
       </div>
 
       <div className="channel-info">

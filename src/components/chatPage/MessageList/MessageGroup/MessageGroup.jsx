@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import DoubleTickIcon from '../../../common/Icon/DoubleTickIcon/DoubleTickIcon'
 import config from '../../../../config/configuration'
 import Message from '../Message/Message'
+import ImgWrapper from '../../../common/ImgWrapper/ImgWrapper'
 import './MessageGroup.scss'
 
 function MessageGroup({ className = '', group = null, observerRef = null }) {
@@ -21,7 +22,7 @@ function MessageGroup({ className = '', group = null, observerRef = null }) {
   return (
     <div className={`c-message-group ${className} ${myGroupClass}`}>
       <div className="author-img">
-        <img src={imageSrc} alt="user-img" />
+        <ImgWrapper src={imageSrc} alt="user-img" isLazy />
       </div>
 
       <div className="data-wrapper">

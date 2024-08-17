@@ -66,7 +66,7 @@ function Users() {
         <table className="users-table">
           <thead className="table-head">
             <tr>
-              <th width="5%" aria-label="image">
+              <th width="6%" aria-label="image">
                 {}
               </th>
               <th width="5%">Id</th>

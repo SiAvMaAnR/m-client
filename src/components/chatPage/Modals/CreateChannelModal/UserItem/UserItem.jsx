@@ -5,8 +5,9 @@ import { activityStatus, page } from '../../../../../constants/system'
 import { RoundCheckbox } from '../../../../_exports'
 import ArrowIcon from '../../../../common/Icon/ArrowIcon/ArrowIcon'
 import api from '../../../../../api/api'
-import './UserItem.scss'
 import { getActivityStatus } from '../../../ChatHeader/ChatHeader'
+import ImgWrapper from '../../../../common/ImgWrapper/ImgWrapper'
+import './UserItem.scss'
 
 function UserItem({
   className = '',
@@ -57,7 +58,7 @@ function UserItem({
       </div>
 
       <div id="image">
-        <img src={imageSrc} alt="user-img" />
+        <ImgWrapper src={imageSrc} alt="user-img" />
       </div>
 
       <div className="user-info">

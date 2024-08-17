@@ -6,6 +6,7 @@ import { channelType } from '../../../constants/chat'
 import MenuIcon from '../../common/Icon/MenuIcon/MenuIcon'
 import SearchIcon from '../../common/Icon/SearchIcon/SearchIcon'
 import { activityStatus } from '../../../constants/system'
+import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import './ChatHeader.scss'
 
 function formatLastOnlineAt(lastOnlineAt) {
@@ -41,7 +42,9 @@ function ChatHeader({ className = '', channel = null }) {
 
   return (
     <div className={`c-chat-header ${className}`}>
-      <div className="image">{channel && <img src={imageSrc} alt="channel-img" />}</div>
+      <div className="image">
+        {channel && <ImgWrapper src={imageSrc} alt="channel-img" isLazy />}
+      </div>
 
       <div className="info">
         <div className="channel-name">{channel?.name}</div>

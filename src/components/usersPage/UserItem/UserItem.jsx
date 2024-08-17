@@ -6,6 +6,7 @@ import api from '../../../api/api'
 import UnblockIcon from './DropDownIcons/Unblock/UnblockIcon'
 import BlockIcon from './DropDownIcons/BlockIcon/BlockIcon'
 import config from '../../../config/configuration'
+import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import './UserItem.scss'
 
 function UserItem({ className = '', userInfo = null, loadUsers = null }) {
@@ -37,7 +38,7 @@ function UserItem({ className = '', userInfo = null, loadUsers = null }) {
   return (
     <tr className={`c-user-item ${className}`}>
       <td id="image">
-        <img src={imageSrc} alt="user-img" />
+        <ImgWrapper src={imageSrc} alt="user-img" />
       </td>
       <td id="id">{id}</td>
       <td id="email">{email}</td>
