@@ -15,14 +15,16 @@ import { chatMethod } from '../../../socket/hubHandlers'
 import DropDown from '../../common/DropDown/DropDown'
 import JoinIcon from '../../common/Icon/JoinIcon/JoinIcon'
 import CreateIcon from '../../common/Icon/CreateIcon/CreateIcon'
-import './ChannelList.scss'
 import JoinChannelModal from '../Modals/JoinChannelModal/JoinChannelModal'
+import Loader1 from '../../common/Loader/Loader1/Loader1'
+import './ChannelList.scss'
 
 const defaultPageSize = 15
 
-function ChannelList({ className = "", selectedChannelId = null }) {
+function ChannelList({ className = '', selectedChannelId = null }) {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isListLoading, setIsListLoading] = useState(false)
+  const [isScrollLoading, setIsScrollLoading] = useState(false)
   const [channels, setChannels] = useState([])
   const [pagesCount, setPagesCount] = useState(0)
   const [searchChannel, setSearchChannel] = useState('')
@@ -65,39 +67,32 @@ function ChannelList({ className = "", selectedChannelId = null }) {
   }, [chatHub, activeChannelType])
 
   const loadChannels = async ({ searchField, pageNumber, pageSize, type }) => {
-    try {
-      setIsLoading(true)
-      const { data, response } = await api.channel.accountChannels({
-        searchField,
-        pageNumber,
-        pageSize,
-        channelType: type
-      })
+    const { data, response } = await api.channel.accountChannels({
+      searchField,
+      pageNumber,
+      pageSize,
+      channelType: type
+    })
 
-      if (response?.data?.clientMessage) {
-        throw new Error(response.data.clientMessage)
-      }
-
-      if (!data || response?.data?.errors) {
-        throw new Error('Something went wrong')
-      }
-
-      if (pageNumber === 0) {
-        setChannels(data.channels || [])
-      } else {
-        setChannels((prevChannels) => [...prevChannels, ...(data.channels || [])])
-      }
-
-      setPagesCount(data.meta.pagesCount)
-    } catch (err) {
-      // temp
-    } finally {
-      setIsLoading(false)
+    if (response?.data?.clientMessage) {
+      throw new Error(response.data.clientMessage)
     }
+
+    if (!data || response?.data?.errors) {
+      throw new Error('Something went wrong')
+    }
+
+    if (pageNumber === 0) {
+      setChannels(data.channels || [])
+    } else {
+      setChannels((prevChannels) => [...prevChannels, ...(data.channels || [])])
+    }
+
+    setPagesCount(data.meta.pagesCount)
   }
 
   const refreshChannels = useCallback(
-    (search, isSmoothScroll) => {
+    async (search, isSmoothScroll) => {
       const scrollBehavior = isSmoothScroll ? 'smooth' : 'auto'
 
       pageNumberRef.current = 0
@@ -106,13 +101,20 @@ function ChannelList({ className = "", selectedChannelId = null }) {
         top: 0,
         behavior: scrollBehavior
       })
+      try {
+        setIsListLoading(true)
 
-      loadChannels({
-        pageNumber: pageNumberRef.current,
-        pageSize: defaultPageSize,
-        searchField: search,
-        type: activeChannelType
-      })
+        await loadChannels({
+          pageNumber: pageNumberRef.current,
+          pageSize: defaultPageSize,
+          searchField: search,
+          type: activeChannelType
+        })
+      } catch (err) {
+        // temp
+      } finally {
+        setIsListLoading(false)
+      }
     },
     [activeChannelType]
   )
@@ -125,8 +127,8 @@ function ChannelList({ className = "", selectedChannelId = null }) {
     refreshChannels(debouncedSearchChannel)
   }, [debouncedSearchChannel, refreshChannels])
 
-  const scrollHandler = (event) => {
-    if (!isLoading && pageNumberRef.current < pagesCount - 1) {
+  const scrollHandler = async (event) => {
+    if (!isScrollLoading && pageNumberRef.current < pagesCount - 1) {
       const { scrollHeight, scrollTop } = event.target
       const targetHeight = event.target.getBoundingClientRect().height
 
@@ -134,12 +136,21 @@ function ChannelList({ className = "", selectedChannelId = null }) {
 
       if (isNeedUpdate) {
         pageNumberRef.current += 1
-        loadChannels({
-          pageNumber: pageNumberRef.current,
-          pageSize: defaultPageSize,
-          searchField: debouncedSearchChannel,
-          type: activeChannelType
-        })
+
+        try {
+          setIsScrollLoading(true)
+
+          await loadChannels({
+            pageNumber: pageNumberRef.current,
+            pageSize: defaultPageSize,
+            searchField: debouncedSearchChannel,
+            type: activeChannelType
+          })
+        } catch (err) {
+          // temp
+        } finally {
+          setIsScrollLoading(false)
+        }
       }
     }
   }
@@ -196,16 +207,20 @@ function ChannelList({ className = "", selectedChannelId = null }) {
         </div>
 
         <div className="list" onScroll={scrollHandler} ref={channelListRef}>
-          {channels.map((channel) => (
-            <Channel
-              key={channel.id}
-              onClick={() => {
-                navigate(`${page.chat}/${channel.id}`)
-              }}
-              isActive={+selectedChannelId === channel.id}
-              data={channel}
-            />
-          ))}
+          {isListLoading ? (
+            <Loader1 className="loader" />
+          ) : (
+            channels.map((channel) => (
+              <Channel
+                key={channel.id}
+                onClick={() => {
+                  navigate(`${page.chat}/${channel.id}`)
+                }}
+                isActive={+selectedChannelId === channel.id}
+                data={channel}
+              />
+            ))
+          )}
         </div>
       </div>
     </>
