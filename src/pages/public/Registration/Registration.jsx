@@ -9,10 +9,10 @@ import ArrowIcon from '../../../components/common/Icon/ArrowIcon/ArrowIcon'
 
 function Registration() {
   const [registrationData, setRegistrationData] = useState({
-    login: 'SiAvMaAnR',
-    email: 'samarkin20022002@gmail.com',
-    password: 'Sosnova61S',
-    confirmationPassword: 'Sosnova61S'
+    login: '',
+    email: '',
+    password: '',
+    confirmationPassword: ''
   })
   const [isLoading, setIsLoading] = useState(false)
   const [currentStepNumber, setCurrentStepNumber] = useState(0)
