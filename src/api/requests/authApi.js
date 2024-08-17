@@ -5,6 +5,7 @@ const path = '/api/auth'
 const authApi = {
   login: async ({ email, password }) => {
     const body = { email, password }
+
     const response = await axiosInstance.post(`${path}/login`, body)
     return response
   },
