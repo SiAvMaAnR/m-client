@@ -10,7 +10,7 @@ const useSignalRHub = (hubName) => {
     const connection = connectionRef.current
 
     if (isLogged) {
-      connection.start().catch((err) => console.log(err))
+      connection.start().catch((err) => console.error(err))
     }
 
     return () => {

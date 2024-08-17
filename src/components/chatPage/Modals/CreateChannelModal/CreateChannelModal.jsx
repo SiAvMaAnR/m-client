@@ -44,6 +44,10 @@ function CreateChannelModal({
         throw new Error('Channel type is not correct')
       }
 
+      if (channelName.length < 4) {
+        throw new Error('The channel name must be at least 4 characters long.')
+      }
+
       const { data, response } = await createChannelMapper[channelType]({
         name: channelName,
         members: [...selectedUserIds]

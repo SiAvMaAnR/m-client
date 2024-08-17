@@ -6,7 +6,7 @@ services:
     restart: on-failure
     environment:
       PORT: 3000
-      REACT_APP_SERVER_URL: 'chat-service:8080'
+      REACT_APP_SERVER_URL: 'http://147.45.78.164:8080'
       REACT_APP_SERVER_TIMEOUT: 5000
     ports:
       - '3000:3000'
