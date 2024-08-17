@@ -5,8 +5,8 @@ import config from '../../../config/configuration'
 import { channelType } from '../../../constants/chat'
 import MenuIcon from '../../common/Icon/MenuIcon/MenuIcon'
 import SearchIcon from '../../common/Icon/SearchIcon/SearchIcon'
-import './ChatHeader.scss'
 import { activityStatus } from '../../../constants/system'
+import './ChatHeader.scss'
 
 function formatLastOnlineAt(lastOnlineAt) {
   if (!lastOnlineAt) {
@@ -35,7 +35,7 @@ function ChatHeader({ className = '', channel = null }) {
     : `${config.app.publicPath}/defaultImages/${defaultImageMapper[channel?.type]}.jpg`
 
   const adaptedChatInfo = getActivityStatus({
-    activityStatus: channel?.userActivityStatus,
+    status: channel?.userActivityStatus,
     lastOnlineAt: channel?.userLastOnlineAt
   })
 
