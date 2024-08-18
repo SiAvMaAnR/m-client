@@ -142,10 +142,16 @@ function MessageList({ className = '', chatId = null }) {
         throw new Error('Something went wrong')
       }
 
+      const newMessages =
+        data.messages.map((message) => ({
+          ...message,
+          pageNumber
+        })) || []
+
       if (pageNumber === 0) {
-        setMessages(data.messages || [])
+        setMessages(newMessages)
       } else {
-        setMessages((prevMessages) => [...prevMessages, ...(data.messages || [])])
+        setMessages((prevMessages) => [...prevMessages, ...newMessages])
       }
 
       setHasMore(pageNumberRef.current < data.meta.pagesCount - 1)

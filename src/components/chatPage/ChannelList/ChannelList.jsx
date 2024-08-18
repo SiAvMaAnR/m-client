@@ -132,7 +132,7 @@ function ChannelList({ className = '', selectedChannelId = null }) {
       const { scrollHeight, scrollTop } = event.target
       const targetHeight = event.target.getBoundingClientRect().height
 
-      const isNeedUpdate = scrollHeight - (scrollTop + targetHeight) < 100
+      const isNeedUpdate = scrollHeight - (scrollTop + targetHeight) < 300
 
       if (isNeedUpdate) {
         pageNumberRef.current += 1
