@@ -8,6 +8,19 @@
     padding: 0 25px;
     gap: 16px;
 
+    .loader {
+        width: 90px;
+        height: 100%;
+        display: grid;
+        place-items: center;
+
+        svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--common-color-0);
+        }
+    }
+
     .image {
         flex: 0 0 90px;
         display: grid;

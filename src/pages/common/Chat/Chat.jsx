@@ -11,11 +11,18 @@ function Chat() {
   const { id } = useParams()
   const [selectedChannelId, setSelectedChannelId] = useState(id)
   const [selectedChannel, setSelectedChannel] = useState(null)
+  const [isLoadingChatHeader, setIsLoadingChatHeader] = useState(false)
 
   const loadChannel = async (channelId) => {
-    const result = await api.channel.accountChannel({ id: channelId })
+    try {
+      setIsLoadingChatHeader(true)
 
-    setSelectedChannel(result.data)
+      const result = await api.channel.accountChannel({ id: channelId })
+
+      setSelectedChannel(result.data)
+    } finally {
+      setIsLoadingChatHeader(false)
+    }
   }
 
   useEffect(() => {
@@ -42,7 +49,11 @@ function Chat() {
         {!!selectedChannelId && (
           <div className="chat">
             <div className="chat-header-container">
-              <ChatHeader className="chat-header" channel={selectedChannel} />
+              <ChatHeader
+                className="chat-header"
+                channel={selectedChannel}
+                isLoading={isLoadingChatHeader}
+              />
             </div>
             <div className="chat-content">
               <div className="chat-messages">

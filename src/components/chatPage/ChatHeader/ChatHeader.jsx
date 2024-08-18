@@ -7,6 +7,7 @@ import MenuIcon from '../../common/Icon/MenuIcon/MenuIcon'
 import SearchIcon from '../../common/Icon/SearchIcon/SearchIcon'
 import { activityStatus } from '../../../constants/system'
 import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
+import Loader2 from '../../common/Loader/Loader2/Loader2'
 import './ChatHeader.scss'
 
 function formatLastOnlineAt(lastOnlineAt) {
@@ -30,7 +31,7 @@ export const getActivityStatus = ({ status, lastOnlineAt }) => {
   return result
 }
 
-function ChatHeader({ className = '', channel = null }) {
+function ChatHeader({ className = '', channel = null, isLoading }) {
   const imageSrc = channel?.image
     ? `data:image/jpeg;base64, ${channel.image}`
     : `${config.app.publicPath}/defaultImages/${defaultImageMapper[channel?.type]}.jpg`
@@ -42,35 +43,42 @@ function ChatHeader({ className = '', channel = null }) {
 
   return (
     <div className={`c-chat-header ${className}`}>
-      <div className="image">
-        {channel && <ImgWrapper src={imageSrc} alt="channel-img" isLazy />}
-      </div>
+      {isLoading ? (
+        <Loader2 className='loader'/>
+      ) : (
+        <>
+          <div className="image">
+            {channel && <ImgWrapper src={imageSrc} alt="channel-img" isLazy />}
+          </div>
 
-      <div className="info">
-        <div className="channel-name">{channel?.name}</div>
+          <div className="info">
+            <div className="channel-name">{channel?.name}</div>
 
-        <div className="additional-info">
-          {channel?.type === channelType.direct ? (
-            <div className="status-info">{adaptedChatInfo}</div>
-          ) : (
-            <div className="members-count">Members: {channel?.membersCount}</div>
-          )}
-        </div>
-      </div>
+            <div className="additional-info">
+              {channel?.type === channelType.direct ? (
+                <div className="status-info">{adaptedChatInfo}</div>
+              ) : (
+                <div className="members-count">Members: {channel?.membersCount}</div>
+              )}
+            </div>
+          </div>
 
-      <div className="search">
-        <SearchIcon className="search-icon" />
-      </div>
+          <div className="search">
+            <SearchIcon className="search-icon" />
+          </div>
 
-      <div className="menu">
-        <MenuIcon className="menu-icon" />
-      </div>
+          <div className="menu">
+            <MenuIcon className="menu-icon" />
+          </div>
+        </>
+      )}
     </div>
   )
 }
 
 ChatHeader.propTypes = {
   className: PropTypes.string,
+  isLoading: PropTypes.bool,
   channel: PropTypes.shape({
     name: PropTypes.string,
     type: PropTypes.string,
