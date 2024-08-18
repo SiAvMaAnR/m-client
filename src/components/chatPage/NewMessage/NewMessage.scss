@@ -8,7 +8,7 @@
     margin-bottom: 35px;
 
     .dropdown-wrapper {
-        .dropdown{
+        .dropdown {
             bottom: 65px;
         }
     }
@@ -54,15 +54,17 @@
         background: var(--background-color-1);
         display: flex;
         align-items: center;
+        justify-content: center;
         transition: all 0.3s ease;
+        min-height: 50px;
 
         &.focused {
             border-color: var(--common-color-0);
         }
 
         textarea {
-            min-height: 10px;
-            padding: 3px 15px;
+            min-height: 21px;
+            padding: 1px 15px;
             max-height: 70px;
             overflow-y: auto;
             overflow-x: hidden;

@@ -1,4 +1,4 @@
-const nameMaxLength = 20
+const nameMaxLength = 40
 const nameMinLength = 4
 const regex = /^[a-zA-Z0-9_.]+$/
 
