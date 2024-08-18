@@ -25,7 +25,8 @@ function MessageList({ className = '', chatId = null }) {
   const [messages, setMessages] = useState([])
   const [groupedMessages, setGroupedMessages] = useState([])
   const [hasMore, setHasMore] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isListLoading, setIsListLoading] = useState(false)
+  const [isScrollLoading, setIsScrollLoading] = useState(false)
   const [searchMessage, setSearchMessage] = useState('')
   const [memberImages, setMemberImages] = useState([])
   const [isShowFastScroll, setIsShowFastScroll] = useState(false)
@@ -108,9 +109,11 @@ function MessageList({ className = '', chatId = null }) {
   }, [])
 
   useEffect(() => {
-    scrollToEnd(messageListRef.current)
-    setLastVisibleMessage(null)
-  }, [chatId])
+    if (!isListLoading && !isScrollLoading) {
+      scrollToEnd(messageListRef.current)
+      setLastVisibleMessage(null)
+    }
+  }, [chatId, isListLoading, isScrollLoading])
 
   useEffect(() => {
     api.channel.memberImages({ channelId: chatId }).then(({ data }) => {
@@ -119,59 +122,58 @@ function MessageList({ className = '', chatId = null }) {
   }, [chatId])
 
   const loadMessages = async ({ channelId, pageNumber, pageSize, skip, searchField }) => {
-    try {
-      setIsLoading(true)
-
-      if (!channelId) {
-        return
-      }
-
-      const { data, response } = await api.chat.messages({
-        channelId,
-        pageNumber,
-        pageSize,
-        skip,
-        searchField
-      })
-
-      if (response?.data?.clientMessage) {
-        throw new Error(response.data.clientMessage)
-      }
-
-      if (!data || response?.data?.errors) {
-        throw new Error('Something went wrong')
-      }
-
-      const newMessages =
-        data.messages.map((message) => ({
-          ...message,
-          pageNumber
-        })) || []
-
-      if (pageNumber === 0) {
-        setMessages(newMessages)
-      } else {
-        setMessages((prevMessages) => [...prevMessages, ...newMessages])
-      }
-
-      setHasMore(pageNumberRef.current < data.meta.pagesCount - 1)
-    } finally {
-      setIsLoading(false)
+    if (!channelId) {
+      return
     }
+
+    const { data, response } = await api.chat.messages({
+      channelId,
+      pageNumber,
+      pageSize,
+      skip,
+      searchField
+    })
+
+    if (response?.data?.clientMessage) {
+      throw new Error(response.data.clientMessage)
+    }
+
+    if (!data || response?.data?.errors) {
+      throw new Error('Something went wrong')
+    }
+
+    const newMessages =
+      data.messages.map((message) => ({
+        ...message,
+        pageNumber
+      })) || []
+
+    if (pageNumber === 0) {
+      setMessages(newMessages)
+    } else {
+      setMessages((prevMessages) => [...prevMessages, ...newMessages])
+    }
+
+    setHasMore(pageNumberRef.current < data.meta.pagesCount - 1)
   }
 
   const refreshMessages = useCallback(
-    (search) => {
+    async (search) => {
       pageNumberRef.current = 0
       skipRef.current = 0
+      try {
+        setIsListLoading(true)
 
-      loadMessages({
-        channelId: chatId,
-        pageNumber: pageNumberRef.current,
-        pageSize: defaultPageSize,
-        searchField: search,
-        skip: skipRef.current
-      })
+        await loadMessages({
+          channelId: chatId,
+          pageNumber: pageNumberRef.current,
+          pageSize: defaultPageSize,
+          searchField: search,
+          skip: skipRef.current
+        })
+      } finally {
+        setIsListLoading(false)
+      }
     },
     [chatId]
   )
@@ -184,17 +186,23 @@ function MessageList({ className = '', chatId = null }) {
     refreshMessages(debouncedSearchMessage)
   }, [debouncedSearchMessage, refreshMessages])
 
-  const fetchMoreMessages = () => {
-    if (!isLoading) {
+  const fetchMoreMessages = async () => {
+    if (!isScrollLoading) {
       pageNumberRef.current += 1
 
-      loadMessages({
-        channelId: chatId,
-        pageNumber: pageNumberRef.current,
-        pageSize: defaultPageSize,
-        searchField: debouncedSearchMessage,
-        skip: skipRef.current
-      })
+      try {
+        setIsScrollLoading(true)
+
+        await loadMessages({
+          channelId: chatId,
+          pageNumber: pageNumberRef.current,
+          pageSize: defaultPageSize,
+          searchField: debouncedSearchMessage,
+          skip: skipRef.current
+        })
+      } finally {
+        setIsScrollLoading(false)
+      }
     }
   }
 
@@ -219,42 +227,49 @@ function MessageList({ className = '', chatId = null }) {
 
   return (
     <div className={`c-message-list ${className}`}>
-      <MessagesScrollToEnd
-        className="messages-scroll"
-        isVisible={isShowFastScroll}
-        onClick={() => scrollToEnd(messageListRef.current, true)}
-      />
+      {isListLoading ? (
+        <Loader1 className="loader" />
+      ) : (
+        <>
+          <MessagesScrollToEnd
+            className="messages-scroll"
+            isVisible={isShowFastScroll}
+            onClick={() => scrollToEnd(messageListRef.current, true)}
+          />
 
-      <div className="list" id="scrollableDiv" ref={messageListRef}>
-        <InfiniteScroll
-          className="infinity-scroll"
-          dataLength={messages.length}
-          next={fetchMoreMessages}
-          hasMore={hasMore}
-          loader={<Loader1 className="loader" />}
-          scrollableTarget="scrollableDiv"
-          onScroll={onScrollHandler}
-          inverse
-        >
-          {groupedMessages.map((groupsInfo) => {
-            const [groupDate, groups] = groupsInfo
+          <div className="list" id="scrollableDiv" ref={messageListRef}>
+            <InfiniteScroll
+              className="infinity-scroll"
+              dataLength={messages.length}
+              next={fetchMoreMessages}
+              hasMore={hasMore}
+              loader={<Loader1 className="scroll-loader" />}
+              scrollableTarget="scrollableDiv"
+              onScroll={onScrollHandler}
+              inverse
+            >
+              {groupedMessages.map((groupsInfo) => {
+                const [groupDate, groups] = groupsInfo
 
-            const date = groupDate === moment(new Date()).format('DD.MM.YYYY') ? 'Today' : groupDate
+                const date =
+                  groupDate === moment(new Date()).format('DD.MM.YYYY') ? 'Today' : groupDate
 
-            return (
-              <div key={groupDate} className="group-date">
-                {groups.map((group) => (
-                  <MessageGroup key={group.id} group={group} observerRef={observerRef} />
-                ))}
+                return (
+                  <div key={groupDate} className="group-date">
+                    {groups.map((group) => (
+                      <MessageGroup key={group.id} group={group} observerRef={observerRef} />
+                    ))}
 
-                <div className="messages-date-wrapper">
-                  <div className="messages-date">{date}</div>
-                </div>
-              </div>
-            )
-          })}
-        </InfiniteScroll>
-      </div>
+                    <div className="messages-date-wrapper">
+                      <div className="messages-date">{date}</div>
+                    </div>
+                  </div>
+                )
+              })}
+            </InfiniteScroll>
+          </div>
+        </>
+      )}
     </div>
   )
 }
