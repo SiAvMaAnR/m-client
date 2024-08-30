@@ -217,7 +217,7 @@ function MessageList({ className = '', chatId = null }) {
   }, [messages, memberImages])
 
   const onScrollHandler = () => {
-    setIsShowFastScroll(messageListRef.current.scrollTop < -800)
+    setIsShowFastScroll((messageListRef.current?.scrollTop ?? 0) < -800)
   }
 
   useKeyDown(

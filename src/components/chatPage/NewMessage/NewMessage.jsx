@@ -8,6 +8,7 @@ import DropDown from '../../common/DropDown/DropDown'
 import SettingsIcon from '../../common/Sidebar/SidebarProfile/MenuIcons/SettingsIcon/SettingsIcon'
 import ImgIcon from '../../common/Icon/ImgIcon/ImgIcon'
 import FileInput from './FileInput/FileInput'
+import Loader2 from '../../common/Loader/Loader2/Loader2'
 import './NewMessage.scss'
 
 const maxSizeFiles = 10000000
@@ -17,6 +18,7 @@ function NewMessage({ className = '', channelId = null }) {
   const [message, setMessage] = useState('')
   const [isFocused, setIsFocused] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [isSending, setIsSending] = useState(false)
   const fileInputRef = useRef(null)
   const [attachFiles, setAttachFiles] = useState([])
   const chatHub = useSelector((state) => state.signalR.chatHubConnection)
@@ -24,17 +26,26 @@ function NewMessage({ className = '', channelId = null }) {
 
   const sendMessageHandler = () => {
     if (channelId && message) {
+      setIsSending(true)
+
       chatHub
         .invoke(chatMethod.sendMessage, {
           channelId,
           message: message.trim(),
           attachFiles
         })
+        .then(
+          async () =>
+            new Promise((resolve) => {
+              setTimeout(resolve, 300)
+            })
+        )
         .catch((err) => {
           setErrorMessage(err.message)
         })
         .finally(() => {
           setMessage('')
+          setIsSending(false)
         })
     }
   }
@@ -140,12 +151,16 @@ function NewMessage({ className = '', channelId = null }) {
           value={message}
           onKeyDown={onKeyDownHandler}
           placeholder="Enter message"
-          required
+          readOnly={isSending}
         />
       </div>
 
       <div className="send-btn" onClick={sendMessageHandler} role="presentation">
-        <SendIcon />
+        {isSending ? (
+          <Loader2 className="send-btn-loader" />
+        ) : (
+          <SendIcon className="send-btn-icon" />
+        )}
       </div>
     </div>
   )
