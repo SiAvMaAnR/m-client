@@ -4,7 +4,12 @@ import { FormDesc, FormInput, FormTitle } from '../../../_exports'
 import { passwordValidator, cPasswordValidator } from '../../../../utils/validators/_exports'
 import './Step3.scss'
 
-function Step3({ className, setRegistrationData, registrationData, setIsValid }) {
+function Step3({
+  className = '',
+  setRegistrationData = null,
+  registrationData = null,
+  setIsValid = () => {}
+}) {
   const [isValidPassword, setIsValidPassword] = useState(false)
   const [isValidCPassword, setIsValidCPassword] = useState(false)
 
@@ -58,13 +63,6 @@ function Step3({ className, setRegistrationData, registrationData, setIsValid })
       </div>
     </div>
   )
-}
-
-Step3.defaultProps = {
-  setRegistrationData: null,
-  registrationData: null,
-  className: '',
-  setIsValid: null
 }
 
 Step3.propTypes = {

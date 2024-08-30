@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
+import { CSSTransition } from 'react-transition-group'
 import './ToolTip1.scss'
 
-function ToolTip1({ children, text, className }) {
+function ToolTip1({ children = null, text = '', className = '' }) {
   const refSetTimeout = useRef()
+  const transitionRef = useRef(null)
   const [showToolTip, setShowToolTip] = useState(false)
 
   const onMouseEnterHandler = () => {
@@ -24,15 +26,19 @@ function ToolTip1({ children, text, className }) {
       onMouseLeave={onMouseLeaveHandler}
     >
       {children}
-      {showToolTip && <div className="tooltip">{text}</div>}
+      <CSSTransition
+        classNames="tooltip"
+        in={showToolTip}
+        nodeRef={transitionRef}
+        timeout={300}
+        unmountOnExit
+      >
+        <div ref={transitionRef} className="tooltip">
+          {text}
+        </div>
+      </CSSTransition>
     </div>
   )
-}
-
-ToolTip1.defaultProps = {
-  children: null,
-  text: '',
-  className: ''
 }
 
 ToolTip1.propTypes = {

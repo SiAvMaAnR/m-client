@@ -4,7 +4,12 @@ import { FormDesc, FormInput, FormTitle } from '../../../_exports'
 import { emailValidator } from '../../../../utils/validators/_exports'
 import './Step1.scss'
 
-function Step1({ className, setRegistrationData, registrationData, setIsValid }) {
+function Step1({
+  className = '',
+  setRegistrationData = null,
+  registrationData = null,
+  setIsValid = () => {}
+}) {
   const [isValidEmail, setIsValidEmail] = useState(false)
 
   const { email } = registrationData
@@ -39,13 +44,6 @@ function Step1({ className, setRegistrationData, registrationData, setIsValid })
       </div>
     </div>
   )
-}
-
-Step1.defaultProps = {
-  setRegistrationData: null,
-  registrationData: null,
-  className: '',
-  setIsValid: null
 }
 
 Step1.propTypes = {

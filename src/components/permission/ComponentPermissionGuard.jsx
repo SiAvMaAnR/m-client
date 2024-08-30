@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types'
 import useRole from '../../hooks/useRole'
 
-function ComponentPermissionGuard({ permittedRoles, children }) {
+function ComponentPermissionGuard({ permittedRoles, children = null }) {
   const userRole = useRole()
   const isAccess = permittedRoles.includes(userRole)
   return isAccess ? children : null
-}
-
-ComponentPermissionGuard.defaultProps = {
-  children: null
 }
 
 ComponentPermissionGuard.propTypes = {

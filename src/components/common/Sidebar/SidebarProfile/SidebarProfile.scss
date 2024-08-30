@@ -1,107 +1,113 @@
 .c-sidebar-profile {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+
+  .sidebar-profile-image {
+    flex: 0 0 60px;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    border-radius: 12px;
+
+    img {
+      width: 45px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+  }
+
+  .sidebar-profile-info {
+    flex: 1 1;
     width: 100%;
     height: 100%;
+    max-width: 0;
+    overflow-x: hidden;
+    transition: all 0.3s linear;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2px;
+    user-select: text;
 
-    .sidebar-profile-image {
-        flex: 0 0 60px;
-        display: grid;
-        place-items: center;
-        height: 100%;
+    .sidebar-profile-login {
+      font-size: 14px;
+      font-weight: 600;
+      overflow-x: auto;
+      scrollbar-width: none;
+      white-space: nowrap;
 
-        img {
-            width: 45px;
-            height: 45px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
-    .sidebar-profile-info {
-        flex: 1 1;
-        width: 100%;
-        height: 100%;
-        max-width: 0;
-        overflow-x: hidden;
+    .sidebar-profile-email {
+      font-size: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      white-space: nowrap;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .sidebar-profile-menu {
+    flex: 0 0 50px;
+    max-width: 0;
+    transition: all 0.3s linear;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    overflow-x: hidden;
+
+    .menu-icon {
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.3s linear;
+      max-width: 0;
+
+      &:hover {
+        background: var(--menu-icon-background-color);
         transition: all 0.3s linear;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: center;
-        gap: 2px;
-        user-select: text;
+      }
 
-        .sidebar-profile-login {
-            font-size: 14px;
-            font-weight: 600;
-            overflow-x: auto;
-            scrollbar-width: none;
+      svg {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
 
-            &::-webkit-scrollbar {
-                display: none;
-            }
-        }
-
-        .sidebar-profile-email {
-            font-size: 12px;
-            overflow-x: auto;
-            scrollbar-width: none;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
-        }
+  &.expand {
+    .sidebar-profile-info {
+      max-width: 155px;
+      transition: all 0.3s linear;
     }
 
     .sidebar-profile-menu {
-        flex: 0 0 50px;
-        max-width: 0;
+      max-width: 50px;
+      transition: all 0.3s linear;
+      overflow-x: visible;
+
+      .menu-icon {
+        max-width: 40px;
         transition: all 0.3s linear;
-        height: 100%;
-        display: grid;
-        place-items: center;
-        overflow-x: hidden;
-
-        .menu-icon {
-            height: 40px;
-            width: 40px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: all 0.3s linear;
-            max-width: 0;
-
-            &:hover {
-                background: var(--menu-icon-background-color);
-                transition: all 0.3s linear;
-            }
-
-            svg {
-                height: 20px;
-                width: 20px;
-            }
-        }
+      }
     }
-
-    &.expand {
-
-        .sidebar-profile-info {
-            max-width: 155px;
-            transition: all 0.3s linear;
-        }
-
-        .sidebar-profile-menu {
-            max-width: 50px;
-            transition: all 0.3s linear;
-            overflow-x: visible;
-
-            .menu-icon {
-                max-width: 40px;
-                transition: all 0.3s linear;
-            }
-        }
-    }
+  }
 }

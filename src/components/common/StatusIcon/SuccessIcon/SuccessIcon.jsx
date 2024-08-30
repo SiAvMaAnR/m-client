@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './SuccessIcon.scss'
 
-function SuccessIcon({ className }) {
+function SuccessIcon({ className = '' }) {
   return (
     <div className={`c-success-icon ${className}`}>
       <svg
@@ -64,10 +64,6 @@ function SuccessIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-SuccessIcon.defaultProps = {
-  className: ''
 }
 
 SuccessIcon.propTypes = {

@@ -3,7 +3,7 @@
 
   &.invalid {
     .form-input {
-      border: solid 2px var(--invalid-error-color);
+      border: solid 2px var(--error-color);
     }
   }
 
@@ -11,13 +11,17 @@
     border-radius: 13px;
     border: 1px solid var(--border-color);
     display: flex;
-    padding: 3px 40px 3px 30px;
+    padding: 3px 30px 3px 30px;
     align-items: center;
     background: var(--background-color);
     outline: none;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 400;
+
+    &.password {
+      padding: 3px 40px 3px 30px;
+    }
 
     &::placeholder {
       color: var(--placeholder-color);
@@ -73,6 +77,6 @@
     cursor: pointer;
     height: 18px;
     width: 18px;
-    color: var(--invalid-error-color);
+    color: var(--error-color);
   }
 }

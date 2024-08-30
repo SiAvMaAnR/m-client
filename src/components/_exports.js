@@ -16,6 +16,10 @@ import StatusIcon from './common/StatusIcon/StatusIcon'
 import UserItem from './usersPage/UserItem/UserItem'
 import PageHeader from './common/PageHeader/PageHeader'
 import Pagination from './common/Pagination/Pagination'
+import SearchInput from './common/Input/SearchInput/SearchInput'
+import BaseModal from './common/Modal/BaseModal/BaseModal'
+import MessageIcon from './common/Icon/MessageIcon/MessageIcon'
+import RoundCheckbox from './common/Checkbox/RoundCheckbox/RoundCheckbox'
 
 export {
   SidebarLayout,
@@ -35,5 +39,9 @@ export {
   StatusIcon,
   UserItem,
   PageHeader,
-  Pagination
+  Pagination,
+  SearchInput,
+  BaseModal,
+  MessageIcon,
+  RoundCheckbox,
 }

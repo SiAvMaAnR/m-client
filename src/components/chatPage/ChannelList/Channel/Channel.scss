@@ -1,0 +1,106 @@
+.c-channel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 62px;
+  min-height: 62px;
+  background: var(--background-color);
+  border: solid 1px transparent;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  gap: 10px;
+  user-select: none;
+
+  &:hover {
+    border-color: var(--border-color);
+    background: var(--hover-background-color);
+  }
+
+  &.active {
+    background: var(--font-color-primary-0);
+    color: var(--selected-font-color);
+  }
+
+  .channel-image {
+    flex: 0 0 68px;
+    display: grid;
+    place-items: center;
+    height: 100%;
+
+    img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  .channel-info {
+    flex: 1 1;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    overflow: hidden;
+
+    .channel-info-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-basis: 50%;
+
+      .title {
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .activity {
+        text-align: center;
+        font-size: 12px;
+        padding: 0 14px;
+        white-space: nowrap;
+      }
+    }
+
+    .channel-info-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-basis: 50%;
+      overflow: hidden;
+
+      .message {
+        flex: 0 1 80%;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .counter {
+        flex: 0 0 50px;
+        display: grid;
+        place-items: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 10px;
+        transition: all 0.1s linear;
+        overflow: hidden;
+
+        div {
+          display: grid;
+          place-items: center;
+          width: 23px;
+          height: 23px;
+          border-radius: 50%;
+          border: solid 1px var(--border-color);
+        }
+      }
+    }
+  }
+}

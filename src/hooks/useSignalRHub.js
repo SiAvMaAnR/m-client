@@ -1,21 +1,24 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import signalR from '../socket/signalR'
 
 const useSignalRHub = (hubName) => {
   const isLogged = useSelector((state) => state.auth.info.isLogged)
-
-  const connection = signalR[hubName]
+  const connectionRef = useRef(signalR[hubName])
 
   useEffect(() => {
+    const connection = connectionRef.current
+
     if (isLogged) {
-      connection.start()
+      connection.start().catch((err) => console.error(err))
     }
 
-    return () => connection.stop()
-  }, [connection, isLogged])
+    return () => {
+      connection.stop()
+    }
+  }, [isLogged, hubName])
 
-  return connection
+  return connectionRef.current
 }
 
 export default useSignalRHub

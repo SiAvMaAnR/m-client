@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './FailedIcon.scss'
 
-function FailedIcon({ className }) {
+function FailedIcon({ className = '' }) {
   return (
     <div className={`c-failed-icon ${className}`}>
       <svg
@@ -80,10 +80,6 @@ function FailedIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-FailedIcon.defaultProps = {
-  className: ''
 }
 
 FailedIcon.propTypes = {

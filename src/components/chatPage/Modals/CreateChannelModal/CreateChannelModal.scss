@@ -1,0 +1,130 @@
+.c-create-channel-modal {
+  user-select: none;
+
+  .base-modal {
+    height: 570px;
+    width: 470px;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+
+    .header {
+      flex-basis: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 15px;
+      border-bottom: solid 1px var(--border-color);
+
+      .brand {
+        padding-left: 8px;
+      }
+
+      .search {
+        .user-search {
+          border-radius: 20px;
+          height: 38px;
+        }
+      }
+    }
+
+    .message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+      height: 30px;
+      border-bottom: solid 1px var(--border-color);
+      color: var(--error-color);
+      gap: 10px;
+
+      .valid-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+      }
+
+      &-enter {
+        opacity: 0;
+        max-height: 0;
+      }
+    
+      &-enter-active {
+        opacity: 1;
+        max-height: 100px;
+        transition: all 0.5s ease;
+      }
+    
+      &-exit {
+        opacity: 1;
+        max-height: 100px;
+      }
+    
+      &-exit-active {
+        opacity: 0;
+        transition: all 0.5s ease;
+        max-height: 0;
+      }
+    }
+
+    .content {
+      flex: 1 0;
+      background: var(--background-color-1);
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+      align-items: stretch;
+      gap: 3px;
+      padding: 8px 6px;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--font-color-primary-0);
+      }
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      border-top: solid 1px var(--border-color);
+
+      .channel-name-input {
+        flex-basis: 50%;
+
+        .form-input {
+          height: 42px;
+          width: 240px;
+          font-size: 15px;
+
+          &::placeholder {
+            font-size: 13px;
+          }
+        }
+      }
+
+      .channel-create-btn {
+        .create-btn {
+          height: 42px;
+          width: 120px;
+          border-radius: 13px;
+        }
+      }
+    }
+  }
+}

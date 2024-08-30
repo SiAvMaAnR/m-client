@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './ValidIcon.scss'
 
-function ValidIcon({ className }) {
+function ValidIcon({ className = '' }) {
   return (
     <div className={`c-valid-icon ${className}`}>
       <svg
@@ -15,10 +15,6 @@ function ValidIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-ValidIcon.defaultProps = {
-  className: ''
 }
 
 ValidIcon.propTypes = {

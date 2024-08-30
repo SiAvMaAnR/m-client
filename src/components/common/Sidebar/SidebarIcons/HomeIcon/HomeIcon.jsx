@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './HomeIcon.scss'
 
-function HomeIcon({ className }) {
+function HomeIcon({ className = '' }) {
   return (
     <div className={`c-home-icon ${className}`}>
       <svg
@@ -20,10 +20,6 @@ function HomeIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-HomeIcon.defaultProps = {
-  className: ''
 }
 
 HomeIcon.propTypes = {

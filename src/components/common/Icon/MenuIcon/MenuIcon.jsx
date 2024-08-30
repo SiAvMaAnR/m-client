@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './MenuIcon.scss'
 
-function MenuIcon({ className }) {
+function MenuIcon({ className = '' }) {
   return (
     <div className={`c-menu-icon ${className}`}>
       <svg
@@ -19,10 +19,6 @@ function MenuIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-MenuIcon.defaultProps = {
-  className: ''
 }
 
 MenuIcon.propTypes = {

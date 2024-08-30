@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types'
-import defaultProfileImg from '../../../constants/defaultProfileImg'
 import ToolsIcon from './ToolsIcon/ToolsIcon'
 import DropDown from '../../common/DropDown/DropDown'
 import { activityStatus } from '../../../constants/system'
 import api from '../../../api/api'
 import UnblockIcon from './DropDownIcons/Unblock/UnblockIcon'
 import BlockIcon from './DropDownIcons/BlockIcon/BlockIcon'
+import config from '../../../config/configuration'
+import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import './UserItem.scss'
 
-function UserItem({ className, userInfo, loadUsers }) {
-  const { id, login, email, birthday, activityStatus: status, isBanned } = userInfo
-  const image = userInfo.image || defaultProfileImg
+function UserItem({ className = '', userInfo = null, loadUsers = null }) {
+  const { id, login, email, birthday, activityStatus: status, isBanned, image } = userInfo
   const activityStatusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
   const bannedClass = isBanned ? 'yes' : ''
   const dropDownItems = [
@@ -19,22 +19,26 @@ function UserItem({ className, userInfo, loadUsers }) {
           icon: <UnblockIcon />,
           title: 'Unblock',
           onClick: () => {
-            api.admin.unblockUser({ id }).then(() => loadUsers())
+            api.user.unblockUser({ id }).then(() => loadUsers())
           }
         }
       : {
           icon: <BlockIcon />,
           title: 'Block',
           onClick: () => {
-            api.admin.blockUser({ id }).then(() => loadUsers())
+            api.user.blockUser({ id }).then(() => loadUsers())
           }
         }
   ]
 
+  const imageSrc = image
+    ? `data:image/jpeg;base64, ${image}`
+    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
+
   return (
     <tr className={`c-user-item ${className}`}>
       <td id="image">
-        <img src={image ? `data:image/jpeg;base64, ${image}` : ''} alt="profile-img" />
+        <ImgWrapper src={imageSrc} alt="user-img" />
       </td>
       <td id="id">{id}</td>
       <td id="email">{email}</td>
@@ -53,12 +57,6 @@ function UserItem({ className, userInfo, loadUsers }) {
       </td>
     </tr>
   )
-}
-
-UserItem.defaultProps = {
-  className: '',
-  userInfo: null,
-  loadUsers: null
 }
 
 UserItem.propTypes = {

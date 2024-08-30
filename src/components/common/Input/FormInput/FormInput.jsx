@@ -7,17 +7,17 @@ import ValidIcon from './ValidIcon/ValidIcon'
 import './FormInput.scss'
 
 function FormInput({
-  placeholder,
-  type,
-  autoComplete,
-  onChange,
-  value,
-  className,
-  required,
-  isPassword,
-  validator,
-  onValid,
-  pattern
+  placeholder = '',
+  type = 'text',
+  autoComplete = null,
+  onChange = () => {},
+  value = '',
+  className = '',
+  required = false,
+  isPassword = false,
+  validator = null,
+  onValid = () => {},
+  pattern = null
 }) {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false)
   const [isValid, setIsValid] = useState(true)
@@ -80,7 +80,7 @@ function FormInput({
       )}
 
       <input
-        className={`form-input ${className}`}
+        className={`form-input ${className} ${isPassword ? 'password' : ''}`}
         type={isVisiblePassword ? 'text' : type}
         autoComplete={autoComplete}
         placeholder={placeholder}
@@ -91,20 +91,6 @@ function FormInput({
       />
     </div>
   )
-}
-
-FormInput.defaultProps = {
-  type: 'text',
-  placeholder: '',
-  onChange: () => {},
-  value: '',
-  className: '',
-  autoComplete: null,
-  required: false,
-  pattern: null,
-  isPassword: false,
-  validator: null,
-  onValid: () => {}
 }
 
 FormInput.propTypes = {

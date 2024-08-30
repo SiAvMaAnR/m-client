@@ -1,64 +1,70 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import api from '../../../api/api'
+import ChatHeader from '../../../components/chatPage/ChatHeader/ChatHeader'
+import ChannelList from '../../../components/chatPage/ChannelList/ChannelList'
+import MessageList from '../../../components/chatPage/MessageList/MessageList'
+import NewMessage from '../../../components/chatPage/NewMessage/NewMessage'
 import './Chat.scss'
 
-const pageSize = 15
-
 function Chat() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [channels, setChannels] = useState([])
-  const [pageNumber, setPageNumber] = useState(0)
-  const [pagesCount, setPagesCount] = useState(0)
+  const { id } = useParams()
+  const [selectedChannelId, setSelectedChannelId] = useState(id)
+  const [selectedChannel, setSelectedChannel] = useState(null)
+  const [isLoadingChatHeader, setIsLoadingChatHeader] = useState(false)
 
-  const loadChannels = useCallback(async () => {
+  const loadChannel = async (channelId) => {
     try {
-      setIsLoading(true)
+      setIsLoadingChatHeader(true)
 
-      const { data, response } = await api.chat.channels({
-        pageNumber,
-        pageSize
-      })
+      const result = await api.channel.accountChannel({ id: channelId })
 
-      if (response?.data?.errors) {
-        throw new Error('Something went wrong')
-      }
-
-      if (response?.data?.clientMessage) {
-        throw new Error(response.data.clientMessage)
-      }
-
-      if (!data) {
-        throw new Error('Something went wrong')
-      }
-
-      setChannels(data.channels || [])
-      setPagesCount(data.meta?.pagesCount || 0)
+      setSelectedChannel(result.data)
     } finally {
-      setIsLoading(false)
+      setIsLoadingChatHeader(false)
     }
-  }, [pageNumber])
+  }
 
   useEffect(() => {
-    loadChannels()
-  }, [loadChannels])
+    if (selectedChannelId) {
+      loadChannel(selectedChannelId)
+    } else {
+      setSelectedChannel(null)
+    }
+  }, [selectedChannelId])
+
+  useEffect(() => {
+    setSelectedChannelId(id)
+  }, [id])
 
   return (
     <div className="p-chat">
-      <div className="channels">
-        <div className="channels-header">
-          <div className="header-menu">.</div>
-          <div className="header-search">.</div>
-          <div className="header-new-channel">.</div>
-        </div>
-        <div className="channels-list">.</div>
-      </div>
+      <ChannelList
+        className="channels"
+        selectedChannelId={+selectedChannelId}
+        setSelectedChannelId={setSelectedChannelId}
+      />
 
-      <div className="chat">
-        <div className="chat-header">.</div>
-        <div className="chat-content">
-          <div className="chat-messages">.</div>
-          <div className="chat-input">.</div>
-        </div>
+      <div className="chat-wrapper">
+        {!!selectedChannelId && (
+          <div className="chat">
+            <div className="chat-header-container">
+              <ChatHeader
+                className="chat-header"
+                channel={selectedChannel}
+                isLoading={isLoadingChatHeader}
+              />
+            </div>
+            <div className="chat-content">
+              <div className="chat-messages">
+                <MessageList chatId={+selectedChannelId} />
+              </div>
+              <div className="chat-input">
+                <NewMessage channelId={+selectedChannelId} />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

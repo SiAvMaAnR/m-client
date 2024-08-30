@@ -1,0 +1,12 @@
+.c-img-wrapper {
+  opacity: 0;
+  transition: all 0.2s ease;
+  display: grid;
+  place-items: center;
+
+  &.loaded {
+    opacity: 1;
+  }
+
+  img {}
+}

@@ -5,10 +5,16 @@ import ValidIcon from '../FormInput/ValidIcon/ValidIcon'
 import birthdayValidator from '../../../../utils/validators/birthdayValidator'
 import './DateInput.scss'
 
-function DateInput({ setValue, className, onValid }) {
+function dateAdapter(strDate) {
+  const [year, month, day] = strDate?.split('-') || []
+
+  return { day, month, year }
+}
+
+function DateInput({ setValue = () => {}, className = '', onValid = () => {}, value = null }) {
   const [validDate, setValidDate] = useState({})
   const [errorMessage, setErrorMessage] = useState(null)
-  const [date, setDate] = useState({})
+  const [date, setDate] = useState(dateAdapter(value))
 
   const { day, month, year } = date
   const isFillField = day && month && year
@@ -98,14 +104,9 @@ function DateInput({ setValue, className, onValid }) {
   )
 }
 
-DateInput.defaultProps = {
-  setValue: () => {},
-  className: '',
-  onValid: () => {}
-}
-
 DateInput.propTypes = {
   setValue: PropTypes.func,
+  value: PropTypes.string,
   className: PropTypes.string,
   onValid: PropTypes.func
 }

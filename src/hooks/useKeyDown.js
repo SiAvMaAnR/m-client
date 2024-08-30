@@ -5,7 +5,6 @@ const useKeyDown = (callback, keys) => {
     (event) => {
       const wasAnyKeyPressed = keys.some((key) => event.key === key)
       if (wasAnyKeyPressed) {
-        // event.preventDefault()
         callback(event)
       }
     },

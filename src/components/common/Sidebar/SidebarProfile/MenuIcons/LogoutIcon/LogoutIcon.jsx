@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './LogoutIcon.scss'
 
-function LogoutIcon({ className }) {
+function LogoutIcon({ className = '' }) {
   return (
     <div className={`c-logout-icon ${className}`}>
       <svg
@@ -24,10 +24,6 @@ function LogoutIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-LogoutIcon.defaultProps = {
-  className: ''
 }
 
 LogoutIcon.propTypes = {

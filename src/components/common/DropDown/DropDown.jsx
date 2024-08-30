@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 import DDItem from './DDItem/DDItem'
 import './DropDown.scss'
 
-function DropDown({ className, children, items }) {
+const farAway = 150
+
+function DropDown({ className = '', children = null, items = [] }) {
   const [showDropDown, setShowDropDown] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -14,10 +16,27 @@ function DropDown({ className, children, items }) {
       }
     }
 
+    const handleMouseMove = (event) => {
+      if (dropdownRef.current) {
+        const rect = dropdownRef.current.getBoundingClientRect()
+        const isFarAway =
+          event.clientX < rect.left - farAway ||
+          event.clientX > rect.right + farAway ||
+          event.clientY < rect.top - farAway ||
+          event.clientY > rect.bottom + farAway
+
+        if (isFarAway) {
+          setShowDropDown(false)
+        }
+      }
+    }
+
     document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('mousemove', handleMouseMove)
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('mousemove', handleMouseMove)
     }
   }, [])
 
@@ -38,12 +57,6 @@ function DropDown({ className, children, items }) {
       )}
     </div>
   )
-}
-
-DropDown.defaultProps = {
-  className: '',
-  children: null,
-  items: []
 }
 
 DropDown.propTypes = {

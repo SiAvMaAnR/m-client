@@ -2,7 +2,13 @@ import PropTypes from 'prop-types'
 import PaginationIcon from './PaginationIcon/PaginationIcon'
 import './Pagination.scss'
 
-function Pagination({ className, pageNumber, pagesCount, onNext, onPrev }) {
+function Pagination({
+  className = '',
+  pageNumber = 0,
+  pagesCount = 0,
+  onNext = () => {},
+  onPrev = () => {}
+}) {
   return (
     <div className={`c-pagination ${className}`}>
       <div className="pagination-previous" onClick={onPrev} role="presentation">
@@ -24,14 +30,6 @@ function Pagination({ className, pageNumber, pagesCount, onNext, onPrev }) {
       </div>
     </div>
   )
-}
-
-Pagination.defaultProps = {
-  className: '',
-  pageNumber: 0,
-  pagesCount: 0,
-  onNext: () => {},
-  onPrev: () => {}
 }
 
 Pagination.propTypes = {

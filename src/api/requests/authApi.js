@@ -5,6 +5,7 @@ const path = '/api/auth'
 const authApi = {
   login: async ({ email, password }) => {
     const body = { email, password }
+
     const response = await axiosInstance.post(`${path}/login`, body)
     return response
   },
@@ -31,7 +32,7 @@ const authApi = {
     const body = { resetToken, password }
     const response = await axiosInstance.post(`${path}/reset-password`, body)
     return response
-  },
+  }
 }
 
 export default authApi

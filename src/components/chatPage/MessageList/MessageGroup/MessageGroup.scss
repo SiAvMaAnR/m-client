@@ -1,0 +1,104 @@
+.c-message-group {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    user-select: none;
+
+    &.my-group {
+        flex-direction: row-reverse;
+
+        .data-wrapper {
+            align-items: flex-end;
+
+            .group-header {
+                justify-content: flex-end;
+                flex-direction: row-reverse;
+
+                .group-read {
+                    opacity: 1;
+
+                    &.read {
+                        svg {
+                            stroke: var(--common-color-0);
+                        }
+                    }
+
+                    svg {
+                        stroke: var(--common-color-1);
+                    }
+                }
+            }
+
+            .group-messages {
+                align-items: flex-end;
+            }
+        }
+    }
+
+    .author-img {
+        height: 100%;
+        padding: 0 15px;
+
+        img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+
+    .data-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .group-header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 1px 5px 4px;
+            gap: 10px;
+
+            .group-author {
+                font-size: 16px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 600;
+                white-space: nowrap;
+                cursor: pointer;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: var(--common-color-0);
+                }
+            }
+
+            .group-time {
+                font-size: 12px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 500;
+                padding: 2px 0 0;
+            }
+
+            .group-read {
+                padding: 0 0 2px;
+                opacity: 0;
+
+                svg {
+                    height: 17px;
+                    width: 17px;
+                    stroke: var(--common-color-0);
+                }
+            }
+        }
+
+        .group-messages {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+    }
+}

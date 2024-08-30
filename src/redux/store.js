@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { authReducer, systemReducer } from './_exports'
+import { authReducer, systemReducer, signalRReducer } from './_exports'
 
 const persistConfig = {
   key: 'root',
@@ -11,7 +11,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  system: systemReducer
+  system: systemReducer,
+  signalR: signalRReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

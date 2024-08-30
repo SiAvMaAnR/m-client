@@ -35,6 +35,39 @@
       align-items: stretch;
       border-radius: 25px;
       box-shadow: 0px 0 10px 6px var(--shadow-color);
+      position: relative;
+
+      .go-to-back {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        left: -65px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+
+        .arrow-icon {
+          height: 180px;
+          width: 55px;
+          border-radius: 25px;
+          transition: all 0.3s ease;
+
+          svg {
+            transform: scale(2) scaleY(1.5) rotateY(180deg);
+            fill: var(--common-color-0);
+            opacity: 0.4;
+            transition: all 0.3s ease;
+          }
+
+          &:hover {
+            box-shadow: 0px 0 10px 6px var(--shadow-color);
+
+            svg {
+              opacity: 1;
+            }
+          }
+        }
+      }
 
       .description {
         flex: 0 0 53%;

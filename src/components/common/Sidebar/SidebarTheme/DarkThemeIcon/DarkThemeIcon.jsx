@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './DarkThemeIcon.scss'
 
-function DarkThemeIcon({ className }) {
+function DarkThemeIcon({ className = '' }) {
   return (
     <div className={`c-dark-theme-icon ${className}`}>
       <svg
@@ -27,10 +27,6 @@ function DarkThemeIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-DarkThemeIcon.defaultProps = {
-  className: ''
 }
 
 DarkThemeIcon.propTypes = {

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './UnblockIcon.scss'
 
-function UnblockIcon({ className }) {
+function UnblockIcon({ className = '' }) {
   return (
     <div className={`c-unblock-icon ${className}`}>
       <svg
@@ -20,10 +20,6 @@ function UnblockIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-UnblockIcon.defaultProps = {
-  className: ''
 }
 
 UnblockIcon.propTypes = {

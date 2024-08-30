@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './BlockIcon.scss'
 
-function BlockIcon({ className }) {
+function BlockIcon({ className = '' }) {
   return (
     <div className={`c-block-icon ${className}`}>
       <svg
@@ -17,10 +17,6 @@ function BlockIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-BlockIcon.defaultProps = {
-  className: ''
 }
 
 BlockIcon.propTypes = {

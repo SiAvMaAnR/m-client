@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './ShowIcon.scss'
 
-function ShowIcon({ className }) {
+function ShowIcon({ className = '' }) {
   return (
     <div className={`c-show-icon ${className}`}>
       <svg
@@ -27,10 +27,6 @@ function ShowIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-ShowIcon.defaultProps = {
-  className: ''
 }
 
 ShowIcon.propTypes = {

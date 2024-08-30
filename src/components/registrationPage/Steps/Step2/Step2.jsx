@@ -4,7 +4,12 @@ import { FormDesc, FormInput, FormTitle } from '../../../_exports'
 import { loginValidator } from '../../../../utils/validators/_exports'
 import './Step2.scss'
 
-function Step2({ className, setRegistrationData, registrationData, setIsValid }) {
+function Step2({
+  className = '',
+  setRegistrationData = null,
+  registrationData = null,
+  setIsValid = () => {}
+}) {
   const [isValidLogin, setIsValidLogin] = useState(false)
 
   const { login } = registrationData
@@ -38,13 +43,6 @@ function Step2({ className, setRegistrationData, registrationData, setIsValid })
       </div>
     </div>
   )
-}
-
-Step2.defaultProps = {
-  setRegistrationData: null,
-  registrationData: null,
-  className: '',
-  setIsValid: null
 }
 
 Step2.propTypes = {

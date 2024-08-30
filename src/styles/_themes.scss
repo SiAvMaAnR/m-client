@@ -2,6 +2,8 @@
 
 .app {
   --font-color-primary-0: #{$c-purple-0};
+  --font-color-primary-1: #{$c-black-0};
+  --font-color-primary-2: #{$c-white-0};
 
   .c-brand {
     --font-color-1: #{$c-purple-0};
@@ -14,12 +16,17 @@
 }
 
 .app[data-theme='dark'] {
+  --common-color-0: #{$c-dark-primary-4};
+  --common-color-1: #{$c-dark-neutral-4};
   --background-color: #{$c-dark-neutral-0};
   --background-color-1: #{$c-dark-neutral-2};
+  --background-color-2: #{$c-purple-0};
   --shadow-color: #{$c-dark-secondary-1};
   --placeholder-color: #{$c-dark-secondary-0};
   --border-color: #{$c-dark-secondary-4};
+  --border-color-1: #{$c-purple-0};
   --icon-background-color: #{$c-dark-neutral-2};
+  --error-color: #{$c-dark-primary-2};
 
   .c-nav-link {
     --font-color: #{$c-white-0};
@@ -36,7 +43,6 @@
     --text-fill-color: #{$c-black-0};
     --toggle-background-color: #{$c-dark-secondary-2};
     --toggle-stroke-color: #{$c-dark-secondary-3};
-    --invalid-error-color: #{$c-dark-primary-2};
   }
 
   .c-sidebar {
@@ -48,22 +54,50 @@
     --default-item-color: #{$c-dark-primary-3};
   }
 
-  .c-dropdown{
+  .c-dropdown {
     --menu-icon-background-color: #{$c-dark-neutral-2};
   }
 
   .c-pagination {
     --current-index-color: #{$c-purple-0};
   }
+
+  .c-channel {
+    --hover-background-color: #{$c-dark-neutral-2};
+    --font-color: #{$c-black-0};
+    --selected-font-color: #{$c-white-0};
+    --last-message-font-color: #{$c-black-0};
+  }
+
+  .c-base-modal {
+    --modal-background-color: #{$c-dark-neutral-0};
+    --modal-background-color-1: #{$c-dark-neutral-3};
+    --border-color: #{$c-dark-secondary-4};
+  }
+
+  .c-round-checkbox {
+    --border-color: #{$c-dark-secondary-4};
+    --checked-background-color: #{$c-purple-0};
+  }
+
+  .c-message-list {
+    --message-background-color: #{$c-light-neutral-2};
+    --my-message-background-color: #{$c-purple-0};
+  }
 }
 
 .app[data-theme='light'] {
+  --common-color-0: #{$c-light-primary-4};
+  --common-color-1: #{$c-light-neutral-4};
   --background-color: #{$c-light-neutral-0};
   --background-color-1: #{$c-light-neutral-2};
+  --background-color-2: #{$c-purple-0};
   --shadow-color: #{$c-light-secondary-1};
   --placeholder-color: #{$c-light-secondary-0};
   --border-color: #{$c-light-secondary-4};
+  --border-color-1: #{$c-purple-0};
   --icon-background-color: #{$c-light-neutral-2};
+  --error-color: #{$c-dark-primary-2};
 
   .c-nav-link {
     --font-color: #{$c-black-0};
@@ -80,7 +114,6 @@
     --text-fill-color: #{$c-black-0};
     --toggle-background-color: #{$c-light-secondary-2};
     --toggle-stroke-color: #{$c-light-secondary-3};
-    --invalid-error-color: #{$c-light-primary-2};
   }
 
   .c-sidebar {
@@ -92,11 +125,34 @@
     --default-item-color: #{$c-light-primary-3};
   }
 
-  .c-dropdown{
+  .c-dropdown {
     --menu-icon-background-color: #{$c-light-neutral-2};
   }
 
   .c-pagination {
     --current-index-color: #{$c-purple-0};
+  }
+
+  .c-channel {
+    --hover-background-color: #{$c-light-neutral-2};
+    --font-color: #{$c-black-0};
+    --selected-font-color: #{$c-white-0};
+    --last-message-font-color: #{$c-black-0};
+  }
+
+  .c-base-modal {
+    --modal-background-color: #{$c-light-neutral-0};
+    --modal-background-color-1: #{$c-light-neutral-3};
+    --border-color: #{$c-light-secondary-4};
+  }
+
+  .c-round-checkbox {
+    --border-color: #{$c-light-secondary-4};
+    --checked-background-color: #{$c-purple-0};
+  }
+
+  .c-message-list {
+    --message-background-color: #{$c-light-neutral-2};
+    --my-message-background-color: #{$c-purple-0};
   }
 }

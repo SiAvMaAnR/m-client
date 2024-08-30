@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './SettingsIcon.scss'
 
-function SettingsIcon({ className }) {
+function SettingsIcon({ className = '' }) {
   return (
     <div className={`c-settings-icon ${className}`}>
       <svg
@@ -24,10 +24,6 @@ function SettingsIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-SettingsIcon.defaultProps = {
-  className: ''
 }
 
 SettingsIcon.propTypes = {

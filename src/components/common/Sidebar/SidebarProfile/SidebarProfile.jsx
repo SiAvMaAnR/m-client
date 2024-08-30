@@ -2,17 +2,16 @@ import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import api from '../../../../api/api'
-import { page, role } from '../../../../constants/system'
-import useRole from '../../../../hooks/useRole'
-import useAuth from '../../../../hooks/useAuth'
-import defaultProfileImg from '../../../../constants/defaultProfileImg'
-import MenuIcon from './MenuIcon/MenuIcon'
+import { page } from '../../../../constants/system'
+import { useRole, useAuth } from '../../../../hooks/_exports'
+import MenuIcon from '../../Icon/MenuIcon/MenuIcon'
 import DropDown from '../../DropDown/DropDown'
 import LogoutIcon from './MenuIcons/LogoutIcon/LogoutIcon'
 import SettingsIcon from './MenuIcons/SettingsIcon/SettingsIcon'
+import config from '../../../../config/configuration'
 import './SidebarProfile.scss'
 
-function SidebarProfile({ className, isExpand }) {
+function SidebarProfile({ className = '', isExpand = false }) {
   const [image, setImage] = useState(null)
   const [email, setEmail] = useState('')
   const [login, setLogin] = useState('')
@@ -20,20 +19,19 @@ function SidebarProfile({ className, isExpand }) {
   const userRole = useRole()
   const { logOut } = useAuth()
   const navigate = useNavigate()
-  const roleApi = userRole === role.user ? api.user : api.admin
 
   useEffect(() => {
     api.account.image().then((result) => {
-      setImage(result?.data?.image || defaultProfileImg)
+      setImage(result?.data?.image)
     })
   }, [])
 
   useEffect(() => {
-    roleApi.profile().then((result) => {
+    api.account.profile().then((result) => {
       setEmail(result?.data?.email ?? 'none')
       setLogin(result?.data?.login ?? 'none')
     })
-  }, [userRole, roleApi])
+  }, [userRole])
 
   const menuItems = [
     {
@@ -51,10 +49,19 @@ function SidebarProfile({ className, isExpand }) {
     }
   ]
 
+  const imageSrc = image
+    ? `data:image/jpeg;base64, ${image}`
+    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
+
   return (
     <div className={`c-sidebar-profile ${className} ${expandClass}`}>
       <div className="sidebar-profile-image">
-        <img src={image ? `data:image/jpeg;base64, ${image}` : ''} alt="profile-img" />
+        <img
+          src={imageSrc}
+          alt="profile-img"
+          onClick={() => navigate(page.profile)}
+          role="presentation"
+        />
       </div>
 
       <div className="sidebar-profile-info">
@@ -69,11 +76,6 @@ function SidebarProfile({ className, isExpand }) {
       </div>
     </div>
   )
-}
-
-SidebarProfile.defaultProps = {
-  className: '',
-  isExpand: false
 }
 
 SidebarProfile.propTypes = {

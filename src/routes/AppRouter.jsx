@@ -14,33 +14,39 @@ import { RoutePermissionGuard, SidebarLayout } from '../components/_exports'
 
 function AppRouter() {
   const isLogged = useSelector((state) => state.auth.info.isLogged)
-  const defaultPage = isLogged ? page.home : page.login
 
+  return <div className="app-router">{isLogged ? <LoggedRouter /> : <GuestRouter />}</div>
+}
+
+function LoggedRouter() {
   return (
-    <div className="app-router">
-      <Routes>
-        <Route path="*" element={<Navigate to={defaultPage} />} />
+    <Routes>
+      <Route path="*" element={<Navigate to={page.home} />} />
 
-        <Route element={<RoutePermissionGuard permittedRoles={[role.public]} />}>
-          <Route path="login" element={<Login />} />
-          <Route path="registration" element={<Registration />} />
-          <Route path="confirm-registration" element={<ConfirmedRegistration />} />
-        </Route>
+      <Route element={<RoutePermissionGuard permittedRoles={[role.admin]} />}>
+        <Route path="users" element={<SidebarLayout page={<Users />} />} />
+      </Route>
 
-        <Route element={<RoutePermissionGuard permittedRoles={[role.admin]} />}>
-          <Route path="users" element={<SidebarLayout page={<Users />} />} />
-        </Route>
+      <Route element={<RoutePermissionGuard permittedRoles={[role.user, role.admin]} />}>
+        <Route path="home" element={<SidebarLayout page={<Home />} />} />
+        <Route path="chat/:id?" element={<SidebarLayout page={<Chat />} />} />
+        <Route path="profile" element={<SidebarLayout page={<Profile />} />} />
+      </Route>
+    </Routes>
+  )
+}
 
-        <Route element={<RoutePermissionGuard permittedRoles={[role.user]} />}>
-          <Route path="profile" element={<SidebarLayout page={<Profile />} />} />
-        </Route>
+function GuestRouter() {
+  return (
+    <Routes>
+      <Route path="*" element={<Navigate to={page.login} />} />
 
-        <Route element={<RoutePermissionGuard permittedRoles={[role.user, role.admin]} />}>
-          <Route path="home" element={<SidebarLayout page={<Home />} />} />
-          <Route path="chat" element={<SidebarLayout page={<Chat />} />} />
-        </Route>
-      </Routes>
-    </div>
+      <Route element={<RoutePermissionGuard permittedRoles={[role.public]} />}>
+        <Route path="login" element={<Login />} />
+        <Route path="registration" element={<Registration />} />
+        <Route path="confirm-registration" element={<ConfirmedRegistration />} />
+      </Route>
+    </Routes>
   )
 }
 

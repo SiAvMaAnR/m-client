@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './HideIcon.scss'
 
-function HideIcon({ className }) {
+function HideIcon({ className = '' }) {
   return (
     <div className={`c-hide-icon ${className}`}>
       <svg
@@ -34,10 +34,6 @@ function HideIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-HideIcon.defaultProps = {
-  className: ''
 }
 
 HideIcon.propTypes = {

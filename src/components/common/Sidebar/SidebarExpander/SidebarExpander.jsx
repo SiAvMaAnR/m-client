@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './SidebarExpander.scss'
 
-function SidebarExpander({ className }) {
+function SidebarExpander({ className = '' }) {
   return (
     <div className={`c-sidebar-expander ${className}`}>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
@@ -9,10 +9,6 @@ function SidebarExpander({ className }) {
       </svg>
     </div>
   )
-}
-
-SidebarExpander.defaultProps = {
-  className: ''
 }
 
 SidebarExpander.propTypes = {

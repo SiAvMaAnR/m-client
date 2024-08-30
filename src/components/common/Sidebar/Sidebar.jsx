@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { page, role } from '../../../constants/system'
-import useKeyDown from '../../../hooks/useKeyDown'
+import { useKeyDown } from '../../../hooks/_exports'
 import SidebarItem from './SidebarItem/SidebarItem'
 import SidebarHeader from './SidebarHeader/SidebarHeader'
 import SidebarSearch from './SidebarSearch/SidebarSearch'
@@ -10,12 +10,11 @@ import SidebarExpander from './SidebarExpander/SidebarExpander'
 import HomeIcon from './SidebarIcons/HomeIcon/HomeIcon'
 import MessengerIcon from './SidebarIcons/MessengerIcon/MessengerIcon'
 import UsersIcon from './SidebarIcons/UsersIcon/UsersIcon'
-import './Sidebar.scss'
 import ComponentPermissionGuard from '../../permission/ComponentPermissionGuard'
+import './Sidebar.scss'
 
 function Sidebar() {
   const [expand, setExpand] = useState(false)
-  // counters to slice
 
   const expandHandler = () => {
     setExpand(!expand)

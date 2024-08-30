@@ -1,16 +1,18 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState } from 'react'
 import api from '../../../api/api'
 import { page } from '../../../constants/system'
 import { Brand, FormButton, FormDesc, FormTitle, Logo, NavLink } from '../../../components/_exports'
 import { Step1, Step2, Step3, Step4 } from '../../../components/registrationPage/Steps/_exports'
 import './Registration.scss'
+import ArrowIcon from '../../../components/common/Icon/ArrowIcon/ArrowIcon'
 
 function Registration() {
   const [registrationData, setRegistrationData] = useState({
-    login: 'SiAvMaAnR',
-    email: 'samarkin20022002@gmail.com',
-    password: 'Sosnova61S',
-    confirmationPassword: 'Sosnova61S'
+    login: '',
+    email: '',
+    password: '',
+    confirmationPassword: ''
   })
   const [isLoading, setIsLoading] = useState(false)
   const [currentStepNumber, setCurrentStepNumber] = useState(0)
@@ -24,31 +26,18 @@ function Registration() {
 
   const { login, email, password, birthday } = registrationData
 
+  const stepParams = {
+    className: 'step',
+    registrationData,
+    setRegistrationData,
+    setIsValid
+  }
+
   const steps = [
-    <Step1
-      className="step"
-      registrationData={registrationData}
-      setRegistrationData={setRegistrationData}
-      setIsValid={setIsValid}
-    />,
-    <Step2
-      className="step"
-      registrationData={registrationData}
-      setRegistrationData={setRegistrationData}
-      setIsValid={setIsValid}
-    />,
-    <Step3
-      className="step"
-      registrationData={registrationData}
-      setRegistrationData={setRegistrationData}
-      setIsValid={setIsValid}
-    />,
-    <Step4
-      className="step"
-      registrationData={registrationData}
-      setRegistrationData={setRegistrationData}
-      setIsValid={setIsValid}
-    />
+    <Step1 {...stepParams} />,
+    <Step2 {...stepParams} />,
+    <Step3 {...stepParams} />,
+    <Step4 {...stepParams} />
   ]
 
   useEffect(() => {
@@ -95,6 +84,19 @@ function Registration() {
     }
   }
 
+  const prevStepHandler = async () => {
+    const prevStep = currentStepNumber - 1
+
+    if (result.isCompleted) {
+      setResult((prevResult) => ({
+        ...prevResult,
+        isCompleted: false
+      }))
+    } else if (prevStep >= 0) {
+      setCurrentStepNumber(prevStep)
+    }
+  }
+
   const nextStepHandler = async () => {
     const nextStep = currentStepNumber + 1
 
@@ -123,9 +125,12 @@ function Registration() {
           </NavLink>
         </div>
       </div>
-
       <div className="registration-content">
         <div className="registration-panel">
+          <div className="go-to-back">
+            <ArrowIcon onClick={prevStepHandler} className="arrow-icon" />
+          </div>
+
           <div className="description">
             <div className="title">Create your account</div>
             <div className="content">

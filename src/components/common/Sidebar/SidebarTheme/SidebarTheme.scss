@@ -1,80 +1,80 @@
 .c-sidebar-theme {
-    display: grid;
-    place-items: center;
-    height: 100%;
-    width: 100%;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 100%;
 
+  .sidebar-theme-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    width: 38px;
+    border-radius: 24px;
+    background: var(--default-background-color);
+    padding: 3px;
+    transition: all 0.5s ease;
+
+    .sidebar-theme {
+      border-radius: 24px;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      place-items: center;
+      justify-content: center;
+      transition: all 0.5s ease;
+      overflow: hidden;
+
+      &:hover {
+        background: var(--background-item-color);
+      }
+
+      &.active {
+        background: var(--background-item-color);
+      }
+
+      &.active {
+        max-width: 0;
+        transition: all 0.3s ease;
+
+        .sidebar-theme-icon {
+          transition: all 0.3s ease;
+          max-width: 0;
+          overflow: hidden;
+        }
+      }
+
+      .sidebar-theme-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        max-width: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+
+  &.expand {
     .sidebar-theme-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 38px;
-        width: 38px;
-        border-radius: 24px;
-        background: var(--default-background-color);
-        padding: 3px;
-        transition: all 0.5s ease;
+      width: 90%;
+      gap: 3px;
+      justify-content: space-between;
 
-        .sidebar-theme {
-            border-radius: 24px;
-            height: 100%;
-            width: 100%;
-            cursor: pointer;
-            display: flex;
-            place-items: center;
-            justify-content: center;
-            transition: all 0.5s ease;
-            overflow: hidden;
+      .sidebar-theme {
+        max-width: 200px;
+        gap: 7px;
+        flex-basis: 50%;
 
-            &:hover {
-                background: var(--background-item-color);
-            }
-
-            &.active {
-                background: var(--background-item-color);
-            }
-
-            &.active {
-                max-width: 0;
-                transition: all 0.3s ease;
-
-                .sidebar-theme-icon {
-                    transition: all 0.3s ease;
-                    max-width: 0;
-                    overflow: hidden;
-                }
-            }
-
-            .sidebar-theme-title {
-                font-family: 'Montserrat', sans-serif;
-                font-size: 12px;
-                font-weight: 500;
-                max-width: 0;
-                overflow: hidden;
-                transition: all 0.3s ease;
-            }
+        .sidebar-theme-icon {
+          max-width: 30px;
         }
-    }
 
-    &.expand {
-        .sidebar-theme-container {
-            width: 90%;
-            gap: 3px;
-            justify-content: space-between;
-
-            .sidebar-theme {
-                max-width: 200px;
-                gap: 7px;
-                flex-basis: 50%;
-
-                .sidebar-theme-icon {
-                    max-width: 30px;
-                }
-
-                .sidebar-theme-title {
-                    max-width: 50px;
-                }
-            }
+        .sidebar-theme-title {
+          max-width: 50px;
         }
+      }
     }
+  }
 }

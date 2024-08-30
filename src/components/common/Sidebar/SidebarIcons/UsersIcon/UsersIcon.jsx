@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import './UsersIcon.scss'
 
-function UsersIcon({ className }) {
+function UsersIcon({ className = '' }) {
   return (
     <div className={`c-users-icon ${className}`}>
       <svg
@@ -39,10 +39,6 @@ function UsersIcon({ className }) {
       </svg>
     </div>
   )
-}
-
-UsersIcon.defaultProps = {
-  className: ''
 }
 
 UsersIcon.propTypes = {

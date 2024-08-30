@@ -1,0 +1,27 @@
+.c-message {
+    background: var(--message-background-color);
+    padding: 10px 14px;
+    width: fit-content;
+    border-radius: 16px;
+    max-width: 550px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &.my-group {
+        background: var(--my-message-background-color);
+        color: var(--font-color-primary-2);
+    }
+
+    .message-text {
+        font-size: 14px;
+        font-family: 'Montserrat', sans-serif;
+        word-wrap: break-word;
+        word-break: break-all;
+        white-space: pre-line;
+    }
+}

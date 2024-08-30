@@ -7,10 +7,10 @@ const monthMaxValue = 12
 const yearMinValue = 1900
 const yearMaxValue = new Date().getFullYear()
 
-const commonPattern = /^\d+$/
-
 function dayValidator(day) {
-  const isValidPattern = commonPattern.test(day)
+  const pattern = /^\d{1,2}$/
+
+  const isValidPattern = pattern.test(day)
   const isValidMaxValue = day <= dayMaxValue
   const isValidMinValue = day >= dayMinValue
 
@@ -22,7 +22,9 @@ function dayValidator(day) {
 }
 
 function monthValidator(month) {
-  const isValidPattern = commonPattern.test(month)
+  const pattern = /^\d{1,2}$/
+
+  const isValidPattern = pattern.test(month)
   const isValidMaxValue = month <= monthMaxValue
   const isValidMinValue = month >= monthMinValue
 
@@ -34,7 +36,9 @@ function monthValidator(month) {
 }
 
 function yearValidator(year) {
-  const isValidPattern = commonPattern.test(year)
+  const pattern = /^\d{4}$/
+
+  const isValidPattern = pattern.test(year)
   const isValidMaxValue = year <= yearMaxValue
   const isValidMinValue = year >= yearMinValue
 

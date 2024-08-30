@@ -15,7 +15,7 @@ function Users() {
     try {
       setIsLoading(true)
 
-      const { data, response } = await api.admin.users({
+      const { data, response } = await api.user.users({
         pageNumber,
         pageSize,
         isLoadImage: true
@@ -35,6 +35,8 @@ function Users() {
 
       setUsers(data.users || [])
       setPagesCount(data.meta?.pagesCount || 0)
+    } catch (err) {
+      // temp
     } finally {
       setIsLoading(false)
     }
@@ -63,8 +65,8 @@ function Users() {
       <div className="users-content">
         <table className="users-table">
           <thead className="table-head">
-            <tr className="table-head-row">
-              <th width="5%" aria-label="image">
+            <tr>
+              <th width="6%" aria-label="image">
                 {}
               </th>
               <th width="5%">Id</th>
@@ -81,12 +83,7 @@ function Users() {
 
           <tbody className="table-body">
             {users.map((user) => (
-              <UserItem
-                className="table-item"
-                key={user.id}
-                userInfo={user}
-                loadUsers={loadUsers}
-              />
+              <UserItem key={user.id} userInfo={user} loadUsers={loadUsers} />
             ))}
           </tbody>
         </table>
