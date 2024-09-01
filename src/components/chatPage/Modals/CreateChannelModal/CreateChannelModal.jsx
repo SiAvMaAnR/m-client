@@ -184,7 +184,7 @@ function CreateChannelModal({
         <>
           <div className="header">
             <div className="brand">
-              <Brand className="brand">Safe|Book</Brand>
+              <Brand className="brand">M|7|R</Brand>
             </div>
 
             <div className="search">

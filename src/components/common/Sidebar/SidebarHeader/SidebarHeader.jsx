@@ -9,7 +9,7 @@ function SidebarHeader({ className = '', isExpand = false }) {
   return (
     <div className={`c-sidebar-header ${className} ${expandClass}`}>
       <Logo className="logo" />
-      <Brand className="brand">Safe|Book</Brand>
+      <Brand className="brand">M|7|R</Brand>
     </div>
   )
 }

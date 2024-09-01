@@ -65,7 +65,7 @@ function Login() {
     <div className="p-login">
       <div className="login-header">
         <div className="brand-wrapper">
-          <Brand className="brand">Safe|Book</Brand>
+          <Brand className="brand">M|7|R</Brand>
         </div>
         <div className="sign-up-wrapper">
           <NavLink className="sign-up" link={page.registration}>
