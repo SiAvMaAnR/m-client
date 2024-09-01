@@ -21,7 +21,7 @@ function AppRouter() {
 function LoggedRouter() {
   return (
     <Routes>
-      <Route path="*" element={<Navigate to={page.home} />} />
+      <Route path="*" element={<Navigate to={page.chat} />} />
 
       <Route element={<RoutePermissionGuard permittedRoles={[role.admin]} />}>
         <Route path="users" element={<SidebarLayout page={<Users />} />} />

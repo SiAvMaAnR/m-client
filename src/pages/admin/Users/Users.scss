@@ -8,6 +8,7 @@
 
   .users-header {
     margin-bottom: 30px;
+    height: 100px;
   }
 
   .users-content {
@@ -20,6 +21,20 @@
     scroll-behavior: smooth;
     overflow-y: auto;
 
+    .loader {
+      width: 100%;
+      display: grid;
+      place-items: center;
+
+      svg {
+        width: 200px;
+        height: 100px;
+
+        circle {
+          fill: var(--font-color-primary-0);
+        }
+      }
+    }
 
     &::-webkit-scrollbar {
       width: 1px;
