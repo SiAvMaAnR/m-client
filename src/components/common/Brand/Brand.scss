@@ -1,14 +1,18 @@
 .c-brand {
   font-family: 'Montserrat', sans-serif;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
   cursor: pointer;
 
   .first {
-    color: var(--font-color);
+    color: var(--font-color-1);
   }
 
   .second {
-    color: var(--font-color-1);
+    color: var(--font-color-0);
+  }
+
+  .third {
+    color: var(--font-color-0);
   }
 }

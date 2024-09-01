@@ -117,7 +117,7 @@ function Registration() {
     <div className="p-registration">
       <div className="registration-header">
         <div className="brand-wrapper">
-          <Brand className="brand">Safe|Book</Brand>
+          <Brand className="brand">M|7|R</Brand>
         </div>
         <div className="sign-in-wrapper">
           <NavLink className="sign-in" link={page.login}>
