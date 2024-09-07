@@ -72,7 +72,7 @@ function Sidebar() {
           <SidebarItem
             className="sidebar-item"
             link={page.users}
-            title="Users"
+            title="Users (A)"
             isExpand={expand}
             noticeCounter={1}
           >

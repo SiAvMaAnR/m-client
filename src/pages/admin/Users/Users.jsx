@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import api from '../../../api/api'
 import { UserItem, PageHeader, Pagination } from '../../../components/_exports'
+import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
 import './Users.scss'
 
 const pageSize = 15
@@ -33,6 +34,10 @@ function Users() {
         throw new Error('Something went wrong')
       }
 
+      await new Promise((resolve) => {
+        setTimeout(resolve, 500)
+      })
+
       setUsers(data.users || [])
       setPagesCount(data.meta?.pagesCount || 0)
     } catch (err) {
@@ -63,30 +68,34 @@ function Users() {
       <PageHeader className="users-header" text="Users" />
 
       <div className="users-content">
-        <table className="users-table">
-          <thead className="table-head">
-            <tr>
-              <th width="6%" aria-label="image">
-                {}
-              </th>
-              <th width="5%">Id</th>
-              <th width="20%">Email</th>
-              <th width="15%">Login</th>
-              <th width="5%">Birthday</th>
-              <th width="5%">Status</th>
-              <th width="5%">Banned</th>
-              <th width="5%" aria-label="tools">
-                {}
-              </th>
-            </tr>
-          </thead>
+        {isLoading ? (
+          <Loader1 className="loader" />
+        ) : (
+          <table className="users-table">
+            <thead className="table-head">
+              <tr>
+                <th width="6%" aria-label="image">
+                  {}
+                </th>
+                <th width="5%">Id</th>
+                <th width="20%">Email</th>
+                <th width="15%">Login</th>
+                <th width="5%">Birthday</th>
+                <th width="5%">Status</th>
+                <th width="5%">Banned</th>
+                <th width="5%" aria-label="tools">
+                  {}
+                </th>
+              </tr>
+            </thead>
 
-          <tbody className="table-body">
-            {users.map((user) => (
-              <UserItem key={user.id} userInfo={user} loadUsers={loadUsers} />
-            ))}
-          </tbody>
-        </table>
+            <tbody className="table-body">
+              {users.map((user) => (
+                <UserItem key={user.id} userInfo={user} loadUsers={loadUsers} />
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
       <Pagination
