@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import { useEffect, useRef } from 'react'
 import './Message.scss'
+import Attachment from './Attachment/Attachment'
 
 function Message({ onClick = () => {}, className = '', message = null, observerRef = null }) {
   const messageRef = useRef(null)
-  const { id, text } = message
+  const { id, text, attachments } = message
 
   useEffect(() => {
     const currentObserver = observerRef.current
@@ -30,6 +31,14 @@ function Message({ onClick = () => {}, className = '', message = null, observerR
       role="presentation"
     >
       <div className="message-text">{text}</div>
+
+      {attachments.length ? (
+        <div className="message-attachments">
+          {attachments?.map((attachment) => (
+            <Attachment key={attachment.id} className="attachment" data={attachment} />
+          ))}
+        </div>
+      ) : null}
     </div>
   )
 }

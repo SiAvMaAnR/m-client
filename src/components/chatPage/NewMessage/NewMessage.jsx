@@ -5,14 +5,27 @@ import SendIcon from '../../common/Icon/SendIcon/SendIcon'
 import AttachmentIcon from '../../common/Icon/AttachmentIcon/AttachmentIcon'
 import { chatMethod } from '../../../socket/hubHandlers'
 import DropDown from '../../common/DropDown/DropDown'
-import SettingsIcon from '../../common/Sidebar/SidebarProfile/MenuIcons/SettingsIcon/SettingsIcon'
 import ImgIcon from '../../common/Icon/ImgIcon/ImgIcon'
+import FileIcon from '../../common/Icon/FileIcon/FileIcon'
 import FileInput from './FileInput/FileInput'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
+import PreviewAttachments from './PreviewAttachments/PreviewAttachments'
+import { encodeToBase64 } from '../../../utils/helpers/encodingHelper'
 import './NewMessage.scss'
 
 const maxSizeFiles = 10000000
-const maxCountFiles = 5
+const maxCountFiles = 8
+
+async function adaptAttachments(attachments) {
+  const adaptAttachmentsProm = attachments.map(async (attach) => ({
+    content: await encodeToBase64(attach),
+    type: attach.type
+  }))
+
+  const files = await Promise.all(adaptAttachmentsProm)
+
+  return files
+}
 
 function NewMessage({ className = '', channelId = null }) {
   const [message, setMessage] = useState('')
@@ -24,22 +37,21 @@ function NewMessage({ className = '', channelId = null }) {
   const chatHub = useSelector((state) => state.signalR.chatHubConnection)
   const textareaRef = useRef(null)
 
-  const sendMessageHandler = () => {
+  const sendMessageHandler = async () => {
     if (channelId && message) {
       setIsSending(true)
+
+      const adaptedAttachments = await adaptAttachments(attachFiles)
 
       chatHub
         .invoke(chatMethod.sendMessage, {
           channelId,
           message: message.trim(),
-          attachFiles
+          attachments: adaptedAttachments
         })
-        .then(
-          async () =>
-            new Promise((resolve) => {
-              setTimeout(resolve, 300)
-            })
-        )
+        .then(() => {
+          
+        })
         .catch((err) => {
           setErrorMessage(err.message)
         })
@@ -83,8 +95,8 @@ function NewMessage({ className = '', channelId = null }) {
       }
     },
     {
-      icon: <SettingsIcon />,
-      title: 'Settings',
+      icon: <FileIcon />,
+      title: 'File',
       onClick: () => {}
     }
   ]
@@ -133,34 +145,40 @@ function NewMessage({ className = '', channelId = null }) {
 
   return (
     <div className={`c-new-message ${className}`}>
-      <FileInput fileInputRef={fileInputRef} onChangeFile={onChangeFiles} />
-
-      <DropDown className="dropdown-wrapper" items={menuItems}>
-        <div className="attachments" onClick={() => {}} role="presentation">
-          <AttachmentIcon />
-        </div>
-      </DropDown>
-
-      <div className={`message-input ${isFocused ? 'focused' : ''}`}>
-        <textarea
-          ref={textareaRef}
-          rows={1}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
-          onKeyDown={onKeyDownHandler}
-          placeholder="Enter message"
-          readOnly={isSending}
-        />
+      <div className="preview-attachments-wrapper">
+        <PreviewAttachments className="preview-attachments" attachments={attachFiles} />
       </div>
 
-      <div className="send-btn" onClick={sendMessageHandler} role="presentation">
-        {isSending ? (
-          <Loader2 className="send-btn-loader" />
-        ) : (
-          <SendIcon className="send-btn-icon" />
-        )}
+      <div className="new-message-wrapper">
+        <FileInput fileInputRef={fileInputRef} onChangeFile={onChangeFiles} />
+
+        <DropDown className="dropdown-wrapper" items={menuItems}>
+          <div className="attachments" onClick={() => {}} role="presentation">
+            <AttachmentIcon />
+          </div>
+        </DropDown>
+
+        <div className={`message-input ${isFocused ? 'focused' : ''}`}>
+          <textarea
+            ref={textareaRef}
+            rows={1}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+            onKeyDown={onKeyDownHandler}
+            placeholder="Enter message"
+            readOnly={isSending}
+          />
+        </div>
+
+        <div className="send-btn" onClick={sendMessageHandler} role="presentation">
+          {isSending ? (
+            <Loader2 className="send-btn-loader" />
+          ) : (
+            <SendIcon className="send-btn-icon" />
+          )}
+        </div>
       </div>
     </div>
   )

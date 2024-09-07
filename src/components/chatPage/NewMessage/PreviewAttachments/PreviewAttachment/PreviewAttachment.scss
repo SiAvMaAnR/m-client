@@ -1,0 +1,13 @@
+.c-preview-attachment {
+    display: grid;
+    place-items: center;
+
+    img {
+        height: 60px;
+        width: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+        opacity: 0.8;
+    }
+}

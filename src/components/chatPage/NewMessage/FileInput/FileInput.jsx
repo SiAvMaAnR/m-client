@@ -3,7 +3,7 @@ import './FileInput.scss'
 
 function FileInput({ className = '', fileInputRef = null, onChangeFile = () => {} }) {
   return (
-    <div className={`c-file-input ${className}`}>
+    <div style={{ display: 'none' }} className={`c-file-input ${className}`}>
       <input type="file" ref={fileInputRef} accept="image/*" onChange={onChangeFile} multiple />
     </div>
   )

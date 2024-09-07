@@ -1,16 +1,15 @@
 .c-message {
     background: var(--message-background-color);
-    padding: 10px 14px;
+    padding: 3px 3px;
     width: fit-content;
     border-radius: 16px;
     max-width: 550px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
-
-    &:hover {
-        opacity: 0.8;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
     &.my-group {
         background: var(--my-message-background-color);
@@ -18,10 +17,17 @@
     }
 
     .message-text {
+        padding: 6px 9px;
         font-size: 14px;
         font-family: 'Montserrat', sans-serif;
         word-wrap: break-word;
         word-break: break-all;
         white-space: pre-line;
+        user-select: text;
+    }
+
+    .message-attachments {
+        display: grid;
+        gap: 3px;
     }
 }
