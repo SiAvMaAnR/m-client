@@ -1,0 +1,18 @@
+.c-attachment {
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        opacity: 0.9;
+    }
+
+    img {
+        width: 100%;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+}

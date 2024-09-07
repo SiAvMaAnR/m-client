@@ -34,10 +34,6 @@ function Users() {
         throw new Error('Something went wrong')
       }
 
-      await new Promise((resolve) => {
-        setTimeout(resolve, 500)
-      })
-
       setUsers(data.users || [])
       setPagesCount(data.meta?.pagesCount || 0)
     } catch (err) {

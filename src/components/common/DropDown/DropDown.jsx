@@ -51,7 +51,14 @@ function DropDown({ className = '', children = null, items = [] }) {
         <div className="dropdown" ref={dropdownRef}>
           {items?.map((item) => {
             const { title, icon, onClick } = item
-            return <DDItem key={title} onClick={onClick} icon={icon} title={title} />
+            return (
+              <DDItem
+                key={title}
+                onClick={onClick}
+                icon={icon}
+                title={title}
+              />
+            )
           })}
         </div>
       )}
