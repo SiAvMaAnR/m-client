@@ -44,6 +44,12 @@ function DropDown({ className = '', children = null, items = [] }) {
     setShowDropDown(true)
   }
 
+  const onClickItemHandler = (event, onClick) => {
+    event.stopPropagation()
+    onClick(event)
+    setShowDropDown(false)
+  }
+
   return (
     <div className={`c-dropdown ${className}`} onClick={onClickHandler} role="presentation">
       <div className="children">{children}</div>
@@ -54,7 +60,7 @@ function DropDown({ className = '', children = null, items = [] }) {
             return (
               <DDItem
                 key={title}
-                onClick={onClick}
+                onClick={(e) => onClickItemHandler(e, onClick)}
                 icon={icon}
                 title={title}
               />

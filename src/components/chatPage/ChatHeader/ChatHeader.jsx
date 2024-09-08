@@ -31,7 +31,13 @@ export const getActivityStatus = ({ status, lastOnlineAt }) => {
   return result
 }
 
-function ChatHeader({ className = '', channel = null, isLoading }) {
+function ChatHeader({
+  className = '',
+  channel = null,
+  isLoading,
+  setSearchMessage,
+  searchMessage
+}) {
   const imageSrc = channel?.image
     ? `data:image/jpeg;base64, ${channel.image}`
     : `${config.app.publicPath}/defaultImages/${defaultImageMapper[channel?.type]}.jpg`
@@ -41,10 +47,14 @@ function ChatHeader({ className = '', channel = null, isLoading }) {
     lastOnlineAt: channel?.userLastOnlineAt
   })
 
+  const onChangeMessageSearchHandler = (event) => {
+    setSearchMessage(event.target.value)
+  }
+
   return (
     <div className={`c-chat-header ${className}`}>
       {isLoading ? (
-        <Loader2 className='loader'/>
+        <Loader2 className="loader" />
       ) : (
         <>
           <div className="image">
@@ -67,6 +77,13 @@ function ChatHeader({ className = '', channel = null, isLoading }) {
             <SearchIcon className="search-icon" />
           </div>
 
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchMessage}
+            onChange={onChangeMessageSearchHandler}
+          />
+
           <div className="menu">
             <MenuIcon className="menu-icon" />
           </div>
@@ -79,6 +96,8 @@ function ChatHeader({ className = '', channel = null, isLoading }) {
 ChatHeader.propTypes = {
   className: PropTypes.string,
   isLoading: PropTypes.bool,
+  setSearchMessage: PropTypes.func,
+  searchMessage: PropTypes.string,
   channel: PropTypes.shape({
     name: PropTypes.string,
     type: PropTypes.string,
