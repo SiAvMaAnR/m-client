@@ -30,15 +30,15 @@ function Message({ onClick = () => {}, className = '', message = null, observerR
       onClick={onClick}
       role="presentation"
     >
-      <div className="message-text">{text}</div>
+      {!!text && <div className="message-text">{text}</div>}
 
-      {attachments.length ? (
+      {attachments.length > 0 && (
         <div className="message-attachments">
           {attachments?.map((attachment) => (
             <Attachment key={attachment.id} className="attachment" data={attachment} />
           ))}
         </div>
-      ) : null}
+      )}
     </div>
   )
 }

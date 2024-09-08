@@ -27,6 +27,10 @@ async function adaptAttachments(attachments) {
   return files
 }
 
+function isCorrectMessage(messageText, attachments) {
+  return messageText || attachments?.length
+}
+
 function NewMessage({ className = '', channelId = null }) {
   const [message, setMessage] = useState('')
   const [isFocused, setIsFocused] = useState(false)
@@ -38,7 +42,7 @@ function NewMessage({ className = '', channelId = null }) {
   const textareaRef = useRef(null)
 
   const sendMessageHandler = async () => {
-    if (channelId && message) {
+    if (channelId && isCorrectMessage(message, attachFiles)) {
       setIsSending(true)
 
       const adaptedAttachments = await adaptAttachments(attachFiles)
@@ -50,7 +54,7 @@ function NewMessage({ className = '', channelId = null }) {
           attachments: adaptedAttachments
         })
         .then(() => {
-          
+          setAttachFiles([])
         })
         .catch((err) => {
           setErrorMessage(err.message)
@@ -91,13 +95,17 @@ function NewMessage({ className = '', channelId = null }) {
       icon: <ImgIcon />,
       title: 'Image',
       onClick: () => {
+        fileInputRef.current.accept = 'image/*'
         fileInputRef.current.click()
       }
     },
     {
       icon: <FileIcon />,
       title: 'File',
-      onClick: () => {}
+      onClick: () => {
+        fileInputRef.current.accept = 'file/*'
+        fileInputRef.current.click()
+      }
     }
   ]
 

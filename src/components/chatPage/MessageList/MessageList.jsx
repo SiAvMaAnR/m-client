@@ -21,16 +21,14 @@ function scrollToEnd(element, isSmooth) {
   })
 }
 
-function MessageList({ className = '', chatId = null }) {
+function MessageList({ className = '', chatId = null, searchMessage = '' }) {
   const [messages, setMessages] = useState([])
   const [groupedMessages, setGroupedMessages] = useState([])
   const [hasMore, setHasMore] = useState(true)
   const [isListLoading, setIsListLoading] = useState(false)
   const [isScrollLoading, setIsScrollLoading] = useState(false)
-  const [searchMessage, setSearchMessage] = useState('')
   const [memberImages, setMemberImages] = useState([])
   const [isShowFastScroll, setIsShowFastScroll] = useState(false)
-  const debouncedSearchMessage = useDebounce(searchMessage, 500)
   const skipRef = useRef(0)
   const pageNumberRef = useRef(0)
   const messageListRef = useRef()
@@ -39,6 +37,7 @@ function MessageList({ className = '', chatId = null }) {
   const [lastVisibleMessage, setLastVisibleMessage] = useState(null)
   const chatHub = useSelector((state) => state.signalR.chatHubConnection)
   const userId = useSelector((state) => state.auth.info.id)
+  const debouncedSearchMessage = useDebounce(searchMessage, 500)
 
   useEffect(() => {
     messagesRef.current = messages
@@ -176,16 +175,14 @@ function MessageList({ className = '', chatId = null }) {
           searchField: search,
           skip: skipRef.current
         })
+      } catch {
+        // temp
       } finally {
         setIsListLoading(false)
       }
     },
     [chatId]
   )
-
-  const onChangeMessageSearchHandler = (event) => {
-    setSearchMessage(event.target.value)
-  }
 
   useEffect(() => {
     refreshMessages(debouncedSearchMessage)
@@ -205,6 +202,8 @@ function MessageList({ className = '', chatId = null }) {
           searchField: debouncedSearchMessage,
           skip: skipRef.current
         })
+      } catch {
+        // temp
       } finally {
         setIsScrollLoading(false)
       }
@@ -281,7 +280,8 @@ function MessageList({ className = '', chatId = null }) {
 
 MessageList.propTypes = {
   className: PropTypes.string,
-  chatId: PropTypes.number
+  chatId: PropTypes.number,
+  searchMessage: PropTypes.string
 }
 
 export default MessageList

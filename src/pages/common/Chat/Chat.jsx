@@ -12,6 +12,7 @@ function Chat() {
   const [selectedChannelId, setSelectedChannelId] = useState(id)
   const [selectedChannel, setSelectedChannel] = useState(null)
   const [isLoadingChatHeader, setIsLoadingChatHeader] = useState(false)
+  const [searchMessage, setSearchMessage] = useState('')
 
   const loadChannel = async (channelId) => {
     try {
@@ -53,11 +54,13 @@ function Chat() {
                 className="chat-header"
                 channel={selectedChannel}
                 isLoading={isLoadingChatHeader}
+                setSearchMessage={setSearchMessage}
+                searchMessage={searchMessage}
               />
             </div>
             <div className="chat-content">
               <div className="chat-messages">
-                <MessageList chatId={+selectedChannelId} />
+                <MessageList chatId={+selectedChannelId} searchMessage={searchMessage} />
               </div>
               <div className="chat-input">
                 <NewMessage channelId={+selectedChannelId} />

@@ -6,6 +6,8 @@ import useAuth from './useAuth'
 import api from '../api/api'
 import { getAuthTokens } from '../utils/helpers/tokenHelper'
 
+const reserveTime = 1000
+
 const useRefreshToken = () => {
   const { updateAccessToken, logOut } = useAuth()
   const { accessTokenExp, refreshTokenExp, isLogged } = useSelector((state) => state.auth.info)
@@ -13,7 +15,7 @@ const useRefreshToken = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const leftTime = accessTokenExp - Date.now()
+    const leftTime = accessTokenExp - Date.now() - reserveTime
 
     const verifyTokenTimeout = setTimeout(() => {
       if (!isLogged) {
