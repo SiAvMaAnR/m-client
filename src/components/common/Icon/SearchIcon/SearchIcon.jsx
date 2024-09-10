@@ -38,7 +38,6 @@ function SearchIcon({ className = '', isExpand = false }) {
               strokeLinecap: 'butt',
               strokeLinejoin: 'miter',
               strokeMiterlimit: 10,
-              fill: 'rgb(0,0,0)',
               fillRule: 'nonzero',
               opacity: 1
             }}

@@ -9,6 +9,7 @@ import { activityStatus } from '../../../constants/system'
 import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
 import './ChatHeader.scss'
+import MessageSearch from './MessageSearch/MessageSearch'
 
 function formatLastOnlineAt(lastOnlineAt) {
   if (!lastOnlineAt) {
@@ -31,13 +32,7 @@ export const getActivityStatus = ({ status, lastOnlineAt }) => {
   return result
 }
 
-function ChatHeader({
-  className = '',
-  channel = null,
-  isLoading,
-  setSearchMessage,
-  searchMessage
-}) {
+function ChatHeader({ className = '', channel = null, isLoading, setSearchMessage }) {
   const imageSrc = channel?.image
     ? `data:image/jpeg;base64, ${channel.image}`
     : `${config.app.publicPath}/defaultImages/${defaultImageMapper[channel?.type]}.jpg`
@@ -46,10 +41,6 @@ function ChatHeader({
     status: channel?.userActivityStatus,
     lastOnlineAt: channel?.userLastOnlineAt
   })
-
-  const onChangeMessageSearchHandler = (event) => {
-    setSearchMessage(event.target.value)
-  }
 
   return (
     <div className={`c-chat-header ${className}`}>
@@ -73,16 +64,9 @@ function ChatHeader({
             </div>
           </div>
 
-          <div className="search">
-            <SearchIcon className="search-icon" />
+          <div className="search-wrapper">
+            <MessageSearch className="search" setSearchMessage={setSearchMessage} />
           </div>
-
-          <input
-            type="text"
-            placeholder="Search"
-            value={searchMessage}
-            onChange={onChangeMessageSearchHandler}
-          />
 
           <div className="menu">
             <MenuIcon className="menu-icon" />
@@ -97,7 +81,6 @@ ChatHeader.propTypes = {
   className: PropTypes.string,
   isLoading: PropTypes.bool,
   setSearchMessage: PropTypes.func,
-  searchMessage: PropTypes.string,
   channel: PropTypes.shape({
     name: PropTypes.string,
     type: PropTypes.string,
