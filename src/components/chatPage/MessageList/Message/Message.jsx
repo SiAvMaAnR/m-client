@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import { useEffect, useRef } from 'react'
-import './Message.scss'
 import Attachment from './Attachment/Attachment'
+import './Message.scss'
 
 function Message({ onClick = () => {}, className = '', message = null, observerRef = null }) {
   const messageRef = useRef(null)
+
   const { id, text, attachments } = message
 
   useEffect(() => {

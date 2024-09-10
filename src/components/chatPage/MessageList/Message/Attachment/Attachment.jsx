@@ -1,14 +1,31 @@
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { chatMethod } from '../../../../../socket/hubHandlers'
 import './Attachment.scss'
 
 function Attachment({ className = '', data = null }) {
-  const { content, type } = data
+  const chatHub = useSelector((state) => state.signalR.chatHubConnection)
+  const [attachment, setAttachment] = useState(null)
 
+  useEffect(() => {
+    if (chatHub) {
+      chatHub
+        .invoke(chatMethod.loadFile, {
+          attachmentId: data.id
+        })
+        .then((result) => {
+          setAttachment(result)
+        })
+    }
+  }, [chatHub, data])
 
   // now only img
   return (
     <div className={`c-attachment ${className}`}>
-      <img src={`data:${type};base64, ${content}`} alt="attachment" />
+      {!!attachment?.content && (
+        <img src={`data:${attachment.type};base64, ${attachment.content}`} alt="attachment" />
+      )}
     </div>
   )
 }
