@@ -4,15 +4,20 @@
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.2s ease;
+    width: 100%;
 
     &:hover {
         opacity: 0.9;
     }
 
-    img {
-        width: 100%;
+    .image {
+        height: 220px;
+        width: 400px;
+        // width: 100%;
         object-fit: cover;
         overflow: hidden;
         border-radius: 12px;
+        background: white;
+        z-index: 100;
     }
 }

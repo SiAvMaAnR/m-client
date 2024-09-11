@@ -219,45 +219,43 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
       {isListLoading ? (
         <Loader1 className="loader" />
       ) : (
-        <>
+        <div className="list" id="scrollableDiv" ref={messageListRef}>
           <MessagesScrollToEnd
             className="messages-scroll"
             isVisible={isShowFastScroll}
             onClick={() => scrollToEnd(messageListRef.current, true)}
           />
 
-          <div className="list" id="scrollableDiv" ref={messageListRef}>
-            <InfiniteScroll
-              className="infinity-scroll"
-              dataLength={messages.length}
-              next={fetchMoreMessages}
-              hasMore={hasMore}
-              loader={<Loader1 className="scroll-loader" />}
-              scrollableTarget="scrollableDiv"
-              onScroll={onScrollHandler}
-              inverse
-            >
-              {groupedMessages.map((groupsInfo) => {
-                const [groupDate, groups] = groupsInfo
+          <InfiniteScroll
+            className="infinity-scroll"
+            dataLength={messages.length}
+            next={fetchMoreMessages}
+            hasMore={hasMore}
+            loader={<Loader1 className="scroll-loader" />}
+            scrollableTarget="scrollableDiv"
+            onScroll={onScrollHandler}
+            inverse
+          >
+            {groupedMessages.map((groupsInfo) => {
+              const [groupDate, groups] = groupsInfo
 
-                const date =
-                  groupDate === moment(new Date()).format('DD.MM.YYYY') ? 'Today' : groupDate
+              const date =
+                groupDate === moment(new Date()).format('DD.MM.YYYY') ? 'Today' : groupDate
 
-                return (
-                  <div key={groupDate} className="group-date">
-                    {groups.map((group) => (
-                      <MessageGroup key={group.id} group={group} observerRef={observerRef} />
-                    ))}
+              return (
+                <div key={groupDate} className="group-date">
+                  {groups.map((group) => (
+                    <MessageGroup key={group.id} group={group} observerRef={observerRef} />
+                  ))}
 
-                    <div className="messages-date-wrapper">
-                      <div className="messages-date">{date}</div>
-                    </div>
+                  <div className="messages-date-wrapper">
+                    <div className="messages-date">{date}</div>
                   </div>
-                )
-              })}
-            </InfiniteScroll>
-          </div>
-        </>
+                </div>
+              )
+            })}
+          </InfiniteScroll>
+        </div>
       )}
     </div>
   )
