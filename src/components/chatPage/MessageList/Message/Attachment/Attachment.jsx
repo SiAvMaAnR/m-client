@@ -1,40 +1,39 @@
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { chatMethod } from '../../../../../socket/hubHandlers'
+import ImageAttachment from './Image/ImageAttachment'
+import { attachmentStatus } from '../../../../../constants/chat'
 import './Attachment.scss'
-import Loader2 from '../../../../common/Loader/Loader2/Loader2'
 
-function Attachment({ className = '', data = null }) {
-  const chatHub = useSelector((state) => state.signalR.chatHubConnection)
+function Attachment({ className = '', data = null, chatHub }) {
   const [attachment, setAttachment] = useState(null)
+  const [status, setStatus] = useState(attachmentStatus.pending)
 
   useEffect(() => {
     if (chatHub) {
+      setStatus(attachmentStatus.loading)
+
       chatHub
         .invoke(chatMethod.loadFile, {
           attachmentId: data.id
         })
         .then((result) => {
+          if (!result?.content) {
+            throw new Error('incorrect attachment')
+          }
+
           setAttachment(result)
+          setStatus(attachmentStatus.success)
+        })
+        .catch(() => {
+          setStatus(attachmentStatus.error)
         })
     }
   }, [chatHub, data])
 
-  // now only img
   return (
     <div className={`c-attachment ${className}`}>
-      {attachment?.content ? (
-        <img
-          className="image"
-          src={`data:${attachment.type};base64, ${attachment.content}`}
-          alt="attachment"
-        />
-      ) : (
-        <div className="image">
-          <Loader2 />
-        </div>
-      )}
+      <ImageAttachment attachment={attachment} status={status} />
     </div>
   )
 }
@@ -44,6 +43,10 @@ Attachment.propTypes = {
   data: PropTypes.shape({
     content: PropTypes.string,
     type: PropTypes.string
+  }),
+  chatHub: PropTypes.shape({
+    invoke: PropTypes.func,
+    on: PropTypes.func
   })
 }
 

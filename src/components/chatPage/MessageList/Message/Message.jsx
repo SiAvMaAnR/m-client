@@ -3,7 +3,13 @@ import { useEffect, useRef } from 'react'
 import Attachment from './Attachment/Attachment'
 import './Message.scss'
 
-function Message({ onClick = () => {}, className = '', message = null, observerRef = null }) {
+function Message({
+  onClick = () => {},
+  className = '',
+  message = null,
+  observerRef = null,
+  chatHub
+}) {
   const messageRef = useRef(null)
 
   const { id, text, attachments } = message
@@ -36,7 +42,12 @@ function Message({ onClick = () => {}, className = '', message = null, observerR
       {attachments.length > 0 && (
         <div className="message-attachments">
           {attachments?.map((attachment) => (
-            <Attachment key={attachment.id} className="attachment" data={attachment} />
+            <Attachment
+              key={attachment.id}
+              className="attachment"
+              data={attachment}
+              chatHub={chatHub}
+            />
           ))}
         </div>
       )}
@@ -53,6 +64,10 @@ Message.propTypes = {
   }),
   observerRef: PropTypes.shape({
     current: PropTypes.instanceOf(IntersectionObserver)
+  }),
+  chatHub: PropTypes.shape({
+    invoke: PropTypes.func,
+    on: PropTypes.func
   })
 }
 

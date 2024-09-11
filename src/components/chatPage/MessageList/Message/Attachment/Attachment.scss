@@ -9,15 +9,4 @@
     &:hover {
         opacity: 0.9;
     }
-
-    .image {
-        height: 220px;
-        width: 400px;
-        // width: 100%;
-        object-fit: cover;
-        overflow: hidden;
-        border-radius: 12px;
-        background: white;
-        z-index: 100;
-    }
 }

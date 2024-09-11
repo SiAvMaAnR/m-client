@@ -245,7 +245,12 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
               return (
                 <div key={groupDate} className="group-date">
                   {groups.map((group) => (
-                    <MessageGroup key={group.id} group={group} observerRef={observerRef} />
+                    <MessageGroup
+                      key={group.id}
+                      group={group}
+                      observerRef={observerRef}
+                      chatHub={chatHub}
+                    />
                   ))}
 
                   <div className="messages-date-wrapper">

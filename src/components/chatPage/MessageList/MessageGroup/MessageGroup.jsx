@@ -7,7 +7,7 @@ import Message from '../Message/Message'
 import ImgWrapper from '../../../common/ImgWrapper/ImgWrapper'
 import './MessageGroup.scss'
 
-function MessageGroup({ className = '', group = null, observerRef = null }) {
+function MessageGroup({ className = '', group = null, observerRef = null, chatHub }) {
   const { authorId, authorLogin, image, createdAt, messages, isRead } = group
   const userId = useSelector((state) => state.auth.info.id)
   const myGroupClass = +userId === +authorId ? 'my-group' : ''
@@ -39,6 +39,7 @@ function MessageGroup({ className = '', group = null, observerRef = null }) {
               key={message.id}
               message={message}
               className={myGroupClass}
+              chatHub={chatHub}
             />
           ))}
         </div>
@@ -64,6 +65,10 @@ MessageGroup.propTypes = {
   }),
   observerRef: PropTypes.shape({
     current: PropTypes.instanceOf(IntersectionObserver)
+  }),
+  chatHub: PropTypes.shape({
+    invoke: PropTypes.func,
+    on: PropTypes.func
   })
 }
 
