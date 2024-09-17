@@ -37,7 +37,7 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
   const observerRef = useRef()
   const messagesRef = useRef(messages)
   const [lastVisibleMessage, setLastVisibleMessage] = useState(null)
-  const chatHub = useSelector((state) => state.signalR.chatHubConnection)
+  const chatHub = useSelector((state) => state.signalR.chatHub)
   const userId = useSelector((state) => state.auth.info.id)
   const debouncedSearchMessage = useDebounce(searchMessage, 500)
 
@@ -63,7 +63,7 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
     const visibleMessage = messagesRef.current.find((message) => message.id === lastVisibleMessage)
 
     if (visibleMessage && !visibleMessage.isRead && +visibleMessage.authorId !== +userId) {
-      chatHub.invoke(chatMethod.readMessage, {
+      chatHub.connection.invoke(chatMethod.readMessage, {
         channelId: chatId,
         messageId: visibleMessage.id
       })

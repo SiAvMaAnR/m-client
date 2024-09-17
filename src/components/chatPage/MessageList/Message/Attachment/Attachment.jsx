@@ -10,18 +10,14 @@ function Attachment({ className = '', data = null, chatHub }) {
   const [status, setStatus] = useState(attachmentStatus.pending)
 
   useEffect(() => {
-    if (chatHub) {
+    if (chatHub && chatHub.isConnected) {
       setStatus(attachmentStatus.loading)
 
-      chatHub
+      chatHub.connection
         .invoke(chatMethod.loadFile, {
           attachmentId: data.id
         })
         .then((result) => {
-          if (!result?.content) {
-            throw new Error('incorrect attachment')
-          }
-
           setAttachment(result)
           setStatus(attachmentStatus.success)
         })
@@ -45,8 +41,12 @@ Attachment.propTypes = {
     type: PropTypes.string
   }),
   chatHub: PropTypes.shape({
-    invoke: PropTypes.func,
-    on: PropTypes.func
+    connection: PropTypes.shape({
+      invoke: PropTypes.func,
+      on: PropTypes.func,
+      state: PropTypes.string
+    }),
+    isConnected: PropTypes.bool
   })
 }
 

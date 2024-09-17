@@ -10,11 +10,11 @@ const useMessagesReceiver = ({
   chatHub
 }) => {
   useEffect(() => {
-    if (chatHub) {
-      chatHub.on(chatMethod.sendMessageRes, (data) => {
+    if (chatHub && chatHub.isConnected) {
+      chatHub.connection.on(chatMethod.sendMessageRes, (data) => {
         const { channelId } = data
 
-        chatHub.invoke(chatMethod.channel, { channelId })
+        chatHub.connection.invoke(chatMethod.channel, { channelId })
 
         if (channelId === chatId) {
           setMessages((messageList) => [data, ...messageList])
@@ -30,7 +30,7 @@ const useMessagesReceiver = ({
 
     return () => {
       if (chatHub) {
-        chatHub.off(chatMethod.sendMessageRes)
+        chatHub.connection.off(chatMethod.sendMessageRes)
       }
     }
   }, [chatHub, chatId, setMessages, messageListRef, scrollToEnd, skipRef])

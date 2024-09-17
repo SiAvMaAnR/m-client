@@ -7,9 +7,9 @@ const chatMethod = {
   readMessageRes: 'ReadMessageResponse',
   readChannelRes: 'ReadChannelResponse',
   uploadFile: 'UploadFileAsync',
-  uploadFileRes: 'UploadFileResponse',
+  removeFile: 'RemoveFileAsync',
   loadFile: 'LoadFileAsync',
-  loadFileRes: 'LoadFileResponse'
+  PreviewFiles: 'PreviewFilesAsync',
 }
 
 const stateMethod = {}

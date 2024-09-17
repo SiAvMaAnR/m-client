@@ -3,8 +3,8 @@ import { chatMethod } from '../../../../socket/hubHandlers'
 
 const useReadMessagesReceiver = ({ setMessages, chatHub }) => {
   useEffect(() => {
-    if (chatHub) {
-      chatHub.on(chatMethod.readMessageRes, (data) => {
+    if (chatHub && chatHub.isConnected) {
+      chatHub.connection.on(chatMethod.readMessageRes, (data) => {
         setMessages((prevMessages) =>
           prevMessages.map((message) =>
             data.includes(message.id) ? { ...message, isRead: true } : message
@@ -14,7 +14,7 @@ const useReadMessagesReceiver = ({ setMessages, chatHub }) => {
     }
     return () => {
       if (chatHub) {
-        chatHub.off(chatMethod.readMessageRes)
+        chatHub.connection.off(chatMethod.readMessageRes)
       }
     }
   }, [chatHub, setMessages])

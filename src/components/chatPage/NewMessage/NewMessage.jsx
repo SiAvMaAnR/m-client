@@ -16,17 +16,6 @@ import './NewMessage.scss'
 const maxSizeFiles = 10000000
 const maxCountFiles = 8
 
-async function adaptAttachments(attachments) {
-  const adaptAttachmentsProm = attachments.map(async (attach) => ({
-    content: await encodeToBase64(attach),
-    type: attach.type
-  }))
-
-  const files = await Promise.all(adaptAttachmentsProm)
-
-  return files
-}
-
 function isCorrectMessage(messageText, attachments) {
   return messageText || attachments?.length
 }
@@ -38,20 +27,18 @@ function NewMessage({ className = '', channelId = null }) {
   const [isSending, setIsSending] = useState(false)
   const fileInputRef = useRef(null)
   const [attachFiles, setAttachFiles] = useState([])
-  const chatHub = useSelector((state) => state.signalR.chatHubConnection)
+  const chatHub = useSelector((state) => state.signalR.chatHub)
   const textareaRef = useRef(null)
 
   const sendMessageHandler = async () => {
     if (channelId && isCorrectMessage(message, attachFiles)) {
       setIsSending(true)
 
-      const adaptedAttachments = await adaptAttachments(attachFiles)
-
-      chatHub
+      chatHub.connection
         .invoke(chatMethod.sendMessage, {
           channelId,
           message: message.trim(),
-          attachments: adaptedAttachments
+          attachments: attachFiles.map((file) => file.uniqueId)
         })
         .then(() => {
           setAttachFiles([])
@@ -135,26 +122,54 @@ function NewMessage({ className = '', channelId = null }) {
 
       Array.from(files)
         .filter((file) => checkUniqFile(file))
-        .forEach((file) => setAttachFiles((prevFiles) => [...prevFiles, file]))
+        .forEach(async (file) => {
+          const dataBase64 = await encodeToBase64(file)
+
+          setAttachFiles((prevFiles) => [
+            ...prevFiles,
+            {
+              content: dataBase64.split(',')[1],
+              type: file.type,
+              uniqueId: crypto.randomUUID(),
+              channelId
+            }
+          ])
+        })
     } catch (err) {
       setErrorMessage(err.message)
     }
   }
+
+  useEffect(() => {
+    if (chatHub && chatHub.isConnected) {
+      setAttachFiles([])
+
+      chatHub.connection
+        .invoke(chatMethod.PreviewFiles, {
+          channelId
+        })
+        .then(({ previewAttachments }) => {
+          setAttachFiles(previewAttachments)
+        })
+        .catch()
+    }
+  }, [chatHub, channelId])
 
   // temp
   useEffect(() => {
     console.log(attachFiles)
   }, [attachFiles])
 
-  // temp
-  useEffect(() => {
-    console.log(errorMessage)
-  }, [errorMessage])
-
   return (
     <div className={`c-new-message ${className}`}>
       <div className="preview-attachments-wrapper">
-        <PreviewAttachments className="preview-attachments" attachments={attachFiles} />
+        {attachFiles.length > 0 && (
+          <PreviewAttachments
+            className="preview-attachments"
+            attachments={attachFiles}
+            setAttachFiles={setAttachFiles}
+          />
+        )}
       </div>
 
       <div className="new-message-wrapper">
