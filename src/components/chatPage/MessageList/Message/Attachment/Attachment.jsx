@@ -5,6 +5,11 @@ import ImageAttachment from './Image/ImageAttachment'
 import { attachmentStatus } from '../../../../../constants/chat'
 import './Attachment.scss'
 
+
+const attachmentTypeMapper = {
+
+}
+
 function Attachment({ className = '', data = null, chatHub }) {
   const [attachment, setAttachment] = useState(null)
   const [status, setStatus] = useState(attachmentStatus.pending)

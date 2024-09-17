@@ -1,0 +1,12 @@
+.c-preview-image-attachment {
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    
+    .preview-file {
+        border-radius: 8px;
+        object-fit: cover;
+        height: 60px;
+        width: 60px;
+    }
+}

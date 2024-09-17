@@ -3,7 +3,22 @@ import { useSelector } from 'react-redux'
 import { useCallback, useEffect, useState } from 'react'
 import { chatMethod } from '../../../../../socket/hubHandlers'
 import Loader1 from '../../../../common/Loader/Loader1/Loader1'
+import PreviewImageAttachment from './PreviewImageAttachment/PreviewImageAttachment'
+import PreviewFileAttachment from './PreviewFileAttachment/PreviewFileAttachment'
+import RemoveIcon from '../../../../common/Icon/RemoveIcon/RemoveIcon'
 import './PreviewAttachment.scss'
+
+const attachmentTypeMapper = (attachment) => {
+  let component = null
+
+  if (/^image\/.*/.test(attachment.type)) {
+    component = <PreviewImageAttachment className="preview-attachment" attachment={attachment} />
+  } else if (/^(application|text)\/.*/.test(attachment.type)) {
+    component = <PreviewFileAttachment className="preview-attachment" attachment={attachment} />
+  }
+
+  return component
+}
 
 function PreviewAttachment({ className = '', attachment, setAttachFiles }) {
   const isUploaded = attachment.id !== undefined
@@ -13,14 +28,16 @@ function PreviewAttachment({ className = '', attachment, setAttachFiles }) {
 
   const removeFile = useCallback(
     (attachmentUId) => {
-      chatHub.connection
-        .invoke(chatMethod.removeFile, { uniqueId: attachmentUId })
-        .then(() => {
-          setAttachFiles((files) => files.filter((file) => file.uniqueId !== attachmentUId))
-        })
-        .catch()
+      if (isLoaded) {
+        chatHub.connection
+          .invoke(chatMethod.removeFile, { uniqueId: attachmentUId })
+          .then(() => {
+            setAttachFiles((files) => files.filter((file) => file.uniqueId !== attachmentUId))
+          })
+          .catch()
+      }
     },
-    [chatHub, setAttachFiles]
+    [chatHub, setAttachFiles, isLoaded]
   )
 
   useEffect(() => {
@@ -43,17 +60,19 @@ function PreviewAttachment({ className = '', attachment, setAttachFiles }) {
     }
   }, [chatHub, attachment, isUploaded])
 
-  const { type, content } = adaptedAttachment
-
   return (
     <div className={`c-preview-attachment ${className}`}>
       {!isLoaded && <Loader1 className="img-loader" />}
 
-      {content ? (
-        <img className="preview-file" src={`data:${type};base64,${content}`} alt="attachment" />
-      ) : (
-        <div className="preview-file" />
-      )}
+      <div
+        className="remove-container"
+        onClick={() => removeFile(attachment.uniqueId)}
+        role="presentation"
+      >
+        <RemoveIcon className="remove-icon" />
+      </div>
+
+      {attachmentTypeMapper(adaptedAttachment)}
     </div>
   )
 }

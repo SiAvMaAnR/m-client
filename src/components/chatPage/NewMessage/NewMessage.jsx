@@ -128,6 +128,8 @@ function NewMessage({ className = '', channelId = null }) {
           setAttachFiles((prevFiles) => [
             ...prevFiles,
             {
+              name: file.name,
+              size: file.size,
               content: dataBase64.split(',')[1],
               type: file.type,
               uniqueId: crypto.randomUUID(),
