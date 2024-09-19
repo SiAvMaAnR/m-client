@@ -1,17 +1,24 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { chatMethod } from '../../../../../socket/hubHandlers'
+import FileAttachment from './File/FileAttachment'
 import ImageAttachment from './Image/ImageAttachment'
 import { attachmentStatus } from '../../../../../constants/chat'
 import './Attachment.scss'
 
+const attachmentTypeMapper = (attachment, status) => {
+  let component = null
 
-const attachmentTypeMapper = {
+  if (/^image\/.*/.test(attachment.type)) {
+    component = <ImageAttachment attachment={attachment} status={status} />
+  } else if (/^(application|text)\/.*/.test(attachment.type)) {
+    component = <FileAttachment attachment={attachment} status={status} />
+  }
 
+  return component
 }
-
 function Attachment({ className = '', data = null, chatHub }) {
-  const [attachment, setAttachment] = useState(null)
+  const [attachment, setAttachment] = useState(data)
   const [status, setStatus] = useState(attachmentStatus.pending)
 
   useEffect(() => {
@@ -33,9 +40,7 @@ function Attachment({ className = '', data = null, chatHub }) {
   }, [chatHub, data])
 
   return (
-    <div className={`c-attachment ${className}`}>
-      <ImageAttachment attachment={attachment} status={status} />
-    </div>
+    <div className={`c-attachment ${className}`}>{attachmentTypeMapper(attachment, status)}</div>
   )
 }
 
