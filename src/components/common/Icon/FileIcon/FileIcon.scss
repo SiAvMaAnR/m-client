@@ -1,10 +1,10 @@
 .c-file-icon {
-    display: grid;
-    place-items: center;
-  
-    svg {
-      width: 27px;
-      height: 27px;
-    }
+  display: grid;
+  place-items: center;
+
+  svg {
+    width: 27px;
+    height: 27px;
+    stroke: var(--font-color-primary-1)
   }
-  
+}

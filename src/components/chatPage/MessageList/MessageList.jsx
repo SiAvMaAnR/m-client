@@ -10,6 +10,8 @@ import Loader1 from '../../common/Loader/Loader1/Loader1'
 import MessageGroup from './MessageGroup/MessageGroup'
 import groupMessages from './helpers/groupMessages'
 import MessagesScrollToEnd from './MessagesScrollToEnd/MessagesScrollToEnd'
+import useMessagesReceiver from './hooks/useMessagesReceiver'
+import useReadMessagesReceiver from './hooks/useReadMessagesReceiver'
 import './MessageList.scss'
 
 const defaultPageSize = 30
@@ -35,53 +37,33 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
   const observerRef = useRef()
   const messagesRef = useRef(messages)
   const [lastVisibleMessage, setLastVisibleMessage] = useState(null)
-  const chatHub = useSelector((state) => state.signalR.chatHubConnection)
+  const chatHub = useSelector((state) => state.signalR.chatHub)
   const userId = useSelector((state) => state.auth.info.id)
   const debouncedSearchMessage = useDebounce(searchMessage, 500)
+
+  useMessagesReceiver({
+    chatId,
+    messageListRef,
+    scrollToEnd,
+    skipRef,
+    setMessages,
+    chatHub
+  })
+
+  useReadMessagesReceiver({
+    chatHub,
+    setMessages
+  })
 
   useEffect(() => {
     messagesRef.current = messages
   }, [messages])
 
   useEffect(() => {
-    if (chatHub) {
-      chatHub.on(chatMethod.sendMessageRes, (data) => {
-        const { channelId } = data
-
-        chatHub.invoke(chatMethod.channel, { channelId })
-
-        if (channelId === chatId) {
-          setMessages((messageList) => [data, ...messageList])
-
-          skipRef.current += 1
-
-          if (messageListRef.current.scrollTop > -800) {
-            setTimeout(() => scrollToEnd(messageListRef.current, true), 100)
-          }
-        }
-      })
-
-      chatHub.on(chatMethod.readMessageRes, (data) => {
-        setMessages((prevMessages) =>
-          prevMessages.map((message) =>
-            data.includes(message.id) ? { ...message, isRead: true } : message
-          )
-        )
-      })
-    }
-    return () => {
-      if (chatHub) {
-        chatHub.off(chatMethod.sendMessageRes)
-        chatHub.off(chatMethod.readMessageRes)
-      }
-    }
-  }, [chatHub, chatId])
-
-  useEffect(() => {
     const visibleMessage = messagesRef.current.find((message) => message.id === lastVisibleMessage)
 
     if (visibleMessage && !visibleMessage.isRead && +visibleMessage.authorId !== +userId) {
-      chatHub.invoke(chatMethod.readMessage, {
+      chatHub.connection.invoke(chatMethod.readMessage, {
         channelId: chatId,
         messageId: visibleMessage.id
       })
@@ -109,6 +91,7 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
 
   useEffect(() => {
     if (!isListLoading) {
+      setIsShowFastScroll(false)
       scrollToEnd(messageListRef.current)
       setLastVisibleMessage(null)
     }
@@ -216,7 +199,9 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
   }, [messages, memberImages])
 
   const onScrollHandler = () => {
-    setIsShowFastScroll((messageListRef.current?.scrollTop ?? 0) < -800)
+    const isExistsMessage = messages.length > 0
+    const isNeedShowScroll = (messageListRef.current?.scrollTop ?? 0) < -800
+    setIsShowFastScroll(isExistsMessage && isNeedShowScroll)
   }
 
   useKeyDown(
@@ -234,45 +219,48 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
       {isListLoading ? (
         <Loader1 className="loader" />
       ) : (
-        <>
+        <div className="list" id="scrollableDiv" ref={messageListRef}>
           <MessagesScrollToEnd
             className="messages-scroll"
             isVisible={isShowFastScroll}
             onClick={() => scrollToEnd(messageListRef.current, true)}
           />
 
-          <div className="list" id="scrollableDiv" ref={messageListRef}>
-            <InfiniteScroll
-              className="infinity-scroll"
-              dataLength={messages.length}
-              next={fetchMoreMessages}
-              hasMore={hasMore}
-              loader={<Loader1 className="scroll-loader" />}
-              scrollableTarget="scrollableDiv"
-              onScroll={onScrollHandler}
-              inverse
-            >
-              {groupedMessages.map((groupsInfo) => {
-                const [groupDate, groups] = groupsInfo
+          <InfiniteScroll
+            className="infinity-scroll"
+            dataLength={messages.length}
+            next={fetchMoreMessages}
+            hasMore={hasMore}
+            loader={<Loader1 className="scroll-loader" />}
+            scrollableTarget="scrollableDiv"
+            onScroll={onScrollHandler}
+            inverse
+          >
+            {groupedMessages.map((groupsInfo) => {
+              const [groupDate, groups] = groupsInfo
 
-                const date =
-                  groupDate === moment(new Date()).format('DD.MM.YYYY') ? 'Today' : groupDate
+              const date =
+                groupDate === moment(new Date()).format('DD.MM.YYYY') ? 'Today' : groupDate
 
-                return (
-                  <div key={groupDate} className="group-date">
-                    {groups.map((group) => (
-                      <MessageGroup key={group.id} group={group} observerRef={observerRef} />
-                    ))}
+              return (
+                <div key={groupDate} className="group-date">
+                  {groups.map((group) => (
+                    <MessageGroup
+                      key={group.id}
+                      group={group}
+                      observerRef={observerRef}
+                      chatHub={chatHub}
+                    />
+                  ))}
 
-                    <div className="messages-date-wrapper">
-                      <div className="messages-date">{date}</div>
-                    </div>
+                  <div className="messages-date-wrapper">
+                    <div className="messages-date">{date}</div>
                   </div>
-                )
-              })}
-            </InfiniteScroll>
-          </div>
-        </>
+                </div>
+              )
+            })}
+          </InfiniteScroll>
+        </div>
       )}
     </div>
   )

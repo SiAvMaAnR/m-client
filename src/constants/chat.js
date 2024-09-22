@@ -4,6 +4,11 @@ const channelType = {
   direct: 'Direct'
 }
 
-const temp = {}
+const attachmentStatus = {
+  pending: 'pending',
+  loading: 'loading',
+  success: 'success',
+  error: 'error'
+}
 
-export { channelType, temp }
+export { channelType, attachmentStatus }

@@ -1,0 +1,54 @@
+.c-redirect-modal {
+    user-select: none;
+
+    .base-modal {
+        height: 400px;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: stretch;
+
+        .redirect-modal-container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 0;
+            gap: 10px;
+
+            .title {
+                font-size: 24px;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                flex-basis: 20%;
+                display: grid;
+                place-items: center;
+                color: var(--font-color-primary-0)
+            }
+
+            .message {
+                font-size: 18px;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 500;
+                flex-basis: 20%;
+                display: grid;
+                place-items: center;
+            }
+
+            .timer {
+                font-size: 26px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 600;
+                flex-basis: 20%;
+                display: grid;
+                place-items: center;
+                color: var(--font-color-primary-0)
+
+            }
+
+        }
+    }
+}

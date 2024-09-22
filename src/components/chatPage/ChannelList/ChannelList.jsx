@@ -34,22 +34,22 @@ function ChannelList({ className = '', selectedChannelId = null }) {
   const [activeChannelType, setActiveChannelCount] = useState(null)
   const pageNumberRef = useRef(0)
   const channelListRef = useRef()
-  const chatHub = useSelector((state) => state.signalR.chatHubConnection)
+  const chatHub = useSelector((state) => state.signalR.chatHub)
 
   useEffect(() => {
-    if (chatHub) {
+    if (chatHub && chatHub.isConnected) {
       const updateChannelsHandler = (curChannels, updatedChannel) => {
         const prevChannels = curChannels.filter((channel) => channel.id !== updatedChannel.id)
         return [updatedChannel, ...prevChannels]
       }
 
-      chatHub.on(chatMethod.channelRes, (updatedChannel) => {
+      chatHub.connection.on(chatMethod.channelRes, (updatedChannel) => {
         if (activeChannelType === null || activeChannelType === updatedChannel.type) {
           setChannels((curChannels) => updateChannelsHandler(curChannels, updatedChannel))
         }
       })
 
-      chatHub.on(chatMethod.readChannelRes, ({ channelId, unreadMessagesCount }) => {
+      chatHub.connection.on(chatMethod.readChannelRes, ({ channelId, unreadMessagesCount }) => {
         setChannels((prevChannels) =>
           prevChannels.map((channel) =>
             channelId === channel.id ? { ...channel, unreadMessagesCount } : channel
@@ -60,8 +60,8 @@ function ChannelList({ className = '', selectedChannelId = null }) {
 
     return () => {
       if (chatHub) {
-        chatHub.off(chatMethod.channelRes)
-        chatHub.off(chatMethod.readChannelRes)
+        chatHub.connection.off(chatMethod.channelRes)
+        chatHub.connection.off(chatMethod.readChannelRes)
       }
     }
   }, [chatHub, activeChannelType])

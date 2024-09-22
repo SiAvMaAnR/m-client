@@ -1,0 +1,98 @@
+.c-file-attachment {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+
+    .file-attachment-content {
+        height: 60px;
+        width: 400px;
+        overflow: hidden;
+        border-radius: 12px;
+        background: var(--background-color);
+        display: flex;
+        justify-content: stretch;
+        align-items: center;
+        gap: 6px;
+
+        .file-downloader-container {
+            height: 100%;
+            display: grid;
+            place-items: center;
+            flex: 0 0 60px;
+
+            .download-file-icon-container {
+                height: 54px;
+                width: 54px;
+                display: grid;
+                place-items: center;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: var(--common-color-0);
+
+                    .file-icon svg {
+                        stroke: var(--font-color-primary-2);
+                    }
+                }
+
+                .file-icon {
+                    display: grid;
+                    place-items: center;
+
+                    svg {
+                        height: 36px;
+                        width: 36px;
+                        stroke: var(--common-color-0);
+                        transition: all 0.3s ease;
+                    }
+                }
+            }
+        }
+
+        .file-info-container {
+            height: 100%;
+            color: var(--font-color-primary-1);
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch;
+            overflow: hidden;
+            gap: 5px;
+
+            .file-name {
+                font-size: 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-weight: 600;
+                padding-right: 10px;
+            }
+
+            .file-info {
+                display: flex;
+                justify-content: stretch;
+                align-items: center;
+                gap: 8px;
+
+                .file-extension {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    font-weight: 500;
+                    font-size: 14px;
+                }
+
+                .file-size {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    font-weight: 600;
+                    font-size: 12px;
+                    color: var(--common-color-0);
+                }
+            }
+        }
+    }
+}

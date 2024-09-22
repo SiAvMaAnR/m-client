@@ -8,7 +8,9 @@ import {
   Login,
   Profile,
   Registration,
-  Users
+  Users,
+  ResetPassword,
+  InitResetPassword
 } from '../pages/_exports'
 import { RoutePermissionGuard, SidebarLayout } from '../components/_exports'
 
@@ -45,6 +47,8 @@ function GuestRouter() {
         <Route path="login" element={<Login />} />
         <Route path="registration" element={<Registration />} />
         <Route path="confirm-registration" element={<ConfirmedRegistration />} />
+        <Route path="reset-password" element={<ResetPassword />} />
+        <Route path="init-reset-password" element={<InitResetPassword />} />
       </Route>
     </Routes>
   )

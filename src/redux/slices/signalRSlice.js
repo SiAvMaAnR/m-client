@@ -3,19 +3,19 @@ import { createSlice } from '@reduxjs/toolkit'
 export const signalRSlice = createSlice({
   name: 'signalR',
   initialState: {
-    chatHubConnection: null,
-    stateHubConnection: null
+    chatHub: null,
+    stateHub: null
   },
   reducers: {
-    setChatConnection: (state, action) => {
-      state.chatHubConnection = action.payload
+    setChatHub: (state, action) => {
+      state.chatHub = action.payload
     },
-    setStateConnection: (state, action) => {
-      state.stateHubConnection = action.payload
+    setStateHub: (state, action) => {
+      state.stateHub = action.payload
     }
   }
 })
 
-export const { setChatConnection, setStateConnection } = signalRSlice.actions
+export const { setChatHub, setStateHub } = signalRSlice.actions
 
 export default signalRSlice.reducer
