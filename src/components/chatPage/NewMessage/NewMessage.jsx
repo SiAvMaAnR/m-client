@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -132,7 +133,7 @@ function NewMessage({ className = '', channelId = null }) {
               size: file.size,
               content: dataBase64.split(',')[1],
               type: file.type,
-              uniqueId: crypto.randomUUID(),
+              uniqueId: uuid(),
               channelId
             }
           ])
