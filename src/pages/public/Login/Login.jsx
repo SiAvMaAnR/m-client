@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../../hooks/_exports'
 import api from '../../../api/api'
@@ -6,8 +6,9 @@ import { page } from '../../../constants/system'
 import { Brand, FormButton, Logo, NavLink, FormInput } from '../../../components/_exports'
 import './Login.scss'
 
+const defaultClientMessage = 'Enter your login details'
+
 function Login() {
-  const defaultClientMessage = 'Enter your login details'
   const navigate = useNavigate()
   const { logIn } = useAuth()
   const [loginData, setLoginData] = useState({})
@@ -103,6 +104,12 @@ function Login() {
                 value={password}
                 required
               />
+            </div>
+
+            <div className="reset-password">
+              <Link to={page.initResetPassword} className="reset-password-link">
+                Forgot password?
+              </Link>
             </div>
 
             <div className="button-wrapper">

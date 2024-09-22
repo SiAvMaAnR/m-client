@@ -27,7 +27,9 @@ const page = {
   chat: '/chat',
   settings: '/settings',
   profile: '/profile',
-  users: '/users'
+  users: '/users',
+  resetPassword: '/reset-password',
+  initResetPassword: '/init-reset-password',
 }
 
 const hub = {

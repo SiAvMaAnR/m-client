@@ -29,6 +29,10 @@
   --icon-background-color: #{$c-dark-neutral-2};
   --error-color: #{$c-dark-primary-2};
 
+  .p-login{
+    --reset-password-link-color: #{$c-dark-primary-5};
+  }
+
   .c-nav-link {
     --font-color: #{$c-white-0};
   }
@@ -100,6 +104,10 @@
   --border-color-1: #{$c-purple-0};
   --icon-background-color: #{$c-light-neutral-2};
   --error-color: #{$c-dark-primary-2};
+
+  .p-login{
+    --reset-password-link-color: #{$c-light-primary-5};
+  }
 
   .c-nav-link {
     --font-color: #{$c-black-0};
