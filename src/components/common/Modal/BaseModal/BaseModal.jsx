@@ -15,15 +15,23 @@ function BaseModal({ className = '', isActive = false, setIsActive = () => {}, c
     setIsActive(false)
   }
 
-  const keyDownHandler = (event) => {
-    switch (event.key) {
-      case 'Escape':
-        closeHandler()
-        break
-      default:
-        break
+  useEffect(() => {
+    let keyDownHandler
+
+    if (isActive) {
+      keyDownHandler = (event) => {
+        if (event.key === 'Escape') {
+          setIsActive(false)
+        }
+      }
+
+      window.addEventListener('keydown', keyDownHandler)
     }
-  }
+
+    return () => {
+      window.removeEventListener('keydown', keyDownHandler)
+    }
+  }, [isActive, setIsActive])
 
   const clickHandler = (event) => {
     if (!modalRef.current.contains(event.target)) {
@@ -37,13 +45,12 @@ function BaseModal({ className = '', isActive = false, setIsActive = () => {}, c
         classNames="modal"
         in={isActive}
         nodeRef={modalAnimationRef}
-        timeout={300}
+        timeout={200}
         unmountOnExit
       >
         <div
           ref={modalAnimationRef}
           className="modal"
-          onKeyDown={keyDownHandler}
           onClick={clickHandler}
           role="presentation"
         >

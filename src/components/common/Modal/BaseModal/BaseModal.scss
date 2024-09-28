@@ -11,12 +11,14 @@
     height: 100%;
     overflow: auto;
     background: var(--modal-background-color-1);
+    will-change: opacity;
 
     .modal-content {
       z-index: 99;
-      border-radius: 12px;
+      border-radius: 22px;
       background: var(--modal-background-color);
       border: solid 1px var(--border-color);
+      will-change: transform;
     }
   }
 
@@ -30,13 +32,12 @@
 
   .modal-enter-active {
     opacity: 1;
+    transition: opacity 0.2s ease;
 
     .modal-content {
       transform: scale(1);
-      transition: all 0.2s ease;
+      transition: transform 0.2s ease;
     }
-
-    transition: all 0.2s ease;
   }
 
   .modal-exit {
@@ -49,12 +50,11 @@
 
   .modal-exit-active {
     opacity: 0;
+    transition: opacity 0.2s ease;
 
     .modal-content {
-      transform: scale(0.8);
-      transition: all 0.2s ease;
+      transform: scale(0.5);
+      transition: transform 0.2s ease;
     }
-
-    transition: all 0.2s ease;
   }
 }

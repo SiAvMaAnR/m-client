@@ -1,18 +1,22 @@
 import PropTypes from 'prop-types'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Attachment from './Attachment/Attachment'
+import MediaViewerModal from '../../../common/Modal/MediaViewerModal/MediaViewerModal'
 import './Message.scss'
 
-function Message({
-  onClick = () => {},
-  className = '',
-  message = null,
-  observerRef = null,
-  chatHub
-}) {
+const getMediaAttachmentIds = (attachments) =>
+  attachments
+    .filter((attachment) => /^image\/.*/.test(attachment.type))
+    .map((attachment) => attachment.id)
+
+function Message({ onClick = () => {}, className = '', message = null, observerRef = null }) {
   const messageRef = useRef(null)
+  const [isActiveMediaViewer, setIsActiveMediaViewer] = useState(false)
+  const [defaultIdMediaViewer, setDefaultIdMediaViewer] = useState(null)
 
   const { id, text, attachments } = message
+
+  const mediaAttachmentIds = getMediaAttachmentIds(attachments)
 
   useEffect(() => {
     const currentObserver = observerRef.current
@@ -30,28 +34,40 @@ function Message({
   }, [observerRef])
 
   return (
-    <div
-      ref={messageRef}
-      data-id={id}
-      className={`c-message ${className}`}
-      onClick={onClick}
-      role="presentation"
-    >
-      {!!text && <div className="message-text">{text}</div>}
+    <>
+      <MediaViewerModal
+        isActive={isActiveMediaViewer}
+        setIsActive={setIsActiveMediaViewer}
+        attachmentIds={mediaAttachmentIds}
+        defaultActiveAttachmentId={defaultIdMediaViewer}
+      />
 
-      {attachments.length > 0 && (
-        <div className="message-attachments">
-          {attachments?.map((attachment) => (
-            <Attachment
-              key={attachment.id}
-              className="attachment"
-              data={attachment}
-              chatHub={chatHub}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+      <div
+        ref={messageRef}
+        data-id={id}
+        className={`c-message ${className}`}
+        onClick={onClick}
+        role="presentation"
+      >
+        {!!text && <div className="message-text">{text}</div>}
+
+        {attachments.length > 0 && (
+          <div className="message-attachments">
+            {attachments?.map((attachment) => (
+              <Attachment
+                key={attachment.id}
+                className="attachment"
+                data={attachment}
+                onClick={() => {
+                  setIsActiveMediaViewer((active) => !active)
+                  setDefaultIdMediaViewer(attachment.id)
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 
@@ -64,10 +80,6 @@ Message.propTypes = {
   }),
   observerRef: PropTypes.shape({
     current: PropTypes.instanceOf(IntersectionObserver)
-  }),
-  chatHub: PropTypes.shape({
-    invoke: PropTypes.func,
-    on: PropTypes.func
   })
 }
 
