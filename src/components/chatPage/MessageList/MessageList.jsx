@@ -249,7 +249,6 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
                       key={group.id}
                       group={group}
                       observerRef={observerRef}
-                      chatHub={chatHub}
                     />
                   ))}
 

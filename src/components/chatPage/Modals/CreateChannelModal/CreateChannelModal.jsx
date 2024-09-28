@@ -124,8 +124,10 @@ function CreateChannelModal({
   }
 
   useEffect(() => {
-    refreshUsers(debouncedUserSearch)
-  }, [debouncedUserSearch, refreshUsers])
+    if (isActive) {
+      refreshUsers(debouncedUserSearch)
+    }
+  }, [debouncedUserSearch, refreshUsers, isActive])
 
   useEffect(() => {
     if (!isActive) {

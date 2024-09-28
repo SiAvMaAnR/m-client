@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { chatMethod } from '../../../../../socket/hubHandlers'
@@ -17,9 +18,10 @@ const attachmentTypeMapper = (attachment, status) => {
 
   return component
 }
-function Attachment({ className = '', data = null, chatHub }) {
+function Attachment({ className = '', data = null, onClick }) {
   const [attachment, setAttachment] = useState(data)
   const [status, setStatus] = useState(attachmentStatus.pending)
+  const chatHub = useSelector((state) => state.signalR.chatHub)
 
   useEffect(() => {
     if (chatHub && chatHub.isConnected) {
@@ -40,7 +42,9 @@ function Attachment({ className = '', data = null, chatHub }) {
   }, [chatHub, data])
 
   return (
-    <div className={`c-attachment ${className}`}>{attachmentTypeMapper(attachment, status)}</div>
+    <div className={`c-attachment ${className}`} onClick={onClick} role="presentation">
+      {attachmentTypeMapper(attachment, status)}
+    </div>
   )
 }
 
@@ -50,14 +54,7 @@ Attachment.propTypes = {
     content: PropTypes.string,
     type: PropTypes.string
   }),
-  chatHub: PropTypes.shape({
-    connection: PropTypes.shape({
-      invoke: PropTypes.func,
-      on: PropTypes.func,
-      state: PropTypes.string
-    }),
-    isConnected: PropTypes.bool
-  })
+  onClick: PropTypes.func
 }
 
 export default Attachment

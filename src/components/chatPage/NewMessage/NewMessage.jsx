@@ -158,11 +158,6 @@ function NewMessage({ className = '', channelId = null }) {
     }
   }, [chatHub, channelId])
 
-  // temp
-  useEffect(() => {
-    console.log(attachFiles)
-  }, [attachFiles])
-
   return (
     <div className={`c-new-message ${className}`}>
       <div className="preview-attachments-wrapper">
