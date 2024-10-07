@@ -12,7 +12,7 @@ const signalRConfig = {
 
 function hubFactory(hubName) {
   return new HubConnectionBuilder()
-    .withUrl(`${signalRConfig.baseUrl}/${hubName}`, signalRConfig.params)
+    .withUrl(`${signalRConfig.baseUrl}/signalR/chat/${hubName}`, signalRConfig.params)
     .withAutomaticReconnect([0, 3000, 5000, 10000, 15000, 30000])
     .configureLogging(LogLevel.None)
     .build()

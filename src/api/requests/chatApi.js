@@ -1,6 +1,7 @@
+import { services } from '../../constants/system'
 import axiosInstance from '../axios'
 
-const path = '/api/chat'
+const path = `/api/${services.chat}/chat`
 
 const chatApi = {
   sendMessage: async ({ message }) => {

@@ -1,6 +1,7 @@
+import { services } from '../../constants/system'
 import axiosInstance from '../axios'
 
-const path = '/api/account'
+const path = `/api/${services.chat}/account`
 
 const accountApi = {
   profile: async () => {

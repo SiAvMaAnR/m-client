@@ -2,11 +2,12 @@ import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
 import Attachment from './Attachment/Attachment'
 import MediaViewerModal from '../../../common/Modal/MediaViewerModal/MediaViewerModal'
+import { isImageAttachmentType } from '../../../../utils/helpers/attachmentTypeHelper'
 import './Message.scss'
 
 const getMediaAttachmentIds = (attachments) =>
   attachments
-    .filter((attachment) => /^image\/.*/.test(attachment.type))
+    .filter((attachment) => isImageAttachmentType(attachment.type))
     .map((attachment) => attachment.id)
 
 function Message({ onClick = () => {}, className = '', message = null, observerRef = null }) {
@@ -59,8 +60,10 @@ function Message({ onClick = () => {}, className = '', message = null, observerR
                 className="attachment"
                 data={attachment}
                 onClick={() => {
-                  setIsActiveMediaViewer((active) => !active)
-                  setDefaultIdMediaViewer(attachment.id)
+                  if (isImageAttachmentType(attachment.type)) {
+                    setIsActiveMediaViewer((active) => !active)
+                    setDefaultIdMediaViewer(attachment.id)
+                  }
                 }}
               />
             ))}

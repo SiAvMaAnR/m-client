@@ -29,7 +29,7 @@ const page = {
   profile: '/profile',
   users: '/users',
   resetPassword: '/reset-password',
-  initResetPassword: '/init-reset-password',
+  initResetPassword: '/init-reset-password'
 }
 
 const hub = {
@@ -37,4 +37,12 @@ const hub = {
   state: 'state'
 }
 
-export { language, theme, role, page, hub, activityStatus }
+const services = {
+  auth: 'auth',
+  accounts: 'accounts',
+  chat: 'chat',
+  notifications: 'notifications',
+  ai: 'ai'
+}
+
+export { language, theme, role, page, hub, activityStatus, services }
