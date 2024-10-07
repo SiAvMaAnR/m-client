@@ -1,6 +1,7 @@
+import { services } from '../../constants/system'
 import axiosInstance from '../axios'
 
-const path = '/api/auth'
+const path = `/api/${services.auth}/auth`
 
 const authApi = {
   login: async ({ email, password }) => {

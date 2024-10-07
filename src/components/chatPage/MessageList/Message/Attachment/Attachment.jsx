@@ -5,14 +5,18 @@ import { chatMethod } from '../../../../../socket/hubHandlers'
 import FileAttachment from './File/FileAttachment'
 import ImageAttachment from './Image/ImageAttachment'
 import { attachmentStatus } from '../../../../../constants/chat'
+import {
+  isFileAttachmentType,
+  isImageAttachmentType
+} from '../../../../../utils/helpers/attachmentTypeHelper'
 import './Attachment.scss'
 
 const attachmentTypeMapper = (attachment, status) => {
   let component = null
 
-  if (/^image\/.*/.test(attachment.type)) {
+  if (isImageAttachmentType(attachment.type)) {
     component = <ImageAttachment attachment={attachment} status={status} />
-  } else if (/^(application|text)\/.*/.test(attachment.type)) {
+  } else if (isFileAttachmentType(attachment.type)) {
     component = <FileAttachment attachment={attachment} status={status} />
   }
 

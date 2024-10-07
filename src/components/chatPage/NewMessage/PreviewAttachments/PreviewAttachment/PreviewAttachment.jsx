@@ -6,14 +6,18 @@ import Loader1 from '../../../../common/Loader/Loader1/Loader1'
 import PreviewImageAttachment from './PreviewImageAttachment/PreviewImageAttachment'
 import PreviewFileAttachment from './PreviewFileAttachment/PreviewFileAttachment'
 import RemoveIcon from '../../../../common/Icon/RemoveIcon/RemoveIcon'
+import {
+  isFileAttachmentType,
+  isImageAttachmentType
+} from '../../../../../utils/helpers/attachmentTypeHelper'
 import './PreviewAttachment.scss'
 
 const attachmentTypeMapper = (attachment) => {
   let component = null
 
-  if (/^image\/.*/.test(attachment.type)) {
+  if (isImageAttachmentType(attachment.type)) {
     component = <PreviewImageAttachment className="preview-attachment" attachment={attachment} />
-  } else if (/^(application|text)\/.*/.test(attachment.type)) {
+  } else if (isFileAttachmentType(attachment.type)) {
     component = <PreviewFileAttachment className="preview-attachment" attachment={attachment} />
   }
 

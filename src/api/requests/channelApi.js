@@ -1,6 +1,7 @@
+import { services } from '../../constants/system'
 import axiosInstance from '../axios'
 
-const path = '/api/channel'
+const path = `/api/${services.chat}/channel`
 
 const channelApi = {
   createDirect: async ({ accountId }) => {
