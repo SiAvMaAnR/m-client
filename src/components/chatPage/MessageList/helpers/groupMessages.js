@@ -1,22 +1,25 @@
 import moment from 'moment'
 
+function isNeedToPrevGroup(lastGroup, message) {
+  return (
+    lastGroup?.messages &&
+    lastGroup.authorId === message.authorId &&
+    lastGroup.isRead === message.isRead &&
+    lastGroup.pageNumber === message.pageNumber &&
+    new Date(message.createdAt).getMinutes() === new Date(lastGroup.createdAt).getMinutes()
+  )
+}
+
 function groupMessages(messages, memberImages) {
   const groupList = []
 
   messages.forEach((message) => {
     const lastGroup = groupList[groupList.length - 1]
 
-    if (
-      lastGroup?.messages &&
-      lastGroup.authorId === message.authorId &&
-      lastGroup.isRead === message.isRead &&
-      lastGroup.pageNumber === message.pageNumber &&
-      new Date(message.createdAt).getMinutes() === new Date(lastGroup.createdAt).getMinutes()
-    ) {
+    if (isNeedToPrevGroup(lastGroup, message)) {
       lastGroup.messages.unshift(message)
     } else {
       groupList.push({
-        id: message.id,
         authorLogin: message.authorLogin,
         authorId: message.authorId,
         createdAt: message.createdAt,
@@ -28,9 +31,15 @@ function groupMessages(messages, memberImages) {
     }
   })
 
-  const resultList = Object.groupBy(groupList, ({ createdAt }) =>
+  const adaptedGroupList = groupList.map((group) => ({
+    ...group,
+    id: group.messages[0].id
+  }))
+
+  const resultList = Object.groupBy(adaptedGroupList, ({ createdAt }) =>
     moment(createdAt).format('DD.MM.YYYY')
   )
+  console.log('result list', resultList)
 
   return Object.entries(resultList)
 }
