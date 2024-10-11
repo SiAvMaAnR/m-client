@@ -39,7 +39,6 @@ function groupMessages(messages, memberImages) {
   const resultList = Object.groupBy(adaptedGroupList, ({ createdAt }) =>
     moment(createdAt).format('DD.MM.YYYY')
   )
-  console.log('result list', resultList)
 
   return Object.entries(resultList)
 }
