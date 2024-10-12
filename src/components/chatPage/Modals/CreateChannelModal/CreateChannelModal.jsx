@@ -8,8 +8,8 @@ import UserItem from './UserItem/UserItem'
 import { useDebounce } from '../../../../hooks/_exports'
 import ValidIcon from '../../../common/Input/FormInput/ValidIcon/ValidIcon'
 import channelNameValidator from '../../../../utils/validators/channelNameValidator'
-import './CreateChannelModal.scss'
 import Loader1 from '../../../common/Loader/Loader1/Loader1'
+import './CreateChannelModal.scss'
 
 const defaultPageSize = 10
 

@@ -17,7 +17,9 @@ import JoinIcon from '../../common/Icon/JoinIcon/JoinIcon'
 import CreateIcon from '../../common/Icon/CreateIcon/CreateIcon'
 import JoinChannelModal from '../Modals/JoinChannelModal/JoinChannelModal'
 import Loader1 from '../../common/Loader/Loader1/Loader1'
+import AIIcon from '../../common/Icon/AIIcon/AIIcon'
 import './ChannelList.scss'
+import CreateAIChannelModal from '../Modals/CreateAIChannelModal/CreateAIChannelModal'
 
 const defaultPageSize = 15
 
@@ -31,6 +33,7 @@ function ChannelList({ className = '', selectedChannelId = null }) {
   const debouncedSearchChannel = useDebounce(searchChannel, 500)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
   const [isActiveJoinChannelModal, setIsActiveJoinChannelModal] = useState(false)
+  const [isActiveCreateAIChannelModal, setIsActiveCreateAIChannelModal] = useState(false)
   const [activeChannelType, setActiveChannelCount] = useState(null)
   const pageNumberRef = useRef(0)
   const channelListRef = useRef()
@@ -169,6 +172,11 @@ function ChannelList({ className = '', selectedChannelId = null }) {
       icon: <JoinIcon />,
       title: 'Join chat',
       onClick: () => setIsActiveJoinChannelModal(true)
+    },
+    {
+      icon: <AIIcon />,
+      title: 'AI chat',
+      onClick: () => setIsActiveCreateAIChannelModal(true)
     }
   ]
 
@@ -182,6 +190,11 @@ function ChannelList({ className = '', selectedChannelId = null }) {
       <JoinChannelModal
         setIsActive={setIsActiveJoinChannelModal}
         isActive={isActiveJoinChannelModal}
+      />
+      <CreateAIChannelModal
+        setIsActive={setIsActiveCreateAIChannelModal}
+        isActive={isActiveCreateAIChannelModal}
+        onCreatedChannel={onCreatedChannelHandler}
       />
 
       <div className={`c-channel-list ${className}`}>
