@@ -1,0 +1,13 @@
+.p-profile {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+
+    .profile-content {
+        height: 520px;
+        width: 420px;
+        box-shadow: 0px 0 10px 6px var(--shadow-color);
+        border-radius: 25px;
+    }
+}
