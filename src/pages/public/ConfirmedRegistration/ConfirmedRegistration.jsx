@@ -1,19 +1,20 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
 import { Brand, FormButton, Logo, NavLink } from '../../../components/_exports'
-import './ConfirmedRegistration.scss'
 import { page } from '../../../constants/system'
 import api from '../../../api/api'
 import { useAuth } from '../../../hooks/_exports'
+import './ConfirmedRegistration.scss'
 
 function ConfirmedRegistration() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { logIn } = useAuth()
   const [message, setMessage] = useState('')
-  const [authData, setAuthData] = useState({})
+  const [authData, setAuthData] = useState(null)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const confirmAsync = useCallback(async () => {
     try {
@@ -78,22 +79,28 @@ function ConfirmedRegistration() {
 
       <div className="confirm-registration-content">
         <div className="confirm-registration-panel">
-          <div className="logo-wrapper">
-            <Logo className="logo" />
-          </div>
+          {isLoading ? (
+            <Loader1 className="loader" />
+          ) : (
+            <>
+              <div className="logo-wrapper">
+                <Logo className="logo" />
+              </div>
 
-          <div className="title">{isSuccess ? 'Success' : 'Failure'}</div>
+              <div className="title">{isSuccess ? 'Success' : 'Failure'}</div>
 
-          <div className="message">{message}</div>
+              <div className="message">{message}</div>
 
-          <div className="button-wrapper">
-            <FormButton
-              className="login-button"
-              onClick={isSuccess ? continueHandler : againHandler}
-            >
-              {isSuccess ? 'Continue' : 'Again'}
-            </FormButton>
-          </div>
+              <div className="button-wrapper">
+                <FormButton
+                  className="login-button"
+                  onClick={isSuccess ? continueHandler : againHandler}
+                >
+                  {isSuccess ? 'Continue' : 'Again'}
+                </FormButton>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
