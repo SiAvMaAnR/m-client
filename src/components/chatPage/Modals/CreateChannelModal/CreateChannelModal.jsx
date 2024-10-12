@@ -8,6 +8,7 @@ import UserItem from './UserItem/UserItem'
 import { useDebounce } from '../../../../hooks/_exports'
 import ValidIcon from '../../../common/Input/FormInput/ValidIcon/ValidIcon'
 import channelNameValidator from '../../../../utils/validators/channelNameValidator'
+import Loader1 from '../../../common/Loader/Loader1/Loader1'
 import './CreateChannelModal.scss'
 
 const defaultPageSize = 10
@@ -214,16 +215,20 @@ function CreateChannelModal({
           </CSSTransition>
 
           <div className="content" onScroll={scrollHandler}>
-            {users.map((user) => (
-              <UserItem
-                className="user-item"
-                key={user.id}
-                userInfo={user}
-                isChecked={selectedUserIds.has(user.id)}
-                onToggle={toggleUserSelection}
-                setIsActive={setIsActive}
-              />
-            ))}
+            {isUsersLoading ? (
+              <Loader1 className="users-loader" />
+            ) : (
+              users.map((user) => (
+                <UserItem
+                  className="user-item"
+                  key={user.id}
+                  userInfo={user}
+                  isChecked={selectedUserIds.has(user.id)}
+                  onToggle={toggleUserSelection}
+                  setIsActive={setIsActive}
+                />
+              ))
+            )}
           </div>
 
           <div className="footer">
