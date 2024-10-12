@@ -14,7 +14,7 @@ function ConfirmedRegistration() {
   const [message, setMessage] = useState('')
   const [authData, setAuthData] = useState(null)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const confirmAsync = useCallback(async () => {
     try {
@@ -78,28 +78,30 @@ function ConfirmedRegistration() {
       </div>
 
       <div className="confirm-registration-content">
-        {isLoading ? (
-          <Loader1 className="loader" />
-        ) : (
-          <div className="confirm-registration-panel">
-            <div className="logo-wrapper">
-              <Logo className="logo" />
-            </div>
+        <div className="confirm-registration-panel">
+          {isLoading ? (
+            <Loader1 className="loader" />
+          ) : (
+            <>
+              <div className="logo-wrapper">
+                <Logo className="logo" />
+              </div>
 
-            <div className="title">{isSuccess ? 'Success' : 'Failure'}</div>
+              <div className="title">{isSuccess ? 'Success' : 'Failure'}</div>
 
-            <div className="message">{message}</div>
+              <div className="message">{message}</div>
 
-            <div className="button-wrapper">
-              <FormButton
-                className="login-button"
-                onClick={isSuccess ? continueHandler : againHandler}
-              >
-                {isSuccess ? 'Continue' : 'Again'}
-              </FormButton>
-            </div>
-          </div>
-        )}
+              <div className="button-wrapper">
+                <FormButton
+                  className="login-button"
+                  onClick={isSuccess ? continueHandler : againHandler}
+                >
+                  {isSuccess ? 'Continue' : 'Again'}
+                </FormButton>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   )
