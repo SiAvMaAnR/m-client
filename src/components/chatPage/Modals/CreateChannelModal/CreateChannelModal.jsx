@@ -9,6 +9,7 @@ import { useDebounce } from '../../../../hooks/_exports'
 import ValidIcon from '../../../common/Input/FormInput/ValidIcon/ValidIcon'
 import channelNameValidator from '../../../../utils/validators/channelNameValidator'
 import Loader1 from '../../../common/Loader/Loader1/Loader1'
+import ChannelTypeSwitcher from './ChannelTypeSwitcher/ChannelTypeSwitcher'
 import './CreateChannelModal.scss'
 
 const defaultPageSize = 10
@@ -49,7 +50,7 @@ function CreateChannelModal({
       channelNameValidator(channelName)
 
       const { data, response } = await createChannelMapper[channelType]({
-        name: channelName,
+        name: channelName.trim(),
         members: [...selectedUserIds]
       })
 
@@ -241,6 +242,14 @@ function CreateChannelModal({
                 value={channelName}
                 pattern=".*"
                 required
+              />
+            </div>
+
+            <div className="channel-type-switcher">
+              <ChannelTypeSwitcher
+                className="type-switcher"
+                chatType={channelType}
+                setChatType={setChannelType}
               />
             </div>
 

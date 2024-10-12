@@ -1,0 +1,22 @@
+.c-channel-type-switcher {
+    user-select: none;
+    height: 44px;
+    width: 90px;
+    border-radius: 12px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    border: solid 1px var(--border-color);
+
+    &:hover {
+        background: var(--background-color-1);
+        color: var(--common-color-0);
+        border-color: var(--common-color-0);
+    }
+
+    p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+    }
+}

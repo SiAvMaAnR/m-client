@@ -25,7 +25,7 @@
         .user-search {
           border-radius: 20px;
           height: 42px;
-          width: 280px;
+          width: 260px;
         }
       }
     }
@@ -126,13 +126,20 @@
 
         .form-input {
           height: 44px;
-          width: 275px;
+          width: 100%;
           font-size: 16px;
           font-family: 'Roboto', sans-serif;
 
           &::placeholder {
             font-size: 13px;
           }
+        }
+      }
+
+      .channel-type-switcher {
+        
+        .type-switcher {
+
         }
       }
 

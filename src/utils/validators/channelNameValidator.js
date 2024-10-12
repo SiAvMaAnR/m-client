@@ -1,6 +1,6 @@
 const nameMaxLength = 40
 const nameMinLength = 4
-const regex = /^[a-zA-Z0-9_.]+$/
+const regex = /^[a-zA-Z0-9_.-<>~ ]+$/
 
 function channelNameValidator(name) {
   const isValidMaxLength = name.length <= nameMaxLength
