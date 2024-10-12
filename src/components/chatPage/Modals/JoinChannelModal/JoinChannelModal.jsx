@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { BaseModal } from '../../../_exports'
+import { BaseModal, Brand } from '../../../_exports'
 import './JoinChannelModal.scss'
 
 function JoinChannelModal({ className = '', isActive = false, setIsActive = () => {} }) {
@@ -11,8 +11,13 @@ function JoinChannelModal({ className = '', isActive = false, setIsActive = () =
         setIsActive={setIsActive}
       >
         <>
-          <div>XEXE</div>
-          <div>ХАХА</div>
+          <div className="header">
+            <div className="brand">
+              <Brand className="brand">M|7|R</Brand>
+            </div>
+          </div>
+
+          <div>.</div>
         </>
       </BaseModal>
     </div>
