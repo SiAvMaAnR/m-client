@@ -5,11 +5,18 @@ function FileInput({
   className = '',
   fileInputRef = null,
   fileType = null,
-  onChangeFile = () => {}
+  onChangeFile = () => {},
+  multiple = false
 }) {
   return (
     <div style={{ display: 'none' }} className={`c-file-input ${className}`}>
-      <input type="file" ref={fileInputRef} accept={fileType} onChange={onChangeFile} multiple />
+      <input
+        type="file"
+        ref={fileInputRef}
+        accept={fileType}
+        onChange={onChangeFile}
+        multiple={multiple}
+      />
     </div>
   )
 }
@@ -21,7 +28,8 @@ FileInput.propTypes = {
     PropTypes.shape({ current: PropTypes.instanceOf(Element) })
   ]),
   fileType: PropTypes.string,
-  onChangeFile: PropTypes.func
+  onChangeFile: PropTypes.func,
+  multiple: PropTypes.bool
 }
 
 export default FileInput
