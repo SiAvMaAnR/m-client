@@ -171,7 +171,7 @@ function NewMessage({ className = '', channelId = null }) {
       </div>
 
       <div className="new-message-wrapper">
-        <FileInput fileInputRef={fileInputRef} onChangeFile={onChangeFiles} />
+        <FileInput fileInputRef={fileInputRef} onChangeFile={onChangeFiles} multiple />
 
         <DropDown className="dropdown-wrapper" items={menuItems}>
           <div className="attachments" onClick={() => {}} role="presentation">

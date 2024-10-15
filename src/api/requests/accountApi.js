@@ -14,8 +14,8 @@ const accountApi = {
     return response
   },
 
-  uploadImage: async ({ file }) => {
-    const body = { file }
+  uploadImage: async ({ image }) => {
+    const body = { image }
     const response = await axiosInstance.post(`${path}/upload-image`, body)
     return response
   },

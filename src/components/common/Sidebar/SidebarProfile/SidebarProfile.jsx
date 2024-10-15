@@ -1,39 +1,30 @@
-import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import api from '../../../../api/api'
 import { page } from '../../../../constants/system'
-import { useRole, useAuth } from '../../../../hooks/_exports'
+import { useAuth } from '../../../../hooks/_exports'
 import MenuIcon from '../../Icon/MenuIcon/MenuIcon'
 import DropDown from '../../DropDown/DropDown'
 import LogoutIcon from './MenuIcons/LogoutIcon/LogoutIcon'
 import SettingsIcon from './MenuIcons/SettingsIcon/SettingsIcon'
+import ProfileIcon from './MenuIcons/ProfileIcon/ProfileIcon'
 import config from '../../../../config/configuration'
 import './SidebarProfile.scss'
 
 function SidebarProfile({ className = '', isExpand = false }) {
-  const [image, setImage] = useState(null)
-  const [email, setEmail] = useState('')
-  const [login, setLogin] = useState('')
+  const { login, email, image } = useSelector((state) => state.user.info)
   const expandClass = isExpand ? 'expand' : ''
-  const userRole = useRole()
   const { logOut } = useAuth()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    api.account.image().then((result) => {
-      setImage(result?.data?.image)
-    })
-  }, [])
-
-  useEffect(() => {
-    api.account.profile().then((result) => {
-      setEmail(result?.data?.email ?? 'none')
-      setLogin(result?.data?.login ?? 'none')
-    })
-  }, [userRole])
-
   const menuItems = [
+    {
+      icon: <ProfileIcon />,
+      title: 'Profile',
+      onClick: () => {
+        navigate(page.profile)
+      }
+    },
     {
       icon: <SettingsIcon />,
       title: 'Settings',
