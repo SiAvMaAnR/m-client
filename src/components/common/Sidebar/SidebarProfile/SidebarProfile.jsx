@@ -28,7 +28,9 @@ function SidebarProfile({ className = '', isExpand = false }) {
     {
       icon: <SettingsIcon />,
       title: 'Settings',
-      onClick: () => {}
+      onClick: () => {
+        navigate(page.settings)
+      }
     },
     {
       icon: <LogoutIcon />,

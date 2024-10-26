@@ -15,7 +15,7 @@ function MessageGroup({ className = '', group = null, observerRef = null }) {
 
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/direct-channel.jpg`
+    : `${config.app.publicPath}/defaultImages/channels/direct-channel.jpg`
 
   const formattedDate = moment(createdAt).format('HH:mm')
 

@@ -4,22 +4,22 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Channel from './Channel/Channel'
 import ChannelFilter from './ChannelFilter/ChannelFilter'
-import CreateChannelIcon from './CreateChannelIcon/CreateChannelIcon'
 import { ToolTip1 } from '../../_exports'
 import ChannelSearch from './ChannelSearch/ChannelSearch'
 import api from '../../../api/api'
-import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal'
 import { useDebounce } from '../../../hooks/_exports'
 import { page } from '../../../constants/system'
 import { chatMethod } from '../../../socket/hubHandlers'
 import DropDown from '../../common/DropDown/DropDown'
 import JoinIcon from '../../common/Icon/JoinIcon/JoinIcon'
 import CreateIcon from '../../common/Icon/CreateIcon/CreateIcon'
+import CreateIcon1 from '../../common/Icon/CreateIcon1/CreateIcon1'
 import JoinChannelModal from '../Modals/JoinChannelModal/JoinChannelModal'
 import Loader1 from '../../common/Loader/Loader1/Loader1'
 import AIIcon from '../../common/Icon/AIIcon/AIIcon'
-import './ChannelList.scss'
 import CreateAIChannelModal from '../Modals/CreateAIChannelModal/CreateAIChannelModal'
+import './ChannelList.scss'
+import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal'
 
 const defaultPageSize = 15
 
@@ -205,7 +205,7 @@ function ChannelList({ className = '', selectedChannelId = null }) {
           <div className="header-new-channel">
             <DropDown className="dropdown-wrapper" items={dropDownItems}>
               <ToolTip1 text="New channel">
-                <CreateChannelIcon className="new-channel-icon" />
+                <CreateIcon1 className="new-channel-icon" />
               </ToolTip1>
             </DropDown>
           </div>

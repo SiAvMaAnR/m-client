@@ -35,7 +35,7 @@ export const getActivityStatus = ({ status, lastOnlineAt }) => {
 function ChatHeader({ className = '', channel = null, isLoading, setSearchMessage }) {
   const imageSrc = channel?.image
     ? `data:image/jpeg;base64, ${channel.image}`
-    : `${config.app.publicPath}/defaultImages/${defaultImageMapper[channel?.type]}.jpg`
+    : `${config.app.publicPath}/defaultImages/channels/${defaultImageMapper[channel?.type]}.jpg`
 
   const adaptedChatInfo = getActivityStatus({
     status: channel?.userActivityStatus,

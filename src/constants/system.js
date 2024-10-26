@@ -29,7 +29,8 @@ const page = {
   profile: '/profile',
   users: '/users',
   resetPassword: '/reset-password',
-  initResetPassword: '/init-reset-password'
+  initResetPassword: '/init-reset-password',
+  aiProfiles: '/ai-profiles',
 }
 
 const hub = {

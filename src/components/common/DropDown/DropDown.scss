@@ -15,6 +15,14 @@
     font-weight: 300;
     white-space: pre-wrap;
     z-index: 99;
+
+    .dropdown-icon {
+      svg {
+        height: 25px;
+        width: 25px;
+        stroke: var(--font-color-primary-1);
+      }
+    }
   }
 
   &.right .dropdown {

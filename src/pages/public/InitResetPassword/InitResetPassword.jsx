@@ -49,15 +49,11 @@ function InitResetPassword() {
         email
       })
 
-      if (response?.data?.errors) {
-        throw new Error('Validation error')
-      }
-
       if (response?.data?.clientMessage) {
         throw new Error(response.data.clientMessage)
       }
 
-      if (!data) {
+      if (!data || response?.data?.errors) {
         throw new Error('Something went wrong')
       }
 

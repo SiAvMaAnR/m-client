@@ -21,7 +21,7 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
 
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/${defaultImageMapper[type]}.jpg`
+    : `${config.app.publicPath}/defaultImages/channels/${defaultImageMapper[type]}.jpg`
 
   useEffect(() => {
     setCounter(unreadMessagesCount)

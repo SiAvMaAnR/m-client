@@ -7,7 +7,7 @@
   user-select: none;
 
   .page-header-text {
-    width: 90%;
+    width: 60%;
     height: 50px;
     display: flex;
     align-items: center;
@@ -16,5 +16,31 @@
     font-size: 30px;
     font-weight: 500;
     padding-left: 8px;
+  }
+
+  .page-header-options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30%;
+    height: 50px;
+    border-bottom: solid 1px var(--border-color);
+    gap: 4px;
+
+    .header-item {
+      height: 35px;
+      width: 50px;
+      display: grid;
+      place-items: center;
+      border: solid 1px var(--border-color);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover{
+        border-color: var(--border-color-1);
+        color: var(--font-color-primary-0);
+      }
+    }
   }
 }

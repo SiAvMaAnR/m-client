@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
-import ToolsIcon from './ToolsIcon/ToolsIcon'
+import ToolsIcon from '../../common/Icon/ToolsIcon/ToolsIcon'
 import DropDown from '../../common/DropDown/DropDown'
 import { activityStatus } from '../../../constants/system'
 import api from '../../../api/api'
-import UnblockIcon from './DropDownIcons/Unblock/UnblockIcon'
-import BlockIcon from './DropDownIcons/BlockIcon/BlockIcon'
+import UnblockIcon from '../../common/Icon/Unblock/UnblockIcon'
+import BlockIcon from '../../common/Icon/BlockIcon/BlockIcon'
 import config from '../../../config/configuration'
 import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import './UserItem.scss'
@@ -16,14 +16,14 @@ function UserItem({ className = '', userInfo = null, loadUsers = null }) {
   const dropDownItems = [
     isBanned
       ? {
-          icon: <UnblockIcon />,
+          icon: <UnblockIcon className="dropdown-icon" />,
           title: 'Unblock',
           onClick: () => {
             api.user.unblockUser({ id }).then(() => loadUsers())
           }
         }
       : {
-          icon: <BlockIcon />,
+          icon: <BlockIcon className="dropdown-icon" />,
           title: 'Block',
           onClick: () => {
             api.user.blockUser({ id }).then(() => loadUsers())

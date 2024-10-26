@@ -15,6 +15,8 @@ import Users from './admin/Users/Users'
 import Chat from './common/Chat/Chat'
 import Home from './common/Home/Home'
 import Profile from './common/Profile/Profile'
+import AIProfiles from './common/AIProfiles/AIProfiles'
+import Settings from './common/Settings/Settings'
 import Error from './common/Error/Error'
 
 export {
@@ -26,6 +28,8 @@ export {
   Profile,
   Chat,
   Home,
+  AIProfiles,
+  Settings,
   Error,
   ConfirmedRegistration
 }

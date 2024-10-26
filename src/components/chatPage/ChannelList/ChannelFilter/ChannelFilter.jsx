@@ -22,7 +22,7 @@ const filtersInfo = [
     key: 4,
     title: 'Direct',
     type: channelType.direct
-  }
+  },
 ]
 
 function ChannelFilter({ className = '', setType = () => {}, type = null }) {

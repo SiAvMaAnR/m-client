@@ -5,8 +5,9 @@ const path = `/api/${services.chat}/chat`
 
 const chatApi = {
   sendMessage: async ({ message }) => {
-    const body = { message }
-    const response = await axiosInstance.post(`${path}/send-message`, body)
+    const response = await axiosInstance.post(`${path}/send-message`, {
+      message
+    })
     return response
   },
 

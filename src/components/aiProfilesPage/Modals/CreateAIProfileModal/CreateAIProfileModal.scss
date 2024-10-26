@@ -1,0 +1,84 @@
+.c-create-ai-profile-modal {
+    user-select: none;
+
+    .base-modal {
+        height: 650px;
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: stretch;
+
+        .header {
+            flex-basis: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 15px;
+            border-bottom: solid 1px var(--border-color);
+
+            .brand {
+                padding-left: 8px;
+            }
+        }
+
+
+        .content {
+            flex: 1 0;
+            background: var(--background-color-1);
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            align-items: stretch;
+            gap: 3px;
+            padding: 8px 6px;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            &::-webkit-scrollbar {
+                width: 2px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: var(--font-color-primary-0);
+            }
+        }
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border-top: solid 1px var(--border-color);
+
+            .profile-key-input {
+                flex-basis: 65%;
+
+                .form-input {
+                    height: 44px;
+                    width: 100%;
+                    font-size: 16px;
+                    font-family: 'Roboto', sans-serif;
+
+                    &::placeholder {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            .profile-create-btn {
+                .create-btn {
+                    height: 44px;
+                    width: 170px;
+                    border-radius: 13px;
+                }
+            }
+        }
+    }
+
+
+}
