@@ -1,0 +1,29 @@
+.c-textarea {
+    height: 100%;
+    width: 100%;
+
+    textarea {
+        height: 100%;
+        width: 100%;
+        border-radius: 13px;
+        border: 1px solid var(--border-color);
+        padding: 15px 20px;
+        background: var(--background-color);
+        outline: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+
+        &::-webkit-scrollbar {
+            width: 2px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--font-color-primary-0);
+        }
+    }
+}

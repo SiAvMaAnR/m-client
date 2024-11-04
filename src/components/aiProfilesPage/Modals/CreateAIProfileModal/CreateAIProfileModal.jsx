@@ -3,22 +3,26 @@ import PropTypes from 'prop-types'
 import { BaseModal, Brand, FormButton, FormInput } from '../../../_exports'
 import api from '../../../../api/api'
 import GroupedSelector from '../../../common/Selector/GroupedSelector/GroupedSelector'
-import { aiModelItems } from '../../../../constants/ai'
+import { aiModel, aiModelItems } from '../../../../constants/ai'
+import TextArea from '../../../common/TextArea/TextArea'
 import './CreateAIProfileModal.scss'
 
 function checkProfileData(profileInfo) {
-  const { model, apiKey, template, temperature } = profileInfo
+  const { name, model, apiKey, temperature } = profileInfo
 
-  return model && apiKey && template && temperature
+  return name && model && apiKey && temperature
+}
+
+const defaultProfileData = {
+  model: aiModel.gpt3T
 }
 
 function CreateAIProfileModal({ className = '', isActive = false, setIsActive, refreshProfiles }) {
-  const [profileInfo, setProfileInfo] = useState({})
+  const [profileInfo, setProfileInfo] = useState(defaultProfileData)
   const [isCreateProfileLoading, setIsCreateProfileLoading] = useState(false)
-  console.log(profileInfo)
 
   const resetProfile = () => {
-    setProfileInfo({})
+    setProfileInfo(defaultProfileData)
   }
 
   const selectModelHandler = (model) => {
@@ -69,17 +73,74 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
           </div>
 
           <div className="content">
-            <GroupedSelector
-              className="model-selector"
-              placeholder="Select AI Model"
-              items={aiModelItems}
-              selectedValue={profileInfo.model}
-              setSelectedValue={selectModelHandler}
-            />
+            <div className="first-row">
+              <div className="name-input">
+                <FormInput
+                  className="form-input"
+                  type="text"
+                  placeholder="Name"
+                  onChange={(event) =>
+                    setProfileInfo((prevProfile) => ({
+                      ...prevProfile,
+                      name: event.target.value
+                    }))
+                  }
+                  value={profileInfo.name}
+                  pattern=".*"
+                  required
+                />
+              </div>
+
+              <div className="model-selector">
+                <GroupedSelector
+                  className="selector"
+                  placeholder="Select AI Model"
+                  items={aiModelItems}
+                  selectedValue={profileInfo.model}
+                  setSelectedValue={selectModelHandler}
+                />
+              </div>
+
+              <div className="temperature-input">
+                <FormInput
+                  className="form-input"
+                  type="number"
+                  placeholder="Temperature"
+                  onChange={(event) =>
+                    setProfileInfo((prevProfile) => ({
+                      ...prevProfile,
+                      temperature: event.target.value
+                    }))
+                  }
+                  value={profileInfo.temperature}
+                  pattern=".*"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="second-row">
+              <div className="template-input">
+                <TextArea
+                  className="textarea"
+                  placeholder="Enter template"
+                  value={profileInfo.template}
+                  onChange={(event) =>
+                    setProfileInfo((prevProfile) => ({
+                      ...prevProfile,
+                      template: event.target.value
+                    }))
+                  }
+                />
+              </div>
+            </div>
           </div>
 
           <div className="footer">
-            <div className="profile-key-input">
+            <div className="key-input">
               <FormInput
                 className="form-input"
                 type="text"
@@ -96,9 +157,9 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
               />
             </div>
 
-            <div className="profile-create-btn">
+            <div className="create-btn">
               <FormButton
-                className="create-btn"
+                className="form-btn"
                 onClick={createProfileHandler}
                 isLoading={isCreateProfileLoading}
               >

@@ -6,7 +6,7 @@ import { authReducer, systemReducer, signalRReducer, userReducer } from './_expo
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['system', 'auth', 'user']
+  whitelist: ['system', 'auth']
 }
 
 const rootReducer = combineReducers({

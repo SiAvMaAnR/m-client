@@ -9,7 +9,7 @@ import api from '../../../api/api'
 import './AiProfileItem.scss'
 
 function AiProfileItem({ className = '', profileInfo = null, refreshProfiles }) {
-  const { id, integration, model, template, temperature, apiKey } = profileInfo
+  const { id, integration, model, name, template, temperature, apiKey } = profileInfo
 
   const imageSrc = `${config.app.publicPath}/defaultImages/ai-integrations/${integration}.png`
 
@@ -37,8 +37,8 @@ function AiProfileItem({ className = '', profileInfo = null, refreshProfiles }) 
       <td id="image">
         <ImgWrapper src={imageSrc} alt="profile-img" />
       </td>
-      <td id="id">{id}</td>
-      <td id="integration">{integration}</td>
+      <td id="id">#{id}</td>
+      <td id="name">{name}</td>
       <td id="model">{model.toLowerCase()}</td>
       <td id="template">{template}</td>
       <td id="temperature">{temperature}</td>

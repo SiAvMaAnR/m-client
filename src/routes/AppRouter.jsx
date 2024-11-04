@@ -31,7 +31,9 @@ function LoggedRouter() {
         <Route path="users" element={<SidebarLayout page={<Users />} />} />
       </Route>
 
-      <Route element={<RoutePermissionGuard permittedRoles={[role.user, role.admin]} />}>
+      <Route
+        element={<RoutePermissionGuard permittedRoles={[role.user, role.admin, role.aiBot]} />}
+      >
         <Route path="home" element={<SidebarLayout page={<Home />} />} />
         <Route path="chat/:id?" element={<SidebarLayout page={<Chat />} />} />
         <Route path="ai-profiles" element={<SidebarLayout page={<AIProfiles />} />} />

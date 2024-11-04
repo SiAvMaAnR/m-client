@@ -4,11 +4,13 @@ import axiosInstance from '../axios'
 const path = `/api/${services.ai}/profiles`
 
 const aiProfileApi = {
-  create: async ({ apiKey, temperature, model }) => {
+  create: async ({ apiKey, temperature, template, model, name }) => {
     const response = await axiosInstance.post(`${path}`, {
       apiKey,
       temperature,
-      model
+      template,
+      model,
+      name
     })
     return response
   },
@@ -18,8 +20,12 @@ const aiProfileApi = {
     return response
   },
 
-  getAll: async ({ pageNumber, pageSize }) => {
-    const params = [`pageNumber=${pageNumber || 0}`, `pageSize=${pageSize || 100}`]
+  getAll: async ({ pageNumber, pageSize, searchField = '' }) => {
+    const params = [
+      `pageNumber=${pageNumber || 0}`,
+      `pageSize=${pageSize || 100}`,
+      `searchField=${searchField}`
+    ]
 
     const response = await axiosInstance.get(`${path}?${params.join('&')}`)
     return response

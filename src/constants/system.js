@@ -6,7 +6,8 @@ const language = {
 const role = {
   public: 'public',
   admin: 'admin',
-  user: 'user'
+  user: 'user',
+  aiBot: 'aibot'
 }
 
 const activityStatus = {

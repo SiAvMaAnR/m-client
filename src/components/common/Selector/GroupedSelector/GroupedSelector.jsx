@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import './GroupedSelector.scss'
 
-function GroupedSelector({ className, items, setSelectedValue, selectedValue, placeholder }) {
+function GroupedSelector({ className, items, setSelectedValue, selectedValue }) {
   const changeValueHandler = (event) => {
     setSelectedValue(event.target.value)
   }
+console.log(selectedValue);
 
   return (
     <div className={`c-grouped-selector ${className}`}>
       <select name="select" value={selectedValue} onChange={changeValueHandler}>
-        <option value="">{placeholder}</option>
-
         {items.map((group) => (
           <optgroup key={group.key} label={group.value}>
             {group.items.map((item) => (
@@ -30,7 +28,6 @@ GroupedSelector.propTypes = {
   className: PropTypes.string,
   selectedValue: PropTypes.string,
   setSelectedValue: PropTypes.func,
-  placeholder: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.number,

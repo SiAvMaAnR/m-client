@@ -87,7 +87,7 @@ function AIProfiles() {
                   {}
                 </th>
                 <th width="5%">Id</th>
-                <th width="10%">Integration</th>
+                <th width="10%">Name</th>
                 <th width="10%">Model</th>
                 <th width="10%">Template</th>
                 <th width="10%">Temperature</th>

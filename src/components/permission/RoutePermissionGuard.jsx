@@ -6,6 +6,7 @@ import useRole from '../../hooks/useRole'
 function RoutePermissionGuard({ permittedRoles }) {
   const userRole = useRole()
   const isAccess = permittedRoles.includes(userRole)
+  
   return isAccess ? <Outlet /> : <Error />
 }
 
