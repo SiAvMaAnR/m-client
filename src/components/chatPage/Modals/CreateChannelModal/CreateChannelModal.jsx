@@ -133,13 +133,14 @@ function CreateChannelModal({
 
   useEffect(() => {
     if (!isActive) {
+      setErrorMessage(null)
       setChannelName('')
       setSelectedUserIds(new Set())
     }
   }, [isActive])
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !isCreateChannelLoading) {
       createChannelHandler()
     }
   }

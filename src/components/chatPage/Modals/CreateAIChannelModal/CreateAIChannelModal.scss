@@ -102,8 +102,14 @@
             }
 
             .channel-type-switcher {
+                height: 100%;
+                max-width: 100px;
+                flex: 1 0;
 
-                .type-switcher {}
+                .type-switcher {
+
+                    text-transform: capitalize;
+                }
             }
 
             .channel-continue-btn {

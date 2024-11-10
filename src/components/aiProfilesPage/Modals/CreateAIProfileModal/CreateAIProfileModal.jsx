@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { BaseModal, Brand, FormButton, FormInput } from '../../../_exports'
 import api from '../../../../api/api'
@@ -17,16 +17,24 @@ const defaultProfileData = {
   model: aiModel.gpt3T
 }
 
-function CreateAIProfileModal({ className = '', isActive = false, setIsActive, refreshProfiles }) {
-  const [profileInfo, setProfileInfo] = useState(defaultProfileData)
+const checkIsAdditionalKeyNeeded = (model) => model === aiModel.gptLite
+
+function CreateAIProfileModal({
+  className = '',
+  isActive = false,
+  setIsActive,
+  refreshProfiles,
+  profile
+}) {
+  const [profileInfo, setProfileInfo] = useState(profile ?? defaultProfileData)
   const [isCreateProfileLoading, setIsCreateProfileLoading] = useState(false)
 
-  const resetProfile = () => {
-    setProfileInfo(defaultProfileData)
-  }
+  const resetProfile = useCallback(() => {
+    setProfileInfo(profile ?? defaultProfileData)
+  }, [profile])
 
   const selectModelHandler = (model) => {
-    setProfileInfo((profile) => ({ ...profile, model }))
+    setProfileInfo((prevProfile) => ({ ...prevProfile, model }))
   }
 
   const createProfileHandler = async () => {
@@ -34,9 +42,9 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
 
     if (isCorrect) {
       setIsCreateProfileLoading(true)
+      const exec = profile ? api.aiProfile.update : api.aiProfile.create
 
-      await api.aiProfile
-        .create(profileInfo)
+      await exec(profileInfo)
         .then(() => {
           refreshProfiles()
           setIsActive(false)
@@ -49,14 +57,14 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
   }
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !isCreateProfileLoading) {
       createProfileHandler()
     }
   }
 
   useEffect(() => {
     resetProfile()
-  }, [isActive])
+  }, [isActive, resetProfile])
 
   return (
     <div className="c-create-ai-profile-modal" onKeyDown={submitKeyDownHandler} role="presentation">
@@ -85,7 +93,7 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
                       name: event.target.value
                     }))
                   }
-                  value={profileInfo.name}
+                  value={profileInfo.name || ''}
                   pattern=".*"
                   required
                 />
@@ -112,7 +120,7 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
                       temperature: event.target.value
                     }))
                   }
-                  value={profileInfo.temperature}
+                  value={profileInfo.temperature?.toString() || ''}
                   pattern=".*"
                   min="0"
                   max="1"
@@ -127,7 +135,7 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
                 <TextArea
                   className="textarea"
                   placeholder="Enter template"
-                  value={profileInfo.template}
+                  value={profileInfo.template || ''}
                   onChange={(event) =>
                     setProfileInfo((prevProfile) => ({
                       ...prevProfile,
@@ -137,6 +145,27 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
                 />
               </div>
             </div>
+
+            {checkIsAdditionalKeyNeeded(profileInfo.model) && (
+              <div className="third-row">
+                <div className="additional-key-input">
+                  <FormInput
+                    className="form-input"
+                    type="text"
+                    placeholder="Additional key"
+                    onChange={(event) =>
+                      setProfileInfo((prevProfile) => ({
+                        ...prevProfile,
+                        additionalKey: event.target.value
+                      }))
+                    }
+                    value={profileInfo.additionalKey || ''}
+                    pattern=".*"
+                    required
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="footer">
@@ -151,7 +180,7 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
                     apiKey: event.target.value
                   }))
                 }
-                value={profileInfo.apiKey}
+                value={profileInfo.apiKey || ''}
                 pattern=".*"
                 required
               />
@@ -163,7 +192,7 @@ function CreateAIProfileModal({ className = '', isActive = false, setIsActive, r
                 onClick={createProfileHandler}
                 isLoading={isCreateProfileLoading}
               >
-                Create
+                {profile ? 'Update' : 'Create'}
               </FormButton>
             </div>
           </div>
@@ -177,7 +206,16 @@ CreateAIProfileModal.propTypes = {
   className: PropTypes.string,
   isActive: PropTypes.bool,
   setIsActive: PropTypes.func,
-  refreshProfiles: PropTypes.func
+  refreshProfiles: PropTypes.func,
+  profile: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    model: PropTypes.string,
+    apiKey: PropTypes.string,
+    additionalKey: PropTypes.string,
+    template: PropTypes.string,
+    temperature: PropTypes.number
+  })
 }
 
 export default CreateAIProfileModal

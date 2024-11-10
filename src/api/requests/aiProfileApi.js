@@ -4,9 +4,10 @@ import axiosInstance from '../axios'
 const path = `/api/${services.ai}/profiles`
 
 const aiProfileApi = {
-  create: async ({ apiKey, temperature, template, model, name }) => {
+  create: async ({ apiKey, additionalKey, temperature, template, model, name }) => {
     const response = await axiosInstance.post(`${path}`, {
       apiKey,
+      additionalKey,
       temperature,
       template,
       model,
@@ -33,6 +34,18 @@ const aiProfileApi = {
 
   delete: async ({ id }) => {
     const response = await axiosInstance.delete(`${path}/${id}`)
+    return response
+  },
+
+  update: async ({ id, apiKey, additionalKey, temperature, template, model, name }) => {
+    const response = await axiosInstance.put(`${path}/${id}`, {
+      apiKey,
+      additionalKey,
+      temperature,
+      template,
+      model,
+      name
+    })
     return response
   }
 }

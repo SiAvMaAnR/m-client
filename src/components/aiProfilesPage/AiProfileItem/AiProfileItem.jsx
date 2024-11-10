@@ -8,7 +8,7 @@ import EditIcon from '../../common/Icon/EditIcon/EditIcon'
 import api from '../../../api/api'
 import './AiProfileItem.scss'
 
-function AiProfileItem({ className = '', profileInfo = null, refreshProfiles }) {
+function AiProfileItem({ className = '', profileInfo = null, refreshProfiles, openUpdateModal }) {
   const { id, integration, model, name, template, temperature, apiKey } = profileInfo
 
   const imageSrc = `${config.app.publicPath}/defaultImages/ai-integrations/${integration}.png`
@@ -18,7 +18,7 @@ function AiProfileItem({ className = '', profileInfo = null, refreshProfiles }) 
       icon: <EditIcon className="dropdown-icon" />,
       title: 'Edit',
       onClick: () => {
-        refreshProfiles()
+        openUpdateModal(profileInfo)
       }
     },
     {
@@ -55,6 +55,7 @@ function AiProfileItem({ className = '', profileInfo = null, refreshProfiles }) 
 AiProfileItem.propTypes = {
   className: PropTypes.string,
   refreshProfiles: PropTypes.func,
+  openUpdateModal: PropTypes.func,
   profileInfo: PropTypes.shape({
     id: PropTypes.number,
     integration: PropTypes.string,

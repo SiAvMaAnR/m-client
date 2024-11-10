@@ -54,9 +54,10 @@ function MediaViewerModal({
   }
 
   return (
-    <div className="c-media-viewer-modal" role="presentation">
+    <div className={`c-media-viewer-modal ${className}`} role="presentation">
       <BaseModal
-        className={`base-modal ${className}`}
+        baseModalClassName="base-modal"
+        className="viewer-modal"
         isActive={isActive}
         setIsActive={setIsActive}
       >
@@ -73,7 +74,7 @@ function MediaViewerModal({
                 alt="attachment"
               />
             ) : (
-              <Loader2 className='media-loader'/>
+              <Loader2 className="media-loader" />
             )}
           </div>
 

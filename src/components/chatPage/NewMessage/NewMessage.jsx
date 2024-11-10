@@ -55,7 +55,7 @@ function NewMessage({ className = '', channelId = null }) {
   }
 
   const onKeyDownHandler = (event) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
+    if (event.key === 'Enter' && !event.shiftKey && !isSending) {
       event.preventDefault()
       sendMessageHandler()
     }

@@ -15,6 +15,7 @@ function AIProfiles() {
   const [pageNumber, setPageNumber] = useState(0)
   const [pagesCount, setPagesCount] = useState(0)
   const [isActiveCreateAIProfileModal, setIsActiveCreateAIProfileModal] = useState(false)
+  const [editableProfile, setEditableProfile] = useState(null)
 
   const loadAIProfiles = useCallback(async () => {
     try {
@@ -43,7 +44,7 @@ function AIProfiles() {
   }, [pageNumber])
 
   useEffect(() => {
-    loadAIProfiles()
+    loadAIProfiles()    
   }, [loadAIProfiles])
 
   const onNext = () => {
@@ -58,12 +59,24 @@ function AIProfiles() {
     }
   }
 
+  const openUpdateModal = (profile) => {
+    setEditableProfile(profile)
+    setIsActiveCreateAIProfileModal(true)
+  }
+
+  useEffect(() => {
+    if (!isActiveCreateAIProfileModal) {
+      setEditableProfile(null)
+    }
+  }, [isActiveCreateAIProfileModal])
+
   return (
     <div className="p-ai-profiles">
       <CreateAIProfileModal
         setIsActive={setIsActiveCreateAIProfileModal}
         isActive={isActiveCreateAIProfileModal}
         refreshProfiles={loadAIProfiles}
+        profile={editableProfile}
       />
 
       <PageHeader className="ai-profiles-header" text="AI Profiles">
@@ -104,6 +117,7 @@ function AIProfiles() {
                   key={profile.id}
                   profileInfo={profile}
                   refreshProfiles={loadAIProfiles}
+                  openUpdateModal={openUpdateModal}
                 />
               ))}
             </tbody>

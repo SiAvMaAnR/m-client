@@ -5,7 +5,6 @@ function GroupedSelector({ className, items, setSelectedValue, selectedValue }) 
   const changeValueHandler = (event) => {
     setSelectedValue(event.target.value)
   }
-console.log(selectedValue);
 
   return (
     <div className={`c-grouped-selector ${className}`}>
@@ -14,7 +13,7 @@ console.log(selectedValue);
           <optgroup key={group.key} label={group.value}>
             {group.items.map((item) => (
               <option key={item.key} value={item.value}>
-                {item.value.toLowerCase()}
+                {item.value}
               </option>
             ))}
           </optgroup>

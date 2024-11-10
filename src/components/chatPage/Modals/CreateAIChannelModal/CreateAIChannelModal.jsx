@@ -5,11 +5,11 @@ import { BaseModal, Brand, FormButton, FormInput, SearchInput } from '../../../_
 import ValidIcon from '../../../common/Input/FormInput/ValidIcon/ValidIcon'
 import { useDebounce } from '../../../../hooks/_exports'
 import { channelType as chatType } from '../../../../constants/chat'
-import ChannelTypeSwitcher from '../CreateChannelModal/ChannelTypeSwitcher/ChannelTypeSwitcher'
 import CreateAIChannelStep1 from './FirstStep/CreateAIChannelStep1'
 import CreateAIChannelStep2 from './SecondStep/CreateAIChannelStep2'
 import api from '../../../../api/api'
 import channelNameValidator from '../../../../utils/validators/channelNameValidator'
+import Selector from '../../../common/Selector/Selector/Selector'
 import './CreateAIChannelModal.scss'
 
 const createChannelMapper = {
@@ -17,6 +17,21 @@ const createChannelMapper = {
   [chatType.public]: api.channel.createPublic,
   [chatType.direct]: api.channel.createDirect
 }
+
+const chatTypeSelectorItems = [
+  {
+    key: 0,
+    value: chatType.private
+  },
+  {
+    key: 1,
+    value: chatType.public
+  },
+  {
+    key: 2,
+    value: chatType.direct
+  }
+]
 
 function CreateAIChannelModal({
   className = '',
@@ -89,7 +104,7 @@ function CreateAIChannelModal({
   }
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !isCreateChannelLoading) {
       nextStepHandler()
     }
   }
@@ -159,10 +174,11 @@ function CreateAIChannelModal({
             </div>
 
             <div className="channel-type-switcher">
-              <ChannelTypeSwitcher
+              <Selector
                 className="type-switcher"
-                chatType={channelType}
-                setChatType={setChannelType}
+                items={chatTypeSelectorItems}
+                selectedValue={channelType}
+                setSelectedValue={setChannelType}
               />
             </div>
 

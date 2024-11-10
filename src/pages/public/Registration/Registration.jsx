@@ -108,7 +108,7 @@ function Registration() {
   }
 
   const keyDownHandler = async (event) => {
-    if (event.key === 'Enter' && isActiveBtn) {
+    if (event.key === 'Enter' && isActiveBtn && !isLoading) {
       await nextStepHandler()
     }
   }
