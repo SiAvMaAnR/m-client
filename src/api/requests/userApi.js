@@ -40,6 +40,11 @@ const userApi = {
   unblockUser: async ({ id }) => {
     const response = await axiosInstance.post(`${path}/unblock-user`, { id })
     return response
+  },
+
+  deleteUser: async ({ id }) => {
+    const response = await axiosInstance.delete(`${path}/users/${id}`)
+    return response
   }
 }
 

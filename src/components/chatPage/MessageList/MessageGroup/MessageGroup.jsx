@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import DoubleTickIcon from '../../../common/Icon/DoubleTickIcon/DoubleTickIcon'
+import { DoubleTickIcon } from '../../../common/Icon/_exports'
 import config from '../../../../config/configuration'
 import Message from '../Message/Message'
 import ImgWrapper from '../../../common/ImgWrapper/ImgWrapper'
@@ -64,7 +64,7 @@ MessageGroup.propTypes = {
   }),
   observerRef: PropTypes.shape({
     current: PropTypes.instanceOf(IntersectionObserver)
-  }),
+  })
 }
 
 export default MessageGroup

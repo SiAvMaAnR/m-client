@@ -6,6 +6,7 @@ import ChannelList from '../../../components/chatPage/ChannelList/ChannelList'
 import MessageList from '../../../components/chatPage/MessageList/MessageList'
 import NewMessage from '../../../components/chatPage/NewMessage/NewMessage'
 import './Chat.scss'
+import { Logo } from '../../../components/_exports'
 
 function Chat() {
   const { id } = useParams()
@@ -47,7 +48,7 @@ function Chat() {
       />
 
       <div className="chat-wrapper">
-        {!!selectedChannelId && (
+        {selectedChannelId ? (
           <div className="chat">
             <div className="chat-header-container">
               <ChatHeader
@@ -66,6 +67,11 @@ function Chat() {
                 <NewMessage channelId={+selectedChannelId} />
               </div>
             </div>
+          </div>
+        ) : (
+          <div className="chat not-selected">
+            <Logo className="logo" />
+            <p>Chat not selected</p>
           </div>
         )}
       </div>

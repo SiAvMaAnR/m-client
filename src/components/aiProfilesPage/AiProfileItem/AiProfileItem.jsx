@@ -2,10 +2,8 @@ import PropTypes from 'prop-types'
 import DropDown from '../../common/DropDown/DropDown'
 import config from '../../../config/configuration'
 import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
-import ToolsIcon from '../../common/Icon/ToolsIcon/ToolsIcon'
-import RemoveIcon from '../../common/Icon/RemoveIcon/RemoveIcon'
-import EditIcon from '../../common/Icon/EditIcon/EditIcon'
 import api from '../../../api/api'
+import { CreateIcon, EditIcon, RemoveIcon, ToolsIcon } from '../../common/Icon/_exports'
 import './AiProfileItem.scss'
 
 function AiProfileItem({ className = '', profileInfo = null, refreshProfiles, openUpdateModal }) {
@@ -14,6 +12,11 @@ function AiProfileItem({ className = '', profileInfo = null, refreshProfiles, op
   const imageSrc = `${config.app.publicPath}/defaultImages/ai-integrations/${integration}.png`
 
   const dropDownItems = [
+    {
+      icon: <CreateIcon className="dropdown-icon" />,
+      title: 'Direct',
+      onClick: () => {}
+    },
     {
       icon: <EditIcon className="dropdown-icon" />,
       title: 'Edit',

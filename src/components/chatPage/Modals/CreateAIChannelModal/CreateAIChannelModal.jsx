@@ -89,7 +89,7 @@ function CreateAIChannelModal({
 
   const steps = [
     <CreateAIChannelStep1 debouncedSearch={debouncedSearch} setProfileId={setProfileId} />,
-    <CreateAIChannelStep2 debouncedSearch={debouncedSearch} />
+    <CreateAIChannelStep2 debouncedSearch={debouncedSearch} setIsActive={setIsActive}/>
   ]
 
   const nextStepHandler = () => {

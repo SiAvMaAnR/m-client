@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import defaultImageMapper from '../../../utils/mappers/defaultImageMapper'
 import config from '../../../config/configuration'
 import { channelType } from '../../../constants/chat'
-import MenuIcon from '../../common/Icon/MenuIcon/MenuIcon'
-import SearchIcon from '../../common/Icon/SearchIcon/SearchIcon'
+import { MenuIcon } from '../../common/Icon/_exports'
 import { activityStatus } from '../../../constants/system'
 import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
-import './ChatHeader.scss'
 import MessageSearch from './MessageSearch/MessageSearch'
+import './ChatHeader.scss'
 
 function formatLastOnlineAt(lastOnlineAt) {
   if (!lastOnlineAt) {

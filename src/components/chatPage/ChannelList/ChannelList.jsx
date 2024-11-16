@@ -11,15 +11,12 @@ import { useDebounce } from '../../../hooks/_exports'
 import { page } from '../../../constants/system'
 import { chatMethod } from '../../../socket/hubHandlers'
 import DropDown from '../../common/DropDown/DropDown'
-import JoinIcon from '../../common/Icon/JoinIcon/JoinIcon'
-import CreateIcon from '../../common/Icon/CreateIcon/CreateIcon'
-import CreateIcon1 from '../../common/Icon/CreateIcon1/CreateIcon1'
+import {AIIcon, CreateIcon, CreateIcon1, JoinIcon} from '../../common/Icon/_exports'
 import JoinChannelModal from '../Modals/JoinChannelModal/JoinChannelModal'
 import Loader1 from '../../common/Loader/Loader1/Loader1'
-import AIIcon from '../../common/Icon/AIIcon/AIIcon'
 import CreateAIChannelModal from '../Modals/CreateAIChannelModal/CreateAIChannelModal'
-import './ChannelList.scss'
 import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal'
+import './ChannelList.scss'
 
 const defaultPageSize = 15
 

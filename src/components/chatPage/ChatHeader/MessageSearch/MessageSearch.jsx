@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-import SearchIcon from '../../../common/Icon/SearchIcon/SearchIcon'
+import { SearchIcon } from '../../../common/Icon/_exports'
 import './MessageSearch.scss'
 
 function MessageSearch({ className = '', setSearchMessage }) {

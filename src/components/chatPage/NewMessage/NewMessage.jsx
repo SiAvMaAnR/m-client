@@ -2,16 +2,14 @@ import { v4 as uuid } from 'uuid'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-import SendIcon from '../../common/Icon/SendIcon/SendIcon'
-import AttachmentIcon from '../../common/Icon/AttachmentIcon/AttachmentIcon'
 import { chatMethod } from '../../../socket/hubHandlers'
 import DropDown from '../../common/DropDown/DropDown'
-import ImgIcon from '../../common/Icon/ImgIcon/ImgIcon'
-import FileIcon from '../../common/Icon/FileIcon/FileIcon'
+import {ImgIcon, FileIcon, VideoIcon, AttachmentIcon, SendIcon} from '../../common/Icon/_exports'
 import FileInput from './FileInput/FileInput'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
 import PreviewAttachments from './PreviewAttachments/PreviewAttachments'
 import { encodeToBase64 } from '../../../utils/helpers/encodingHelper'
+import { acceptedFiles, acceptedImages, acceptedVideos } from './acceptedFiles'
 import './NewMessage.scss'
 
 const maxSizeFiles = 10000000
@@ -78,22 +76,26 @@ function NewMessage({ className = '', channelId = null }) {
     autoResize()
   }, [message])
 
+  const dropDownAttachmentClickHandler = (accept) => {
+    fileInputRef.current.accept = accept
+    fileInputRef.current.click()
+  }
+
   const menuItems = [
     {
       icon: <ImgIcon />,
       title: 'Image',
-      onClick: () => {
-        fileInputRef.current.accept = 'image/*'
-        fileInputRef.current.click()
-      }
+      onClick: () => dropDownAttachmentClickHandler(acceptedImages)
     },
     {
       icon: <FileIcon />,
       title: 'File',
-      onClick: () => {
-        fileInputRef.current.accept = 'file/*'
-        fileInputRef.current.click()
-      }
+      onClick: () => dropDownAttachmentClickHandler(acceptedFiles)
+    },
+    {
+      icon: <VideoIcon />,
+      title: 'Video',
+      onClick: () => dropDownAttachmentClickHandler(acceptedVideos)
     }
   ]
 
@@ -174,7 +176,7 @@ function NewMessage({ className = '', channelId = null }) {
         <FileInput fileInputRef={fileInputRef} onChangeFile={onChangeFiles} multiple />
 
         <DropDown className="dropdown-wrapper" items={menuItems}>
-          <div className="attachments" onClick={() => {}} role="presentation">
+          <div className="attachments">
             <AttachmentIcon />
           </div>
         </DropDown>

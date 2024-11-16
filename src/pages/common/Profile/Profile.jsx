@@ -2,13 +2,13 @@ import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import config from '../../../config/configuration'
 import FormButton from '../../../components/common/Button/FormButton/FormButton'
-import UploadIcon from '../../../components/common/Icon/UploadIcon/UploadIcon'
+import {UploadIcon} from '../../../components/common/Icon/_exports'
 import api from '../../../api/api'
 import FileInput from '../../../components/chatPage/NewMessage/FileInput/FileInput'
 import { encodeToBase64 } from '../../../utils/helpers/encodingHelper'
 import { updateInfo } from '../../../redux/slices/userSlice'
-import './Profile.scss'
 import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
+import './Profile.scss'
 
 function Profile() {
   const { login, email, image, birthday } = useSelector((state) => state.user.info)

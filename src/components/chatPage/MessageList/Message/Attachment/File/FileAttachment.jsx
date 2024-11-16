@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import Loader2 from '../../../../../common/Loader/Loader2/Loader2'
-import FileIcon from '../../../../../common/Icon/FileIcon/FileIcon'
-import RemoveIcon from '../../../../../common/Icon/RemoveIcon/RemoveIcon'
+import { FileIcon, RemoveIcon } from '../../../../../common/Icon/_exports'
 import { attachmentStatus } from '../../../../../../constants/chat'
 import { formatBytes, getFileExtension } from '../../../../../../utils/helpers/commonHelper'
 import './FileAttachment.scss'

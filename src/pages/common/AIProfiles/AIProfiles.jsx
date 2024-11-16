@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { PageHeader, Pagination } from '../../../components/_exports'
 import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
 import ProfileItem from '../../../components/aiProfilesPage/AiProfileItem/AiProfileItem'
-import CreateIcon from '../../../components/common/Icon/CreateIcon1/CreateIcon1'
+import {  CreateIcon1 } from '../../../components/common/Icon/_exports'
 import CreateAIProfileModal from '../../../components/aiProfilesPage/Modals/CreateAIProfileModal/CreateAIProfileModal'
 import api from '../../../api/api'
 import './AIProfiles.scss'
@@ -44,7 +44,7 @@ function AIProfiles() {
   }, [pageNumber])
 
   useEffect(() => {
-    loadAIProfiles()    
+    loadAIProfiles()
   }, [loadAIProfiles])
 
   const onNext = () => {
@@ -85,7 +85,7 @@ function AIProfiles() {
           onClick={() => setIsActiveCreateAIProfileModal(true)}
           role="presentation"
         >
-          <CreateIcon />
+          <CreateIcon1 />
         </div>
       </PageHeader>
 
