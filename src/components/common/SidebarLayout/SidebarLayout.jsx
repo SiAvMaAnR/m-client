@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types'
 import Sidebar from '../Sidebar/Sidebar'
+import PageLayout from '../../pageLayout/PageLayout'
 import './SidebarLayout.scss'
 
 function SidebarLayout({ page }) {
   return (
     <div className="c-sidebar-layout">
       <Sidebar />
-      <div className="page-wrapper">{page}</div>
+      <PageLayout page={page} />
     </div>
   )
 }

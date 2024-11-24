@@ -5,9 +5,11 @@ import { DoubleTickIcon } from '../../../common/Icon/_exports'
 import config from '../../../../config/configuration'
 import Message from '../Message/Message'
 import ImgWrapper from '../../../common/ImgWrapper/ImgWrapper'
+import usePageSection from '../../../../hooks/usePageSection'
 import './MessageGroup.scss'
 
 function MessageGroup({ className = '', group = null, observerRef = null }) {
+  const { accountSection } = usePageSection()
   const { authorId, authorLogin, image, createdAt, messages, isRead } = group
   const userId = useSelector((state) => state.auth.info.id)
   const myGroupClass = +userId === +authorId ? 'my-group' : ''
@@ -19,15 +21,21 @@ function MessageGroup({ className = '', group = null, observerRef = null }) {
 
   const formattedDate = moment(createdAt).format('HH:mm')
 
+  const imgClickHandler = () => {
+    accountSection.set(authorId)
+  }
+
   return (
     <div className={`c-message-group ${className} ${myGroupClass}`}>
       <div className="author-img">
-        <ImgWrapper src={imageSrc} alt="user-img" isLazy />
+        <ImgWrapper src={imageSrc} alt="user-img" onClick={imgClickHandler} isLazy />
       </div>
 
       <div className="data-wrapper">
         <div className="group-header">
-          <div className="group-author">{authorLogin}</div>
+          <div className="group-author" onClick={imgClickHandler} role="presentation">
+            {authorLogin}
+          </div>
           <div className="group-time">{formattedDate}</div>
           <DoubleTickIcon className={`group-read ${readClass}`} />
         </div>

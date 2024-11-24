@@ -5,7 +5,7 @@ export const systemSlice = createSlice({
   name: 'system',
   initialState: {
     language: language.english,
-    theme: theme.light
+    theme: theme.light,
   },
   reducers: {
     setLanguage: (state, action) => {
@@ -13,7 +13,7 @@ export const systemSlice = createSlice({
     },
     setTheme: (state, action) => {
       state.theme = action.payload
-    }
+    },
   }
 })
 

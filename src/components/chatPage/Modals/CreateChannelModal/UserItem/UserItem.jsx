@@ -23,7 +23,7 @@ function UserItem({
 
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/channels/direct-channel.jpg`
+    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
 
   const onClickHandler = () => {
     onToggle(id)

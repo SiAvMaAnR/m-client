@@ -31,7 +31,7 @@ const page = {
   users: '/users',
   resetPassword: '/reset-password',
   initResetPassword: '/init-reset-password',
-  aiProfiles: '/ai-profiles',
+  aiProfiles: '/ai-profiles'
 }
 
 const hub = {
@@ -47,4 +47,8 @@ const services = {
   ai: 'ai'
 }
 
-export { language, theme, role, page, hub, activityStatus, services }
+const section = {
+  account: 'account'
+}
+
+export { language, theme, role, page, hub, activityStatus, services, section }

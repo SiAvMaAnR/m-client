@@ -1,21 +1,37 @@
+import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import DropDown from '../../common/DropDown/DropDown'
 import config from '../../../config/configuration'
 import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import api from '../../../api/api'
 import { CreateIcon, EditIcon, RemoveIcon, ToolsIcon } from '../../common/Icon/_exports'
+import { page } from '../../../constants/system'
 import './AiProfileItem.scss'
 
 function AiProfileItem({ className = '', profileInfo = null, refreshProfiles, openUpdateModal }) {
+  const navigate = useNavigate()
   const { id, integration, model, name, template, temperature, apiKey } = profileInfo
 
   const imageSrc = `${config.app.publicPath}/defaultImages/ai-integrations/${integration}.png`
+
+  const createDirect = async () => {
+    const { data } = await api.channel.createDirect({
+      name,
+      aiProfileId: id
+    })
+
+    if (data.isSuccess && data.channelId) {
+      navigate(`${page.chat}/${data.channelId}`)
+    }
+  }
 
   const dropDownItems = [
     {
       icon: <CreateIcon className="dropdown-icon" />,
       title: 'Direct',
-      onClick: () => {}
+      onClick: () => {
+        createDirect()
+      }
     },
     {
       icon: <EditIcon className="dropdown-icon" />,

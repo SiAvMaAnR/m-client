@@ -4,7 +4,7 @@ import useSignalRHub from './hooks/useSignalRHub'
 import { hub } from './constants/system'
 import useRefreshToken from './hooks/useRefreshToken'
 import { setChatHub, setStateHub } from './redux/slices/signalRSlice'
-import useProfile from './hooks/useProfile'
+import { useProfile } from './hooks/_exports'
 import './App.scss'
 
 function App() {

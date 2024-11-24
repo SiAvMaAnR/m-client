@@ -1,4 +1,3 @@
-import moment from 'moment'
 import PropTypes from 'prop-types'
 import defaultImageMapper from '../../../utils/mappers/defaultImageMapper'
 import config from '../../../config/configuration'
@@ -8,20 +7,8 @@ import { activityStatus } from '../../../constants/system'
 import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
 import MessageSearch from './MessageSearch/MessageSearch'
+import formatLastOnlineAt from '../../../utils/helpers/formatHelper'
 import './ChatHeader.scss'
-
-function formatLastOnlineAt(lastOnlineAt) {
-  if (!lastOnlineAt) {
-    return null
-  }
-  const date = moment(lastOnlineAt)
-
-  const formattedDate = date.isSame(moment(), 'day')
-    ? `Seen today at ${date.format('HH:mm')}`
-    : `Seen on ${date.format('D MMM')}`
-
-  return formattedDate
-}
 
 export const getActivityStatus = ({ status, lastOnlineAt }) => {
   const isOnline = status?.toLowerCase() === activityStatus.online

@@ -1,0 +1,182 @@
+.c-account-section {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+
+    .section-header {
+        flex: 0 0 58px;
+        width: 100%;
+        display: flex;
+        justify-content: stretch;
+        align-items: center;
+        padding: 0 10px;
+        gap: 5px;
+        user-select: none;
+
+        .close-wrapper {
+            height: 40px;
+            flex: 0 0 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            border: solid 1px var(--border-color);
+            background: var(--background-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                svg {
+                    fill: var(--common-color-0);
+                }
+
+                border-color: var(--border-color-1);
+            }
+
+            .close-icon {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .title {
+            flex: 1 1 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            overflow: hidden;
+            padding-left: 25px;
+
+            p {
+                font-family: 'Roboto', sans-serif;
+                font-size: 22px;
+                font-weight: 500;
+                white-space: nowrap;
+                color: var(--common-color-0);
+            }
+        }
+    }
+
+    .section-content {
+        flex: 1 1;
+        border-top: solid 3px var(--background-color);
+        user-select: none;
+
+        .account-info {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            align-items: center;
+            padding: 35px 30px 50px;
+            overflow: hidden;
+
+            .image {
+                flex: 0 0 160px;
+
+                .img-wrapper {
+                    overflow: hidden;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 100%;
+                    cursor: pointer;
+
+                    img {
+                        height: 140px;
+                        width: 140px;
+                        object-fit: cover;
+                    }
+                }
+            }
+
+            .login,
+            .status {
+                white-space: nowrap;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .login {
+                margin: 10px 0 7px;
+                font-size: 26px;
+                font-weight: 600;
+            }
+
+            .status {
+                font-size: 16px;
+                color: var(--common-color-0);
+            }
+
+            .actions {
+                flex: 0 0 80px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+
+                .direct,
+                .favorite {
+                    height: 42px;
+                    width: 42px;
+                    border: solid 1px var(--border-color);
+                    border-radius: 12px;
+                    background: var(--background-color);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    svg {
+                        fill: var(--common-color-0);
+                    }
+
+                    &:hover {
+                        border-color: var(--border-color-1);
+                    }
+                }
+            }
+
+            .additional-info {
+                margin-top: 20px;
+                background: var(--background-color);
+                width: 100%;
+                border-radius: 12px;
+                display: flex;
+                justify-content: stretch;
+                align-items: stretch;
+                flex-direction: column;
+                overflow: hidden;
+                padding: 4px 0;
+
+                .info-item {
+                    font-size: 16px;
+                    display: flex;
+                    justify-content: stretch;
+                    align-items: center;
+                    gap: 20px;
+                    padding: 6px 5px;
+
+                    .icon {
+                        flex-basis: 35px;
+
+                        svg {
+                            height: 22px;
+                            width: 22px;
+                        }
+
+                        .email-icon {
+                            svg {
+                                height: 28px;
+                                width: 28px;
+                            }
+                        }
+                    }
+
+                    p {
+                        font-family: 'Roboto', sans-serif;
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+    }
+}

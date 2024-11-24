@@ -4,32 +4,29 @@ import axiosInstance from '../axios'
 const path = `/api/${services.chat}/channel`
 
 const channelApi = {
-  createDirect: async ({ name, accountId, aiProfileId, aiProfileName }) => {
+  createDirect: async ({ name, accountId, aiProfileId }) => {
     const response = await axiosInstance.post(`${path}/create-direct`, {
       accountId,
       name,
       aiProfileId,
-      aiProfileName
     })
     return response
   },
 
-  createPublic: async ({ name, members, aiProfileId, aiProfileName }) => {
+  createPublic: async ({ name, members, aiProfileId }) => {
     const response = await axiosInstance.post(`${path}/create-public`, {
       name,
       members,
       aiProfileId,
-      aiProfileName
     })
     return response
   },
 
-  createPrivate: async ({ name, members, aiProfileId, aiProfileName }) => {
+  createPrivate: async ({ name, members, aiProfileId }) => {
     const response = await axiosInstance.post(`${path}/create-private`, {
       name,
       members,
       aiProfileId,
-      aiProfileName
     })
     return response
   },

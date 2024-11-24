@@ -29,7 +29,17 @@ const accountApi = {
 
     const response = await axiosInstance.get(`${path}/accounts?${params.join('&')}`)
     return response
-  }
+  },
+
+  accountById: async ({ id }) => {
+    const response = await axiosInstance.get(`${path}/accounts/${id}`)
+    return response
+  },
+
+  imageByAccountId: async ({ id }) => {
+    const response = await axiosInstance.get(`${path}/accounts/${id}/image`)
+    return response
+  },
 }
 
 export default accountApi

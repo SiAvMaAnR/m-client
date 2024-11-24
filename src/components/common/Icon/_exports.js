@@ -22,6 +22,12 @@ import UnblockIcon from './UnblockIcon/UnblockIcon'
 import UploadIcon from './UploadIcon/UploadIcon'
 import UsersIcon from './UsersIcon/UsersIcon'
 import VideoIcon from './VideoIcon/VideoIcon'
+import FavoriteIcon from './FavoriteIcon/FavoriteIcon'
+import EmailIcon from './EmailIcon/EmailIcon'
+import RoleIcon from './RoleIcon/RoleIcon'
+import SettingsIcon from './SettingsIcon/SettingsIcon'
+import ProfileIcon from './ProfileIcon/ProfileIcon'
+import LogoutIcon from './LogoutIcon/LogoutIcon'
 
 export {
   AIIcon,
@@ -47,5 +53,11 @@ export {
   UnblockIcon,
   UploadIcon,
   UsersIcon,
-  VideoIcon
+  VideoIcon,
+  FavoriteIcon,
+  EmailIcon,
+  RoleIcon,
+  SettingsIcon,
+  ProfileIcon,
+  LogoutIcon
 }

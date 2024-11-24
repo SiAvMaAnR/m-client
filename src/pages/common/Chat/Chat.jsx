@@ -5,8 +5,8 @@ import ChatHeader from '../../../components/chatPage/ChatHeader/ChatHeader'
 import ChannelList from '../../../components/chatPage/ChannelList/ChannelList'
 import MessageList from '../../../components/chatPage/MessageList/MessageList'
 import NewMessage from '../../../components/chatPage/NewMessage/NewMessage'
-import './Chat.scss'
 import { Logo } from '../../../components/_exports'
+import './Chat.scss'
 
 function Chat() {
   const { id } = useParams()
