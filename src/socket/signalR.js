@@ -3,7 +3,7 @@ import { hub } from '../constants/system'
 import config from '../config/configuration'
 import { getAccessToken } from '../utils/helpers/tokenHelper'
 
-const automaticReconnectIntervals = [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000]
+const reconnectInterval = 1000
 
 const signalRConfig = {
   baseUrl: config.server.url,
@@ -15,7 +15,7 @@ const signalRConfig = {
 function hubFactory(hubName) {
   return new HubConnectionBuilder()
     .withUrl(`${signalRConfig.baseUrl}/signalR/chat/${hubName}`, signalRConfig.params)
-    .withAutomaticReconnect(automaticReconnectIntervals)
+    .withAutomaticReconnect({ nextRetryDelayInMilliseconds: () => reconnectInterval })
     .configureLogging(LogLevel.None)
     .build()
 }

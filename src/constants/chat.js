@@ -11,4 +11,19 @@ const attachmentStatus = {
   error: 'error'
 }
 
-export { channelType, attachmentStatus }
+const fileExtension = {
+  jpeg: 'jpeg',
+  jpg: 'jpg',
+  png: 'png',
+  svg: 'svg',
+  pdf: 'pdf',
+  docx: 'vnd.openxmlformats-officedocument.wordprocessingml.document',
+  doc: 'msword',
+  rtf: 'rtf',
+  odt: 'vnd.oasis.opendocument.text',
+  mp4: 'mp4',
+  webm: 'webm',
+  avi: 'avi',
+}
+
+export { channelType, fileExtension, attachmentStatus }

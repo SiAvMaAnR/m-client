@@ -5,14 +5,19 @@ const path = `/api/${services.chat}/user`
 
 const userApi = {
   registration: async ({ email, login, password, birthday }) => {
-    const body = { email, login, password, birthday }
-    const response = await axiosInstance.post(`${path}/registration`, body)
+    const response = await axiosInstance.post(`${path}/registration`, {
+      email,
+      login,
+      password,
+      birthday
+    })
     return response
   },
 
   confirmation: async ({ confirmation }) => {
-    const body = { confirmation }
-    const response = await axiosInstance.post(`${path}/confirmation`, body)
+    const response = await axiosInstance.post(`${path}/confirmation`, {
+      confirmation
+    })
     return response
   },
 
@@ -28,14 +33,17 @@ const userApi = {
   },
 
   blockUser: async ({ id }) => {
-    const body = { id }
-    const response = await axiosInstance.post(`${path}/block-user`, body)
+    const response = await axiosInstance.post(`${path}/block-user`, { id })
     return response
   },
 
   unblockUser: async ({ id }) => {
-    const body = { id }
-    const response = await axiosInstance.post(`${path}/unblock-user`, body)
+    const response = await axiosInstance.post(`${path}/unblock-user`, { id })
+    return response
+  },
+
+  deleteUser: async ({ id }) => {
+    const response = await axiosInstance.delete(`${path}/users/${id}`)
     return response
   }
 }

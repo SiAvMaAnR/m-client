@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import ArrowIcon from '../../../common/Icon/ArrowIcon/ArrowIcon'
+import { ArrowIcon } from '../../../common/Icon/_exports'
 import './MessagesScrollToEnd.scss'
 
 function MessagesScrollToEnd({ onClick = () => {}, className = '', isVisible = false }) {

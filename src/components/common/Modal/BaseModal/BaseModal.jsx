@@ -3,7 +3,13 @@ import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 import './BaseModal.scss'
 
-function BaseModal({ className = '', isActive = false, setIsActive = () => {}, children = null }) {
+function BaseModal({
+  className = '',
+  baseModalClassName = '',
+  isActive = false,
+  setIsActive = () => {},
+  children = null
+}) {
   const modalRef = useRef(null)
   const modalAnimationRef = useRef(null)
 
@@ -34,13 +40,13 @@ function BaseModal({ className = '', isActive = false, setIsActive = () => {}, c
   }, [isActive, setIsActive])
 
   const clickHandler = (event) => {
-    if (!modalRef.current.contains(event.target)) {
+    if (!modalRef.current.contains(event.target) || event.target === modalRef.current) {
       closeHandler()
     }
   }
 
   return (
-    <div className="c-base-modal">
+    <div className={`c-base-modal ${baseModalClassName}`}>
       <CSSTransition
         classNames="modal"
         in={isActive}
@@ -48,12 +54,7 @@ function BaseModal({ className = '', isActive = false, setIsActive = () => {}, c
         timeout={200}
         unmountOnExit
       >
-        <div
-          ref={modalAnimationRef}
-          className="modal"
-          onClick={clickHandler}
-          role="presentation"
-        >
+        <div ref={modalAnimationRef} className="modal" onClick={clickHandler} role="presentation">
           <div ref={modalRef} className={`modal-content ${className}`}>
             {children}
           </div>
@@ -64,6 +65,7 @@ function BaseModal({ className = '', isActive = false, setIsActive = () => {}, c
 }
 
 BaseModal.propTypes = {
+  baseModalClassName: PropTypes.string,
   className: PropTypes.string,
   isActive: PropTypes.bool,
   setIsActive: PropTypes.func,

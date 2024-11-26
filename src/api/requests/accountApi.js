@@ -15,8 +15,7 @@ const accountApi = {
   },
 
   uploadImage: async ({ image }) => {
-    const body = { image }
-    const response = await axiosInstance.post(`${path}/upload-image`, body)
+    const response = await axiosInstance.post(`${path}/upload-image`, { image })
     return response
   },
 
@@ -30,7 +29,17 @@ const accountApi = {
 
     const response = await axiosInstance.get(`${path}/accounts?${params.join('&')}`)
     return response
-  }
+  },
+
+  accountById: async ({ id }) => {
+    const response = await axiosInstance.get(`${path}/accounts/${id}`)
+    return response
+  },
+
+  imageByAccountId: async ({ id }) => {
+    const response = await axiosInstance.get(`${path}/accounts/${id}/image`)
+    return response
+  },
 }
 
 export default accountApi

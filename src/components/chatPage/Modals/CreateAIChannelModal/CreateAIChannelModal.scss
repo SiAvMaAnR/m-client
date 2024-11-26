@@ -20,6 +20,106 @@
             .brand {
                 padding-left: 8px;
             }
+
+            .search {
+                .search-input {
+                    border-radius: 20px;
+                    height: 42px;
+                    width: 260px;
+                }
+            }
         }
+
+        .message {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            height: 30px;
+            border-bottom: solid 1px var(--border-color);
+            color: var(--error-color);
+            gap: 10px;
+
+            .valid-icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            p {
+                font-family: 'Roboto', sans-serif;
+                font-size: 16px;
+            }
+
+            &-enter {
+                opacity: 0;
+                max-height: 0;
+            }
+
+            &-enter-active {
+                opacity: 1;
+                max-height: 100px;
+                transition: all 0.5s ease;
+            }
+
+            &-exit {
+                opacity: 1;
+                max-height: 100px;
+            }
+
+            &-exit-active {
+                opacity: 0;
+                transition: all 0.5s ease;
+                max-height: 0;
+            }
+        }
+
+        .content {
+            flex: 1 0;
+            background: var(--background-color-1);
+            overflow: hidden;
+        }
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border-top: solid 1px var(--border-color);
+
+            .channel-name-input {
+                flex-basis: 50%;
+
+                .form-input {
+                    height: 44px;
+                    width: 100%;
+                    font-size: 16px;
+                    font-family: 'Roboto', sans-serif;
+
+                    &::placeholder {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            .channel-type-switcher {
+                height: 100%;
+                max-width: 100px;
+                flex: 1 0;
+
+                .type-switcher {
+
+                    text-transform: capitalize;
+                }
+            }
+
+            .channel-continue-btn {
+                .continue-btn {
+                    height: 44px;
+                    width: 170px;
+                    border-radius: 13px;
+                }
+            }
+        }
+
     }
 }

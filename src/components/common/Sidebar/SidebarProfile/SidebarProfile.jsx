@@ -5,11 +5,9 @@ import { page } from '../../../../constants/system'
 import { useAuth } from '../../../../hooks/_exports'
 import MenuIcon from '../../Icon/MenuIcon/MenuIcon'
 import DropDown from '../../DropDown/DropDown'
-import LogoutIcon from './MenuIcons/LogoutIcon/LogoutIcon'
-import SettingsIcon from './MenuIcons/SettingsIcon/SettingsIcon'
-import ProfileIcon from './MenuIcons/ProfileIcon/ProfileIcon'
 import config from '../../../../config/configuration'
 import './SidebarProfile.scss'
+import { LogoutIcon, ProfileIcon, SettingsIcon } from '../../Icon/_exports'
 
 function SidebarProfile({ className = '', isExpand = false }) {
   const { login, email, image } = useSelector((state) => state.user.info)
@@ -28,7 +26,9 @@ function SidebarProfile({ className = '', isExpand = false }) {
     {
       icon: <SettingsIcon />,
       title: 'Settings',
-      onClick: () => {}
+      onClick: () => {
+        navigate(page.settings)
+      }
     },
     {
       icon: <LogoutIcon />,

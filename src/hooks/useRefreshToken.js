@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { page } from '../constants/system'
 import useAuth from './useAuth'
 import api from '../api/api'
@@ -14,31 +14,40 @@ const useRefreshToken = () => {
   const { accessToken, refreshToken } = getAuthTokens()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const leftTime = accessTokenExp - Date.now() - reserveTime
+  const refreshTokenHandler = useCallback(() => {
+    if (refreshTokenExp > Date.now()) {
+      api.auth
+        .refreshToken({ refreshToken })
+        .then((result) => {
+          const token = result.data?.accessToken
 
-    const verifyTokenTimeout = setTimeout(() => {
-      if (!isLogged) {
-        return
-      }
+          if (!token) {
+            throw new Error('Wrong token')
+          }
 
-      if (refreshTokenExp > Date.now()) {
-        api.auth.refreshToken({ refreshToken }).then((result) => {
-          const newAccessToken = result?.data?.accessToken
           updateAccessToken({
-            accessToken: newAccessToken
+            accessToken: token
           })
         })
-      } else {
-        api.auth.revokeToken({ refreshToken }).finally(() => {
+        .catch(() => {
           logOut()
           navigate(page.login)
         })
-      }
-    }, leftTime)
+    } else {
+      api.auth.revokeToken({ refreshToken }).finally(() => {
+        logOut()
+        navigate(page.login)
+      })
+    }
+  }, [logOut, navigate, refreshToken, refreshTokenExp, updateAccessToken])
+
+  useEffect(() => {
+    const leftTime = accessTokenExp - Date.now() - reserveTime
+
+    const verifyTokenTimeout = isLogged ? setTimeout(refreshTokenHandler, leftTime) : null
 
     return () => clearTimeout(verifyTokenTimeout)
-  }, [accessTokenExp, refreshToken, refreshTokenExp, isLogged, updateAccessToken, logOut, navigate])
+  }, [isLogged, accessTokenExp, refreshTokenHandler])
 
   useEffect(() => {
     if (isLogged && !accessToken) {

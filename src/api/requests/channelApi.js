@@ -4,27 +4,37 @@ import axiosInstance from '../axios'
 const path = `/api/${services.chat}/channel`
 
 const channelApi = {
-  createDirect: async ({ accountId }) => {
-    const body = { accountId }
-    const response = await axiosInstance.post(`${path}/create-direct`, body)
+  createDirect: async ({ name, accountId, aiProfileId }) => {
+    const response = await axiosInstance.post(`${path}/create-direct`, {
+      accountId,
+      name,
+      aiProfileId,
+    })
     return response
   },
 
-  createPublic: async ({ name, members }) => {
-    const body = { name, members }
-    const response = await axiosInstance.post(`${path}/create-public`, body)
+  createPublic: async ({ name, members, aiProfileId }) => {
+    const response = await axiosInstance.post(`${path}/create-public`, {
+      name,
+      members,
+      aiProfileId,
+    })
     return response
   },
 
-  createPrivate: async ({ name, members }) => {
-    const body = { name, members }
-    const response = await axiosInstance.post(`${path}/create-private`, body)
+  createPrivate: async ({ name, members, aiProfileId }) => {
+    const response = await axiosInstance.post(`${path}/create-private`, {
+      name,
+      members,
+      aiProfileId,
+    })
     return response
   },
 
   connect: async ({ channelId }) => {
-    const body = { channelId }
-    const response = await axiosInstance.post(`${path}/connect`, body)
+    const response = await axiosInstance.post(`${path}/connect`, {
+      channelId
+    })
     return response
   },
 
@@ -46,8 +56,9 @@ const channelApi = {
   },
 
   setUpDirectChannel: async ({ partnerId }) => {
-    const body = { partnerId }
-    const response = await axiosInstance.post(`${path}/setup-direct`, body)
+    const response = await axiosInstance.post(`${path}/setup-direct`, {
+      partnerId
+    })
     return response
   },
 

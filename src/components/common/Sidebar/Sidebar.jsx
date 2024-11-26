@@ -7,9 +7,7 @@ import SidebarSearch from './SidebarSearch/SidebarSearch'
 import SidebarTheme from './SidebarTheme/SidebarTheme'
 import SidebarProfile from './SidebarProfile/SidebarProfile'
 import SidebarExpander from './SidebarExpander/SidebarExpander'
-import HomeIcon from './SidebarIcons/HomeIcon/HomeIcon'
-import MessengerIcon from './SidebarIcons/MessengerIcon/MessengerIcon'
-import UsersIcon from './SidebarIcons/UsersIcon/UsersIcon'
+import { AIIcon, HomeIcon, MessengerIcon, UsersIcon } from '../Icon/_exports'
 import ComponentPermissionGuard from '../../permission/ComponentPermissionGuard'
 import './Sidebar.scss'
 
@@ -66,6 +64,16 @@ function Sidebar() {
           noticeCounter={1}
         >
           <MessengerIcon />
+        </SidebarItem>
+
+        <SidebarItem
+          className="sidebar-item"
+          link={page.aiProfiles}
+          title="AI Profiles"
+          isExpand={expand}
+          noticeCounter={1}
+        >
+          <AIIcon />
         </SidebarItem>
 
         <ComponentPermissionGuard permittedRoles={[role.admin]}>

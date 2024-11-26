@@ -22,20 +22,16 @@ function Users() {
         isLoadImage: true
       })
 
-      if (response?.data?.errors) {
-        throw new Error('Something went wrong')
-      }
-
       if (response?.data?.clientMessage) {
         throw new Error(response.data.clientMessage)
       }
 
-      if (!data) {
+      if (!data || response?.data?.errors) {
         throw new Error('Something went wrong')
       }
 
       setUsers(data.users || [])
-      setPagesCount(data.meta?.pagesCount || 0)
+      setPagesCount(data.meta?.pagesCount || 1)
     } catch (err) {
       // temp
     } finally {

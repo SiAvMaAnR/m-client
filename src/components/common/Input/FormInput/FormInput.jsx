@@ -17,7 +17,10 @@ function FormInput({
   isPassword = false,
   validator = null,
   onValid = () => {},
-  pattern = null
+  pattern = null,
+  min,
+  max,
+  step
 }) {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false)
   const [isValid, setIsValid] = useState(true)
@@ -88,6 +91,9 @@ function FormInput({
         value={value}
         pattern={pattern}
         required={required}
+        min={min}
+        max={max}
+        step={step}
       />
     </div>
   )
@@ -104,7 +110,10 @@ FormInput.propTypes = {
   pattern: PropTypes.string,
   isPassword: PropTypes.bool,
   validator: PropTypes.func,
-  onValid: PropTypes.func
+  onValid: PropTypes.func,
+  min: PropTypes.string,
+  max: PropTypes.string,
+  step: PropTypes.string
 }
 
 export default FormInput

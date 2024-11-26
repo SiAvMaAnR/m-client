@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import config from '../../../../../config/configuration'
 import { activityStatus, page } from '../../../../../constants/system'
 import { RoundCheckbox } from '../../../../_exports'
-import ArrowIcon from '../../../../common/Icon/ArrowIcon/ArrowIcon'
+import { ArrowIcon } from '../../../../common/Icon/_exports'
 import api from '../../../../../api/api'
 import { getActivityStatus } from '../../../ChatHeader/ChatHeader'
 import ImgWrapper from '../../../../common/ImgWrapper/ImgWrapper'
@@ -23,7 +23,7 @@ function UserItem({
 
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/direct-channel.jpg`
+    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
 
   const onClickHandler = () => {
     onToggle(id)

@@ -4,8 +4,8 @@ import api from '../../../api/api'
 import { page } from '../../../constants/system'
 import { Brand, FormButton, FormDesc, FormTitle, Logo, NavLink } from '../../../components/_exports'
 import { Step1, Step2, Step3, Step4 } from '../../../components/registrationPage/Steps/_exports'
+import { ArrowIcon } from '../../../components/common/Icon/_exports'
 import './Registration.scss'
-import ArrowIcon from '../../../components/common/Icon/ArrowIcon/ArrowIcon'
 
 function Registration() {
   const [registrationData, setRegistrationData] = useState({
@@ -108,7 +108,7 @@ function Registration() {
   }
 
   const keyDownHandler = async (event) => {
-    if (event.key === 'Enter' && isActiveBtn) {
+    if (event.key === 'Enter' && isActiveBtn && !isLoading) {
       await nextStepHandler()
     }
   }

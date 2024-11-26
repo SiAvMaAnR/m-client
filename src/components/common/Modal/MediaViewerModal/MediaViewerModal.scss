@@ -1,20 +1,17 @@
 .c-media-viewer-modal {
     user-select: none;
 
-    .base-modal {
-        height: 95%;
-        width: 85%;
+    .viewer-modal {
         display: flex;
         flex-direction: column;
-        justify-content: stretch;
-        align-items: stretch;
-        position: relative;
+        justify-content: center;
+        align-items: center;
         background: transparent !important;
         border: none !important;
+        max-height: 95%;
+        width: 80%;
 
         .media-viewer {
-            height: 100%;
-            width: 100%;
             display: grid;
             place-items: center;
 
@@ -30,37 +27,35 @@
                     width: 55px;
                     border-radius: 25px;
                     transition: all 0.3s ease;
-                    background: var(--background-color);
 
                     svg {
                         transform: scale(2) scaleY(1.5) rotateY(180deg);
-                        fill: var(--common-color-0);
-                        opacity: 0.4;
+                        fill: var(--font-color-primary-2);
+                        opacity: 1;
                         transition: all 0.3s ease;
                     }
 
                     &:hover {
                         box-shadow: 0px 0 10px 6px var(--shadow-color);
+                        background: var(--background-color);
 
                         svg {
-                            opacity: 1;
+                            fill: var(--common-color-0);
                         }
                     }
                 }
             }
 
             .prev-item {
-                left: -65px;
+                left: -100px;
             }
 
             .next-item {
-                right: -65px;
+                right: -100px;
                 transform: rotateY(180deg);
             }
 
             .viewer-content {
-                height: 100%;
-                width: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -70,7 +65,7 @@
                     max-width: 100%;
                     max-height: 100%;
                     border-radius: 30px;
-
+                    cursor: pointer;
                 }
 
                 .media-loader {

@@ -5,7 +5,7 @@ import { chatMethod } from '../../../../../socket/hubHandlers'
 import Loader1 from '../../../../common/Loader/Loader1/Loader1'
 import PreviewImageAttachment from './PreviewImageAttachment/PreviewImageAttachment'
 import PreviewFileAttachment from './PreviewFileAttachment/PreviewFileAttachment'
-import RemoveIcon from '../../../../common/Icon/RemoveIcon/RemoveIcon'
+import { RemoveIcon } from '../../../../common/Icon/_exports'
 import {
   isFileAttachmentType,
   isImageAttachmentType

@@ -25,6 +25,10 @@
         .remove-icon {
             height: 30px;
             width: 30px;
+
+            svg {
+                stroke: var(--font-color-primary-2);
+            }
         }
     }
 

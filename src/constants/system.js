@@ -6,7 +6,8 @@ const language = {
 const role = {
   public: 'public',
   admin: 'admin',
-  user: 'user'
+  user: 'user',
+  aiBot: 'aibot'
 }
 
 const activityStatus = {
@@ -29,7 +30,8 @@ const page = {
   profile: '/profile',
   users: '/users',
   resetPassword: '/reset-password',
-  initResetPassword: '/init-reset-password'
+  initResetPassword: '/init-reset-password',
+  aiProfiles: '/ai-profiles'
 }
 
 const hub = {
@@ -45,4 +47,8 @@ const services = {
   ai: 'ai'
 }
 
-export { language, theme, role, page, hub, activityStatus, services }
+const section = {
+  account: 'account'
+}
+
+export { language, theme, role, page, hub, activityStatus, services, section }

@@ -65,7 +65,7 @@ function ResetPassword() {
   }
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !isLoading) {
       resetPasswordHandler()
     }
   }

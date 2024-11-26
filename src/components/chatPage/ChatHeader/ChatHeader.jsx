@@ -1,28 +1,14 @@
-import moment from 'moment'
 import PropTypes from 'prop-types'
 import defaultImageMapper from '../../../utils/mappers/defaultImageMapper'
 import config from '../../../config/configuration'
 import { channelType } from '../../../constants/chat'
-import MenuIcon from '../../common/Icon/MenuIcon/MenuIcon'
-import SearchIcon from '../../common/Icon/SearchIcon/SearchIcon'
+import { MenuIcon } from '../../common/Icon/_exports'
 import { activityStatus } from '../../../constants/system'
 import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
-import './ChatHeader.scss'
 import MessageSearch from './MessageSearch/MessageSearch'
-
-function formatLastOnlineAt(lastOnlineAt) {
-  if (!lastOnlineAt) {
-    return null
-  }
-  const date = moment(lastOnlineAt)
-
-  const formattedDate = date.isSame(moment(), 'day')
-    ? `Seen today at ${date.format('HH:mm')}`
-    : `Seen on ${date.format('D MMM')}`
-
-  return formattedDate
-}
+import formatLastOnlineAt from '../../../utils/helpers/formatHelper'
+import './ChatHeader.scss'
 
 export const getActivityStatus = ({ status, lastOnlineAt }) => {
   const isOnline = status?.toLowerCase() === activityStatus.online
@@ -35,7 +21,7 @@ export const getActivityStatus = ({ status, lastOnlineAt }) => {
 function ChatHeader({ className = '', channel = null, isLoading, setSearchMessage }) {
   const imageSrc = channel?.image
     ? `data:image/jpeg;base64, ${channel.image}`
-    : `${config.app.publicPath}/defaultImages/${defaultImageMapper[channel?.type]}.jpg`
+    : `${config.app.publicPath}/defaultImages/channels/${defaultImageMapper[channel?.type]}.jpg`
 
   const adaptedChatInfo = getActivityStatus({
     status: channel?.userActivityStatus,

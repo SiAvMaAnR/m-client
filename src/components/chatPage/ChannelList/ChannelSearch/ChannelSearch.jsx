@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import SearchIcon from '../../../common/Icon/SearchIcon/SearchIcon'
+import { SearchIcon } from '../../../common/Icon/_exports'
 import './ChannelSearch.scss'
 
 function ChannelSearch({ className = '', onChange = () => {} }) {

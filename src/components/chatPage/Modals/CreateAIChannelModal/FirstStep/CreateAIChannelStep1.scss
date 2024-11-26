@@ -1,0 +1,40 @@
+.c-create-ai-channel-step-1 {
+    height: 100%;
+    background: var(--background-color-1);
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 3px;
+    padding: 8px 6px;
+    overflow-y: auto;
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--font-color-primary-0);
+    }
+
+    .profiles-loader {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+
+        svg {
+            width: 200px;
+            height: 80px;
+
+            circle {
+                fill: var(--font-color-primary-0);
+            }
+        }
+    }
+}
